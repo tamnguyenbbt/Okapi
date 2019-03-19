@@ -174,7 +174,7 @@ namespace OkapiTests
 }
 ````
 
-### Usage
+## Usage
 * Usage document in PDF will come soon.
             
 ## Versions
