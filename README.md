@@ -1,5 +1,6 @@
 # Okapi
 Selenium and ExtSelenium-based Web UI test automation library with dynamic content concept support.
+* Support Selenium WebDriver Grid only.
 
 ## Set Up Test Project
 The code in this repo is for a sample test project based on MSUnit and .Net Framework 4.5.
