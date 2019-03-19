@@ -2,7 +2,7 @@
 Selenium and ExtSelenium-based Web UI test automation library with dynamic content concept support.
 
 ## Set up test project
-* The code in this repo is sample test project based on MSUnit and .Net Framework 4.5.
+The code in this repo is sample test project based on MSUnit and .Net Framework 4.5.
 
 ### Using App.config
 
