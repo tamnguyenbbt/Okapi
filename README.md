@@ -134,11 +134,17 @@ then inject it via DI.
 
 ## Example
 ````
-[TestClass]
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Okapi.Drivers;
+using Okapi.Elements;
+
+namespace OkapiTests
+{
+    [TestClass]
     public class SampleTests
     {
         [TestMethod]
-        public void Test1()
+        public void Single_driver_auto_created_by_driver_pool()
         {
             DriverPool.Instance.ActiveDriver.LauchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New(SearchInfo.New("span", "{0}"), SearchInfo.New("input"), DynamicContents.New("First name"));
@@ -149,13 +155,13 @@ then inject it via DI.
         }
 
         [TestMethod]
-        public void Test2()
+        public void Single_driver_auto_created_by_driver_pool_plus_user_created_driver()
         {
             DriverPool.Instance.ActiveDriver.LauchPage("https://www.xero.com/au/signup/");
 
             var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input", DynamicContents.New("First name"));
             ManagedDriver previousActiveDriver = DriverPool.Instance.ActiveDriver;
-            DriverPool.Instance.CreateDriver(LocalChromeTestEnvironment.Instance).LauchPage("https://www.google.com");
+            DriverPool.Instance.CreateDriver().LauchPage("https://www.google.com");
             DriverPool.Instance.ActiveDriver = previousActiveDriver;
 
             userName.MoveToElement();
@@ -164,6 +170,7 @@ then inject it via DI.
             DriverPool.Instance.QuitActiveDriver();
         }
     }
+}
 ````
 
 ### Usage
