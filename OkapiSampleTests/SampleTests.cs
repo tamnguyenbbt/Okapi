@@ -8,7 +8,7 @@ namespace OkapiTests
     public class SampleTests
     {
         [TestMethod]
-        public void Test1()
+        public void Single_driver_auto_created_by_driver_pool()
         {
             DriverPool.Instance.ActiveDriver.LauchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New(SearchInfo.New("span", "{0}"), SearchInfo.New("input"), DynamicContents.New("First name"));
@@ -19,7 +19,7 @@ namespace OkapiTests
         }
 
         [TestMethod]
-        public void Test2()
+        public void Single_driver_auto_created_by_driver_pool_plus_user_created_driver()
         {
             DriverPool.Instance.ActiveDriver.LauchPage("https://www.xero.com/au/signup/");
 
