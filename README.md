@@ -1,12 +1,13 @@
 # Okapi
 Selenium and ExtSelenium-based Web UI test automation library with dynamic content concept support.
+* Support Selenium WebDriver Grid only.
 
-## Set up test project
-* The code in this repo is sample test project based on MSUnit and .Net Framework 4.5.
+## Set Up Test Project
+The code in this repo is for a sample test project based on MSUnit and .Net Framework 4.5.
 
 ### Using App.config
 
-* If you decide to use App.config, add an App.config file as below.
+If you decide to use **App.config**, add an App.config file as below:
 
 ````
 <?xml version="1.0" encoding="utf-8" ?>
@@ -30,7 +31,7 @@ Selenium and ExtSelenium-based Web UI test automation library with dynamic conte
 ````
 ### Using class configs
 
-* If you decide to use class configs, implement the following interfaces
+If you decide to use class configs, implement the following interfaces:
 
 * Implement **IDriverConfig**
 ````
@@ -65,12 +66,12 @@ namespace OkapiSampleTests.Configurations
 }
 ````
 
-* You then can pass them into the constructors of the Okapi library's classes, i.e. 
+You then can pass them into the constructors of the Okapi library's classes, i.e. 
 ````
 DriverPool.Instance.CreateDriver(LocalChromeTestEnvironment.Instance)
 ````
 
-* OR you can inject them into the Okapi library using Dependency Injection (DI) (Ninject).
+OR you can inject them into the Okapi library using Dependency Injection (DI) (Ninject).
 To inject, you need to implement Okapi library's **IOkapiModuleLoader** interface as below:
 
 ````
@@ -93,7 +94,7 @@ namespace OkapiSampleTests.Configurations
 }
 ````
 
-* If you want to control the browsers' behaviours rather than using the default behaviours provided by Opika, 
+If you want to control the browsers' behaviours rather than using the default behaviours provided by Opika, 
 you can implement Okapi library's **IDriverOptionsFactory** interface. For instance,
 
 ````
@@ -166,7 +167,7 @@ then inject it via DI.
 ````
 
 ### Usage
-* Usage document will come soon.
+* Usage document in PDF will come soon.
             
 ## Versions
 * Version **1.0.0** released on 03/19/2019
