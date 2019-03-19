@@ -6,7 +6,7 @@ The code in this repo is for a sample test project based on MSUnit and .Net Fram
 
 ### Using App.config
 
-If you decide to use **App.config**, add an App.config file as below.
+If you decide to use **App.config**, add an App.config file as below:
 
 ````
 <?xml version="1.0" encoding="utf-8" ?>
@@ -30,7 +30,7 @@ If you decide to use **App.config**, add an App.config file as below.
 ````
 ### Using class configs
 
-If you decide to use class configs, implement the following interfaces
+If you decide to use class configs, implement the following interfaces:
 
 * Implement **IDriverConfig**
 ````
