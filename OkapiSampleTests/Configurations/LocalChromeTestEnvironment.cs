@@ -2,12 +2,13 @@ using System;
 using Okapi.Configs;
 using Okapi.Enums;
 
-namespace OkapiSampleTests.Configurations
+namespace OkapiTests
 {
-    public class LocalChromeTestEnvironment : ITestEnvironment
+    internal class LocalChromeTestEnvironment : ITestEnvironment
     {
         public static LocalChromeTestEnvironment Instance => new LocalChromeTestEnvironment();
-        DriverFlavour ITestEnvironment.DriverFlavour => DriverFlavour.Chrome;
-        Uri ITestEnvironment.SeleniumHubUri => new Uri("http://localhost:2021/wd/hub");
+        public DriverFlavour DriverFlavour => DriverFlavour.Chrome;
+        public Uri SeleniumHubUri => new Uri("http://localhost:4444/wd/hub");
+        public bool Log => true;
     }
 }
