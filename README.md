@@ -5,8 +5,7 @@ Selenium and ExtSelenium-based Web UI test automation library with dynamic conte
 
 ## Set Up Test Project
 The code in this repo is for a sample test project based on MSUnit and .Net Framework 4.5 and uses Okapi library.
-* Okapi library can be found under NuGet at https://www.nuget.org/packages/Okapi/1.0.0 
-* The test projects which use Okapi library are required to have their assembly names containing the word **Okapi**. So that if you are using Okapi, you should remember Okapi, the lovely and cool animal.
+* Okapi library can be found under NuGet at https://www.nuget.org/packages/Okapi/1.0.0
 
 ### Using App.config
 
@@ -19,15 +18,15 @@ If you decide to use **App.config**, add an App.config file as below:
     <section name="EnvironmentSection" type="Okapi.Configs.EnvironmentSection, Okapi" />
   </configSections>
   <appSettings>
-    <add key="SeleniumHubUrl" value="http://localhost:2021/wd/hub"/>    
+    <add key="SeleniumHubUrl" value="http://localhost:2021/wd/hub"/> //need to change to your Selenium Hub URL    
   </appSettings>
   <EnvironmentSection>
     <Environments>
       <add targetTestEnvironment="Test"
            active="true"
-           driverFlavour="ChromeDriver"
-           driverTimeoutInSeconds ="10"
-           quitDriverOnError ="true"/>
+           driverFlavour="ChromeDriver" //required
+           driverTimeoutInSeconds ="10" //if not set, Okapi set 10 by default
+           quitDriverOnError ="true"/> //if not set, Okapi set true by default
     </Environments>
   </EnvironmentSection>  
 </configuration>
@@ -45,8 +44,8 @@ namespace OkapiSampleTests.Configurations
 {
     public class CustomisedDriverConfig : IDriverConfig
     {
-        public int TimeoutInSeconds => 10;
-        public bool QuitDriverOnError => true;
+        public int TimeoutInSeconds => 10; //if not set, Okapi set 10 by default
+        public bool QuitDriverOnError => true; //if not set, Okapi set true by default
         public DomUtilConfig SearchByAnchorConfig => null;
     }
 }
@@ -97,6 +96,8 @@ namespace OkapiSampleTests.Configurations
 }
 ````
 
+If you define both App.config and DI, DI will take precedence.
+
 If you want to control the browsers' behaviours rather than using the default behaviours provided by Opika, 
 you can implement Okapi library's **IDriverOptionsFactory** interface. For instance,
 
@@ -134,6 +135,21 @@ namespace OkapiSampleTests.Configurations
 ````
 
 then inject it via DI.
+
+Okapi supports the following browser types so far:
+
+````
+namespace Okapi.Enums
+{
+    public enum DriverFlavour
+    {
+        Chrome,
+        Edge,
+        Firefox,
+        IE
+    }
+}
+````
 
 ## Example
 ````
@@ -180,11 +196,12 @@ namespace OkapiTests
 * Usage document in PDF will come soon.
             
 ## Versions
+* Version **1.0.0.1** released on 03/20/2019
 * Version **1.0.0** released on 03/19/2019
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0
-* Install-Package Okapi -Version 1.0.0
+* https://www.nuget.org/packages/Okapi/1.0.0.1
+* Install-Package Okapi -Version 1.0.0.1
 
 ## Dependencies
 ### .NETFramework 4.5
