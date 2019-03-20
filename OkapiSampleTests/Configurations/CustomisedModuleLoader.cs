@@ -2,6 +2,7 @@ using Ninject;
 using Okapi.Configs;
 using Okapi.DI;
 using Okapi.Drivers;
+using Serilog.Core;
 
 namespace OkapiSampleTests.Configurations
 {
@@ -12,6 +13,7 @@ namespace OkapiSampleTests.Configurations
             kernel.Bind<ITestEnvironment>().To<LocalChromeTestEnvironment>().InSingletonScope();
             kernel.Bind<IDriverConfig>().To<CustomisedDriverConfig>().InSingletonScope();
             kernel.Bind<IDriverOptionsFactory>().To<CustomisedDriverOptionsFactory>().InSingletonScope();
+            kernel.Bind<ILogEventSink>().To<DefaultSink>().InSingletonScope();
         }
     }
 }
