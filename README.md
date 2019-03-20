@@ -5,7 +5,7 @@ Selenium and ExtSelenium-based Web UI test automation library with dynamic conte
 
 ## Set Up Test Project
 The code in this repo is for a sample test project based on MSUnit and .Net Framework 4.5 and uses Okapi library.
-* Okapi library can be found under NuGet at https://www.nuget.org/packages/Okapi/1.0.0
+* Okapi library can be found under NuGet at https://www.nuget.org/packages/Okapi/1.0.0.1
 
 ### Using App.config
 
