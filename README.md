@@ -261,6 +261,7 @@ namespace OkapiTests
         public void Another_develper_friendly_style_by_name()
         {
             DriverPool.Instance.ActiveDriver.LauchPage("https://www.xero.com/au/signup/");
+            
             var userName = new TestObject()
             {
                 LocatingMethod = LocatingMethod.Name,
@@ -275,7 +276,6 @@ namespace OkapiTests
         public void Single_driver_auto_created_by_driver_pool_plus_user_created_driver()
         {
             DriverPool.Instance.ActiveDriver.LauchPage("https://www.xero.com/au/signup/");
-
             var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input", DynamicContents.New("First name"));
             ManagedDriver previousActiveDriver = DriverPool.Instance.ActiveDriver;
             DriverPool.Instance.CreateDriver().LauchPage("https://www.google.com");
