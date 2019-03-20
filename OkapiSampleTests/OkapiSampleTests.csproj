@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Configurations\DriverConfig.cs" />
     <Compile Include="Configurations\LocalChromeTestEnvironment.cs" />
+    <Compile Include="DI\OkapiModuleLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleTests.cs" />
     <Compile Include="ThirdParties\DriverOptionsFactory.cs" />
