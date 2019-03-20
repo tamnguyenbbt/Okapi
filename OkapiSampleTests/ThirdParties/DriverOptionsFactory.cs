@@ -6,9 +6,9 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 
-namespace OkapiSampleTests.Configurations
+namespace OkapiSampleTests.ThirdParties
 {
-    internal sealed class CustomisedDriverOptionsFactory : IDriverOptionsFactory
+    internal sealed class DriverOptionsFactory : IDriverOptionsFactory
     {
         public DriverOptions CreateDriverOptions(DriverFlavour driverFlavour)
         {

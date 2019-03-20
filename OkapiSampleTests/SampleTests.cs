@@ -13,7 +13,7 @@ namespace OkapiTests
         public void Single_driver_auto_created_by_driver_pool()
         {
             DriverPool.Instance.ActiveDriver.LauchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
+            var userName = TestObject.New("//label[span[contains(text(),'First name2')]]/input");
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
         }
