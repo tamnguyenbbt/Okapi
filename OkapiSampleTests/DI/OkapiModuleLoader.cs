@@ -16,7 +16,7 @@ namespace OkapiSampleTests.DI
             kernel.Bind<ITestEnvironment>().To<LocalChromeTestEnvironment>().InSingletonScope();
             kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope();
             kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope();
-            kernel.Bind<ILoggerConfigurationProvider>().To<LoggerConfigurationProvider>().InSingletonScope();
+            kernel.Bind<IOkapiLogger>().To<OkapiLogger>().InSingletonScope();
         }
     }
 }
