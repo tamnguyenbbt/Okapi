@@ -1,5 +1,5 @@
 # Okapi Get Started
-Okapi is a Selenium and ExtSelenium-based Web UI test automation library with dynamic content concept support
+Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** with dynamic content concept support
 * Supports Selenium WebDriver Grid configuration only
 * Supports .Net Framework 4.5 and 4.6
 * Manages Selenium drivers nicely and hides them from users to simplify test automation processes
