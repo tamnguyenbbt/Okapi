@@ -60,7 +60,7 @@ If you decide to use **App.config**, add an App.config file as below:
 	</EnvironmentSection>
 </configuration>
 ````
-#### Using class config
+#### Using class configuration
 
 If you decide to use class configs, implement the following interfaces:
 
