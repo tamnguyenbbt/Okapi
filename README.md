@@ -280,7 +280,9 @@ namespace OkapiTests
         public void By_anchor()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New(SearchInfo.New("span", "First name"), SearchInfo.New("input"));
+	    var anchorElementInfo = SearchInfo.New("span", "First name");
+	    var searchingElementInfo = SearchInfo.New("input");
+            var userName = TestObject.New(anchorElementInfo, searchingElementInfo);
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitAllDrivers();
         }
