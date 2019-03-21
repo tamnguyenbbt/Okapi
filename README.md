@@ -199,7 +199,7 @@ namespace OkapiSampleTests.ThirdParties
 }
 ````
 
-### Inject Okapi's Interfaces's Implementations
+### Inject Okapi Interface Implementations
 Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject your settings mentioned above to Okapi
 
 ````
