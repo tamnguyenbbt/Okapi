@@ -164,7 +164,7 @@ namespace Okapi.Enums
 
 ### Customize Okapi Logging
 Okapi comes with the ability to log testing activities and to capture snapshots which are controllable via configuration.
-You can customize the logging message template format and logging destination by implement Okapi's interface **IOkapiLogger**.
+You can customize the logging message template format and logging destination by implementing Okapi's interface **IOkapiLogger**.
 Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
 
 At this point of time, IOkapiLogger supports string messages. JSON support may come in future.
