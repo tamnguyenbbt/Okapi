@@ -105,12 +105,12 @@ You then can pass the objects of these classes into the constructors of the Okap
 DriverPool.Instance.CreateDriver(LocalChromeTestEnvironment.Instance)
 ````
 
-OR you can inject them into the Okapi via Okapi's Dependency Injection (DI) interface (using Ninject).
+OR you can inject them into Okapi via its Dependency Injection (DI) interface (using Ninject).
 
 ### Override Selenium Driver Options 
 
-If you want to control the browsers' behaviours rather than using the default behaviours provided by Opika, 
-you can implement Okapi library's **IDriverOptionsFactory** interface. For instance,
+If you want to control the browsers' behaviours rather than using the default behaviours provided by Okapi, 
+you can implement its **IDriverOptionsFactory** interface. For instance,
 
 ````
 using Okapi.Drivers;
