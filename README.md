@@ -1,12 +1,12 @@
 # Okapi Get Started
 Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** with dynamic content concept support
-* Supports Selenium WebDriver Grid configuration only
+* Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
 * Supports .Net Framework 4.5 and 4.6
 * Manages Selenium drivers nicely and hides them from users to simplify test automation processes
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0.2
-* Install-Package Okapi -Version 1.0.0.2
+* https://www.nuget.org/packages/Okapi/1.0.0.3
+* Install-Package Okapi -Version 1.0.0.3
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -41,6 +41,7 @@ If you decide to use **App.config**, add an App.config file as below:
 			<add targetTestEnvironment="Test1"
 				 active="true"
 				 driverFlavour="ChromeDriver"
+         			 remoteDriver="false"
 				 driverTimeoutInSeconds ="10"
 				 quitDriverOnError ="true"
 				 log ="true"
@@ -50,6 +51,7 @@ If you decide to use **App.config**, add an App.config file as below:
 			<add targetTestEnvironment="Test2"
 			   active="false"
 			   driverFlavour="IE"
+         		   remoteDriver="false"
 			   driverTimeoutInSeconds ="10"
 			   quitDriverOnError ="true"
 			   log ="true"
@@ -58,6 +60,7 @@ If you decide to use **App.config**, add an App.config file as below:
 			   snapshotLocation ="Snapshots"/>
 		</Environments>
 	</EnvironmentSection>
+</configuration>
 </configuration>
 ````
 #### Using Class Configuration
@@ -96,6 +99,7 @@ namespace OkapiTests
         public bool TakeSnapshotOnOK => true;
         public bool TakeSnapshotOnError => true;
         public string SnapshotLocation => "Snapshots";
+        public bool RemoteDriver => false; //use local driver, not remote
     }
 }
 ````
@@ -137,7 +141,7 @@ namespace OkapiSampleTests.Configurations
                     return new FirefoxOptions();
                 default:
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArguments("--no-sandbox");
+                    chromeOptions.AddArguments("headless");
                     return chromeOptions;
             }
         }
@@ -372,6 +376,7 @@ namespace OkapiTests
 * Usage document will come in near future.
             
 ## Versions
+* Version **1.0.0.3** released on 03/26/2019 -- supports non remote web drivers
 * Version **1.0.0.2** released on 03/21/2019
 * Version **1.0.0.1** released on 03/20/2019
 * Version **1.0.0** released on 03/19/2019
