@@ -12,5 +12,6 @@ namespace OkapiTests
         public bool TakeSnapshotOnOK => true;
         public bool TakeSnapshotOnError => true;
         public string SnapshotLocation => "Snapshots";
+        public bool RemoteDriver => false;
     }
 }

@@ -22,7 +22,7 @@ namespace OkapiSampleTests.ThirdParties
                     return new FirefoxOptions();
                 default:
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArguments("--no-sandbox");
+                    chromeOptions.AddArguments("headless");
                     return chromeOptions;
             }
         }
