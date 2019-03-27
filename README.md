@@ -5,8 +5,8 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Manages Selenium drivers nicely and hides them from users to simplify test automation processes
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0.4
-* Install-Package Okapi -Version 1.0.0.4
+* https://www.nuget.org/packages/Okapi/1.0.0.5
+* Install-Package Okapi -Version 1.0.0.5
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -233,6 +233,7 @@ namespace OkapiSampleTests.DI
 
 ## Example
 ````
+using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Okapi.Drivers;
@@ -254,9 +255,59 @@ namespace OkapiTests
         }
 
         [TestMethod]
+        public void Loop_test_with_data_list()
+        {
+            IList<Registration> testData = new List<Registration>
+            {
+                new Registration()
+                {
+                    UserName = "Automation1"
+                },
+                new Registration()
+                {
+                    UserName = "Automation2"
+                },
+            };
+
+            TestExecutor.Loop(Sample_scenario, testData);
+        }
+
+        [TestMethod]
+        public void Parallel_test_with_data_list()
+        {
+            IList<Registration> testData = new List<Registration>
+            {
+                new Registration()
+                {
+                    UserName = "Automation1"
+                },
+                new Registration()
+                {
+                    UserName = "Automation2"
+                },
+            };
+
+            TestExecutor.Parallel(Sample_scenario, testData);
+        }
+
+        [TestMethod]
         public void Parallel_test_with_data_set()
         {
             TestExecutor.Parallel(Sample_scenario, new RegistrationDataSet());
+        }
+
+        [TestMethod]
+        public void Parallel_test_with_data_set_in_line()
+        {
+            TestExecutor.Parallel(
+                new Action<Registration>(x =>
+                {
+                    DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+                    var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
+                    userName.SendKeys(x.UserName);
+                    DriverPool.Instance.QuitActiveDriver();
+                })
+            , new RegistrationDataSet());
         }
 
         private static void Sample_scenario(Registration registration)
@@ -392,6 +443,7 @@ namespace OkapiTests
     }
 }
 ````
+
 * Data set example
 ````
 using System.Collections.Generic;
@@ -425,6 +477,7 @@ namespace OkapiSampleTests.TestData
 * Usage document will come in near future.
             
 ## Versions
+* Version **1.0.0.5** released on 03/28/2019
 * Version **1.0.0.4** released on 03/28/2019
 * Version **1.0.0.3** released on 03/26/2019
 * Version **1.0.0.2** released on 03/21/2019
