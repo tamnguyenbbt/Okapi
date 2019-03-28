@@ -2,11 +2,12 @@
 Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** with dynamic content concept support
 * Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
 * Supports .Net Framework 4.5 and 4.6
-* Manages Selenium drivers nicely and hides them from users to simplify test automation processes
+* Supports data-driven
+* Manages Selenium drivers automatically and hides them from users to simplify test automation processes
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0.5
-* Install-Package Okapi -Version 1.0.0.5
+* https://www.nuget.org/packages/Okapi/1.0.0.6
+* Install-Package Okapi -Version 1.0.0.6
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -477,6 +478,7 @@ namespace OkapiSampleTests.TestData
 * Usage document will come in near future.
             
 ## Versions
+* Version **1.0.0.6** released on 03/29/2019
 * Version **1.0.0.5** released on 03/28/2019
 * Version **1.0.0.4** released on 03/28/2019
 * Version **1.0.0.3** released on 03/26/2019
