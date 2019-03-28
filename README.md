@@ -5,8 +5,8 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Manages Selenium drivers nicely and hides them from users to simplify test automation processes
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0.3
-* Install-Package Okapi -Version 1.0.0.3
+* https://www.nuget.org/packages/Okapi/1.0.0.5
+* Install-Package Okapi -Version 1.0.0.5
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -233,17 +233,91 @@ namespace OkapiSampleTests.DI
 
 ## Example
 ````
+using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Okapi.Drivers;
 using Okapi.Elements;
 using Okapi.Enums;
+using Okapi.Runners;
+using OkapiSampleTests.TestData;
 
 namespace OkapiTests
 {
     [TestClass]
     public class SampleTests
     {
+        [TestMethod]
+        public void Loop_test_with_data_set()
+        {
+            IDataSet<Registration> dataSet = new RegistrationDataSet();
+            TestExecutor.Loop(Sample_scenario, dataSet);
+        }
+
+        [TestMethod]
+        public void Loop_test_with_data_list()
+        {
+            IList<Registration> testData = new List<Registration>
+            {
+                new Registration()
+                {
+                    UserName = "Automation1"
+                },
+                new Registration()
+                {
+                    UserName = "Automation2"
+                },
+            };
+
+            TestExecutor.Loop(Sample_scenario, testData);
+        }
+
+        [TestMethod]
+        public void Parallel_test_with_data_list()
+        {
+            IList<Registration> testData = new List<Registration>
+            {
+                new Registration()
+                {
+                    UserName = "Automation1"
+                },
+                new Registration()
+                {
+                    UserName = "Automation2"
+                },
+            };
+
+            TestExecutor.Parallel(Sample_scenario, testData);
+        }
+
+        [TestMethod]
+        public void Parallel_test_with_data_set()
+        {
+            TestExecutor.Parallel(Sample_scenario, new RegistrationDataSet());
+        }
+
+        [TestMethod]
+        public void Parallel_test_with_data_set_in_line()
+        {
+            TestExecutor.Parallel(
+                new Action<Registration>(x =>
+                {
+                    DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+                    var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
+                    userName.SendKeys(x.UserName);
+                    DriverPool.Instance.QuitActiveDriver();
+                })
+            , new RegistrationDataSet());
+        }
+
+        private static void Sample_scenario(Registration registration)
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
+            userName.SendKeys(registration.UserName);
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
         [TestMethod]
         public void Single_driver_auto_created_by_driver_pool()
         {
@@ -284,9 +358,7 @@ namespace OkapiTests
         public void By_anchor()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-	    var anchorElementInfo = SearchInfo.New("span", "First name");
-	    var searchingElementInfo = SearchInfo.New("input");
-            var userName = TestObject.New(anchorElementInfo, searchingElementInfo);
+            var userName = TestObject.New(SearchInfo.New("span", "First name"), SearchInfo.New("input"));
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitAllDrivers();
         }
@@ -372,11 +444,42 @@ namespace OkapiTests
 }
 ````
 
+* Data set example
+````
+using System.Collections.Generic;
+using Okapi.Runners;
+
+namespace OkapiSampleTests.TestData
+{
+    public class RegistrationDataSet : IDataSet<Registration>
+    {
+        public IList<Registration> Get()
+        {
+            var data = new List<Registration>
+            {
+                new Registration()
+                {
+                    UserName = "Automation1"
+                },
+                new Registration()
+                {
+                    UserName = "Automation2"
+                },
+            };
+
+            return data;
+        }
+    }
+}
+````
+
 ## Usage
 * Usage document will come in near future.
             
 ## Versions
-* Version **1.0.0.3** released on 03/26/2019 -- supports non remote web drivers
+* Version **1.0.0.5** released on 03/28/2019
+* Version **1.0.0.4** released on 03/28/2019
+* Version **1.0.0.3** released on 03/26/2019
 * Version **1.0.0.2** released on 03/21/2019
 * Version **1.0.0.1** released on 03/20/2019
 * Version **1.0.0** released on 03/19/2019
