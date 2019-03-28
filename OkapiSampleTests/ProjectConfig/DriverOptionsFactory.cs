@@ -6,7 +6,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 
-namespace OkapiSampleTests.ThirdParties
+namespace OkapiSampleTests.ProjectConfig
 {
     internal sealed class DriverOptionsFactory : IDriverOptionsFactory
     {
@@ -22,7 +22,7 @@ namespace OkapiSampleTests.ThirdParties
                     return new FirefoxOptions();
                 default:
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArguments("headless");
+                    //chromeOptions.AddArguments("headless");
                     return chromeOptions;
             }
         }

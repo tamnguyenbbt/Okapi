@@ -2,9 +2,9 @@ using System;
 using Okapi.Configs;
 using Okapi.Enums;
 
-namespace OkapiTests
+namespace OkapiSampleTests.ProjectConfig
 {
-    internal class LocalChromeTestEnvironment : ITestEnvironment
+    internal class TestEnvironment : ITestEnvironment
     {
         public DriverFlavour DriverFlavour => DriverFlavour.Chrome;
         public Uri SeleniumHubUri => new Uri("http://localhost:2021/wd/hub");

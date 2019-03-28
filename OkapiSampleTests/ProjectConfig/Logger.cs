@@ -1,13 +1,13 @@
 ﻿using System;
 using Okapi.Logs;
 using Serilog;
-using Serilog.Core;
+using SeriLogLogger = Serilog.Core.Logger;
 
-namespace OkapiSampleTests.ThirdParties
+namespace OkapiSampleTests.ProjectConfig
 {
-    internal class OkapiLogger : IOkapiLogger
+    internal class Logger : IOkapiLogger
     {
-        private readonly static Logger logger = new LoggerConfiguration().WriteTo.File("C:\\DEV\\Tam\\Okapi\\log.txt").CreateLogger();
+        private readonly static SeriLogLogger logger = new LoggerConfiguration().WriteTo.File("C:\\DEV\\Tam\\Okapi\\log.txt").CreateLogger();
 
         public void Error(string messageTemplate)
         {

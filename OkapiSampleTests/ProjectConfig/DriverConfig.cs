@@ -1,7 +1,7 @@
 using ExtSelenium.DomCore;
 using Okapi.Configs;
 
-namespace OkapiSampleTests.Configurations
+namespace OkapiSampleTests.ProjectConfig
 {
     internal class DriverConfig : IDriverConfig
     {

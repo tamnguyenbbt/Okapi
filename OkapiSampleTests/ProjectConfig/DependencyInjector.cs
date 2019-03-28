@@ -3,20 +3,17 @@ using Okapi.Configs;
 using Okapi.DI;
 using Okapi.Drivers;
 using Okapi.Logs;
-using OkapiSampleTests.Configurations;
-using OkapiSampleTests.ThirdParties;
-using OkapiTests;
 
-namespace OkapiSampleTests.DI
+namespace OkapiSampleTests.ProjectConfig
 {
-    internal class OkapiModuleLoader : IOkapiModuleLoader
+    internal class DependencyInjector : IOkapiModuleLoader
     {
         public void LoadAssemblyBindings(IKernel kernel)
         {
-            kernel.Bind<ITestEnvironment>().To<LocalChromeTestEnvironment>().InSingletonScope();
+            kernel.Bind<ITestEnvironment>().To<TestEnvironment>().InSingletonScope();
             kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope();
             kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope();
-            kernel.Bind<IOkapiLogger>().To<OkapiLogger>().InSingletonScope();
+            kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope();
         }
     }
 }
