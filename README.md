@@ -2,12 +2,14 @@
 Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** with dynamic content concept support
 * Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
 * Supports .Net Framework 4.5 and 4.6
-* Supports data-driven
+* Supports data-driven out of the box 
+ - When passing null value to action methods (i.e. SendKeys), they will do nothing
+ - Every time changing dynamic contents with new data values, new web element will be referenced, ready to accept user actions (useful for acting on menus, dropdowns, and tables)
 * Manages Selenium drivers automatically and hides them from users to simplify test automation processes
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0.6
-* Install-Package Okapi -Version 1.0.0.6
+* https://www.nuget.org/packages/Okapi/1.0.0.7
+* Install-Package Okapi -Version 1.0.0.7
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -75,7 +77,7 @@ using Okapi.Configs;
 
 namespace OkapiSampleTests.Configurations
 {
-    public class CustomisedDriverConfig : IDriverConfig
+    public class DriverConfig : IDriverConfig
     {
         public int TimeoutInSeconds => 10; //if not set, Okapi set 10 by default
         public bool QuitDriverOnError => true; //if not set, Okapi set true by default
@@ -92,7 +94,7 @@ using Okapi.Enums;
 
 namespace OkapiTests
 {
-    internal class LocalChromeTestEnvironment : ITestEnvironment
+    internal class TestEnvironment : ITestEnvironment
     {
         public DriverFlavour DriverFlavour => DriverFlavour.Chrome;
         public Uri SeleniumHubUri => new Uri("http://localhost:2021/wd/hub");
@@ -128,7 +130,7 @@ using OpenQA.Selenium.IE;
 
 namespace OkapiSampleTests.Configurations
 {
-    internal class CustomisedDriverOptionsFactory : IDriverOptionsFactory
+    internal class DriverOptionsFactory : IDriverOptionsFactory
     {
         public DriverOptions CreateDriverOptions(DriverFlavour driverFlavour)
         {
@@ -176,15 +178,17 @@ At this point of time, IOkapiLogger supports string messages. JSON support may c
 
 ````
 using System;
+using System.IO;
 using Okapi.Logs;
+using Okapi.TestUtils;
 using Serilog;
-using Serilog.Core;
+using SeriLogLogger = Serilog.Core.Logger;
 
-namespace OkapiSampleTests.ThirdParties
+namespace OkapiSampleTests.ProjectConfig
 {
-    internal class OkapiLogger : IOkapiLogger
+    internal class Logger : IOkapiLogger
     {
-        private readonly static Logger logger = new LoggerConfiguration().WriteTo.File("C:\\DEV\\Tam\\Okapi\\log.txt").CreateLogger();
+        private readonly static SeriLogLogger logger = new LoggerConfiguration().WriteTo.File($"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}log.txt").CreateLogger();
 
         public void Error(string messageTemplate)
         {
@@ -213,20 +217,17 @@ using Okapi.Configs;
 using Okapi.DI;
 using Okapi.Drivers;
 using Okapi.Logs;
-using OkapiSampleTests.Configurations;
-using OkapiSampleTests.ThirdParties;
-using OkapiTests;
 
-namespace OkapiSampleTests.DI
+namespace OkapiSampleTests.ProjectConfig
 {
-    internal class OkapiModuleLoader : IOkapiModuleLoader
+    internal class DependencyInjector : IOkapiModuleLoader
     {
         public void LoadAssemblyBindings(IKernel kernel)
         {
-            kernel.Bind<ITestEnvironment>().To<LocalChromeTestEnvironment>().InSingletonScope();
+            kernel.Bind<ITestEnvironment>().To<TestEnvironment>().InSingletonScope();
             kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope();
             kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope();
-            kernel.Bind<IOkapiLogger>().To<OkapiLogger>().InSingletonScope();
+            kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope();
         }
     }
 }
@@ -413,7 +414,7 @@ namespace OkapiTests
         }
 
         [TestMethod]
-        public void Another_develper_friendly_style_by_name()
+        public void Another_developer_friendly_style_by_name()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
 
@@ -439,6 +440,71 @@ namespace OkapiTests
             userName.MoveToElement();
             userName.SendKeys("TesterTester");
             DriverPool.Instance.QuitAllExceptActiveDriver();
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
+        [TestMethod]
+        public void SetDynamicContents()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input");
+            userName.SetDynamicContents("First name").MoveToElement();
+            userName.SendKeys("TesterTester");
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
+        [TestMethod]
+        public void Single_anchor()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            TestObject.New(SearchInfo.New("span", "Next")).Click();
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
+        [TestMethod]
+        public void Try_get_element_count_when_no_element_found()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            var button = TestObject.New(SearchInfo.New("span", "Next1"));
+
+            if (button.TryGetElementCount(1) != 0)
+            {
+                button.Click();
+            }
+
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
+        [TestMethod]
+        public void Get_element_count_when_no_element_found()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            var elementCount = TestObject.New(SearchInfo.New("span", "Next1")).ElementCount;
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
+        [TestMethod]
+        public void Get_element_count_when_element_found()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            var elementCount = TestObject.New(SearchInfo.New("span", "Next")).ElementCount;
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
+        [TestMethod]
+        public void By_anchor_without_anchor_tag()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            var userName = TestObject.New(SearchInfo.OwnText("First name"), SearchInfo.New("input"));
+            userName.SendKeys("Automation");
+            DriverPool.Instance.QuitAllDrivers();
+        }
+
+        [TestMethod]
+        public void Get_text()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
             DriverPool.Instance.QuitActiveDriver();
         }
     }
@@ -478,6 +544,7 @@ namespace OkapiSampleTests.TestData
 * Usage document will come in near future.
             
 ## Versions
+* Version **1.0.0.7** released on 03/30/2019
 * Version **1.0.0.6** released on 03/29/2019
 * Version **1.0.0.5** released on 03/28/2019
 * Version **1.0.0.4** released on 03/28/2019
