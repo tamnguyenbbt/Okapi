@@ -5,7 +5,6 @@ using Okapi.Drivers;
 using Okapi.Elements;
 using Okapi.Enums;
 using Okapi.Runners;
-using Okapi.TestUtils;
 using OkapiSampleTests.TestData;
 
 namespace OkapiTests
@@ -208,6 +207,16 @@ namespace OkapiTests
         }
 
         [TestMethod]
+        public void SetDynamicContents()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input");
+            userName.SetDynamicContents("First name").MoveToElement();
+            userName.SendKeys("TesterTester");
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
+        [TestMethod]
         public void Single_anchor()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
@@ -255,10 +264,11 @@ namespace OkapiTests
         }
 
         [TestMethod]
-        public void Ramdom()
+        public void Get_text()
         {
-            var a = Util.RandomNumber(50, 10).Length;
-            var b = Util.RandomText(50, 100).Length;
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
+            DriverPool.Instance.QuitActiveDriver();
         }
     }
 }

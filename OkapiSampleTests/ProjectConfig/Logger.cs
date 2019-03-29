@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using Okapi.Logs;
+using Okapi.TestUtils;
 using Serilog;
 using SeriLogLogger = Serilog.Core.Logger;
 
@@ -7,7 +9,7 @@ namespace OkapiSampleTests.ProjectConfig
 {
     internal class Logger : IOkapiLogger
     {
-        private readonly static SeriLogLogger logger = new LoggerConfiguration().WriteTo.File("C:\\DEV\\Tam\\Okapi\\log.txt").CreateLogger();
+        private readonly static SeriLogLogger logger = new LoggerConfiguration().WriteTo.File($"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}log.txt").CreateLogger();
 
         public void Error(string messageTemplate)
         {
