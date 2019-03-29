@@ -3,8 +3,8 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
 * Supports .Net Framework 4.5 and 4.6
 * Supports data-driven out of the box 
-** When passing null value to action methods (i.e. SendKeys), they will do nothing
-** Every time changing dynamic contents with new data values, new web element will be referenced, ready to accept user actions (useful for acting on menus, dropdowns, and tables)
+* -->  When passing null value to action methods (i.e. SendKeys), they will do nothing
+* --> Every time changing dynamic contents with new data values, new web element will be referenced, ready to accept user actions (useful for acting on menus, dropdowns, and tables)
 * Manages Selenium drivers automatically and hides them from users to simplify test automation processes
 
 ## NuGet
