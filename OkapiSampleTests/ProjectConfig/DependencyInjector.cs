@@ -3,6 +3,7 @@ using Okapi.Configs;
 using Okapi.DI;
 using Okapi.Drivers;
 using Okapi.Logs;
+using Okapi.Report;
 
 namespace OkapiSampleTests.ProjectConfig
 {
@@ -14,6 +15,7 @@ namespace OkapiSampleTests.ProjectConfig
             kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope();
             kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope();
             kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope();
+            kernel.Bind<IReportFormatter>().To<ReportFormatter>().InSingletonScope();
         }
     }
 }
