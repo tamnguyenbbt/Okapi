@@ -72,7 +72,7 @@ If you decide to use **App.config**, add an App.config file as below:
 
 If you decide to use class configs, implement the following interfaces:
 
-* Implement **IDriverConfig**
+* Implement **IDriverConfig** (optional)
 ````
 using ExtSelenium.DomCore;
 using Okapi.Configs;
@@ -116,7 +116,7 @@ DriverPool.Instance.CreateDriver(LocalChromeTestEnvironment.Instance)
 
 OR you can inject them into Okapi via its Dependency Injection (DI) interface (using Ninject).
 
-### Override Selenium Driver Options 
+### Override Selenium Driver Options (Optional)
 
 If you want to control the browsers' behaviours rather than using the default behaviours provided by Okapi, 
 you can implement its **IDriverOptionsFactory** interface. For instance,
@@ -171,7 +171,7 @@ namespace Okapi.Enums
 }
 ````
 
-### Customize Logging
+### Customize Logging (Optional)
 Okapi comes with the ability to log testing activities and to capture snapshots which are controllable via configuration.
 You can customize the logging message template format and logging destination by implementing Okapi's interface **IOkapiLogger**.
 Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
@@ -210,10 +210,10 @@ namespace OkapiSampleTests.ProjectConfig
 }
 ````
 
-### Customize Test Report
+### Customize Test Report (Optional)
 Implement **IReportFormatter** interface. Below is a simple ReportFormatter sending test case execution results to a text file.
 A comprehensive html/javascript report with summary charts will be developed in future as a seperate project/nuget package. 
-
+If you use test report, decorate your test method with attribute **TestCase**. Also, call **TestReport.ReportTestCaseResult** at the end of the test method or in test cleanup method.
 ````
 using System;
 using System.IO;
@@ -311,10 +311,10 @@ namespace OkapiSampleTests.ProjectConfig
         public void LoadAssemblyBindings(IKernel kernel)
         {
             kernel.Bind<ITestEnvironment>().To<TestEnvironment>().InSingletonScope();
-            kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope();
-            kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope();
-            kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope();
-            kernel.Bind<IReportFormatter>().To<ReportFormatter>().InSingletonScope();
+            kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
+            kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
+            kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope(); //optional; if not provided, Okapi does not log info
+            kernel.Bind<IReportFormatter>().To<ReportFormatter>().InSingletonScope(); //optional; if not provided, Okapi does not produce test report
         }
     }
 }
