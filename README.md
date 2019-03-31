@@ -310,7 +310,7 @@ namespace OkapiSampleTests.ProjectConfig
     {
         public void LoadAssemblyBindings(IKernel kernel)
         {
-            kernel.Bind<ITestEnvironment>().To<TestEnvironment>().InSingletonScope();
+            kernel.Bind<ITestEnvironment>().To<TestEnvironment>().InSingletonScope(); //optional; if not provided, Okapi uses App.config
             kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
             kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
             kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope(); //optional; if not provided, Okapi does not log info
