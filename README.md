@@ -6,10 +6,12 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * -->  When passing null value to action methods (i.e. SendKeys), they will do nothing
 * --> Every time changing dynamic contents with new data values, new web element will be referenced, ready to accept user actions (useful for acting on menus, dropdowns, and tables)
 * Manages Selenium drivers automatically and hides them from users to simplify test automation processes
+* Ideal for setting Web UI automation test project using Page object Model (POM). The combination of data-driven and POM will result in better decoupling, cleaner code, low cost of maintenance, and easier to scale.
+* Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.) (under development)
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0.7
-* Install-Package Okapi -Version 1.0.0.7
+* https://www.nuget.org/packages/Okapi/1.0.0.8
+* Install-Package Okapi -Version 1.0.0.8
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -169,7 +171,7 @@ namespace Okapi.Enums
 }
 ````
 
-### Customize Okapi Logging
+### Customize Logging
 Okapi comes with the ability to log testing activities and to capture snapshots which are controllable via configuration.
 You can customize the logging message template format and logging destination by implementing Okapi's interface **IOkapiLogger**.
 Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
@@ -208,6 +210,32 @@ namespace OkapiSampleTests.ProjectConfig
 }
 ````
 
+### Customize Test Report
+Implement **IReportFormatter** interface
+i.e.
+
+````
+using System.IO;
+using Okapi.Report;
+using Okapi.TestUtils;
+using Serilog;
+using SeriLogLogger = Serilog.Core.Logger;
+
+namespace OkapiSampleTests.ProjectConfig
+{
+    internal class ReportFormatter : IReportFormatter
+    {
+        private readonly static SeriLogLogger logger = new LoggerConfiguration().WriteTo.File($"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}report.txt").CreateLogger();
+
+        public void Run(ReportData data)
+        {
+            string result = $"{data.TestMethod.Name} --> {data.TestResult}";
+            logger.Information(result);
+        }
+    }
+}
+````
+
 ### Inject Okapi Interface Implementations
 Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject your settings mentioned above to Okapi
 
@@ -217,6 +245,7 @@ using Okapi.Configs;
 using Okapi.DI;
 using Okapi.Drivers;
 using Okapi.Logs;
+using Okapi.Report;
 
 namespace OkapiSampleTests.ProjectConfig
 {
@@ -228,6 +257,7 @@ namespace OkapiSampleTests.ProjectConfig
             kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope();
             kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope();
             kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope();
+            kernel.Bind<IReportFormatter>().To<ReportFormatter>().InSingletonScope();
         }
     }
 }
@@ -238,11 +268,14 @@ namespace OkapiSampleTests.ProjectConfig
 using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Okapi.Attributes;
 using Okapi.Drivers;
 using Okapi.Elements;
 using Okapi.Enums;
+using Okapi.Report;
 using Okapi.Runners;
 using OkapiSampleTests.TestData;
+using TestResult = Okapi.Report.TestResult;
 
 namespace OkapiTests
 {
@@ -448,8 +481,7 @@ namespace OkapiTests
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input");
-            userName.SetDynamicContents("First name").MoveToElement();
-            userName.SendKeys("TesterTester");
+            userName.SetDynamicContents("First name").MoveToElement().SendKeys("TesterTester");
             DriverPool.Instance.QuitActiveDriver();
         }
 
@@ -457,7 +489,7 @@ namespace OkapiTests
         public void Single_anchor()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            TestObject.New(SearchInfo.New("span", "Next")).Click();
+            TestObject.New(SearchInfo.New("span", "Next")).Click().Click();
             DriverPool.Instance.QuitActiveDriver();
         }
 
@@ -501,11 +533,13 @@ namespace OkapiTests
         }
 
         [TestMethod]
+        [TestCase]
         public void Get_text()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
     }
 }
@@ -544,6 +578,7 @@ namespace OkapiSampleTests.TestData
 * Usage document will come in near future.
             
 ## Versions
+* Version **1.0.0.8** released on 03/31/2019
 * Version **1.0.0.7** released on 03/30/2019
 * Version **1.0.0.6** released on 03/29/2019
 * Version **1.0.0.5** released on 03/28/2019
