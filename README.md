@@ -7,11 +7,11 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * --> Every time changing dynamic contents with new data values, new web element will be referenced, ready to accept user actions (useful for acting on menus, dropdowns, and tables)
 * Manages Selenium drivers automatically and hides them from users to simplify test automation processes
 * Ideal for setting Web UI automation test project using Page object Model (POM). The combination of data-driven and POM will result in better decoupling, cleaner code, low cost of maintenance, and easier to scale.
-* Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.) (under development)
+* Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination (ALM, Web services, etc.) based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.). This introduces a bit of overhead in your test script or test script cleanup but gives you the fexibility to report in any format (text, html, etc.) to any destination you and your organisation want to. Currently this supports reporting to test case level. Reporting to test step level will be in development soon.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0.8
-* Install-Package Okapi -Version 1.0.0.8
+* https://www.nuget.org/packages/Okapi/1.0.0.9
+* Install-Package Okapi -Version 1.0.0.9
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -578,6 +578,7 @@ namespace OkapiSampleTests.TestData
 * Usage document will come in near future.
             
 ## Versions
+* Version **1.0.0.9** released on 03/31/2019
 * Version **1.0.0.8** released on 03/31/2019
 * Version **1.0.0.7** released on 03/30/2019
 * Version **1.0.0.6** released on 03/29/2019
