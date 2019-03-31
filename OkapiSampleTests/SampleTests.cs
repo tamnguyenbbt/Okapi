@@ -16,13 +16,86 @@ namespace OkapiTests
     public class SampleTests
     {
         [TestMethod]
+        [TestCase]
+        public void Get_text_with_assertion_library_of_your_choice()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
+            DriverPool.Instance.QuitActiveDriver();
+            void assertion() => Assert.AreEqual("Try Xero FREE for 30 days1!", text);
+            TestReport.ReportTestCaseResult(assertion);
+        }
+
+        [TestMethod]
+        [TestCase]
+        public void Assertion_with_user_added_message()
+        {
+            string expected = "Welcome! Try Xero FREE for 30 days!";
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string actual = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
+            DriverPool.Instance.QuitActiveDriver();
+
+            void assertion() => Assert.AreEqual(expected, actual);
+            KeyValuePair<Action, string> assertionsAndUserAddedData
+                = new KeyValuePair<Action, string>(assertion, $"Expected: {expected} | Actual: {actual}");
+            TestReport.ReportTestCaseResult(assertionsAndUserAddedData);
+        }
+
+        [TestMethod]
+        [TestCase]
+        public void Assertion_with_user_added_messages()
+        {
+            string expected = "Welcome! Try Xero FREE for 30 days!";
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string actual = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
+            DriverPool.Instance.QuitActiveDriver();
+
+            void assertion() => Assert.AreEqual(expected, actual);
+            KeyValuePair<Action, IList<string>> assertionsAndUserAddedData
+                = new KeyValuePair<Action, IList<string>>(assertion,
+                new List<string> { $"Expected: {expected} | Actual: {actual}" });
+            TestReport.ReportTestCaseResult(assertionsAndUserAddedData);
+        }
+
+        [TestMethod]
+        [TestCase]
+        public void Assertion_with_user_added_message_passed()
+        {
+            string expected = "Try Xero FREE for 30 days!";
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string actual = TestObject.New(SearchInfo.OwnText(expected)).Text;
+            DriverPool.Instance.QuitActiveDriver();
+
+            void assertion() => Assert.AreEqual(expected, actual);
+            KeyValuePair<Action, string> assertionsAndUserAddedData
+                = new KeyValuePair<Action, string>(assertion, $"Expected: {expected} | Actual: {actual}");
+            TestReport.ReportTestCaseResult(assertionsAndUserAddedData);
+        }
+
+        [TestMethod]
+        [TestCase]
+        public void One_assertion()
+        {
+            string expected = "Welcome! Try Xero FREE for 30 days!";
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string actual = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
+            DriverPool.Instance.QuitActiveDriver();
+
+            void assertion() => Assert.AreEqual(expected, actual);
+            TestReport.ReportTestCaseResult(assertion, $"Expected: {expected} | Actual: {actual}");
+        }
+
+        [TestMethod]
+        [TestCase]
         public void Loop_test_with_data_set()
         {
             IDataSet<Registration> dataSet = new RegistrationDataSet();
             TestExecutor.Loop(Sample_scenario, dataSet);
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Loop_test_with_data_list()
         {
             IList<Registration> testData = new List<Registration>
@@ -38,9 +111,11 @@ namespace OkapiTests
             };
 
             TestExecutor.Loop(Sample_scenario, testData);
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Parallel_test_with_data_list()
         {
             IList<Registration> testData = new List<Registration>
@@ -56,15 +131,19 @@ namespace OkapiTests
             };
 
             TestExecutor.Parallel(Sample_scenario, testData);
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Parallel_test_with_data_set()
         {
             TestExecutor.Parallel(Sample_scenario, new RegistrationDataSet());
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Parallel_test_with_data_set_in_line()
         {
             TestExecutor.Parallel(
@@ -76,6 +155,7 @@ namespace OkapiTests
                     DriverPool.Instance.QuitActiveDriver();
                 })
             , new RegistrationDataSet());
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         private static void Sample_scenario(Registration registration)
@@ -84,54 +164,66 @@ namespace OkapiTests
             var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys(registration.UserName);
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Single_driver_auto_created_by_driver_pool()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Developer_friendly_style()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = new TestObject("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void XPath_by_default()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = new TestObject("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void By_name()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = new TestObject(LocatingMethod.Name, "FirstName"); //name attribute of tag input
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void By_anchor()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New(SearchInfo.New("span", "First name"), SearchInfo.New("input"));
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitAllDrivers();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void One_dynamic_content_making_one_test_object_to_hit_two_fields()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
@@ -140,9 +232,11 @@ namespace OkapiTests
             userName.DynamicContents = DynamicContents.New("Last name");
             userName.SendKeys("Tester");
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Another_develper_friendly_style_by_anchor_implicitly()
         {
             ManagedDriver currentDriver = DriverPool.Instance.ActiveDriver;
@@ -159,9 +253,11 @@ namespace OkapiTests
             userName.DynamicContents = DynamicContents.New("Last name");
             userName.SendKeys("Tester");
             DriverPool.Instance.Quit(currentDriver);
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Another_develper_friendly_style_by_xpath_as_default()
         {
             ManagedDriver currentDriver = DriverPool.Instance.ActiveDriver;
@@ -177,9 +273,11 @@ namespace OkapiTests
             userName.DynamicContents = DynamicContents.New("Last name");
             userName.SendKeys("Tester");
             DriverPool.Instance.Quit(currentDriver);
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Another_developer_friendly_style_by_name()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
@@ -192,9 +290,11 @@ namespace OkapiTests
 
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Single_driver_auto_created_by_driver_pool_plus_user_created_driver()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
@@ -207,26 +307,32 @@ namespace OkapiTests
             userName.SendKeys("TesterTester");
             DriverPool.Instance.QuitAllExceptActiveDriver();
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void SetDynamicContents()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input");
             userName.SetDynamicContents("First name").MoveToElement().SendKeys("TesterTester");
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Single_anchor()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            TestObject.New(SearchInfo.New("span", "Next")).Click().Click();
+            TestObject.New(SearchInfo.New("span", "Next1")).Click().Click();
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Try_get_element_count_when_no_element_found()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
@@ -238,40 +344,37 @@ namespace OkapiTests
             }
 
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Get_element_count_when_no_element_found()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             var elementCount = TestObject.New(SearchInfo.New("span", "Next1")).ElementCount;
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void Get_element_count_when_element_found()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             var elementCount = TestObject.New(SearchInfo.New("span", "Next")).ElementCount;
             DriverPool.Instance.QuitActiveDriver();
+            TestReport.ReportTestCaseResult(TestResult.PASS);
         }
 
         [TestMethod]
+        [TestCase]
         public void By_anchor_without_anchor_tag()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New(SearchInfo.OwnText("First name"), SearchInfo.New("input"));
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitAllDrivers();
-        }
-
-        [TestMethod]
-        [TestCase]
-        public void Get_text()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.ReportTestCaseResult(TestResult.PASS);
         }
     }
