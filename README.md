@@ -6,10 +6,12 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * -->  When passing null value to action methods (i.e. SendKeys), they will do nothing
 * --> Every time changing dynamic contents with new data values, new web element will be referenced, ready to accept user actions (useful for acting on menus, dropdowns, and tables)
 * Manages Selenium drivers automatically and hides them from users to simplify test automation processes
+* Ideal for setting Web UI automation test project using Page object Model (POM). The combination of data-driven and POM will result in better decoupling, cleaner code, low cost of maintenance, and easier to scale.
+* Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination (ALM, Web services, etc.) based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.). This introduces a bit of overhead in your test script or test script cleanup but gives you the fexibility to report in any format (text, html, etc.) to any destination you and your organisation want to. Currently this supports reporting to test case level. Reporting to test step level will be in development soon.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0.7
-* Install-Package Okapi -Version 1.0.0.7
+* https://www.nuget.org/packages/Okapi/1.0.0.9
+* Install-Package Okapi -Version 1.0.0.9
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -42,15 +44,15 @@ If you decide to use **App.config**, add an App.config file as below:
 	<EnvironmentSection>
 		<Environments>
 			<add targetTestEnvironment="Test1"
-				 active="true"
-				 driverFlavour="ChromeDriver"
-         			 remoteDriver="false"
-				 driverTimeoutInSeconds ="10"
-				 quitDriverOnError ="true"
-				 log ="true"
-				 takeSnapshotOnOK ="true"
-				 takeSnapshotOnError ="true"
-				 snapshotLocation ="Snapshots"/>
+			   active="true"
+			   driverFlavour="ChromeDriver"
+         		   remoteDriver="false"
+			   driverTimeoutInSeconds ="10"
+			   quitDriverOnError ="true"
+			   log ="true"
+			   takeSnapshotOnOK ="true"
+			   takeSnapshotOnError ="true"
+			   snapshotLocation ="Snapshots"/>
 			<add targetTestEnvironment="Test2"
 			   active="false"
 			   driverFlavour="IE"
@@ -169,7 +171,7 @@ namespace Okapi.Enums
 }
 ````
 
-### Customize Okapi Logging
+### Customize Logging
 Okapi comes with the ability to log testing activities and to capture snapshots which are controllable via configuration.
 You can customize the logging message template format and logging destination by implementing Okapi's interface **IOkapiLogger**.
 Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
@@ -208,6 +210,89 @@ namespace OkapiSampleTests.ProjectConfig
 }
 ````
 
+### Customize Test Report
+Implement **IReportFormatter** interface. Below is a simple ReportFormatter sending test case execution results to a text file.
+A comprehensive html/javascript report with summary charts will be developed in future as a seperate project/nuget package. 
+
+````
+using System;
+using System.IO;
+using System.Text;
+using Okapi.Extensions;
+using Okapi.Report;
+using Okapi.TestUtils;
+using Serilog;
+using SeriLogLogger = Serilog.Core.Logger;
+
+namespace OkapiSampleTests.ProjectConfig
+{
+    internal class ReportFormatter : IReportFormatter
+    {
+        private readonly static SeriLogLogger logger = new LoggerConfiguration()
+            .WriteTo
+            .File($"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}Report_{DateTime.Now.GetTimestamp()}.txt").CreateLogger();
+
+        public void Run(ReportData data)
+        {
+            StringBuilder reportStringBuilder = new StringBuilder();
+            reportStringBuilder.Append($"TEST CASE: {data.TestMethod.Name}");
+
+            reportStringBuilder.Append($"{Environment.NewLine}");
+            reportStringBuilder.Append("\t");
+            reportStringBuilder.Append($"RESULT: {data.TestResult}");
+
+            if (data.DurationInSeconds != -1)
+            {
+                reportStringBuilder.Append($"{Environment.NewLine}");
+                reportStringBuilder.Append("\t");
+                reportStringBuilder.Append($"DURATION: {data.DurationInSeconds} seconds");
+            }
+
+            if (data.StartDateTime != null)
+            {
+                reportStringBuilder.Append($"{Environment.NewLine}");
+                reportStringBuilder.Append("\t");
+                reportStringBuilder.Append($"START TIME: {data.StartDateTime}");
+            }
+
+            reportStringBuilder.Append($"{Environment.NewLine}");
+            reportStringBuilder.Append("\t");
+            reportStringBuilder.Append($"END TIME: {data.EndDateTime}");
+
+            if (data.AdditionalData.HasAny())
+            {
+                reportStringBuilder.Append($"{Environment.NewLine}");
+                reportStringBuilder.Append("\t");
+                reportStringBuilder.Append($"ADDITIONAL DATA: {data.AdditionalData.ConvertToString()}");
+            }
+
+            if (data.FailDetails != null)
+            {
+                reportStringBuilder.Append($"{Environment.NewLine}");
+                reportStringBuilder.Append("\t");
+                reportStringBuilder.Append($"FAIL INFO: {data.FailDetails}");
+            }
+
+            if (data.Exception != null)
+            {
+                reportStringBuilder.Append($"{Environment.NewLine}");
+                reportStringBuilder.Append("\t");
+                reportStringBuilder.Append($"EXCEPTION: {data.Exception}");
+            }
+
+            if (data.TestResult.Equals(TestResult.PASS))
+            {
+                logger.Information(reportStringBuilder.ToString());
+            }
+            else
+            {
+                logger.Error(reportStringBuilder.ToString());
+            }
+        }
+    }
+}
+````
+
 ### Inject Okapi Interface Implementations
 Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject your settings mentioned above to Okapi
 
@@ -217,6 +302,7 @@ using Okapi.Configs;
 using Okapi.DI;
 using Okapi.Drivers;
 using Okapi.Logs;
+using Okapi.Report;
 
 namespace OkapiSampleTests.ProjectConfig
 {
@@ -228,6 +314,7 @@ namespace OkapiSampleTests.ProjectConfig
             kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope();
             kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope();
             kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope();
+            kernel.Bind<IReportFormatter>().To<ReportFormatter>().InSingletonScope();
         }
     }
 }
@@ -235,315 +322,15 @@ namespace OkapiSampleTests.ProjectConfig
 
 ## Example
 ````
-using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Okapi.Drivers;
-using Okapi.Elements;
-using Okapi.Enums;
-using Okapi.Runners;
-using OkapiSampleTests.TestData;
-
-namespace OkapiTests
-{
-    [TestClass]
-    public class SampleTests
-    {
-        [TestMethod]
-        public void Loop_test_with_data_set()
-        {
-            IDataSet<Registration> dataSet = new RegistrationDataSet();
-            TestExecutor.Loop(Sample_scenario, dataSet);
-        }
-
-        [TestMethod]
-        public void Loop_test_with_data_list()
-        {
-            IList<Registration> testData = new List<Registration>
-            {
-                new Registration()
-                {
-                    UserName = "Automation1"
-                },
-                new Registration()
-                {
-                    UserName = "Automation2"
-                },
-            };
-
-            TestExecutor.Loop(Sample_scenario, testData);
-        }
-
-        [TestMethod]
-        public void Parallel_test_with_data_list()
-        {
-            IList<Registration> testData = new List<Registration>
-            {
-                new Registration()
-                {
-                    UserName = "Automation1"
-                },
-                new Registration()
-                {
-                    UserName = "Automation2"
-                },
-            };
-
-            TestExecutor.Parallel(Sample_scenario, testData);
-        }
-
-        [TestMethod]
-        public void Parallel_test_with_data_set()
-        {
-            TestExecutor.Parallel(Sample_scenario, new RegistrationDataSet());
-        }
-
-        [TestMethod]
-        public void Parallel_test_with_data_set_in_line()
-        {
-            TestExecutor.Parallel(
-                new Action<Registration>(x =>
-                {
-                    DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-                    var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
-                    userName.SendKeys(x.UserName);
-                    DriverPool.Instance.QuitActiveDriver();
-                })
-            , new RegistrationDataSet());
-        }
-
-        private static void Sample_scenario(Registration registration)
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
-            userName.SendKeys(registration.UserName);
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void Single_driver_auto_created_by_driver_pool()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
-            userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void Developer_friendly_style()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = new TestObject("//label[span[contains(text(),'First name')]]/input");
-            userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void XPath_by_default()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = new TestObject("//label[span[contains(text(),'First name')]]/input");
-            userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void By_name()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = new TestObject(LocatingMethod.Name, "FirstName"); //name attribute of tag input
-            userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void By_anchor()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New(SearchInfo.New("span", "First name"), SearchInfo.New("input"));
-            userName.SendKeys("Automation");
-            DriverPool.Instance.QuitAllDrivers();
-        }
-
-        [TestMethod]
-        public void One_dynamic_content_making_one_test_object_to_hit_two_fields()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New(SearchInfo.New("span", "{0}"), SearchInfo.New("input"), DynamicContents.New("First name"));
-            userName.SendKeys("Automation");
-            userName.DynamicContents = DynamicContents.New("Last name");
-            userName.SendKeys("Tester");
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void Another_develper_friendly_style_by_anchor_implicitly()
-        {
-            ManagedDriver currentDriver = DriverPool.Instance.ActiveDriver;
-            currentDriver.LaunchPage("https://www.xero.com/au/signup/");
-
-            var userName = new TestObject()
-            {
-                AnchorElementInfo = SearchInfo.New("span", "{0}"),
-                SearchElementInfo = SearchInfo.New("input"),
-                DynamicContents = new List<string>() { "First name" }
-            };
-
-            userName.SendKeys("Automation");
-            userName.DynamicContents = DynamicContents.New("Last name");
-            userName.SendKeys("Tester");
-            DriverPool.Instance.Quit(currentDriver);
-        }
-
-        [TestMethod]
-        public void Another_develper_friendly_style_by_xpath_as_default()
-        {
-            ManagedDriver currentDriver = DriverPool.Instance.ActiveDriver;
-            currentDriver.LaunchPage("https://www.xero.com/au/signup/");
-
-            var userName = new TestObject()
-            {
-                Locator = "//label[span[contains(text(),'{0}')]]/input",
-                DynamicContents = new List<string>() { "First name" }
-            };
-
-            userName.SendKeys("Automation");
-            userName.DynamicContents = DynamicContents.New("Last name");
-            userName.SendKeys("Tester");
-            DriverPool.Instance.Quit(currentDriver);
-        }
-
-        [TestMethod]
-        public void Another_developer_friendly_style_by_name()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-
-            var userName = new TestObject()
-            {
-                LocatingMethod = LocatingMethod.Name,
-                Locator = "FirstName"
-            };
-
-            userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void Single_driver_auto_created_by_driver_pool_plus_user_created_driver()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input", DynamicContents.New("First name"));
-            ManagedDriver previousActiveDriver = DriverPool.Instance.ActiveDriver;
-            DriverPool.Instance.CreateDriver().LaunchPage("https://www.google.com");
-            DriverPool.Instance.ActiveDriver = previousActiveDriver;
-
-            userName.MoveToElement();
-            userName.SendKeys("TesterTester");
-            DriverPool.Instance.QuitAllExceptActiveDriver();
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void SetDynamicContents()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input");
-            userName.SetDynamicContents("First name").MoveToElement();
-            userName.SendKeys("TesterTester");
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void Single_anchor()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            TestObject.New(SearchInfo.New("span", "Next")).Click();
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void Try_get_element_count_when_no_element_found()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            var button = TestObject.New(SearchInfo.New("span", "Next1"));
-
-            if (button.TryGetElementCount(1) != 0)
-            {
-                button.Click();
-            }
-
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void Get_element_count_when_no_element_found()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            var elementCount = TestObject.New(SearchInfo.New("span", "Next1")).ElementCount;
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void Get_element_count_when_element_found()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            var elementCount = TestObject.New(SearchInfo.New("span", "Next")).ElementCount;
-            DriverPool.Instance.QuitActiveDriver();
-        }
-
-        [TestMethod]
-        public void By_anchor_without_anchor_tag()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New(SearchInfo.OwnText("First name"), SearchInfo.New("input"));
-            userName.SendKeys("Automation");
-            DriverPool.Instance.QuitAllDrivers();
-        }
-
-        [TestMethod]
-        public void Get_text()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
-            DriverPool.Instance.QuitActiveDriver();
-        }
-    }
-}
-````
-
-* Data set example
-````
-using System.Collections.Generic;
-using Okapi.Runners;
-
-namespace OkapiSampleTests.TestData
-{
-    public class RegistrationDataSet : IDataSet<Registration>
-    {
-        public IList<Registration> Get()
-        {
-            var data = new List<Registration>
-            {
-                new Registration()
-                {
-                    UserName = "Automation1"
-                },
-                new Registration()
-                {
-                    UserName = "Automation2"
-                },
-            };
-
-            return data;
-        }
-    }
-}
+See https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
 ````
 
 ## Usage
 * Usage document will come in near future.
             
 ## Versions
+* Version **1.0.0.9** released on 03/31/2019
+* Version **1.0.0.8** released on 03/31/2019
 * Version **1.0.0.7** released on 03/30/2019
 * Version **1.0.0.6** released on 03/29/2019
 * Version **1.0.0.5** released on 03/28/2019
