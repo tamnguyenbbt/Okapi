@@ -44,15 +44,15 @@ If you decide to use **App.config**, add an App.config file as below:
 	<EnvironmentSection>
 		<Environments>
 			<add targetTestEnvironment="Test1"
-				 active="true"
-				 driverFlavour="ChromeDriver"
-         			 remoteDriver="false"
-				 driverTimeoutInSeconds ="10"
-				 quitDriverOnError ="true"
-				 log ="true"
-				 takeSnapshotOnOK ="true"
-				 takeSnapshotOnError ="true"
-				 snapshotLocation ="Snapshots"/>
+			   active="true"
+			   driverFlavour="ChromeDriver"
+         		   remoteDriver="false"
+			   driverTimeoutInSeconds ="10"
+			   quitDriverOnError ="true"
+			   log ="true"
+			   takeSnapshotOnOK ="true"
+			   takeSnapshotOnError ="true"
+			   snapshotLocation ="Snapshots"/>
 			<add targetTestEnvironment="Test2"
 			   active="false"
 			   driverFlavour="IE"
@@ -211,8 +211,8 @@ namespace OkapiSampleTests.ProjectConfig
 ````
 
 ### Customize Test Report
-Implement **IReportFormatter** interface
-Sample ReportFormatter sending test case execution results to a text file
+Implement **IReportFormatter** interface. Below is a simple ReportFormatter sending test case execution results to a text file.
+A comprehensive html/javascript report with summary charts will be developed in future as a seperate project/nuget package. 
 
 ````
 using System;
