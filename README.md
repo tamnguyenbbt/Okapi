@@ -246,9 +246,9 @@ namespace OkapiSampleTests.ProjectConfig
 ````
 
 ## Sample Tests Using MSTest
-````
-See https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
-````
+
+* https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
+
 
 ## Usage
 * Usage document will come in near future.
