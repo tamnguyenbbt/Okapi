@@ -1,10 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Text;
 using Okapi.Extensions;
 using Okapi.Report;
 using Okapi.TestUtils;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using SeriLogLogger = Serilog.Core.Logger;
 
 namespace OkapiSampleTests.ProjectConfig
@@ -15,55 +17,94 @@ namespace OkapiSampleTests.ProjectConfig
             .WriteTo
             .File($"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}Report_{DateTime.Now.GetTimestamp()}.txt").CreateLogger();
 
-        public void Run(ReportData data)
+        public void Run(TestCase testCase)
         {
             StringBuilder reportStringBuilder = new StringBuilder();
-            reportStringBuilder.Append($"TEST CASE: {data.TestMethod.Name}");
+            reportStringBuilder.Append($"TEST CASE: {testCase.Method.Name}");
 
-            reportStringBuilder.Append($"{Environment.NewLine}");
-            reportStringBuilder.Append("\t");
-            reportStringBuilder.Append($"RESULT: {data.TestResult}");
+            NewLineAndTab(reportStringBuilder);
+            reportStringBuilder.Append($"RESULT: {testCase.Result}");
 
-            if (data.DurationInSeconds != -1)
+            NewLineAndTab(reportStringBuilder);
+            reportStringBuilder.Append($"DURATION: {testCase.DurationInSeconds} seconds");
+
+            NewLineAndTab(reportStringBuilder);
+            reportStringBuilder.Append($"START TIME: {testCase.StartDateTime}");
+
+            NewLineAndTab(reportStringBuilder);
+            reportStringBuilder.Append($"END TIME: {testCase.EndDateTime}");
+
+            if (testCase.AllAdditionalData.HasAny())
             {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"DURATION: {data.DurationInSeconds} seconds");
+                NewLineAndTab(reportStringBuilder);
+                reportStringBuilder.Append($"ADDITIONAL DATA: {testCase.AllAdditionalData.ConvertToString()}");
             }
 
-            if (data.StartDateTime != null)
+            if (testCase.FailAdditionalData.HasAny())
             {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"START TIME: {data.StartDateTime}");
+                NewLineAndTab(reportStringBuilder);
+                reportStringBuilder.Append($"FAIL ADDITIONAL DATA: {testCase.FailAdditionalData.ConvertToString()}");
             }
 
-            reportStringBuilder.Append($"{Environment.NewLine}");
-            reportStringBuilder.Append("\t");
-            reportStringBuilder.Append($"END TIME: {data.EndDateTime}");
-
-            if (data.AdditionalData.HasAny())
+            if (testCase.TestObjectInfo != null)
             {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"ADDITIONAL DATA: {data.AdditionalData.ConvertToString()}");
+                NewLineAndTab(reportStringBuilder);
+                reportStringBuilder.Append($"TEST OBJECT INFO: {testCase.TestObjectInfo}");
             }
 
-            if (data.FailDetails != null)
+            if (testCase.Exception != null)
             {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"FAIL INFO: {data.FailDetails}");
+                NewLineAndTab(reportStringBuilder);
+                reportStringBuilder.Append($"EXCEPTION: {testCase.Exception}");
             }
 
-            if (data.Exception != null)
+            IList<TestStep> testSteps = testCase.TestSteps;
+
+            if (testSteps.HasAny())
             {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"EXCEPTION: {data.Exception}");
+                testSteps.ToList().ForEach(x =>
+                {
+                    NewLineAndTab(reportStringBuilder);
+                    NewLineAndTab(reportStringBuilder);
+
+                    reportStringBuilder.Append($"STEP: {x.Method.Name}");
+
+                    NewLineAndTab(reportStringBuilder);
+                    reportStringBuilder.Append($"RESULT: {x.Result}");
+
+                    NewLineAndTab(reportStringBuilder);
+                    reportStringBuilder.Append($"DURATION: {x.DurationInSeconds} seconds");
+
+                    if (x.AllAdditionalData.HasAny())
+                    {
+                        NewLineAndTab(reportStringBuilder);
+                        reportStringBuilder.Append($"ADDITIONAL DATA: {x.AllAdditionalData.ConvertToString()}");
+                    }
+
+                    if (x.FailAdditionalData.HasAny())
+                    {
+                        NewLineAndTab(reportStringBuilder);
+                        reportStringBuilder.Append($"FAIL ADDITIONAL DATA: {x.FailAdditionalData.ConvertToString()}");
+                    }
+
+                    if (x.TestObjectInfo != null)
+                    {
+                        NewLineAndTab(reportStringBuilder);
+                        reportStringBuilder.Append($"TEST OBJECT INFO: {x.TestObjectInfo}");
+                    }
+
+                    if (x.Exception != null)
+                    {
+                        NewLineAndTab(reportStringBuilder);
+                        reportStringBuilder.Append($"EXCEPTION: {x.Exception}");
+                    }
+                });
             }
 
-            if (data.TestResult.Equals(TestResult.PASS))
+            NewLineAndTab(reportStringBuilder);
+            NewLineAndTab(reportStringBuilder);
+
+            if (testCase.Result.Equals(TestResult.PASS))
             {
                 logger.Information(reportStringBuilder.ToString());
             }
@@ -71,6 +112,12 @@ namespace OkapiSampleTests.ProjectConfig
             {
                 logger.Error(reportStringBuilder.ToString());
             }
+        }
+
+        private void NewLineAndTab(StringBuilder reportStringBuilder)
+        {
+            reportStringBuilder.Append($"{Environment.NewLine}");
+            reportStringBuilder.Append("\t");
         }
     }
 }

@@ -8,7 +8,7 @@ using Okapi.Enums;
 using Okapi.Report;
 using Okapi.Runners;
 using OkapiSampleTests.TestData;
-using TestResult = Okapi.Report.TestResult;
+using OkapiTests.Steps;
 
 namespace OkapiTests
 {
@@ -22,8 +22,9 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
             DriverPool.Instance.QuitActiveDriver();
-            void assertion() => Assert.AreEqual("Try Xero FREE for 30 days1!", text);
-            TestReport.ReportTestCaseResult(assertion);
+            void assertion() => Assert.AreEqual("Welcome! Try Xero FREE for 30 days!", text);
+            TestReport.Verify(assertion);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -38,7 +39,26 @@ namespace OkapiTests
             void assertion() => Assert.AreEqual(expected, actual);
             KeyValuePair<Action, string> assertionsAndUserAddedData
                 = new KeyValuePair<Action, string>(assertion, $"Expected: {expected} | Actual: {actual}");
-            TestReport.ReportTestCaseResult(assertionsAndUserAddedData);
+            TestReport.Verify(assertionsAndUserAddedData);
+            TestReport.Report();
+        }
+
+        [TestMethod]
+        [TestCase]
+        public void Use_steps()
+        {
+            string expected = "Try Xero FREE for 30 days!";
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            SampleSteps.Step1(expected);
+            SampleSteps.Step1(expected);
+
+            string actual = TestObject.New(SearchInfo.OwnText(expected)).Text;
+            TestReport.Verify(() => Assert.AreEqual(expected, actual), $"Expected: {expected} | Actual: {actual}");
+
+            SampleSteps.Step2("Welcome! Try Xero FREE for 30 days!");
+            SampleSteps.Step1(expected);
+            DriverPool.Instance.QuitActiveDriver();
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -54,7 +74,8 @@ namespace OkapiTests
             KeyValuePair<Action, IList<string>> assertionsAndUserAddedData
                 = new KeyValuePair<Action, IList<string>>(assertion,
                 new List<string> { $"Expected: {expected} | Actual: {actual}" });
-            TestReport.ReportTestCaseResult(assertionsAndUserAddedData);
+            TestReport.Verify(assertionsAndUserAddedData);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -69,7 +90,8 @@ namespace OkapiTests
             void assertion() => Assert.AreEqual(expected, actual);
             KeyValuePair<Action, string> assertionsAndUserAddedData
                 = new KeyValuePair<Action, string>(assertion, $"Expected: {expected} | Actual: {actual}");
-            TestReport.ReportTestCaseResult(assertionsAndUserAddedData);
+            TestReport.Verify(assertionsAndUserAddedData);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -82,7 +104,8 @@ namespace OkapiTests
             DriverPool.Instance.QuitActiveDriver();
 
             void assertion() => Assert.AreEqual(expected, actual);
-            TestReport.ReportTestCaseResult(assertion, $"Expected: {expected} | Actual: {actual}");
+            TestReport.Verify(assertion, $"Expected: {expected} | Actual: {actual}");
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -91,7 +114,7 @@ namespace OkapiTests
         {
             IDataSet<Registration> dataSet = new RegistrationDataSet();
             TestExecutor.Loop(Sample_scenario, dataSet);
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -111,7 +134,7 @@ namespace OkapiTests
             };
 
             TestExecutor.Loop(Sample_scenario, testData);
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -131,7 +154,7 @@ namespace OkapiTests
             };
 
             TestExecutor.Parallel(Sample_scenario, testData);
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -139,7 +162,7 @@ namespace OkapiTests
         public void Parallel_test_with_data_set()
         {
             TestExecutor.Parallel(Sample_scenario, new RegistrationDataSet());
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -155,7 +178,7 @@ namespace OkapiTests
                     DriverPool.Instance.QuitActiveDriver();
                 })
             , new RegistrationDataSet());
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         private static void Sample_scenario(Registration registration)
@@ -164,7 +187,7 @@ namespace OkapiTests
             var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys(registration.UserName);
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -175,7 +198,7 @@ namespace OkapiTests
             var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -186,7 +209,7 @@ namespace OkapiTests
             var userName = new TestObject("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -197,7 +220,7 @@ namespace OkapiTests
             var userName = new TestObject("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -208,7 +231,7 @@ namespace OkapiTests
             var userName = new TestObject(LocatingMethod.Name, "FirstName"); //name attribute of tag input
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -219,7 +242,7 @@ namespace OkapiTests
             var userName = TestObject.New(SearchInfo.New("span", "First name"), SearchInfo.New("input"));
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitAllDrivers();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -232,7 +255,7 @@ namespace OkapiTests
             userName.DynamicContents = DynamicContents.New("Last name");
             userName.SendKeys("Tester");
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -253,7 +276,7 @@ namespace OkapiTests
             userName.DynamicContents = DynamicContents.New("Last name");
             userName.SendKeys("Tester");
             DriverPool.Instance.Quit(currentDriver);
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -273,7 +296,7 @@ namespace OkapiTests
             userName.DynamicContents = DynamicContents.New("Last name");
             userName.SendKeys("Tester");
             DriverPool.Instance.Quit(currentDriver);
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -290,7 +313,7 @@ namespace OkapiTests
 
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -307,7 +330,7 @@ namespace OkapiTests
             userName.SendKeys("TesterTester");
             DriverPool.Instance.QuitAllExceptActiveDriver();
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -318,7 +341,7 @@ namespace OkapiTests
             var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input");
             userName.SetDynamicContents("First name").MoveToElement().SendKeys("TesterTester");
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -328,7 +351,7 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             TestObject.New(SearchInfo.New("span", "Next1")).Click().Click();
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -344,7 +367,7 @@ namespace OkapiTests
             }
 
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -354,7 +377,7 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             var elementCount = TestObject.New(SearchInfo.New("span", "Next1")).ElementCount;
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -364,7 +387,7 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             var elementCount = TestObject.New(SearchInfo.New("span", "Next")).ElementCount;
             DriverPool.Instance.QuitActiveDriver();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
 
         [TestMethod]
@@ -375,7 +398,7 @@ namespace OkapiTests
             var userName = TestObject.New(SearchInfo.OwnText("First name"), SearchInfo.New("input"));
             userName.SendKeys("Automation");
             DriverPool.Instance.QuitAllDrivers();
-            TestReport.ReportTestCaseResult(TestResult.PASS);
+            TestReport.Report();
         }
     }
 }

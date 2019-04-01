@@ -8,8 +8,8 @@ namespace OkapiSampleTests.ProjectConfig
     {
         public DriverFlavour DriverFlavour => DriverFlavour.Chrome;
         public Uri SeleniumHubUri => new Uri("http://localhost:2021/wd/hub");
-        public bool Log => true;
-        public bool TakeSnapshotOnOK => true;
+        public bool Log => false;
+        public bool TakeSnapshotOnOK => false;
         public bool TakeSnapshotOnError => true;
         public string SnapshotLocation => "Snapshots";
         public bool RemoteDriver => false;
