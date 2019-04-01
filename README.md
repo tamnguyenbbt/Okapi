@@ -215,9 +215,8 @@ Implement **IReportFormatter** interface. Below is a simple ReportFormatter send
 A comprehensive html/javascript report with summary charts will be developed in future as a seperate project/nuget package. 
 To produce test report, you need to decorate your test case methods with attribute **TestCase** and test step methods with **Step**. Also, call **TestReport.Verify()** to perform assertions and update report (you can use any assertion library), and call **TestReport.Report()** at the end of the test methods and test step methods to send the report to the implementation class of IReportFormatter
 
-Example: 
-````
-````
+* Example: https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/ProjectConfig/ReportFormatter.cs
+
 
 ### Inject Okapi Interface Implementations
 Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject your settings mentioned above to Okapi
