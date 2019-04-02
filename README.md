@@ -10,8 +10,8 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination (ALM, Web services, etc.) based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.). This introduces a bit of overhead in your test script or test script cleanup but gives you the fexibility to report in any format (text, html, etc.) to any destination you and your organisation want to. Currently this supports reporting to test case level. Reporting to test step level will be in development soon.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.0.9
-* Install-Package Okapi -Version 1.0.0.9
+* https://www.nuget.org/packages/Okapi/1.0.1
+* Install-Package Okapi -Version 1.0.1
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -213,85 +213,10 @@ namespace OkapiSampleTests.ProjectConfig
 ### Customize Test Report (Optional)
 Implement **IReportFormatter** interface. Below is a simple ReportFormatter sending test case execution results to a text file.
 A comprehensive html/javascript report with summary charts will be developed in future as a seperate project/nuget package. 
-If you use test report, decorate your test method with attribute **TestCase**. Also, call **TestReport.ReportTestCaseResult** at the end of the test method or in test cleanup method.
-````
-using System;
-using System.IO;
-using System.Text;
-using Okapi.Extensions;
-using Okapi.Report;
-using Okapi.TestUtils;
-using Serilog;
-using SeriLogLogger = Serilog.Core.Logger;
+To produce test report, you need to decorate your test case methods with attribute **TestCase** and test step methods with **Step**. Also, call **TestReport.Verify()** to perform assertions and update report (you can use any assertion library), and call **TestReport.Report()** at the end of the test methods and test step methods to send the report to the implementation class of IReportFormatter
 
-namespace OkapiSampleTests.ProjectConfig
-{
-    internal class ReportFormatter : IReportFormatter
-    {
-        private readonly static SeriLogLogger logger = new LoggerConfiguration()
-            .WriteTo
-            .File($"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}Report_{DateTime.Now.GetTimestamp()}.txt").CreateLogger();
+* Example: https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/ProjectConfig/ReportFormatter.cs
 
-        public void Run(ReportData data)
-        {
-            StringBuilder reportStringBuilder = new StringBuilder();
-            reportStringBuilder.Append($"TEST CASE: {data.TestMethod.Name}");
-
-            reportStringBuilder.Append($"{Environment.NewLine}");
-            reportStringBuilder.Append("\t");
-            reportStringBuilder.Append($"RESULT: {data.TestResult}");
-
-            if (data.DurationInSeconds != -1)
-            {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"DURATION: {data.DurationInSeconds} seconds");
-            }
-
-            if (data.StartDateTime != null)
-            {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"START TIME: {data.StartDateTime}");
-            }
-
-            reportStringBuilder.Append($"{Environment.NewLine}");
-            reportStringBuilder.Append("\t");
-            reportStringBuilder.Append($"END TIME: {data.EndDateTime}");
-
-            if (data.AdditionalData.HasAny())
-            {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"ADDITIONAL DATA: {data.AdditionalData.ConvertToString()}");
-            }
-
-            if (data.FailDetails != null)
-            {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"FAIL INFO: {data.FailDetails}");
-            }
-
-            if (data.Exception != null)
-            {
-                reportStringBuilder.Append($"{Environment.NewLine}");
-                reportStringBuilder.Append("\t");
-                reportStringBuilder.Append($"EXCEPTION: {data.Exception}");
-            }
-
-            if (data.TestResult.Equals(TestResult.PASS))
-            {
-                logger.Information(reportStringBuilder.ToString());
-            }
-            else
-            {
-                logger.Error(reportStringBuilder.ToString());
-            }
-        }
-    }
-}
-````
 
 ### Inject Okapi Interface Implementations
 Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject your settings mentioned above to Okapi
@@ -320,15 +245,16 @@ namespace OkapiSampleTests.ProjectConfig
 }
 ````
 
-## Example
-````
-See https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
-````
+## Sample Tests Using MSTest
+
+* https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
+
 
 ## Usage
 * Usage document will come in near future.
             
 ## Versions
+* Version **1.0.1** released on 04/02/2019
 * Version **1.0.0.9** released on 03/31/2019
 * Version **1.0.0.8** released on 03/31/2019
 * Version **1.0.0.7** released on 03/30/2019
