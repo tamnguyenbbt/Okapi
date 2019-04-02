@@ -59,4 +59,7 @@ public static void Add_emails(ContactDataSet contactDataSet)
         
 ````
 
-You then can call this Add_emails step from any test script and pass contactDataSet in
+You then can call this Add_emails step from any test script and pass contactDataSet in, where:
+````
+var contactDataSet = new ContactDataSet();
+````
