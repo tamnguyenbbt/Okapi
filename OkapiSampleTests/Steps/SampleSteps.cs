@@ -5,17 +5,16 @@ using Okapi.Elements;
 using Okapi.Report;
 using OkapiSampleTests.TestData;
 
-namespace OkapiTests.Steps
+namespace OkapiTests
 {
     public class SampleSteps
     {
         [Step]
-        public static void Sample_steps(Registration registration)
+        public static void Sample_scenario(Registration registration)
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys(registration.UserName);
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 

@@ -5,8 +5,9 @@ namespace OkapiSampleTests.ProjectConfig
 {
     internal class DriverConfig : IDriverConfig
     {
-        public int TimeoutInSeconds => 5;
+        public int TimeoutInSeconds => 2;
         public bool QuitDriverOnError => true;
-        public DomUtilConfig SearchByAnchorConfig => null;
+        public bool QuitDriverOnFailVerification => true;
+        public DomUtilConfig SearchByAnchorConfig => null;        
     }
 }

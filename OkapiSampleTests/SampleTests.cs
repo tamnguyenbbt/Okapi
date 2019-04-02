@@ -8,7 +8,6 @@ using Okapi.Enums;
 using Okapi.Report;
 using Okapi.Runners;
 using OkapiSampleTests.TestData;
-using OkapiTests.Steps;
 
 namespace OkapiTests
 {
@@ -21,8 +20,7 @@ namespace OkapiTests
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
-            DriverPool.Instance.QuitActiveDriver();
-            void assertion() => Assert.AreEqual("Welcome! Try Xero FREE for 30 days!", text);
+            void assertion() => Assert.AreEqual("1Try Xero FREE for 30 days!", text);
             TestReport.Verify(assertion);
             TestReport.Report();
         }
@@ -34,8 +32,6 @@ namespace OkapiTests
             string expected = "Welcome! Try Xero FREE for 30 days!";
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             string actual = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
-            DriverPool.Instance.QuitActiveDriver();
-
             void assertion() => Assert.AreEqual(expected, actual);
             KeyValuePair<Action, string> assertionsAndUserAddedData
                 = new KeyValuePair<Action, string>(assertion, $"Expected: {expected} | Actual: {actual}");
@@ -57,7 +53,6 @@ namespace OkapiTests
 
             SampleSteps.Step2("Welcome! Try Xero FREE for 30 days!");
             SampleSteps.Step1(expected);
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -68,8 +63,6 @@ namespace OkapiTests
             string expected = "Welcome! Try Xero FREE for 30 days!";
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             string actual = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
-            DriverPool.Instance.QuitActiveDriver();
-
             void assertion() => Assert.AreEqual(expected, actual);
             KeyValuePair<Action, IList<string>> assertionsAndUserAddedData
                 = new KeyValuePair<Action, IList<string>>(assertion,
@@ -85,8 +78,6 @@ namespace OkapiTests
             string expected = "Try Xero FREE for 30 days!";
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             string actual = TestObject.New(SearchInfo.OwnText(expected)).Text;
-            DriverPool.Instance.QuitActiveDriver();
-
             void assertion() => Assert.AreEqual(expected, actual);
             KeyValuePair<Action, string> assertionsAndUserAddedData
                 = new KeyValuePair<Action, string>(assertion, $"Expected: {expected} | Actual: {actual}");
@@ -101,8 +92,6 @@ namespace OkapiTests
             string expected = "Welcome! Try Xero FREE for 30 days!";
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             string actual = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
-            DriverPool.Instance.QuitActiveDriver();
-
             void assertion() => Assert.AreEqual(expected, actual);
             TestReport.Verify(assertion, $"Expected: {expected} | Actual: {actual}");
             TestReport.Report();
@@ -186,7 +175,6 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys(registration.UserName);
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -197,7 +185,6 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -208,7 +195,6 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = new TestObject("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -219,7 +205,6 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = new TestObject("//label[span[contains(text(),'First name')]]/input");
             userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -230,7 +215,6 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = new TestObject(LocatingMethod.Name, "FirstName"); //name attribute of tag input
             userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -241,7 +225,6 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New(SearchInfo.New("span", "First name"), SearchInfo.New("input"));
             userName.SendKeys("Automation");
-            DriverPool.Instance.QuitAllDrivers();
             TestReport.Report();
         }
 
@@ -254,7 +237,6 @@ namespace OkapiTests
             userName.SendKeys("Automation");
             userName.DynamicContents = DynamicContents.New("Last name");
             userName.SendKeys("Tester");
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -295,7 +277,6 @@ namespace OkapiTests
             userName.SendKeys("Automation");
             userName.DynamicContents = DynamicContents.New("Last name");
             userName.SendKeys("Tester");
-            DriverPool.Instance.Quit(currentDriver);
             TestReport.Report();
         }
 
@@ -312,7 +293,6 @@ namespace OkapiTests
             };
 
             userName.SendKeys("Automation");
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -328,8 +308,6 @@ namespace OkapiTests
 
             userName.MoveToElement();
             userName.SendKeys("TesterTester");
-            DriverPool.Instance.QuitAllExceptActiveDriver();
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -340,7 +318,6 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New("//label[span[contains(text(),'{0}')]]/input");
             userName.SetDynamicContents("First name").MoveToElement().SendKeys("TesterTester");
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -350,7 +327,6 @@ namespace OkapiTests
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             TestObject.New(SearchInfo.New("span", "Next1")).Click().Click();
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -366,7 +342,6 @@ namespace OkapiTests
                 button.Click();
             }
 
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -376,7 +351,6 @@ namespace OkapiTests
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             var elementCount = TestObject.New(SearchInfo.New("span", "Next1")).ElementCount;
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -386,7 +360,6 @@ namespace OkapiTests
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             var elementCount = TestObject.New(SearchInfo.New("span", "Next")).ElementCount;
-            DriverPool.Instance.QuitActiveDriver();
             TestReport.Report();
         }
 
@@ -397,7 +370,6 @@ namespace OkapiTests
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             var userName = TestObject.New(SearchInfo.OwnText("First name"), SearchInfo.New("input"));
             userName.SendKeys("Automation");
-            DriverPool.Instance.QuitAllDrivers();
             TestReport.Report();
         }
     }

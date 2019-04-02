@@ -25,8 +25,11 @@ namespace OkapiSampleTests.ProjectConfig
             NewLineAndTab(reportStringBuilder);
             reportStringBuilder.Append($"RESULT: {testCase.Result}");
 
-            NewLineAndTab(reportStringBuilder);
-            reportStringBuilder.Append($"DURATION: {testCase.DurationInSeconds} seconds");
+            if (testCase.DurationInSeconds > 0)
+            {
+                NewLineAndTab(reportStringBuilder);
+                reportStringBuilder.Append($"DURATION: {testCase.DurationInSeconds} seconds");
+            }
 
             NewLineAndTab(reportStringBuilder);
             reportStringBuilder.Append($"START TIME: {testCase.StartDateTime}");
@@ -72,8 +75,17 @@ namespace OkapiSampleTests.ProjectConfig
                     NewLineAndTab(reportStringBuilder);
                     reportStringBuilder.Append($"RESULT: {x.Result}");
 
+                    if (x.DurationInSeconds > 0)
+                    {
+                        NewLineAndTab(reportStringBuilder);
+                        reportStringBuilder.Append($"DURATION: {x.DurationInSeconds} seconds");
+                    }
+
                     NewLineAndTab(reportStringBuilder);
-                    reportStringBuilder.Append($"DURATION: {x.DurationInSeconds} seconds");
+                    reportStringBuilder.Append($"START TIME: {x.StartDateTime}");
+
+                    NewLineAndTab(reportStringBuilder);
+                    reportStringBuilder.Append($"END TIME: {x.EndDateTime}");
 
                     if (x.AllAdditionalData.HasAny())
                     {
