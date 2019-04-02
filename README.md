@@ -10,8 +10,8 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination (ALM, Web services, etc.) based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.). This introduces a bit of overhead in your test script or test script cleanup but gives you the fexibility to report in any format (text, html, etc.) to any destination you and your organisation want to. Currently this supports reporting to test case level. Reporting to test step level will be in development soon.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.1
-* Install-Package Okapi -Version 1.0.1
+* https://www.nuget.org/packages/Okapi/1.0.4
+* Install-Package Okapi -Version 1.0.4
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -74,38 +74,26 @@ If you decide to use class configs, implement the following interfaces:
 
 * Implement **IDriverConfig** (optional)
 ````
-using ExtSelenium.DomCore;
-using Okapi.Configs;
-
-namespace OkapiSampleTests.Configurations
+internal class DriverConfig : IDriverConfig
 {
-    public class DriverConfig : IDriverConfig
-    {
-        public int TimeoutInSeconds => 10; //if not set, Okapi set 10 by default
-        public bool QuitDriverOnError => true; //if not set, Okapi set true by default
-        public DomUtilConfig SearchByAnchorConfig => null;
-    }
+    public int TimeoutInSeconds => 2;
+    public bool QuitDriverOnError => true;
+    public bool QuitDriverOnFailVerification => true;
+    public DomUtilConfig SearchByAnchorConfig => null;        
 }
 ````
 
 * Implement **ITestEnvironment**
 ````
-using System;
-using Okapi.Configs;
-using Okapi.Enums;
-
-namespace OkapiTests
+internal class TestEnvironment : ITestEnvironment
 {
-    internal class TestEnvironment : ITestEnvironment
-    {
-        public DriverFlavour DriverFlavour => DriverFlavour.Chrome;
-        public Uri SeleniumHubUri => new Uri("http://localhost:2021/wd/hub");
-        public bool Log => true; //enable logging
-        public bool TakeSnapshotOnOK => true;
-        public bool TakeSnapshotOnError => true;
-        public string SnapshotLocation => "Snapshots";
-        public bool RemoteDriver => false; //use local driver, not remote
-    }
+    public DriverFlavour DriverFlavour => DriverFlavour.Chrome;
+    public Uri SeleniumHubUri => new Uri("http://localhost:2021/wd/hub");
+    public bool Log => false;
+    public bool TakeSnapshotOnOK => false;
+    public bool TakeSnapshotOnError => true;
+    public string SnapshotLocation => "Snapshots";
+    public bool RemoteDriver => false; //use local driver, not remote
 }
 ````
 
@@ -122,34 +110,20 @@ If you want to control the browsers' behaviours rather than using the default be
 you can implement its **IDriverOptionsFactory** interface. For instance,
 
 ````
-using Okapi.Drivers;
-using Okapi.Enums;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-
-namespace OkapiSampleTests.Configurations
+public DriverOptions CreateDriverOptions(DriverFlavour driverFlavour)
 {
-    internal class DriverOptionsFactory : IDriverOptionsFactory
+    switch (driverFlavour)
     {
-        public DriverOptions CreateDriverOptions(DriverFlavour driverFlavour)
-        {
-            switch (driverFlavour)
-            {
-                case DriverFlavour.Edge:
-                    return new EdgeOptions();
-                case DriverFlavour.IE:
-                    return new InternetExplorerOptions();
-                case DriverFlavour.Firefox:
-                    return new FirefoxOptions();
-                default:
-                    ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArguments("headless");
-                    return chromeOptions;
-            }
-        }
+        case DriverFlavour.Edge:
+            return new EdgeOptions();
+        case DriverFlavour.IE:
+            return new InternetExplorerOptions();
+        case DriverFlavour.Firefox:
+            return new FirefoxOptions();
+        default:
+             ChromeOptions chromeOptions = new ChromeOptions();
+             //chromeOptions.AddArguments("headless");
+             return chromeOptions;
     }
 }
 ````
@@ -159,15 +133,12 @@ then inject it via DI.
 At this time, Okapi supports the following browser types:
 
 ````
-namespace Okapi.Enums
+public enum DriverFlavour
 {
-    public enum DriverFlavour
-    {
-        Chrome,
-        Edge,
-        Firefox,
-        IE
-    }
+    Chrome,
+    Edge,
+    Firefox,
+    IE
 }
 ````
 
@@ -179,33 +150,23 @@ Below is a simple implementation using Serilog's File sink. Serilog comes with m
 At this point of time, IOkapiLogger supports string messages. JSON support may come in future.
 
 ````
-using System;
-using System.IO;
-using Okapi.Logs;
-using Okapi.TestUtils;
-using Serilog;
-using SeriLogLogger = Serilog.Core.Logger;
-
-namespace OkapiSampleTests.ProjectConfig
+internal class Logger : IOkapiLogger
 {
-    internal class Logger : IOkapiLogger
+    private readonly static SeriLogLogger logger = new LoggerConfiguration().WriteTo.File($"{Util.ParentProjectDirectory}			{Path.DirectorySeparatorChar}log.txt").CreateLogger();
+
+    public void Error(string messageTemplate)
     {
-        private readonly static SeriLogLogger logger = new LoggerConfiguration().WriteTo.File($"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}log.txt").CreateLogger();
+        logger.Error(messageTemplate);
+    }
 
-        public void Error(string messageTemplate)
-        {
-            logger.Error(messageTemplate);
-        }
+    public void Error(string messageTemplate, Exception exception)
+    {
+        logger.Error(exception, messageTemplate);
+    }
 
-        public void Error(string messageTemplate, Exception exception)
-        {
-            logger.Error(exception, messageTemplate);
-        }
-
-        public void Info(string messageTemplate)
-        {
-            logger.Information(messageTemplate);
-        }
+    public void Info(string messageTemplate)
+    {
+        logger.Information(messageTemplate);
     }
 }
 ````
@@ -222,25 +183,15 @@ To produce test report, you need to decorate your test case methods with attribu
 Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject your settings mentioned above to Okapi
 
 ````
-using Ninject;
-using Okapi.Configs;
-using Okapi.DI;
-using Okapi.Drivers;
-using Okapi.Logs;
-using Okapi.Report;
-
-namespace OkapiSampleTests.ProjectConfig
+internal class DependencyInjector : IOkapiModuleLoader
 {
-    internal class DependencyInjector : IOkapiModuleLoader
+    public void LoadAssemblyBindings(IKernel kernel)
     {
-        public void LoadAssemblyBindings(IKernel kernel)
-        {
-            kernel.Bind<ITestEnvironment>().To<TestEnvironment>().InSingletonScope(); //optional; if not provided, Okapi uses App.config
-            kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
-            kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
-            kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope(); //optional; if not provided, Okapi does not log info
-            kernel.Bind<IReportFormatter>().To<ReportFormatter>().InSingletonScope(); //optional; if not provided, Okapi does not produce test report
-        }
+        kernel.Bind<ITestEnvironment>().To<TestEnvironment>().InSingletonScope(); //optional; if not provided, Okapi uses App.config
+        kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
+        kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
+        kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope(); //optional; if not provided, Okapi does not log info
+        kernel.Bind<IReportFormatter>().To<ReportFormatter>().InSingletonScope(); //optional; if not provided, Okapi does not produce test report
     }
 }
 ````
@@ -248,23 +199,9 @@ namespace OkapiSampleTests.ProjectConfig
 ## Sample Tests Using MSTest
 
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
-
-
-## Usage
-* Usage document will come in near future.
-            
+          
 ## Versions
-* Version **1.0.1** released on 04/02/2019
-* Version **1.0.0.9** released on 03/31/2019
-* Version **1.0.0.8** released on 03/31/2019
-* Version **1.0.0.7** released on 03/30/2019
-* Version **1.0.0.6** released on 03/29/2019
-* Version **1.0.0.5** released on 03/28/2019
-* Version **1.0.0.4** released on 03/28/2019
-* Version **1.0.0.3** released on 03/26/2019
-* Version **1.0.0.2** released on 03/21/2019
-* Version **1.0.0.1** released on 03/20/2019
-* Version **1.0.0** released on 03/19/2019
+* Version **1.0.4** released on 04/02/2019
 
 ## Author
 ###  **Tam Nguyen**
