@@ -2,7 +2,7 @@
 # How To Use Loop
 
 ## Example Scenario
-Need to enter several emails into a contact email page from data set
+Need to enter several emails into a contact page. Test data is from data set
 
 ## Example Page Object Model
 ````
