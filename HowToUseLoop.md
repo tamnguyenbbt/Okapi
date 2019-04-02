@@ -4,6 +4,18 @@
 ## Example Scenario
 Need to enter several emails into a contact email page from data set
 
+## Example Page Object Model
+````
+public class ContactPage
+{
+    public static void AddEmail(string email)
+    {
+        TestObject.New("//input[@placeholder='Email']").SendKeys(email);
+        TestObject.New(SearchInfo.OwnText("{0}")).SetDynamicContents(email).Click();
+    }
+}
+````
+
 ## Example Data Template
 ````
   public class ContactDTO
