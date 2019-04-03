@@ -8,7 +8,7 @@ namespace OkapiSampleTests.ProjectConfig
     {
         public DriverFlavour DriverFlavour => DriverFlavour.Chrome;
         public Uri SeleniumHubUri => new Uri("http://localhost:2021/wd/hub");
-        public bool Log => false;
+        public bool Log => true;
         public bool QuitDriverOnError => true;
         public bool QuitDriverOnFailVerification => true;
         public bool TakeSnapshotOnOK => false;
