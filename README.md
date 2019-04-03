@@ -6,12 +6,12 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * -->  When passing null value to action methods (i.e. SendKeys), they will do nothing
 * --> Every time changing dynamic contents with new data values, new web element will be referenced, ready to accept user actions (useful for acting on menus, dropdowns, and tables)
 * Manages Selenium drivers automatically and hides them from users to simplify test automation processes
-* Ideal for setting Web UI automation test project using Page object Model (POM). The combination of data-driven and POM will result in better decoupling, cleaner code, low cost of maintenance, and easier to scale.
-* Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination (ALM, Web services, etc.) based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.). This introduces a bit of overhead in your test script or test script cleanup but gives you the fexibility to report in any format (text, html, etc.) to any destination you and your organisation want to. Currently this supports reporting to test case level. Reporting to test step level will be in development soon.
+* Ideal for setting Web UI automation test project using Page object Model (POM) and object repository. The combination of data-driven and POM will result in better decoupling, cleaner code, low cost of maintenance, and easier to scale.
+* Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination (ALM, Web services, etc.) based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.). This introduces a bit of overhead in your test script or test script cleanup but gives you the fexibility to report in any format (text, html, etc.) to any destination you and your organisation want to.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.4
-* Install-Package Okapi -Version 1.0.4
+* https://www.nuget.org/packages/Okapi/1.0.7
+* Install-Package Okapi -Version 1.0.7
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -77,8 +77,6 @@ If you decide to use class configs, implement the following interfaces:
 internal class DriverConfig : IDriverConfig
 {
     public int TimeoutInSeconds => 2;
-    public bool QuitDriverOnError => true;
-    public bool QuitDriverOnFailVerification => true;
     public DomUtilConfig SearchByAnchorConfig => null;        
 }
 ````
@@ -90,6 +88,8 @@ internal class TestEnvironment : ITestEnvironment
     public DriverFlavour DriverFlavour => DriverFlavour.Chrome;
     public Uri SeleniumHubUri => new Uri("http://localhost:2021/wd/hub");
     public bool Log => false;
+    public bool QuitDriverOnError => true;
+    public bool QuitDriverOnFailVerification => true;
     public bool TakeSnapshotOnOK => false;
     public bool TakeSnapshotOnError => true;
     public string SnapshotLocation => "Snapshots";
@@ -201,7 +201,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
           
 ## Versions
-* Version **1.0.4** released on 04/02/2019
+* Version **1.0.7** released on 04/03/2019
 
 ## Author
 ###  **Tam Nguyen**
