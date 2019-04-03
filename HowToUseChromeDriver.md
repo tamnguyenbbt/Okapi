@@ -7,7 +7,7 @@
 ## Setup Environment PATH Variable
 * Add the path to '**chromedriver.exe**' to your Windows machine environment PATH variable (Control Panel > System > Advanced System Settings > Environment Variables > System Variables)
 
-## Config For Okapi to pick Chrome Driver
+## Config For Okapi To Pick Chrome Driver
 There are 2 options - via App.config of your test project or via 
 ````
  public DriverFlavour DriverFlavour => DriverFlavour.Chrome;
