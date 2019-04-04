@@ -20,7 +20,7 @@ namespace OkapiTests
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
-            void assertion() => Assert.AreEqual("1Try Xero FREE for 30 days!", text);
+            void assertion() => Assert.AreEqual("Try Xero FREE for 30 days!", text);
             TestReport.Verify(assertion);
             TestReport.Report().QuitActiveDriver();
         }
