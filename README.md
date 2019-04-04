@@ -10,8 +10,8 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination (ALM, Web services, etc.) based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.). This introduces a bit of overhead in your test script or test script cleanup but gives you the fexibility to report in any format (text, html, etc.) to any destination you and your organisation want to.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.0.7
-* Install-Package Okapi -Version 1.0.7
+* https://www.nuget.org/packages/Okapi/1.0.9
+* Install-Package Okapi -Version 1.0.9
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -147,7 +147,7 @@ Okapi comes with the ability to log testing activities and to capture snapshots 
 You can customize the logging message template format and logging destination by implementing Okapi's interface **IOkapiLogger**.
 Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
 
-At this point of time, IOkapiLogger supports string messages. JSON support may come in future.
+Use Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 for the same purpose.
 
 ````
 internal class Logger : IOkapiLogger
@@ -176,7 +176,8 @@ Implement **IReportFormatter** interface. Below is a simple ReportFormatter send
 A comprehensive html/javascript report with summary charts will be developed in future as a seperate project/nuget package. 
 To produce test report, you need to decorate your test case methods with attribute **TestCase** and test step methods with **Step**. Also, call **TestReport.Verify()** to perform assertions and update report (you can use any assertion library), and call **TestReport.Report()** at the end of the test methods and test step methods to send the report to the implementation class of IReportFormatter
 
-* Example: https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/ProjectConfig/ReportFormatter.cs
+* Example: https://github.com/tamnguyenbbt/Okapi.Support.File/blob/master/Okapi.Support.File/ReportFormatter.cs
+* Use Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 for the same purpose.
 
 
 ### Inject Okapi Interface Implementations
@@ -201,7 +202,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
           
 ## Versions
-* Version **1.0.7** released on 04/03/2019
+* Version **1.0.9** released on 04/04/2019
 
 ## Author
 ###  **Tam Nguyen**
