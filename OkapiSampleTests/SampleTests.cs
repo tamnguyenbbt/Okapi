@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Okapi;
 using Okapi.Attributes;
 using Okapi.Drivers;
 using Okapi.Elements;
@@ -14,6 +15,31 @@ namespace OkapiTests
     [TestClass]
     public class SampleTests
     {
+        [TestMethod]
+        public void Codegen()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");           
+        }
+
+        [TestMethod]
+        public void Dynamic_tag_and_its_text()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string text = Dynamic.Find("<h2> `Try Xero FREE for 30 days!`").Text;
+            void assertion() => Assert.AreEqual("Try Xero FREE for 30 days!", text);
+            TestReport.Verify(assertion);
+            TestReport.Report().QuitActiveDriver();
+        }
+
+        [TestMethod]
+        [TestCase]
+        public void Dynamic_xpath()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            Dynamic.Find("Find xpath `//label[span[contains(text(),'First name')]]/input`").SendKeys("Automation");
+            TestReport.Report().QuitActiveDriver();
+        }
+
         [TestMethod]
         [TestCase]
         public void Get_text_with_assertion_library_of_your_choice()
