@@ -18,6 +18,8 @@ public void Codegen()
 }
 ````
 
+and run the test.
+
 ## Outcome
 * Check for the C# file created. In the above example, it is 'GoogleSearchPage.Generated.cs' created in current project folder
 
