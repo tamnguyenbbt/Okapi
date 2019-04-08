@@ -1,4 +1,4 @@
-# How To Use CodeGen To Create Page object Model Class File
+# How To Use CodeGen To Create Page Object Model (POM) Class File
 
 ## Sample Usage
 ````
