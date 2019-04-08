@@ -2,20 +2,20 @@
 
 ## Sample Usage
 ````
-        [TestMethod]
-        public void Codegen()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+[TestMethod]
+public void Codegen()
+{
+   DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
             
-            IList<string> usings = new List<string>
-            {
-                "System",
-                "Okapi.Enums"
-            };
+   IList<string> usings = new List<string>
+   {
+       "System",
+       "Okapi.Enums"
+   };
 
-            string nameSpace = "Okapi.SampleTests";
-            new CodeGen(usings, nameSpace).GeneratePOMFile("GoogleSearchPage.Generated", Util.CurrentProjectDirectory);            
-        }
+   string nameSpace = "Okapi.SampleTests";
+   new CodeGen(usings, nameSpace).GeneratePOMFile("GoogleSearchPage.Generated", Util.CurrentProjectDirectory);            
+}
 ````
 
 ## Outcome
