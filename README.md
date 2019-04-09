@@ -10,8 +10,8 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Support user-customized test report (users to implement IReportFormatter interface so you can format test report and send it to destination (ALM, Web services, etc.) based on your needs without being dependent on test franeworks like MSUnit, NUnit, Cucumber-based ones, etc.). This introduces a bit of overhead in your test script or test script cleanup but gives you the fexibility to report in any format (text, html, etc.) to any destination you and your organisation want to.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.1.1
-* Install-Package Okapi -Version 1.1.1
+* https://www.nuget.org/packages/Okapi/1.1.2
+* Install-Package Okapi -Version 1.1.2
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -202,7 +202,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
           
 ## Versions
-* Version **1.1.1** released on 04/09/2019
+* Version **1.1.2** released on 04/09/2019
 
 ## Author
 ###  **Tam Nguyen**
