@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Okapi;
 using Okapi.Attributes;
+using Okapi.Dom;
 using Okapi.Drivers;
 using Okapi.Elements;
 using Okapi.Enums;
 using Okapi.Report;
 using Okapi.Runners;
+using Okapi.TestUtils;
 using OkapiSampleTests.TestData;
 
 namespace OkapiTests
@@ -18,8 +20,17 @@ namespace OkapiTests
         [TestMethod]
         public void Codegen()
         {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");           
-        }
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+
+            IList<string> usings = new List<string>
+            {
+                "System",
+                "Okapi.Enums"
+            };
+
+            string nameSpace = "Okapi.SampleTests";
+            new CodeGen(usings, nameSpace).GeneratePOMFileUserProvidedPropertyNames("GoogleSearchPage_Generated", Util.CurrentProjectDirectory);
+        }   
 
         [TestMethod]
         public void Dynamic_tag_and_its_text()
