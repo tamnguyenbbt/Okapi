@@ -18,9 +18,45 @@ namespace OkapiTests
     public class SampleTests
     {
         [TestMethod]
-        public void Codegen()
+        [TestCase]
+        public void Open_a_page_to_record()
         {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+            DriverPool.Instance.ActiveDriver.LaunchPage("http://www.google.com");            
+        }
+
+        [TestMethod]
+        public void CodeGen_record_on_the_reusable_driver_from_last_run()
+        {
+            IList<string> usings = new List<string>
+            {
+                "System",
+                "Okapi.Enums"
+            };
+
+            string nameSpace = "Okapi.SampleTests";
+            IManagedDriver driver = ManagedDriver.ReusableInstanceFromLastRun;
+            driver.TimeoutInSeconds = 5;
+            new CodeGen(driver, usings, nameSpace).Include(ElementStatus.Enabled).Record("GoogleSearchPage_Generated", Util.CurrentProjectDirectory);
+        }
+
+        [TestMethod]
+        public void CodeGen_Record_from_reusable_driver_from_last_run_managed_by_pool()
+        {
+            IList<string> usings = new List<string>
+            {
+                "System",
+                "Okapi.Enums"
+            };
+
+            string nameSpace = "Okapi.SampleTests";
+            IManagedDriver driver = DriverPool.Instance.CreateReusableDriverFromLastRun();
+            new CodeGen(driver, usings, nameSpace).Record("GoogleSearchPage_Generated", Util.CurrentProjectDirectory);
+        }
+
+        [TestMethod]
+        public void CodeGen_Record_from_driver_managed_by_pool()
+        {
+            IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
 
             IList<string> usings = new List<string>
             {
@@ -29,15 +65,52 @@ namespace OkapiTests
             };
 
             string nameSpace = "Okapi.SampleTests";
-            new CodeGen(usings, nameSpace).GeneratePOMFileUserProvidedPropertyNames("GoogleSearchPage_Generated", Util.CurrentProjectDirectory);
-        }   
+
+            //non-user intervention
+            new CodeGen(driver, usings, nameSpace).Record("GoogleSearchPage_Generated", Util.CurrentProjectDirectory);
+        }
 
         [TestMethod]
+        public void CodeGen_GeneratePOMFile()
+        {
+            IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+
+            IList<string> usings = new List<string>
+            {
+                "System",
+                "Okapi.Enums"
+            };
+
+            string nameSpace = "Okapi.SampleTests";
+
+            //non-user intervention
+            new CodeGen(driver, usings, nameSpace).GeneratePOMFile("GoogleSearchPage_Generated", Util.CurrentProjectDirectory);
+        }
+
+        [TestMethod]
+        public void CodeGen_GeneratePOMFileUserProvidedPropertyNames()
+        {
+            IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+
+            IList<string> usings = new List<string>
+            {
+                "System",
+                "Okapi.Enums"
+            };
+
+            string nameSpace = "Okapi.SampleTests";
+
+            //users intervention: pick which web elements (highlighted) to record and set their names or accept default names
+            new CodeGen(driver, usings, nameSpace).GeneratePOMFileUserProvidedPropertyNames("GoogleSearchPage_Generated", Util.CurrentProjectDirectory);
+        }
+
+        [TestMethod]
+        [TestCase]
         public void Dynamic_tag_and_its_text()
         {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            string text = Dynamic.Find("<h2> `Try Xero FREE for 30 days!`").Text;
-            void assertion() => Assert.AreEqual("Try Xero FREE for 30 days!", text);
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.test.com");
+            string text = Dynamic.Find("<h2> `Testing`").Text;
+            void assertion() => Assert.AreEqual("Testing", text);
             TestReport.Verify(assertion);
             TestReport.Report().QuitActiveDriver();
         }
@@ -48,7 +121,7 @@ namespace OkapiTests
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             Dynamic.Find("Find xpath `//label[span[contains(text(),'First name')]]/input`").SendKeys("Automation");
-            TestReport.Report().QuitActiveDriver();
+            //TestReport.Report().QuitActiveDriver();
         }
 
         [TestMethod]
