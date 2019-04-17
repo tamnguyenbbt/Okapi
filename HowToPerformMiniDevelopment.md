@@ -1,7 +1,10 @@
 # How To Perform A Mini Development
 Imagine the web application under test has 10 pages and you have automated the first 9 pages.
+
 Now you need to automate page 10 (capture web objects, save them into test object repository, check if they are working fine, etc.).
-You don't want to step through the first 9 pages just to perform the script development and test the script for page 10 because it is painful
+
+You don't want to step through the first 9 pages just to perform the script development and test the script for page 10 because it is painful.
+
 Okapi has 2 methods helping you to perform a mini development.
 
 ````
