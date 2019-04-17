@@ -2,14 +2,16 @@
 Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** with dynamic content concept support
 * Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
 * Supports .Net Framework 4.5 and 4.6
+* Advanced and unique auto and manual Page Object Model class code generation/recording algorithm
 * Supports data-driven out of the box
-* Advanced auto and manual Page Object Model class code generation/recording
 * Reusable web driver from another execution session
 * Manages Selenium drivers automatically
-* Supports user-customized test report
+* Supports user-customized test report and logging
 * Supports user-customized test project configuration for quick setup of test project
 * Advanced built-in web object interaction library for developing reliable test scripts with less lines of code
 * Realiable
+* Easy to integrate with any Unit test framework
+* Ideal for setting up and running both locally and in any Continuous Integration environment
 
 ## NuGet
 * https://www.nuget.org/packages/Okapi/1.1.19
