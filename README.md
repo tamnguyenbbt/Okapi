@@ -14,8 +14,8 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.1.19
-* Install-Package Okapi -Version 1.1.19
+* https://www.nuget.org/packages/Okapi/1.1.31
+* Install-Package Okapi -Version 1.1.31
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -206,7 +206,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
           
 ## Versions
-* Version **1.1.19** released on 04/17/2019
+* Version **1.1.31** released on 05/07/2019
 
 ## Author
 ###  **Tam Nguyen**
