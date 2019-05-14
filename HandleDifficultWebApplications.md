@@ -1,6 +1,6 @@
 # Handle Difficult Web Applications
 
-Okapi API methods handle most of the cases nicely. However, when you encounter difficult-to-automate web applications. Okapi advanced methods would come into help.
+Okapi API fundamental methods handle most of the cases nicely. However, when you encounter difficult-to-automate web applications. Okapi advanced methods would come into help.
 Below are some of them
 
 ## WaitUntilClickable()
