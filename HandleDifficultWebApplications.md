@@ -60,5 +60,15 @@ TestObject
   .RetryToClickUntilAttributeValueContains("class", "ui-state-active");
 ````
 
+##ClearWithBackspaceKey()
+* For some web applications, normal Clear() method does not work effectively. ClearWithBackspaceKey(int numberOfBackspaces = 20) and ClearAllWithBackspaceKey() will be helpful
+
+````
+TestObject
+  .New("//div[label[text()='End Date']]/x-calendar/span/input");
+  .ClearAllWithBackspaceKey()
+  .SendKeys(DateTime.Now.ToString("h:mm tt"));
+````
+
 ## Others
 - Check namespace Okapi.Extensions and Okapi.Elements.ITestObject for more methods
