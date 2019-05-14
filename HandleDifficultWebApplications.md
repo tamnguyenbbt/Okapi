@@ -72,7 +72,7 @@ TestObject
 
 ## TryClick()
 * Standard methods try to perform expected actions and if fail, tests will fail with report.
-* There are scenarios where we want to try to do something such as try to click. If fails, just ignore and move on. That is where the Try...() methods come in to help.
+* There are scenarios where we want to try to do something such as trying to click. If fails, just ignore and move on. That is where the Try...() methods come in to help.
 
 ````
 TestObject
