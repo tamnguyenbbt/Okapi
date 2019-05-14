@@ -60,7 +60,7 @@ TestObject
   .RetryToClickUntilAttributeValueContains("class", "ui-state-active");
 ````
 
-##ClearWithBackspaceKey()
+## ClearWithBackspaceKey()
 * For some web applications, normal Clear() method does not work effectively. ClearWithBackspaceKey(int numberOfBackspaces = 20) and ClearAllWithBackspaceKey() will be helpful
 
 ````
