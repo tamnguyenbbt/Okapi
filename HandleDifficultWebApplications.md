@@ -70,5 +70,15 @@ TestObject
   .SendKeys(DateTime.Now.ToString("h:mm tt"));
 ````
 
+## TryClick()
+* Standard methods try to perform expected actions and if fail, tests will fail with report.
+* There are scenarios where we want to try to do something such as try to click. If fails, just ignore and move on. That is where the Try...() methods come in to help.
+
+````
+TestObject
+  .New("//tr[td[2][contains(text(),'Teachers')][contains(text(),'Math')]]/td[1]/x-checkbox/div")
+  .TryClick(2);
+````
+
 ## Others
 - Check namespace Okapi.Extensions and Okapi.Elements.ITestObject for more methods
