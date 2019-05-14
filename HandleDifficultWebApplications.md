@@ -37,7 +37,7 @@ TestObject
 
 ## ClickAndWaitForOtherTestObjectEnabledAndDisplayed()
 * Under Okapi.Extensions namespace
-* Example: click on a button once and wait for other web element to be enabled and displayed before acting on that web element
+* Example: click on a button once and wait for other web element to be enabled and displayed before doing something else.
 
 ````
 TestObject
