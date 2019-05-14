@@ -16,7 +16,7 @@ TestObject
 ````
 ## WaitUntilPageReady()
 * There are scenarios such as a single page web application is reloaded or after an ajax call, the web element under test is not ready in DOM yet.
-* WaitUntilPageReady() will wait for javascript, angular, ajax, etc. to be complete.
+* WaitUntilPageReady() will wait for javascript, angular, jquery, ajax, etc. to be complete.
 
 ````
 TestObject
