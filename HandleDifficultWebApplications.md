@@ -26,7 +26,7 @@ TestObject
 ````
 ## ClickAndWaitForThisGone()
 * Under Okapi.Extensions namespace
-* Example: click a Save button once and a new page is loaded. We want to make sure that the Save button is gone before doing something else.
+* Example: click a Save button of a pop-up window once and a new page is loaded. We want to click on another button on this new page. In some single page web applications, this new button may be always there. So it gets clicked before the pop-up window disappears. Timing is crucial in Web UI test automation and in this case the correct timing is broken. We want to avoid this from happening and make sure that the Save button is gone before doing something else.
 
 ````
  Dynamic
