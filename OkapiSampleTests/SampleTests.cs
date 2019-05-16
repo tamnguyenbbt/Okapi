@@ -108,9 +108,9 @@ namespace OkapiTests
         [TestCase]
         public void Dynamic_tag_and_its_text()
         {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.test.com");
-            string text = Dynamic.Find("<h2> `Testing`").Text;
-            void assertion() => Assert.AreEqual("Testing", text);
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string text = Dynamic.Find("<h2> `Try Xero FREE for 30 days!`").Text;
+            void assertion() => Assert.AreEqual("Try Xero FREE for 30 days!", text);
             TestReport.Verify(assertion);
             TestReport.Report().QuitActiveDriver();
         }
