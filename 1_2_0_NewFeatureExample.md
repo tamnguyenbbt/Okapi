@@ -2,8 +2,10 @@
         public void SampleTest()
         {
             IManagedDriver driver = DriverPool.Instance.CreateReusableDriverFromLastRun();
-            ITestObject testObject = TestObject.New(SearchInfo.New("label", "Start Date"),
-            SearchInfo.New("input")).SetShortestDomDistanceDepth(5);
+            ITestObject testObject = TestObject.New(
+                SearchInfo.New("label", "Start Date"),
+                SearchInfo.New("input"))
+            .SetShortestDomDistanceDepth(5);
             
             var count = testObject.TryGetElementCount(2);
             var indexes = testObject.ElementIndexes;
