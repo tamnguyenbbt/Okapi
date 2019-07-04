@@ -4,8 +4,11 @@
             IManagedDriver driver = DriverPool.Instance.CreateReusableDriverFromLastRun();
             ITestObject testObject = TestObject.New(
                 SearchInfo.New("label", "Start Date"),
-                SearchInfo.New("input"))
-            .SetShortestDomDistanceDepth(5);
+                SearchInfo.New("input"));
+            
+            var countwithDepthAsOne = testObject.TryGetElementCount(2);
+            
+            testObject.SetShortestDomDistanceDepth(5);
             
             var count = testObject.TryGetElementCount(2);
             var indexes = testObject.ElementIndexes;
@@ -34,6 +37,8 @@
         }
         
         //Results:
+        
+            //countwithDepthAsOne: 1
 
             //count: 12
             //indexes: [0,1,2,3,4,5,6,7,8,9,10,11]
