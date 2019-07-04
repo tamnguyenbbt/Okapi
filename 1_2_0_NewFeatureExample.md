@@ -2,13 +2,18 @@
         public void SampleTest()
         {
             IManagedDriver driver = DriverPool.Instance.CreateReusableDriverFromLastRun();
-            ITestObject testObject = TestObject.New(SearchInfo.New("label", "Start Date"), SearchInfo.New("input")).SetShortestDomDistanceDepth(5);
+            ITestObject testObject = TestObject.New(SearchInfo.New("label", "Start Date"),
+            SearchInfo.New("input")).SetShortestDomDistanceDepth(5);
             var count = testObject.TryGetElementCount(2);
             var indexes = testObject.ElementIndexes;
             var allXPaths = testObject.AllLocators;
             var filteredXPaths = testObject.FilteredLocators;
 
-            var countAfterFilters = testObject.FilterByEnabled().FilterByDisplayed().FilterByClickable().TryGetElementCount(2);
+            var countAfterFilters = testObject
+                    .FilterByEnabled()
+                    .FilterByDisplayed()
+                    .FilterByClickable()
+                    .TryGetElementCount(2);
             var indexesAfterFilters = testObject.ElementIndexes;
             var allXPathsAfterFilters = testObject.AllLocators;
             var filteredXPathsAfterFilters = testObject.FilteredLocators;
