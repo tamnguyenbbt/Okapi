@@ -11,6 +11,10 @@ Okapi has 2 methods helping you to perform a mini development.
 DriverPool.Instance.CreateReusableDriver(Uri serverUri, SessionId sessionId, bool setAsActive = true);
 DriverPool.Instance.CreateReusableDriverFromLastRun(bool setAsActive = true)
 ````
+
+## Notes
+To be able to use Reusable driver, W3C WebDriver standard has to be turned off in the latest chromedrivers (which have W3C WebDriver standard turned on by default) or use chrome driver version before 73 (https://chromedriver.storage.googleapis.com/index.html?path=72.0.3626.7/)
+
 ## Sample Usage
 Assume you have already built 90% of the script to test automate Google SignIn page.
 
