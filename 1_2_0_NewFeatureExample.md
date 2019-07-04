@@ -23,6 +23,7 @@
             var indexesWithoutFilters = testObject.ElementIndexes;
             var allXPathsWithoutFilters = testObject.AllLocators;
             var filteredXPathsWithoutFilters = testObject.FilteredLocators;
+            testObject.SetElementIndex(1).TryHighlight().Click();
 
             var countAfterFiltersRemoved = testObject.RemoveAllFilters().TryGetElementCount(2);
             var indexesAfterFiltersRemoved = testObject.ElementIndexes;
