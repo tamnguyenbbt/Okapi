@@ -9,21 +9,22 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Supports user-customized test report and logging
 * Supports user-customized test project configuration for quick setup of test project
 * Advanced built-in web object interaction library for developing reliable test scripts with less lines of code
+* Search by anchor; search by two anchors; smart search
 * Realiable
 * Easy to integrate with any Unit test framework
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.2.0
-* Install-Package Okapi -Version 1.2.0
+* https://www.nuget.org/packages/Okapi/1.2.3
+* Install-Package Okapi -Version 1.2.3
 
 ## Dependencies
 ### .NETFramework 4.5
-* ExtSelenium (>= 1.0.0.3)
+* ExtSelenium (>= 1.0.1.0)
 * Ninject (>= 3.3.4)
 
 ### .NETFramework 4.6
-* ExtSelenium (>= 1.0.0.3)
+* ExtSelenium (>= 1.0.1.0)
 * Ninject (>= 3.3.4)
 
 ## Set Up Test Project
@@ -56,7 +57,8 @@ If you decide to use **App.config**, add an App.config file as below:
 			   log ="true"
 			   takeSnapshotOnOK ="true"
 			   takeSnapshotOnError ="true"
-			   snapshotLocation ="Snapshots"/>
+			   snapshotLocation ="Snapshots"
+			   smartSearch ="true"/>
 			<add targetTestEnvironment="Test2"
 			   active="false"
 			   driverFlavour="IE"
@@ -98,6 +100,7 @@ internal class TestEnvironment : ITestEnvironment
     public bool TakeSnapshotOnError => true;
     public string SnapshotLocation => "Snapshots";
     public bool RemoteDriver => false; //use local driver, not remote
+    public bool SmartSearch => true
 }
 ````
 
@@ -206,7 +209,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
           
 ## Versions
-* Version **1.2.0** released on 07/04/2019
+* Version **1.2.3** released on 07/07/2019
 
 ## Author
 ###  **Tam Nguyen**
