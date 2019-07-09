@@ -15,5 +15,6 @@ namespace OkapiSampleTests.ProjectConfig
         public bool TakeSnapshotOnError => true;
         public string SnapshotLocation => "Snapshots";
         public bool RemoteDriver => false;
+        public bool SmartSearch => true;
     }
 }
