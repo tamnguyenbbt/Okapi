@@ -162,6 +162,8 @@ Below is a simple implementation using Serilog's File sink. Serilog comes with m
 
 Use Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 for the same purpose.
 
+**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ItestEnvironment. Users don't need to perform Ninject dependencies with constructors, please use https://www.nuget.org/packages/Okapi.Support.File/1.0.1 for simpler. Also, users don't need to use Ninject at all.
+
 ````
 internal class Logger : IOkapiLogger
 {
