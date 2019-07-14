@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using Okapi.Configs;
 using Okapi.Enums;
+using Okapi.Utils;
 
 namespace OkapiSampleTests.ProjectConfig
 {
@@ -16,5 +18,7 @@ namespace OkapiSampleTests.ProjectConfig
         public string SnapshotLocation => "Snapshots";
         public bool RemoteDriver => false;
         public bool SmartSearch => true;
+        public string ReportDirectory => $"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}Report";
+        public string LogPath => $"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}Log.txt";
     }
 }

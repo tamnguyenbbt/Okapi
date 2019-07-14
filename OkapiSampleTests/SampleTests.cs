@@ -9,7 +9,7 @@ using Okapi.Elements;
 using Okapi.Enums;
 using Okapi.Report;
 using Okapi.Runners;
-using Okapi.TestUtils;
+using Okapi.Utils;
 using OkapiSampleTests.TestData;
 
 namespace OkapiTests
@@ -21,7 +21,7 @@ namespace OkapiTests
         [TestCase]
         public void Open_a_page_to_record()
         {
-            DriverPool.Instance.ActiveDriver.LaunchPage("http://www.google.com");            
+            DriverPool.Instance.ActiveDriver.LaunchPage("http://www.google.com");
         }
 
         [TestMethod]
