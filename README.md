@@ -15,17 +15,19 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.2.3
-* Install-Package Okapi -Version 1.2.3
+* https://www.nuget.org/packages/Okapi/1.2.4
+* Install-Package Okapi -Version 1.2.4
 
 ## Dependencies
 ### .NETFramework 4.5
 * ExtSelenium (>= 1.0.1.0)
 * Ninject (>= 3.3.4)
+* From 1.2.4, depends on Okapi.Common 1.0.0
 
 ### .NETFramework 4.6
 * ExtSelenium (>= 1.0.1.0)
 * Ninject (>= 3.3.4)
+* From 1.2.4, depends on Okapi.Common 1.0.0
 
 ## Set Up Test Project
 The code in this repo is for a sample test project based on MSUnit and .Net Framework 4.5 and uses Okapi library.
@@ -50,25 +52,27 @@ If you decide to use **App.config**, add an App.config file as below:
 		<Environments>
 			<add targetTestEnvironment="Test1"
 			   active="true"
-			   driverFlavour="ChromeDriver"
-         		   remoteDriver="false"
-			   driverTimeoutInSeconds ="10"
-			   quitDriverOnError ="true"
-			   log ="true"
-			   takeSnapshotOnOK ="true"
-			   takeSnapshotOnError ="true"
-			   snapshotLocation ="Snapshots"
-			   smartSearch ="true"/>
+			   driverFlavour = "ChromeDriver"
+         		   remoteDriver = "false"
+			   driverTimeoutInSeconds = "10"
+			   quitDriverOnError = "true"
+			   log = "true"
+			   takeSnapshotOnOK = "true"
+			   takeSnapshotOnError = "true"
+			   snapshotLocation = "Snapshots"
+			   smartSearch = "true"
+			   logPath = "Log.txt"
+			   reportDirectory = "Report"/>
 			<add targetTestEnvironment="Test2"
-			   active="false"
-			   driverFlavour="IE"
-         		   remoteDriver="false"
-			   driverTimeoutInSeconds ="10"
-			   quitDriverOnError ="true"
-			   log ="true"
-			   takeSnapshotOnOK ="true"
-			   takeSnapshotOnError ="true"
-			   snapshotLocation ="Snapshots"/>
+			   active = "false"
+			   driverFlavour = "IE"
+         		   remoteDriver = "false"
+			   driverTimeoutInSeconds = "10"
+			   quitDriverOnError = "true"
+			   log = "true"
+			   takeSnapshotOnOK = "true"
+			   takeSnapshotOnError = "true"
+			   snapshotLocation = "Snapshots"/>
 		</Environments>
 	</EnvironmentSection>
 </configuration>
@@ -100,7 +104,9 @@ internal class TestEnvironment : ITestEnvironment
     public bool TakeSnapshotOnError => true;
     public string SnapshotLocation => "Snapshots";
     public bool RemoteDriver => false; //use local driver, not remote
-    public bool SmartSearch => true
+    public bool SmartSearch => true; //from 1.2.3
+    public string logPath => "Log.txt"; //from 1.2.4
+    public string reportDirectory => "Report"; //from 1.2.4
 }
 ````
 
@@ -204,12 +210,14 @@ internal class DependencyInjector : IOkapiModuleLoader
 }
 ````
 
+**Note**: from 1.2.4, the implementation of **IOkapiModuleLoader** is not required for user-customized classes so the dependencies on Ninject is no longer required. Okapi automatically finds and loads the implementations for ITestEnvironment, IDriverConfig, IDriverOptionsFactory, IOkapiLogger, and  IReportFormatter if any.
+
 ## Sample Tests Using MSTest
 
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
           
 ## Versions
-* Version **1.2.3** released on 07/07/2019
+* Version **1.2.4** released on 04/07/2019
 
 ## Author
 ###  **Tam Nguyen**
