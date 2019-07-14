@@ -20,14 +20,20 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 
 ## Dependencies
 ### .NETFramework 4.5
-* ExtSelenium (>= 1.0.1.0)
+* DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
+* ExtSelenium (>= 1.0.1)
+* LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
-* From 1.2.4, depends on Okapi.Common 1.0.0
+* Okapi.Common (>= 1.0.0)
+* Simplify.Windows.Forms (>= 1.0.0)
 
 ### .NETFramework 4.6
-* ExtSelenium (>= 1.0.1.0)
+* DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
+* ExtSelenium (>= 1.0.1)
+* LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
-* From 1.2.4, depends on Okapi.Common 1.0.0
+* Okapi.Common (>= 1.0.0)
+* Simplify.Windows.Forms (>= 1.0.0)
 
 ## Set Up Test Project
 The code in this repo is for a sample test project based on MSUnit and .Net Framework 4.5 and uses Okapi library.
@@ -162,7 +168,7 @@ Below is a simple implementation using Serilog's File sink. Serilog comes with m
 
 Use Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 for the same purpose.
 
-**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ItestEnvironment. Users don't need to perform Ninject dependencies with constructors, please use https://www.nuget.org/packages/Okapi.Support.File/1.0.1 for simpler. Also, users don't need to use Ninject at all.
+**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ITestEnvironment. Users don't need to perform Ninject dependencies with constructors, please use https://www.nuget.org/packages/Okapi.Support.File/1.0.1 for simpler. Also, users don't need to use Ninject at all.
 
 ````
 internal class Logger : IOkapiLogger
@@ -194,6 +200,7 @@ To produce test report, you need to decorate your test case methods with attribu
 * Example: https://github.com/tamnguyenbbt/Okapi.Support.File/blob/master/Okapi.Support.File/ReportFormatter.cs
 * Use Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 for the same purpose.
 
+**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ITestEnvironment. Users don't need to perform Ninject dependencies with constructors, please use https://www.nuget.org/packages/Okapi.Support.File/1.0.1 for simpler. Also, users don't need to use Ninject at all.
 
 ### Inject Okapi Interface Implementations
 Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject your settings mentioned above to Okapi
