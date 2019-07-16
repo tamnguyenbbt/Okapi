@@ -22,7 +22,6 @@ namespace OkapiSampleTests.ProjectConfig
                     return new FirefoxOptions();
                 default:
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    //chromeOptions.AddArguments("headless");
                     return chromeOptions;
             }
         }
