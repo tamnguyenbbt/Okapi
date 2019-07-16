@@ -15,8 +15,8 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.2.4
-* Install-Package Okapi -Version 1.2.4
+* https://www.nuget.org/packages/Okapi/1.2.7
+* Install-Package Okapi -Version 1.2.7
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -24,7 +24,7 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * ExtSelenium (>= 1.0.1)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
-* Okapi.Common (>= 1.0.0)
+* Okapi.Common (>= 1.0.3)
 * Simplify.Windows.Forms (>= 1.0.0)
 
 ### .NETFramework 4.6
@@ -32,7 +32,7 @@ Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** wit
 * ExtSelenium (>= 1.0.1)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
-* Okapi.Common (>= 1.0.0)
+* Okapi.Common (>= 1.0.3)
 * Simplify.Windows.Forms (>= 1.0.0)
 
 ## Set Up Test Project
@@ -121,7 +121,7 @@ You then can pass the objects of these classes into the constructors of the Okap
 DriverPool.Instance.CreateDriver(LocalChromeTestEnvironment.Instance)
 ````
 
-OR you can inject them into Okapi via its Dependency Injection (DI) interface (using Ninject).
+OR you can inject them into Okapi via its Dependency Injection (DI) interface (using Ninject). From version 1.2.3, Okapi automatically picks up the implemented classes without the need to inject vis DI (DI is stilled supported).
 
 ### Override Selenium Driver Options (Optional)
 
@@ -166,41 +166,48 @@ Okapi comes with the ability to log testing activities and to capture snapshots 
 You can customize the logging message template format and logging destination by implementing Okapi's interface **IOkapiLogger**.
 Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
 
-Use Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 for the same purpose.
+* Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0.
+* From 1.2.7, please use https://www.nuget.org/packages/Okapi.Support.Log.Text/1.0.0
+* GitHub: https://github.com/tamnguyenbbt/Okapi.Support.Log.Text
 
-**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ITestEnvironment. Users don't need to perform Ninject dependencies with constructors, please use https://www.nuget.org/packages/Okapi.Support.File/1.0.1 for simpler. Also, users don't need to use Ninject at all.
+**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ITestEnvironment. Users don't need to perform Ninject dependencies with constructors, please use https://www.nuget.org/packages/Okapi.Support.Log.Text/1.0.0 which provides the default implementation of IOkapiLogger. Also, users don't need to use Ninject at all.
 
 ````
-internal class Logger : IOkapiLogger
-{
-    private readonly static SeriLogLogger logger = new LoggerConfiguration().WriteTo.File($"{Util.ParentProjectDirectory}			{Path.DirectorySeparatorChar}log.txt").CreateLogger();
-
-    public void Error(string messageTemplate)
+    public class Logger : IOkapiLogger
     {
-        logger.Error(messageTemplate);
-    }
+        private static SeriLogLogger logger;
 
-    public void Error(string messageTemplate, Exception exception)
-    {
-        logger.Error(exception, messageTemplate);
-    }
+        public Logger()
+        {
+            string logFileName = Session.Instance.LogPath;
+            logger = new LoggerConfiguration().WriteTo.File(logFileName).CreateLogger();
+        }
 
-    public void Info(string messageTemplate)
-    {
-        logger.Information(messageTemplate);
+        public void Error(string messageTemplate)
+        {
+            logger.Error(messageTemplate);
+        }
+
+        public void Error(string messageTemplate, Exception exception)
+        {
+            logger.Error(exception, messageTemplate);
+        }
+
+        public void Info(string messageTemplate)
+        {
+            logger.Information(messageTemplate);
+        }
     }
-}
 ````
 
 ### Customize Test Report (Optional)
-Implement **IReportFormatter** interface. Below is a simple ReportFormatter sending test case execution results to a text file.
-A comprehensive html/javascript report with summary charts will be developed in future as a seperate project/nuget package. 
-To produce test report, you need to decorate your test case methods with attribute **TestCase** and test step methods with **Step**. Also, call **TestReport.Verify()** to perform assertions and update report (you can use any assertion library), and call **TestReport.Report()** at the end of the test methods and test step methods to send the report to the implementation class of IReportFormatter
+Implement **IReportFormatter** interface.
+To produce test report, you need to decorate your test case methods with Okpai **TestCase** attribute and test step methods with Okapi **Step** attribute. Also, call **TestReport.Verify()** to perform assertions and update report (you can use any assertion library), and call **TestReport.Report()** at the end of the test methods and test step methods to send the report to the implementation class of IReportFormatter
 
-* Example: https://github.com/tamnguyenbbt/Okapi.Support.File/blob/master/Okapi.Support.File/ReportFormatter.cs
-* Use Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 for the same purpose.
+* GitHub: https://github.com/tamnguyenbbt/Okapi.Support.Report.Text and https://github.com/tamnguyenbbt/Okapi.Support.Report.Html
+* Nuget packages: https://www.nuget.org/packages/Okapi.Support.Report.Text/1.0.0 and https://www.nuget.org/packages/Okapi.Support.Report.Html/1.0.0
 
-**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ITestEnvironment. Users don't need to perform Ninject dependencies with constructors, please use https://www.nuget.org/packages/Okapi.Support.File/1.0.1 for simpler. Also, users don't need to use Ninject at all.
+**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ITestEnvironment. Users don't need to perform Ninject dependencies with constructors.
 
 ### Inject Okapi Interface Implementations
 Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject your settings mentioned above to Okapi
@@ -226,7 +233,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
           
 ## Versions
-* Version **1.2.4** released on 04/07/2019
+* Version **1.2.7** released on 16/07/2019
 
 ## Author
 ###  **Tam Nguyen**
