@@ -91,7 +91,7 @@ namespace OkapiSampleTests.TestCases
         public void Find_by_anchor_using_anchor_own_text()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
-            var userName = TestObject.New(SearchInfo.OwnText("First name"), SearchInfo.New("input"));
+            var userName = TestObject.New(SearchInfo.OwnText("first name"), SearchInfo.New("input"));
             userName.SendKeys("Automation");
             TestReport.Report().QuitActiveDriver();
         }
