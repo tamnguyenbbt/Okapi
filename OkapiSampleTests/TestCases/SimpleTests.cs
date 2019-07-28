@@ -81,8 +81,27 @@ namespace OkapiSampleTests.TestCases
         public void Find_by_anchor_with_smart_search()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            //<span class="form-name">First name</span>
+            //<input class="form-input">
             var userName = TestObject.New(SearchInfo.New("span", "first name"), SearchInfo.New("input"));
             userName.SendKeys("Automation");
+            TestReport.Report().QuitActiveDriver();
+        }
+
+        [TestMethod]
+        [TestCase]
+        public void Find_by_anchor_with_smart_search_extending_to_attribute_value_text()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            //<input aria-label="First name">
+            ITestObject firstNameTextBox = TestObject.New(SearchInfo.New("input", "first name"));
+            firstNameTextBox.SendKeys("Tester");
+            var locators = firstNameTextBox.AllLocators;
+
+            firstNameTextBox = TestObject.New(SearchInfo.New("input", "first na"));
+            firstNameTextBox.SendKeys("Tester");
+            locators = firstNameTextBox.AllLocators;
+
             TestReport.Report().QuitActiveDriver();
         }
 
@@ -244,7 +263,7 @@ namespace OkapiSampleTests.TestCases
         [TestCase]
         public void Use_test_steps_middle_step_failed()
         {
-            SampleSteps.Step1();            
+            SampleSteps.Step1();
             SampleSteps.Step3();
             SampleSteps.Step2("tester");
             TestReport.Report().QuitActiveDriver();
