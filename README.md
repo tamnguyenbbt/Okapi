@@ -1,7 +1,7 @@
 # Okapi Get Started
 Okapi is a Selenium and ExtSelenium-based **Web UI test automation library/framework** with the following key features
 * Unlike many free and commercial test automation frameworks in the market, providing good user interfaces, utilities, a compiler, an object repository, a not very smart recording and object spying tool based on traditional html searching methods (id, name, tag name, class, css, xpath, etc.), and an API library then let users to deal with all the real-life tough test automation scripting obstacles such as timing, single-page application automation obstacles, AJAX etc. (that why a lot of organisations buy them and have to have a large team to build test automation frameworks around them), Okapi deals with all these things, letting users to focus on business rules while scripting (there is no need to build automation framework around Okapi).   
-* With its advanced algorithm, being the first automation test framework in the market to introduce the search web elements by anchors method, which are much simpler and intuitive to use and require much less script maintenance than traditional method like XPATH, CSS Selector, etc. 
+* With its advanced algorithm, being the first automation test framework in the market to introduce the search web elements by anchors method, which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
 * Introduces the Dynamic Contents concept for better code reusable and easy to use
 * Advanced and unique auto and manual Page Object Model class code generation/recording algorithm
 * Advanced smart search by anchors
