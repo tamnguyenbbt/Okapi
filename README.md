@@ -1,16 +1,19 @@
 # Okapi Get Started
-Okapi is a Selenium and ExtSelenium-based **Web UI test automation library** with dynamic content concept support
-* Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
-* Supports .Net Framework 4.5 and 4.6
+Okapi is a Selenium and ExtSelenium-based **Web UI test automation library/framework** with the following key features
+* Unlike many other test automation frameworks in the market, providing good user interfaces, utilities, a compiler, an object repository, a not very smart recording and object spying tool, and API then let users to deal with all the real-life tough test automation scripting obstacles such as timing, single-page application automation obstacles, etc. (that why a lot of organisations buy them and have to have a large team to build test automation frameworks around them), Okapi deals with all these things, letting users to focus on business rules while scripting (there is no need to build automation framework around Okapi).   
+* With its advanced algorithm, being the first automation test framework in the market to introduce the search web elements by anchors method, which are much simpler and intuitive to use and require much less script maintenance than traditional method like XPATH, CSS Selector, etc. 
+* Introduces the Dynamic Contents concept for better code reusable and easy to use
 * Advanced and unique auto and manual Page Object Model class code generation/recording algorithm
+* Advanced smart search by anchors
 * Supports data-driven out of the box
 * Reusable web driver from another execution session
 * Manages Selenium drivers automatically
-* Supports user-customized test report and logging
+* Supports user-customized test report and logging, coming with two default report packages - text and html
 * Supports user-customized test project configuration for quick setup of test project
 * Advanced built-in web object interaction library for developing reliable test scripts with less lines of code
-* Search by anchor; search by two anchors; smart search
-* Realiable
+* Reliable
+* Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
+* Supports .Net Framework 4.5 and 4.6* 
 * Easy to integrate with any Unit test framework
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 
