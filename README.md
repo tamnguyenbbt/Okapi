@@ -19,8 +19,8 @@
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.2.16
-* Install-Package Okapi -Version 1.2.16
+* https://www.nuget.org/packages/Okapi/1.2.19
+* Install-Package Okapi -Version 1.2.19
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -237,7 +237,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
           
 ## Versions
-* Version **1.2.16** released on 29/07/2019
+* Version **1.2.19** released on 30/07/2019
 
 ## Author
 ###  **Tam Nguyen**
