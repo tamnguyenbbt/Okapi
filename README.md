@@ -18,13 +18,13 @@
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.2.13
-* Install-Package Okapi -Version 1.2.13
+* https://www.nuget.org/packages/Okapi/1.2.16
+* Install-Package Okapi -Version 1.2.16
 
 ## Dependencies
 ### .NETFramework 4.5
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.0.4)
+* ExtSelenium (>= 1.0.5)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Okapi.Common (>= 1.0.4)
@@ -32,7 +32,7 @@
 
 ### .NETFramework 4.6
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.0.4)
+* ExtSelenium (>= 1.0.5)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Okapi.Common (>= 1.0.4)
