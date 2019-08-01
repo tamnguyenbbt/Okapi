@@ -40,7 +40,7 @@ namespace OkapiSampleTests.TestCases
         {
             DriverPool.Instance.ActiveDriver.SetTimeoutInSeconds(4).LaunchPage("https://www.xero.com/au/signup/");
             string text = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
-            TestReport.Verify(() => Assert.AreEqual("Try Xero FREE for 30 days!", text));
+            TestReport.AreEqual("Try Xero FREE for 30 days!", text);
             TestReport.Report().QuitActiveDriver();
         }
 
@@ -51,8 +51,23 @@ namespace OkapiSampleTests.TestCases
             string expected = "Try Xero FREE for 30 days!";
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
             string actual = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
-            void assertion() => Assert.AreEqual(expected, actual);
-            TestReport.Verify(assertion, $"Expected: {expected} | Actual: {actual}");
+            TestReport.AreEqual(expected, actual, $"Expected: {expected} | Actual: {actual}");
+            TestReport.Report().QuitActiveDriver();
+        }
+
+        [TestMethod]
+        [TestCase]
+        public void Use_assertion_with_action_on_fail()
+        {
+            string expected = "Hello";
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
+            string actual = TestObject.New(SearchInfo.OwnText("Try Xero FREE for 30 days!")).Text;
+            TestReport.IsTrue(
+                expected == actual,
+                () =>
+                {
+                    new TestObject(LocatingMethod.Name, "FirstName").SendKeys("Automation");
+                }, "Expected: {0} | Actual: {1}", expected, actual);
             TestReport.Report().QuitActiveDriver();
         }
 
