@@ -234,7 +234,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 
 ## Sample Tests Using MSTest
 
-* https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/SampleTests.cs
+* https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/SimpleTests.cs
           
 ## Versions
 * Version **1.2.24** released on 04/08/2019
