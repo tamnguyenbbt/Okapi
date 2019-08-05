@@ -19,8 +19,8 @@
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.2.24
-* Install-Package Okapi -Version 1.2.24
+* https://www.nuget.org/packages/Okapi/1.2.26
+* Install-Package Okapi -Version 1.2.26
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -28,7 +28,7 @@
 * ExtSelenium (>= 1.0.5)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
-* Okapi.Common (>= 1.0.6)
+* Okapi.Common (>= 1.0.7)
 * Simplify.Windows.Forms (>= 1.0.0)
 
 ### .NETFramework 4.6
@@ -36,7 +36,7 @@
 * ExtSelenium (>= 1.0.5)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
-* Okapi.Common (>= 1.0.6)
+* Okapi.Common (>= 1.0.7)
 * Simplify.Windows.Forms (>= 1.0.0)
 
 ## Set Up Test Project
@@ -237,7 +237,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/SimpleTests.cs
           
 ## Versions
-* Version **1.2.24** released on 04/08/2019
+* Version **1.2.26** released on 05/08/2019
 
 ## Author
 ###  **Tam Nguyen**
