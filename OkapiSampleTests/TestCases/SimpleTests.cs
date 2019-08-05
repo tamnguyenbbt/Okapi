@@ -12,6 +12,8 @@ using OkapiSampleTests.Steps;
 namespace OkapiSampleTests.TestCases
 {
     [TestClass]
+    //See https://github.com/tamnguyenbbt/Okapi/blob/master/HowToTestWithChromeDriver.md 
+    //for how to set up a simple Chrome driver to use with these tests
     public class SimpleTests
     {
         [TestMethod]

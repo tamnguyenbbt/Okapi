@@ -60,23 +60,23 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Okapi, Version=1.2.24.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okapi.1.2.24\lib\net45\Okapi.dll</HintPath>
+    <Reference Include="Okapi, Version=1.2.26.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Okapi.1.2.26\lib\net45\Okapi.dll</HintPath>
     </Reference>
-    <Reference Include="Okapi.Common, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okapi.Common.1.0.6\lib\net45\Okapi.Common.dll</HintPath>
+    <Reference Include="Okapi.Common, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Okapi.Common.1.0.7\lib\net45\Okapi.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Okapi.Support.Log.Text, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okapi.Support.Log.Text.1.0.0\lib\net45\Okapi.Support.Log.Text.dll</HintPath>
+    <Reference Include="Okapi.Support.Log.Text, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Okapi.Support.Log.Text.1.0.1\lib\net45\Okapi.Support.Log.Text.dll</HintPath>
     </Reference>
-    <Reference Include="Okapi.Support.Report.Html, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okapi.Support.Report.Html.1.0.5\lib\net45\Okapi.Support.Report.Html.dll</HintPath>
+    <Reference Include="Okapi.Support.Report.Html, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Okapi.Support.Report.Html.1.0.7\lib\net45\Okapi.Support.Report.Html.dll</HintPath>
     </Reference>
-    <Reference Include="Okapi.Support.Report.MSTest, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okapi.Support.Report.MSTest.1.0.0\lib\net45\Okapi.Support.Report.MSTest.dll</HintPath>
+    <Reference Include="Okapi.Support.Report.MSTest, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Okapi.Support.Report.MSTest.1.0.1\lib\net45\Okapi.Support.Report.MSTest.dll</HintPath>
     </Reference>
-    <Reference Include="Okapi.Support.Report.NUnit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okapi.Support.Report.NUnit.1.0.0\lib\net45\Okapi.Support.Report.NUnit.dll</HintPath>
+    <Reference Include="Okapi.Support.Report.NUnit, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Okapi.Support.Report.NUnit.1.0.1\lib\net45\Okapi.Support.Report.NUnit.dll</HintPath>
     </Reference>
     <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
@@ -115,8 +115,9 @@
     <Compile Include="ProjectConfig\TestEnvironment.cs" />
     <Compile Include="TestCases\MiniDevelopmentSamples.cs" />
     <Compile Include="TestCases\ReportIndividually.cs" />
-    <Compile Include="TestCases\WithNUnit.cs" />
-    <Compile Include="TestCases\WithMSTest.cs" />
+    <Compile Include="TestCases\ReportWithNUnitContext.cs" />
+    <Compile Include="TestCases\ReportWithMSTestContext.cs" />
+    <Compile Include="TestCases\ReportWithReusableDriver.cs" />
     <Compile Include="TestCases\SimpleTests.cs" />
     <Compile Include="TestCases\LoopTests.cs" />
     <Compile Include="TestData\Registration.cs" />

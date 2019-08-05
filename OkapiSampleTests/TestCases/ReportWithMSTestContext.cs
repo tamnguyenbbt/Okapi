@@ -8,15 +8,15 @@ using Okapi.Support.Report.MSTest;
 namespace OkapiSampleTests.TestCases
 {
     [TestClass]
-    public class WithMSTest
+    public class ReportWithMSTestContext
     {
-        private static TestContext ClassTestContext { get; set; }
+        private static TestContext classTestContext;
         public TestContext TestContext { get; set; }
 
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            ClassTestContext = context;
+            classTestContext = context;
         }
 
         [ClassCleanup]

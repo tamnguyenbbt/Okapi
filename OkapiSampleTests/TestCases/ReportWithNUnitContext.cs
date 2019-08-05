@@ -9,7 +9,7 @@ using TestCase = Okapi.Attributes.TestCaseAttribute;
 namespace OkapiSampleTests.TestCases
 {
     [TestFixture]
-    public class WithNUnit
+    public class ReportWithNUnitContext
     {
         [OneTimeSetUp]
         public static void ClassInit()
