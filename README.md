@@ -1,8 +1,8 @@
 # Okapi Get Started
 **Okapi** is a Selenium and ExtSelenium-based **Web UI test automation library/framework** with the following key features
-* Unlike many free and commercial test automation frameworks in the market, providing good user interfaces, utilities, a compiler, an object repository, a not very smart recording and object spying tool based on traditional html searching methods (id, name, tag name, class, css, xpath, etc.), and an API library then let users to deal with all the real-life tough test automation scripting obstacles such as timing, single-page application automation obstacles, AJAX etc. (that why a lot of organizations after deciding to buy/get them, have to find experiened and technical strong automation testers and form a large team to build test automation frameworks around them. Sometimes, they have to involve some good web developers and spend years to build the automation test frameworks around them. Unfortunately, quite often web developers have little knowledge and experience on real-life test automation difficulties and quite often they fail or create messy frameworks.), Okapi deals with all these things, letting users to focus more on business rules of the web applications under test while scripting (there is little need to build automation framework around Okapi).  
+* Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting. Okapi is ready to use and there is little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common), ready to be downloaded and used
-* With its advanced algorithm, **being the first automation test framework in the market** to introduce the search web elements by anchors method, which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+* With its advanced algorithm, **Okapi** introduces the search web elements by anchors method, which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
 * Introduces the **Dynamic Contents** concept for better code reusable and easy to use
 * Advanced and unique auto and manual Page Object Model class code generation/recording algorithm
 * Advanced **smart search** by anchors (turned on/off in config)
@@ -11,7 +11,7 @@
 * Manages Selenium drivers automatically
 * Supports user-customized test report and logging, coming with two default report packages - text and html
 * Supports user-customized test project configuration for quick setup of test project
-* Advanced built-in web object interaction library for developing reliable test scripts with less lines of code
+* Advanced built-in web object interaction library for developing reliable test scripts with less lines of code. Coming to test automation scripting, less code, more reliable and easier-to-maintain scripts
 * Reliable
 * Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
 * Supports .Net Framework 4.5 and 4.6* 
