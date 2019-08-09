@@ -12,3 +12,5 @@ Steps to automate:
 4. Build data-driven reusable steps, decorating them so they are reportable
 5. Build test cases, decorating them so they are reportable
 6. Run tests
+
+IT'S QUICK AND EASY. :)
