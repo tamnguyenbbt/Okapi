@@ -1,6 +1,6 @@
 This is a finished simple test structure using Page Object Model as the form of web object repository
 - Each web page is represented as a Page Object Model (POM) class
-- Seperate the concerns: Data Transfer Objects (DTOs), Data, POMs, test steps, and test cases
+- Seperate the concerns: Data templates via Data Transfer Objects (DTOs), Data, POMs, test steps, and test cases
 	--> Easier to share works, build and maintain
 	--> Maximize code reusability
 - This sample automates the tests for Facebook SignUp page

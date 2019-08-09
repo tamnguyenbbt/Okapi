@@ -29,7 +29,7 @@ namespace OkapiSampleTests.PageObjectModelSample.TestCases
         }
 
         [Test]
-        //[@TestCase] //Decorated with Okapi 'TestCase' attribute and closed with TestReport.Report() so that this test case gets reported
+        [@TestCase] //Decorated with Okapi 'TestCase' attribute and closed with TestReport.Report() so that this test case gets reported
         public void Fail_to_create_a_new_account_when_password_is_not_secure()
         {
             //Arrange
@@ -44,7 +44,7 @@ namespace OkapiSampleTests.PageObjectModelSample.TestCases
 
         [Test]
         [@TestCase]
-        public void Long_first_name_chopped_after_clicking_sign_up_button()
+        public void Fail_to_create_a_new_account_when_first_name_length_is_over_the_limit()
         {
             //Arrange
             AccountDTO account = accountDataSet.LongFirstNameTestAccount;
@@ -53,10 +53,6 @@ namespace OkapiSampleTests.PageObjectModelSample.TestCases
             SignUpSteps.Create_a_new_account(account);
 
             //Assert
-            var a = SignUpPage
-                .ErrorMessage
-                .SetDynamicContents("There is a limit on the number of characters in first names").AllLocators;
-
             SignUpPage
                 .ErrorMessage
                 .SetDynamicContents("There is a limit on the number of characters in first names")
