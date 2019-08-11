@@ -11,7 +11,7 @@ namespace OkapiSampleTests.TestCases
     {
         [TestMethod]
         [TestCase]
-        public void Test1()
+        public void Passed_test()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             int elementCount = TestObject.New(SearchInfo.New("span", "Next")).ElementCount;
@@ -21,7 +21,7 @@ namespace OkapiSampleTests.TestCases
 
         [TestMethod]
         [TestCase]
-        public void Test2()
+        public void Failed_test()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             int elementCount = TestObject.New(SearchInfo.New("span", "Next")).ElementCount;

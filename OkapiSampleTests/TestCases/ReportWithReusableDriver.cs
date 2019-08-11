@@ -29,13 +29,11 @@ namespace OkapiSampleTests.TestCases
 
         [Test]
         [TestCase]
-        public void Test1_passed()
+        public void Test_1_passed()
         {
             DriverPool.Instance.ActiveDriver.SetTimeoutInSeconds(3).LaunchPage("https://accounts.google.com/signup");
             //Not worried about entering the exact word 'First name' in 'SetDynamicContents' when smart search is turned on in App.config
-            genericTextBox
-                .SetDynamicContents("first na")
-                .SendKeys("John");
+            genericTextBox.SetDynamicContents("first na").SendKeys("John");
             Enter_username("john.doe");
         }
 
@@ -47,18 +45,16 @@ namespace OkapiSampleTests.TestCases
         //and W3C mode is turned off or turned off by default. 
         //Chrome driver versions before 73 have W3C mode turned off by default so they can be used to test this one.
         //https://chromedriver.storage.googleapis.com/index.html?path=72.0.3626.7/
-        public void Test2_failed_unable_to_find_last_name_text_box()
+        public void Test_2_failed_unable_to_find_last_name_text_box()
         {
             DriverPool.Instance.CreateReusableDriverFromLastRun().SetTimeoutInSeconds(3);
             Enter_password("password is password");
-            genericTextBox
-                .SetDynamicContents("Last name1111")
-                .SendKeys("Doe");
+            genericTextBox.SetDynamicContents("Last name1111").SendKeys("Doe");
         }
 
         [Test]
         [TestCase]
-        public void Test3_failed_because_test_2_closed_the_driver_on_failure()
+        public void Test_3_failed_because_test_2_closed_the_driver_on_failure()
         {
             DriverPool.Instance.CreateReusableDriverFromLastRun().SetTimeoutInSeconds(3);
             TestObject.New(SearchInfo.New(HtmlTag.span, "Next")).Click();

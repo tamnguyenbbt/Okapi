@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using ExtSelenium.Extensions;
 using NUnit.Framework;
 using Okapi.Drivers;
+using Okapi.Extensions;
 using Okapi.Report;
 using Okapi.Support.Report.NUnit;
 using OkapiSampleTests.PageObjectModelSample.Data;
@@ -30,7 +33,7 @@ namespace OkapiSampleTests.PageObjectModelSample.TestCases
 
         [Test]
         [@TestCase] //Decorated with Okapi 'TestCase' attribute and closed with TestReport.Report() so that this test case gets reported
-        public void Fail_to_create_a_new_account_when_password_is_not_secure()
+        public void Error_displays_when_creating_a_new_account_with_not_secure_password()
         {
             //Arrange
             AccountDTO account = accountDataSet.PasswordNotSecureTestAccount;
@@ -44,7 +47,7 @@ namespace OkapiSampleTests.PageObjectModelSample.TestCases
 
         [Test]
         [@TestCase]
-        public void Fail_to_create_a_new_account_when_first_name_length_is_over_the_limit()
+        public void Error_displays_when_creating_a_new_account_with_first_name_length_being_over_the_limit()
         {
             //Arrange
             AccountDTO account = accountDataSet.LongFirstNameTestAccount;
@@ -61,7 +64,7 @@ namespace OkapiSampleTests.PageObjectModelSample.TestCases
 
         [Test]
         [@TestCase]
-        public void Fail_to_create_a_new_account_when_first_name_is_not_provided()
+        public void Error_displays_when_creating_a_new_account_with_first_name_not_provided()
         {
             //Arrange
             AccountDTO account = accountDataSet.NonProvidedFirstNameTestAccount;
@@ -76,7 +79,7 @@ namespace OkapiSampleTests.PageObjectModelSample.TestCases
 
         [Test]
         [@TestCase]
-        public void Fail_to_create_a_new_account_when_custom_gender_pronoun_is_not_provided()
+        public void Error_displays_when_creating_a_new_account_with_custom_gender_pronoun_not_provided()
         {
             //Arrange
             AccountDTO account = accountDataSet.NonProvidedPronounTestAccount;

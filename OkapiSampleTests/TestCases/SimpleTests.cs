@@ -59,7 +59,7 @@ namespace OkapiSampleTests.TestCases
 
         [TestMethod]
         [TestCase]
-        public void Use_assertion_with_action_on_fail()
+        public void Failed_assertion_with_action_on_fail()
         {
             string expected = "Hello";
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
@@ -268,7 +268,7 @@ namespace OkapiSampleTests.TestCases
 
         [TestMethod]
         [TestCase]
-        public void Use_test_steps_last_step_failed()
+        public void Failed_the_last_step()
         {
             SampleSteps.Step1();
             SampleSteps.Step2("tester");
@@ -278,7 +278,7 @@ namespace OkapiSampleTests.TestCases
 
         [TestMethod]
         [TestCase]
-        public void Use_test_steps_middle_step_failed()
+        public void Failed_the_second_step()
         {
             SampleSteps.Step1();
             SampleSteps.Step3();
@@ -288,7 +288,7 @@ namespace OkapiSampleTests.TestCases
 
         [TestMethod]
         [TestCase]
-        public void Assertion_failed_with_user_added_message()
+        public void Failed_assertion_with_user_added_message()
         {
             string expected = "Hello world!";
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.xero.com/au/signup/");
@@ -301,7 +301,7 @@ namespace OkapiSampleTests.TestCases
 
         [TestMethod]
         [TestCase]
-        public void Find_by_anchor_failed_not_found()
+        public void Failed_finding_by_anchor_when_element_is_not_found()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
             TestObject.New(SearchInfo.New("span", "NextWrong")).Click();

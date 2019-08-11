@@ -13,12 +13,12 @@ namespace OkapiSampleTests.PageObjectModelSample.POMs
 
         public static ITestObject AnyBirthdayListBox => ListBox.New(SearchInfo.New(HtmlTag.div, "Birthday"), SearchInfo.New(HtmlTag.select, "{0}"));
 
-        public static ITestObject FirstNameInputBox => AnyInputBox.SetAnchorDynamicContents("First name");
+        public static ITestObject FirstNameInputBox => AnyInputBox.SetDynamicContents("First name");
         public static ITestObject SurNameInputNox => AnyInputBox.SetAnchorDynamicContents("surname");
-        public static ITestObject ContactInputBox => AnyInputBox.SetAnchorDynamicContents("Mobile number or email address");
+        public static ITestObject ContactInputBox => AnyInputBox.SetSearchElementDynamicContents("Mobile number or email address");
         public static ITestObject PasswordInputBox => AnyInputBox.SetAnchorDynamicContents("New password");
         public static ITestObject BirthDayDropDown => AnyBirthdayListBox.SetSearchElementDynamicContents("Day");
-        public static ITestObject BirthMonthDropDown => AnyBirthdayListBox.SetSearchElementDynamicContents("Month");
+        public static ITestObject BirthMonthDropDown => AnyBirthdayListBox.SetDynamicContents("Month");
         public static ITestObject BirthYearDropDown => AnyBirthdayListBox.SetSearchElementDynamicContents("Year");
         public static ITestObject GenderRadioButton => TestObject.New(SearchInfo.New(HtmlTag.label, "{0}"), SearchInfo.New(HtmlTag.input));
         public static ITestObject PronounDropDown => ListBox.New(SearchInfo.New(HtmlTag.select, "Select your pronoun"));

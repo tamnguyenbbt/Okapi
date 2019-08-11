@@ -41,8 +41,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExtSelenium, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ExtSelenium.1.0.7\lib\net45\ExtSelenium.dll</HintPath>
+    <Reference Include="ExtSelenium, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExtSelenium.1.0.8\lib\net45\ExtSelenium.dll</HintPath>
     </Reference>
     <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
       <HintPath>..\packages\LiteDB.4.1.4\lib\net40\LiteDB.dll</HintPath>
@@ -60,8 +60,8 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Okapi, Version=1.2.28.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okapi.1.2.28\lib\net45\Okapi.dll</HintPath>
+    <Reference Include="Okapi, Version=1.2.29.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Okapi.1.2.29\lib\net45\Okapi.dll</HintPath>
     </Reference>
     <Reference Include="Okapi.Common, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Okapi.Common.1.0.7\lib\net45\Okapi.Common.dll</HintPath>
@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PageObjectModelSample\About.txt" />
+    <Content Include="PageObjectModelSample\WebPageUnderTest.jpg" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
