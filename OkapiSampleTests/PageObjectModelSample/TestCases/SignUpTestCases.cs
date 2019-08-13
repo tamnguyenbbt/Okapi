@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using ExtSelenium.Extensions;
 using NUnit.Framework;
 using Okapi.Drivers;
-using Okapi.Extensions;
 using Okapi.Report;
 using Okapi.Support.Report.NUnit;
 using OkapiSampleTests.PageObjectModelSample.Data;
