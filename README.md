@@ -19,8 +19,11 @@
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.3.2
-* Install-Package Okapi -Version 1.3.2
+* https://www.nuget.org/packages/Okapi/1.3.3
+* Install-Package Okapi -Version 1.3.3
+
+## Blog
+* https://okapi4automation.wordpress.com
 
 ## Dependencies
 ### .NETFramework 4.5
@@ -239,7 +242,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/PageObjectModelSample
           
 ## Versions
-* Version **1.3.2** released on 14/08/2019
+* Version **1.3.3** released on 15/08/2019
 
 ## Author
 ###  **Tam Nguyen**
