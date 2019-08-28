@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using Okapi.Drivers;
+using Okapi.Elements;
 using Okapi.Extensions;
 using Okapi.Report;
 using TestCase = Okapi.Attributes.TestCaseAttribute;
@@ -8,7 +9,7 @@ namespace OkapiSampleTests.TestCases
 {
     public class SignUpPageObjectModel
     {
-        //Will upload a post related to syntax of the free text into https://okapi4automation.wordpress.com
+        //See https://okapi4automation.wordpress.com
         public const string AnyInputBox = "<input> `{0}`";
         public const string AnyBirthdayListBox = "anchor <div> `Birthday` search <select> `{0}`";
         public const string GenderRadioButton = "Anchor `{0}` <label>, search <input>";
@@ -45,6 +46,35 @@ namespace OkapiSampleTests.TestCases
             bool displayed = SignUpPageObjectModel.InvalidMobileNumberToolTip.GetTestObject().Displayed;
             TestReport.IsTrue(displayed, $"Expected: tool tip displayed. Actual: {displayed}");
             TestReport.Report();
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
+        [Test]
+        [@TestCase]
+        public void Test2_I_am_a_lazy_tester()
+        {
+            //Arrange
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");
+
+            //Act
+            ListBox birthDayListBox = "anchor <div> `Birthday` search <select> `{0}`".GetListBox("Day");
+            birthDayListBox.SelectByValue("7");
+            "<button> `Sign Up`".GetTestObject().Click();
+            DriverPool.Instance.QuitActiveDriver();
+        }
+
+        [Test]
+        [@TestCase]
+        public void Test3_a_bit_lazier()
+        {
+            //Arrange
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");
+
+            //Act
+            ListBox birthDayListBox = "anchor `Birthday` search `{0}` <select>".GetListBox("Day");
+            birthDayListBox.SelectByValue("7");
+            "`Sign Up`".GetTestObject().Click();
+            DriverPool.Instance.QuitActiveDriver();
         }
     }
 }

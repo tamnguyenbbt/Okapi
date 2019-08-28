@@ -29,8 +29,6 @@ namespace OkapiSampleTests.TestCases
             TestReport.Report(TestContext.CurrentContext.ToOkapiTestContext());
         }
 
-        //TO DO in 1.3.1: fix test report related bug: Message: TearDown : Okapi.Exceptions.TestReportException 
-        //: Unable to find test method 'OkapiSampleTests.TestCases.HumanWay.Test1
         [Test]
         [TestCase]
         public void Test1()
