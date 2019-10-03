@@ -20,5 +20,6 @@ namespace OkapiSampleTests.ProjectConfig
         public bool SmartSearch => true;
         public string ReportDirectory => $"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}Report";
         public string LogPath => $"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}Log.txt";
+        public bool HighlightOnSearch => true;
     }
 }
