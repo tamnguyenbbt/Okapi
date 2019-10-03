@@ -258,11 +258,14 @@ internal class DependencyInjector : IOkapiModuleLoader
 
 ## Future Support/Development
 Okapi Studio, desktop application for Okapi is under development and is expected to be released early or mid 2020.
-Okapi Studio leverages the power of Okapi and have the following base features:
+Okapi Studio leverages the power of Okapi and has the following base features:
 * Test artefact creation/edit vis UI. Unlike other tools in the market which have UI view and expert (code) view, Okapi Studio has only one UI view to be simple but it is advanced so users can create sophisticated tests without writing any line of code.
 * Test artefact manager - project, test case, test step, test suite, object repository
 * Execution/Debug - tests, test, actions, action, line by line, breakpoints
 * Report
+* Import/Export
+* Console Runner for CI/CD
+
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio.png)
 
 
