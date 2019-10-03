@@ -267,7 +267,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * Test Data Parameterization
 * Console Runner for CI/CD
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio1.png)
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio2.png)
 
