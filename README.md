@@ -263,6 +263,6 @@ Okapi Studio leverages the power of Okapi and have the following base features:
 * Test artefact manager - project, test case, test step, test suite, object repository
 * Execution/Debug - tests, test, actions, action, line by line, breakpoints
 * Report
-* Early UI
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio.png)
 
 
