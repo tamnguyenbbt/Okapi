@@ -244,20 +244,9 @@ internal class DependencyInjector : IOkapiModuleLoader
 **Note**: from 1.2.4, the implementation of **IOkapiModuleLoader** is not required for user-customized classes so the dependencies on Ninject is no longer required. Okapi automatically finds and loads the implementations for ITestEnvironment, IDriverConfig, IDriverOptionsFactory, IOkapiLogger, and  IReportFormatter if any.
 
 ## First **'What You See Is What You Get'** Style Test Development
-````
-	[TestCase]
-        public void Facebook_registration()
-        {
-            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FacebookReg.png)
 
-            "<input> `{0}`".GetTestObject("First name").SendKeys("John");
-            "<input> `surname`".GetTestObject().SendKeys("Doe");
-            "anchor `Birthday` search `{0}` <select>".GetListBox("Day").SelectByValue("7");
-            "Sign Up".GetTestObject().Click();
-
-            DriverPool.Instance.QuitActiveDriver();
-        }
-````
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FirstTest.png)
 
 ## Sample Tests Using MSTest
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/SimpleTests.cs
