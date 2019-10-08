@@ -18,10 +18,11 @@
 * Supports .Net Framework 4.5 and 4.6* 
 * Easy to integrate with any Unit test framework
 * Ideal for setting up and running both locally and in any Continuous Integration environment
+* Smart search on traditional searching methods (id, class name, link text, xpath, etc.). For instance, "userName".GetTestObject().SendKeys("John") acts the same as "Id `userName`".GetTestObject().SendKeys("John")
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.3.18
-* Install-Package Okapi -Version 1.3.18
+* https://www.nuget.org/packages/Okapi/1.3.19
+* Install-Package Okapi -Version 1.3.19
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -79,7 +80,8 @@ If you decide to use **App.config**, add an App.config file as below:
          smartSearch = "true"
          logPath = "log.txt"
          reportDirectory = "Report"
-         highlightOnSearch = "true"/>
+         highlightOnSearch = "true"
+	 highlightTimeInSeconds = "0.05"/>
       <add targetTestEnvironment="Test2"
 	 active = "false"
 	 driverFlavour = "IE"
@@ -255,7 +257,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/PageObjectModelSample
           
 ## Versions
-* Version **1.3.18** released on 04/10/2019
+* Version **1.3.19** released on 08/10/2019
 
 ## Author
 ###  **Tam Nguyen**
