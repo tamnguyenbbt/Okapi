@@ -21,5 +21,6 @@ namespace OkapiSampleTests.ProjectConfig
         public string ReportDirectory => $"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}Report";
         public string LogPath => $"{Util.ParentProjectDirectory}{Path.DirectorySeparatorChar}Log.txt";
         public bool HighlightOnSearch => true;
+        public double HighlightTimeInSeconds => 0.05;
     }
 }
