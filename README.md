@@ -22,8 +22,8 @@
 Okapi treats traditional searching mwethods such Id and class name as special cases of the advanced search by anchors algorithm where search element is also the anchor element.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.3.19
-* Install-Package Okapi -Version 1.3.19
+* https://www.nuget.org/packages/Okapi/1.3.21
+* Install-Package Okapi -Version 1.3.21
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -31,7 +31,7 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 ## Dependencies
 ### .NETFramework 4.5
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.0.11)
+* ExtSelenium (>= 1.0.13)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Newtonsoft.Json (>= 12.0.2)
@@ -40,7 +40,7 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 
 ### .NETFramework 4.6
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.0.11)
+* ExtSelenium (>= 1.0.13)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Newtonsoft.Json (>= 12.0.2)
@@ -258,7 +258,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/PageObjectModelSample
           
 ## Versions
-* Version **1.3.19** released on 08/10/2019
+* Version **1.3.21** released on 09/10/2019
 
 ## Author
 ###  **Tam Nguyen**
