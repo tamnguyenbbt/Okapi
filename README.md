@@ -22,8 +22,8 @@
 Okapi treats traditional searching mwethods such Id and class name as special cases of the advanced search by anchors algorithm where search element is also the anchor element.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.3.21
-* Install-Package Okapi -Version 1.3.21
+* https://www.nuget.org/packages/Okapi/1.3.22
+* Install-Package Okapi -Version 1.3.22
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -258,7 +258,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/PageObjectModelSample
           
 ## Versions
-* Version **1.3.21** released on 09/10/2019
+* Version **1.3.22** released on 10/10/2019
 
 ## Author
 ###  **Tam Nguyen**
