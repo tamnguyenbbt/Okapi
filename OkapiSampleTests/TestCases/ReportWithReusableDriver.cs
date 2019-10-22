@@ -42,9 +42,6 @@ namespace OkapiSampleTests.TestCases
         //Test2 continues from what Test1 has done but not necessary in the same execution. 
         //That means that you can run Test1 first; then run Test2 in the second execution.
         //This can be achieved using 'ReusableDriverFromLastRun' as long as the browser opened by Test1 is kept opened
-        //and W3C mode is turned off or turned off by default. 
-        //Chrome driver versions before 73 have W3C mode turned off by default so they can be used to test this one.
-        //https://chromedriver.storage.googleapis.com/index.html?path=72.0.3626.7/
         public void Test_2_failed_unable_to_find_last_name_text_box()
         {
             DriverPool.Instance.CreateReusableDriverFromLastRun().SetTimeoutInSeconds(3);
