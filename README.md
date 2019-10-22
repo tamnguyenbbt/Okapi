@@ -31,11 +31,11 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 
 ## 'What You See Is What You Get' Style Test Development - First Simple Test Script
 
-Facebook registration page
+**Facebook registration page**
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FacebookReg.png)
 
-With Okapi, it is quick and easy to write test scripts
+**With Okapi, it is quick and easy to write test scripts.**
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FirstTest.png)
 
