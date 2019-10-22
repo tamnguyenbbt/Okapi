@@ -1,5 +1,5 @@
 # Okapi Get Started
-**Okapi** is a Selenium and ExtSelenium-based **Web UI test automation library/framework**
+**Okapi** is an advanced and easy-to-use Selenium-based **Web UI test automation library/framework**
 * Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting. 
 * Okapi is ready to use, there being little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
