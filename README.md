@@ -1,5 +1,5 @@
 # Okapi Get Started
-**Okapi** is an advanced and easy-to-use Selenium-based **Web UI test automation library/framework**. **Okapi** was designed **not to be just another Web UI test automation library or Selenium-wrapper in the market**. It aims at changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective. It was designed and developed to be game changer in Web UI automation testing business.
+**Okapi** is an advanced and easy-to-use Selenium-based **Web UI test automation library/framework**. **Okapi** was designed **not to be just another Web UI test automation library or Selenium-wrapper in the market**. It aims at changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective. It was designed and developed to be game changer in Web UI automation testing business. Okapi is powerful and open.
 
 * Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting (in C#). Okapi helps to build reliable and easy-to-maintain test scripts.
 * Okapi is ready to use, there being little need to build another wrapper around it. 
