@@ -34,6 +34,7 @@ Facebook registration page
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FacebookReg.png)
 
+With Okapi, it is quick and easy to write test scripts
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FirstTest.png)
 
 ## Dependencies
