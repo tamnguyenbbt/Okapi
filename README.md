@@ -1,14 +1,15 @@
 # Okapi Get Started
-**Okapi** is an advanced and easy-to-use Selenium-based **Web UI test automation library/framework**
+**Okapi** is an advanced and easy-to-use Selenium-based **Web UI test automation library/framework**. **Okapi** was designed **not to be just another Web UI library or Selenium-wrapper in the market**. It aims at changing the way you write and maintain Web UI test automation scripts. It was designed and developed to be a game changer in Web UI automation testing business.
+
 * Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting (in C#).
 * Okapi is ready to use, there being little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
-* With its advanced algorithm, **Okapi** introduces the **search web elements by anchors methods**, which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+* First to introduce the advanced **search web elements by anchors methods** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+* Advanced **smart search** by anchors (turned on/off in config)
+* Introduces **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
 * Introduces the **Dynamic Contents** concept for better code reusable and easy to use
 * Advanced and unique auto and manual Page Object Model class code generation/recording algorithm
-* Advanced **smart search** by anchors (turned on/off in config)
 * Supports data-driven out of the box
-* **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
 * Manages Selenium drivers automatically
 * Supports user-customized test report and logging, coming with two default report packages - text and html
 * Supports user-customized test project configuration for quick setup of test project
