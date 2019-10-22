@@ -4,7 +4,7 @@
 * Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting (in C#).
 * Okapi is ready to use, there being little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
-* First to introduce the advanced **search web elements by anchors methods** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+* First to introduce the advanced **search web elements by anchors** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
 * Advanced **smart search** by anchors (turned on/off in config)
 * Introduces **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
 * Introduces the **Dynamic Contents** concept for better code reusable and easy to use
