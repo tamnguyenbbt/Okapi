@@ -29,6 +29,11 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 ## Blog
 * https://okapi4automation.wordpress.com
 
+## 'What You See Is What You Get' Style Test Development - First Simple Test Script
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FacebookReg.png)
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FirstTest.png)
+
 ## Dependencies
 ### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
@@ -237,11 +242,6 @@ internal class DependencyInjector : IOkapiModuleLoader
 ````
 
 **Note**: from 1.2.4, the implementation of **IOkapiModuleLoader** is not required for user-customized classes so the dependencies on Ninject is no longer required. Okapi automatically finds and loads the implementations for ITestEnvironment, IDriverConfig, IDriverOptionsFactory, IOkapiLogger, and  IReportFormatter if any.
-
-## 'What You See Is What You Get' Style Test Development - First Simple Test Script
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FacebookReg.png)
-
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FirstTest.png)
 
 ## Sample Tests Using MSTest
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/SimpleTests.cs
