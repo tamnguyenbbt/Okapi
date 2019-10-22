@@ -13,7 +13,7 @@
 * Supports user-customized test report and logging, coming with two default report packages - text and html
 * Supports user-customized test project configuration for quick setup of test project
 * Advanced built-in web object interaction library for developing reliable test scripts with less lines of code
-* Reliable
+* Reliable API (i.e. all methods detect if the web element under test is found before performing an action on it. Click method also detects if the click action has taken effect otherwise retries up to 3 times, etc.)
 * Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
 * Supports .Net Framework 4.5, 4.6 and 4.7
 * Easy to integrate with any Unit test framework
