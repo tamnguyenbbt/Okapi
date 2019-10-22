@@ -21,7 +21,7 @@
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 * Smart search on traditional searching methods (id, class name, link text, xpath, etc.). For instance, "userName".GetTestObject().SendKeys("John") acts the same as "Id `userName`".GetTestObject().SendKeys("John").
 Okapi treats traditional searching mwethods such Id and class name as special cases of the advanced search by anchors algorithm where search element is also the anchor element.
-* Supports user-defined actions
+* Supports user-defined actions, to extend the functionalities where Okapi has not provided yet.
 
 ## NuGet
 * https://www.nuget.org/packages/Okapi/1.4.1
