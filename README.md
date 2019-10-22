@@ -1,6 +1,6 @@
 # Okapi Get Started
 **Okapi** is an advanced and easy-to-use Selenium-based **Web UI test automation library/framework**
-* Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting. 
+* Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting (in C#).
 * Okapi is ready to use, there being little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
 * With its advanced algorithm, **Okapi** introduces the **search web elements by anchors methods**, which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
