@@ -28,7 +28,7 @@ namespace OkapiSampleTests.TestCases
         [Test]
         [@TestCase]
         public void Test1()
-        {            
+        {
             //Arrange
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");
 
@@ -77,16 +77,24 @@ namespace OkapiSampleTests.TestCases
             DriverPool.Instance.QuitActiveDriver();
         }
 
+        [Test]
         [@TestCase]
         public void Facebook_registration()
         {
             DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");
 
             "<input> `{0}`".GetTestObject("First name").SendKeys("John");
-
             "<input> `surname`".GetTestObject().SendKeys("Doe");
 
-            "anchor `Birthday` search `{0}` <select>".GetListBox("Day").SelectByValue("7");
+            "anchor `Birthday` search `{0}` <select>".GetListBox("Day").SelectByValue("1");
+            "anchor `Birthday` search `Day` <select>".GetListBox().SelectByValue("2");
+            "anchor `Birthday` search <select>".GetListBox().SelectByValue("3");
+            "anchor `Birthday` search `{0}`".GetListBox("Day").SelectByValue("4");
+            "anchor `Birthday` search `Day`".GetListBox().SelectByValue("5");
+            "anchor `Birthday`".GetListBox().SelectByValue("6");
+            "<div> `Birthday`".GetListBox().SelectByValue("7");
+            "`Birthday`".GetListBox().SelectByValue("8");
+            "Birthday".GetListBox().SelectByValue("9");
 
             "Sign Up".GetTestObject().Click();
 
