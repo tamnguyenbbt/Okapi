@@ -1,46 +1,50 @@
 # Okapi Get Started
-**Okapi** is a Selenium and ExtSelenium-based **Web UI test automation library/framework**
-* Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting. 
-* Okapi is ready to use and there is little need to build another wrapper around it. 
+**Okapi** is an advanced and easy-to-use Selenium-based **Web UI test automation library/framework**. **Okapi** was designed **not to be just another Web UI test automation library or Selenium-wrapper in the market**. It aims at changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective at top levels. It was designed and developed to be game changer in Web UI automation testing business. Okapi is powerful and open.
+
+* Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting (in C#). Okapi helps to build reliable and easy-to-maintain test scripts.
+* Okapi is ready to use, there being little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
-* With its advanced algorithm, **Okapi** introduces the search web elements by anchors methods, which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+* First to introduce the advanced **search web elements by anchors** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+* Advanced **smart search** by anchors (turned on/off in config)
+* Introduces **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
 * Introduces the **Dynamic Contents** concept for better code reusable and easy to use
 * Advanced and unique auto and manual Page Object Model class code generation/recording algorithm
-* Advanced **smart search** by anchors (turned on/off in config)
 * Supports data-driven out of the box
-* **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
 * Manages Selenium drivers automatically
 * Supports user-customized test report and logging, coming with two default report packages - text and html
 * Supports user-customized test project configuration for quick setup of test project
 * Advanced built-in web object interaction library for developing reliable test scripts with less lines of code
-* Reliable
+* Reliable API (i.e. all methods detect if the web element under test is found before performing an action on it. Click method also detects if the click action has taken effect otherwise retries up to 3 times, etc.)
 * Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
-* Supports .Net Framework 4.5 and 4.6* 
+* Supports .Net Framework 4.5, 4.6 and 4.7
 * Easy to integrate with any Unit test framework
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 * Smart search on traditional searching methods (id, class name, link text, xpath, etc.). For instance, "userName".GetTestObject().SendKeys("John") acts the same as "Id `userName`".GetTestObject().SendKeys("John").
 Okapi treats traditional searching mwethods such Id and class name as special cases of the advanced search by anchors algorithm where search element is also the anchor element.
+* Supports user-defined actions, to extend/add the web interactive actions where Okapi has not provided yet.
+* Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.3.22
-* Install-Package Okapi -Version 1.3.22
+* https://www.nuget.org/packages/Okapi/1.4.3
+* Install-Package Okapi -Version 1.4.3
 
 ## Blog
 * https://okapi4automation.wordpress.com
 
-## Dependencies
-### .NETFramework 4.5
-* DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.0.13)
-* LiteDB (>= 4.1.4)
-* Ninject (>= 3.3.4)
-* Newtonsoft.Json (>= 12.0.2)
-* Okapi.Common (>= 1.0.8)
-* Simplify.Windows.Forms (>= 1.0.0)
+## 'What You See Is What You Get' Style Test Development - First Simple Test Script
 
-### .NETFramework 4.6
+**Facebook registration page**
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FacebookReg.png)
+
+**With Okapi, it is quick and easy to write test scripts.**
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FirstTest.png)
+
+## Dependencies
+### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.0.13)
+* ExtSelenium (>= 1.0.14)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Newtonsoft.Json (>= 12.0.2)
@@ -246,19 +250,17 @@ internal class DependencyInjector : IOkapiModuleLoader
 
 **Note**: from 1.2.4, the implementation of **IOkapiModuleLoader** is not required for user-customized classes so the dependencies on Ninject is no longer required. Okapi automatically finds and loads the implementations for ITestEnvironment, IDriverConfig, IDriverOptionsFactory, IOkapiLogger, and  IReportFormatter if any.
 
-## 'What You See Is What You Get' Style Test Development - First Simple Test Script
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FacebookReg.png)
-
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FirstTest.png)
-
 ## Sample Tests Using MSTest
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/SimpleTests.cs
 
 ## Sample Test Structure Set-up Using Page Object Model
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/PageObjectModelSample
+
+## Sample Test Using Reusable Driver
+* https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.3.22** released on 10/10/2019
+* Version **1.4.3** released on 23/10/2019
 
 ## Author
 ###  **Tam Nguyen**

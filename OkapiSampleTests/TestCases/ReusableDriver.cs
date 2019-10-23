@@ -29,7 +29,7 @@ namespace OkapiSampleTests.TestCases
 
         [Test]
         [@TestCase]
-        public void Test_3_running_after_test_1_and_2_in_other_execution_session()
+        public void Test_3_running_after_test_1_and_2_in_another_execution_session()
         {
             //very useful during script development and debugging; no need to run everything again from beginning
             DriverPool.Instance.CreateReusableDriverFromLastRun(); 
