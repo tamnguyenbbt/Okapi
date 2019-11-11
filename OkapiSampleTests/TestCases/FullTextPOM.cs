@@ -3,6 +3,7 @@ using Okapi.Drivers;
 using Okapi.Elements;
 using Okapi.Extensions;
 using Okapi.Report;
+using Okapi.Runners;
 using TestCase = Okapi.Attributes.TestCaseAttribute;
 
 namespace OkapiSampleTests.TestCases
@@ -25,6 +26,39 @@ namespace OkapiSampleTests.TestCases
     [TestFixture]
     public class FullTextPOM
     {
+        [Test]
+        [@TestCase]
+        public void TestA()
+        {
+            DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");
+        }
+
+        [Test]
+        [@TestCase]
+        public void TestB()
+        {
+            DriverPool.Instance.CreateReusableDriverFromLastRun();
+            string inputText = SignUpPageObjectModel.AnyInputBox.GetTestObject("First name").Clear().SendKeys("John").Value;
+
+            TestReport.AreEqual("John", inputText);
+        }
+
+        [Test]
+        [@TestCase]
+        public void TestC()
+        {
+            DriverPool.Instance.CreateReusableDriverFromLastRun();
+            string inputText = null;
+
+            TestExecutor.Run(true, () =>
+            {
+                inputText = SignUpPageObjectModel.AnyInputBox.GetTestObject("First name").Clear().SendKeys("John").Value;
+            });
+            
+
+            TestReport.AreEqual("John", inputText);
+        }
+
         [Test]
         [@TestCase]
         public void Test1()
