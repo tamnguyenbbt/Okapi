@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.4.12
-* Install-Package Okapi -Version 1.4.12
+* https://www.nuget.org/packages/Okapi/1.4.13
+* Install-Package Okapi -Version 1.4.13
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -86,7 +86,8 @@ If you decide to use **App.config**, add an App.config file as below:
          logPath = "log.txt"
          reportDirectory = "Report"
          highlightOnSearch = "true"
-	 highlightTimeInSeconds = "0.05"/>
+	 highlightTimeInSeconds = "0.05"
+	 cachedObjectRepository = "COR.txt"/>
       <add targetTestEnvironment="Test2"
 	 active = "false"
 	 driverFlavour = "IE"
@@ -135,6 +136,7 @@ internal class TestEnvironment : ITestEnvironment
     public string reportDirectory => "Report"; //from 1.2.4
     public string reportDirectory => "Report"; //from 1.2.4
     public bool HighlightOnSearch => true; //from 1.3.8 --> helpful in development time and debugging
+    public string CachedObjectRepository => "COR.txt";
 }
 ````
 
@@ -260,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.4.12** released on 11/11/2019
+* Version **1.4.13** released on 12/11/2019
 
 ## Author
 ###  **Tam Nguyen**
