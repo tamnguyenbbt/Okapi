@@ -317,7 +317,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 	* ````"`First name`"````
 	* ````"First name"````
 	
-When smart search is turned on (in app.config; recommend to turn it on all the time), text/attribute values are not case-sensitive. Providing part of the text/attribute values are also OK.
+When smart search is turned on (in app.config; recommend to turn it on all the time), text/attribute values are not case-sensitive. Providing part of the text/attribute values is also OK.
 
 4. Example
 * A line of code to enter a text "John" to First name text box
