@@ -293,13 +293,13 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * Write a simple unit test using Okapi to test
   * ````IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");````
   
-## Search by anchors
+## Search by anchors syntax
 1. By anchor
 * Anchor - a known web element
 * Search - web element you need to locate
 * Parts - Anchor or Search are made of 2 parts - a tag/css selector; and a text/attribute value. 
-	* tag format: i.e. <div>, <li>div>div>
-	* text/attribute value format: i.e. `How are you?`
+	* tag format: i.e. ````<div>````, ````<li>div>div>````
+	* text/attribute value format: i.e. `````How are you?`````
 	* One part or two parts can be provided and which part stays first does not matter
 * Sample 
 	* ````"anchor <label> `How are you?` search <button>"````
