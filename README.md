@@ -298,7 +298,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * Anchor - a known web element
 * Search - web element you need to locate
 * Parts - Anchor or Search are made of 2 parts - a tag/css selector; and a text/attribute value. 
-	* tag format: i.e. ````<div>````, ````<li>div>div>````
+	* tag/css selector format: i.e. ````<div>````, ````<li>div>div>````
 	* text/attribute value format: i.e. `````How are you?`````
 	* One part or two parts can be provided and which part stays first does not matter
 * Sample 
@@ -307,7 +307,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 2. By 2 anchors
 * Need another information: Parent Anchor or Parent for short
 * Sample
-	* ````"parent `Are you own a car?` anchor <label> `Yes` search <span>"````
+	* ````"parent `Do you own a car?` anchor <label> `Yes` search <span>"````
 	
 3. Special case
 * Anchor and Search are one
@@ -316,6 +316,11 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 	* ````"<input> `First name`"````
 	* ````"`First name`"````
 	* ````"First name"````
+	
+When smart search is turned on (in app.config; recommend to turn it on all the time), text/attribute values are not case-sensitive. Providing part of the text/attribute values are also OK.
 
+4. Example
+* A line of code to enter a text "John" to First name text box
+````"<input> `first name`".GetTestObject().SendKeys("John");````
 
 
