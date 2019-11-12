@@ -291,5 +291,31 @@ Okapi Studio leverages the power of Okapi and has the following base features:
   * Go to Control Panel > System > Advanced system settings > Environment Variables...> System variables > Path
   * Edit and add a new path item pointing to the folder containing chromedriver.exe file 
 * Write a simple unit test using Okapi to test
-  * ````IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");````
+  * ````IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");````
+  
+## Search by anchors
+1. By anchor
+* Anchor - a known web element
+* Search - web element you need to locate
+* Parts - Anchor or Search are made of 2 parts - a tag/css selector; and a text/attribute value. 
+	* tag format: i.e. <div>, <li>div>div>
+	* text/attribute value format: i.e. `How are you?`
+	* One part or two parts can be provided and which part stays first does not matter
+* Sample 
+	* ````"anchor <label> `How are you?` search <button>"````
+	* ````"anchor `How are you?` <label> search <button>"````
+2. By 2 anchors
+* Need another information: Parent Anchor or Parent for short
+* Sample
+	* ````"parent `Are you own a car?` anchor <label> `Yes` search <span>"````
+	
+3. Special case
+* Anchor and Search are one
+* Sample
+	* ````"search <input> `First name`"````
+	* ````"<input> `First name`"````
+	* ````"`First name`"````
+	* ````"First name"````
+
+
 
