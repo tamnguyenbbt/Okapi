@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.4.13
-* Install-Package Okapi -Version 1.4.13
+* https://www.nuget.org/packages/Okapi/1.4.14
+* Install-Package Okapi -Version 1.4.14
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -262,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.4.13** released on 12/11/2019
+* Version **1.4.14** released on 12/11/2019
 
 ## Author
 ###  **Tam Nguyen**
