@@ -321,6 +321,6 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 
 4. Example
 * A line of code to enter a text "John" to First name text box
-````"<input> `first name`".GetTestObject().SendKeys("John");````
+	* ````"<input> `first name`".GetTestObject().SendKeys("John");````
 
 
