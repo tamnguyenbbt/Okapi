@@ -288,7 +288,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 ## Setup to use ChromeDriver on Windows 10
 * Download the latest stable chromedriver.exe (32 bit for Windows) version which supports your Chrome browser from https://chromedriver.chromium.org/downloads and save it to a local folder
 * Config Path environment variabe for Selenium to find chromedriver.exe
- - Go to Control Panel > System > Advanced system settings > Environment Variables...> System variables > Path
- - Edit and add a new path item pointing to the folder containing chromedriver.exe file 
+  * Go to Control Panel > System > Advanced system settings > Environment Variables...> System variables > Path
+  * Edit and add a new path item pointing to the folder containing chromedriver.exe file 
 * Write a simple Unit test using Okapi
 ````IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");````
