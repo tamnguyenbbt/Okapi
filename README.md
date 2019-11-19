@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.5.4
-* Install-Package Okapi -Version 1.5.4
+* https://www.nuget.org/packages/Okapi/1.5.6
+* Install-Package Okapi -Version 1.5.6
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -44,7 +44,7 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 ## Dependencies
 ### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.1.0)
+* ExtSelenium (>= 1.1.1)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Newtonsoft.Json (>= 12.0.2)
@@ -262,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.5.4** released on 18/11/2019
+* Version **1.5.6** released on 20/11/2019
 
 ## Author
 ###  **Tam Nguyen**
@@ -323,4 +323,17 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 * A line of code to enter a text "John" to First name text box
 	* ````"<input> `first name`".GetTestObject().SendKeys("John");````
 
+
+# Advanced Usage
+## Get text of a cell in a table
+* Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
+* There are multiple ways to do that in Okapi. Below is code of one of the methods to achieve the goal.
+	* ````ITestObject row = "anchor `{0}` search <tr>".GetTestObject("12345678"); //12345678 is student id````
+	* ````int precedingRowCount = row.PrecedingSibling.ElementCount;``` --> get the number of rows above the row with student id above
+	* ````string studentName = $"anchor `Student Info` search <table>tr>".GetTestObject().FilterByScreenDistance(precedingRowCount)
+                .Child
+                .NextSiblingAt(2)
+                .ChildAt(2, 0, 2).Text;````
+		
+		
 
