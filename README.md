@@ -327,13 +327,13 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 # Advanced Usage
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
-* There are multiple ways to do that in Okapi. Below is code of one of the methods to achieve the goal.
+* There are multiple ways to do that in Okapi. Below is code demonstrate one way to do that. 
 	* ````ITestObject row = "anchor `{0}` search <tr>".GetTestObject("12345678"); //12345678 is student id````
-	* ````int precedingRowCount = row.PrecedingSibling.ElementCount;``` --> get the number of rows above the row with student id above
-	* ````string studentName = $"anchor `Student Info` search <table>tr>".GetTestObject().FilterByScreenDistance(precedingRowCount)
-                .Child
-                .NextSiblingAt(2)
-                .ChildAt(2, 0, 2).Text;````
+	* ````int precedingRowCount = row.PrecedingSibling.ElementCount;```` --> get the number of rows above the row with student id above
+	* ````string studentName = "anchor `Student Info` search <table>tr>".GetTestObject().FilterByScreenDistance(precedingRowCount)               .Child.NextSiblingAt(2).ChildAt(2, 0, 2).Text;````
+	
+	By default, ````"anchor `Student Info` search <table>tr>".GetTestObject()```` will get the closest row toward the column title 'Student Info' which is the first row in the table. We don't want that to happen. We want to get the row we wanted so we call FilterByScreenDistance(precedingRowCount) which gets row at at distance order 'precedingRowCount' from the column title.
+	Now we are in the row, looking into the DOM a bit and seeing that to go to the student name element we have to call ````Child.NextSiblingAt(2).ChildAt(2, 0, 2)````. 
 		
 		
 
