@@ -336,4 +336,6 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 	Now we are in the row, looking into the DOM a bit and seeing that to go to the student name element we have to call ````Child.NextSiblingAt(2).ChildAt(2, 0, 2)````. 
 		
 		
+## Usage Okapi lambda functions
+
 
