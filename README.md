@@ -351,7 +351,47 @@ public void Temporary_development()
 	*  Start to code for page 5 in Temporary_development(). Confirm the script by running it from time to time. It will act on the previous opened browser instead of opening a new browser. You can repeat this cycle as many times as you want.
 	*  When you are happy with the code in Temporary_development(), copy it and paste it at the end of Already_complete_works(). Then delete the Temporary_development() and rerun the whole Already_complete_works() to double check your complete script.
 
-## Dynamic Contents
+## Use Dynamic Contents
+* Okapi introduces Dynamic Contents concept to promote code reusability. The main class in Okapi is TestObject class which implements ITestObject interface. Each TestObject object can represent any of multiple web elements on a web page. 
+
+* For instance, the xpath "//span[label[text()='First Name']]/input" points to the First Name text box; and "//span[label[text()='Last Name']]/input" points to the Last Name text box. 
+
+* You can always write code as below
+
+````
+ITestObject firstNameTextBox = "//span[label[text()='First Name']]/input".GetTestObject();
+ITestObject lastNameTextBox = "//span[label[text()='Last Name']]/input".GetTestObject();
+firstNameTextBox.SendKeys("John");
+lastNameTextBox.SendKeys("Doe");
+````
+
+* However, these 2 xpaths are very similar, so we can do a bit better with Okapi dynamic contents
+
+````
+ITestObject genericTextBox = "//span[label[text()='{0}']]/input".GetTestObject(); //{0} is a single dynamic content
+genericTextBox.SetDynamicContent("First Name").SendKeys("John");
+genericTextBox.SetDynamicContent("Last Name").SendKeys("Doe");
+````
+
+* With Okapi search by anchors, there can be dynamic contents in parent anchor, in anchor, and/or in search parts. Therefore, Okapi has the following methods:
+	* SetAnchorDynamicContents(params string[] dynamicContents)
+	* SetParentAnchorDynamicContents(params string[] dynamicContents)
+	* SetSearchElementDynamicContents(params string[] dynamicContents)
+	
+````
+"anchor <h2> `{0}` search <span> `Add Student`".GetTestObject().SetAnchorDynamicContents("Create Student Profile").Click();
+````
+
+* In the above example, there is only dynamic contents for anchor. So you can use SetDynamicContents() instead. Okapi is smart enough to set it for anchor. 
+
+* When there are dynamic contents for more than one parts (i.e. for both anchor and search, or parent and anchor, etc.), SetDynamicContents() will always set for anchor.
+
+* In the above example, there is only dynamic contents. So you can set dynamic contents within GetTestObject() as well to be short.
+
+````
+"anchor <h2> `{0}` search <span> `Add Student`".GetTestObject("Create Student Profile").Click();
+````
+
 
 # Advanced Usage
 ## Get text of a cell in a table
