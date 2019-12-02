@@ -352,7 +352,7 @@ public static void Select_city_names(params string[] cityNames)
     string cityNameCheckBox = "anchor <span> `{0}` search <li>";
     
     cityNameCheckBox.GetTestObject().ForEach(cityNames,
-    (obj, item) => obj.SetAnchorDynamicContents(item)
+    (self, item) => self.SetAnchorDynamicContents(item)
     .OnTrue(x => !x.TryGetAttribute("class", 0.5).Contains("ui-checkbox-selected")).Click());
     
     TestReport.Report();
