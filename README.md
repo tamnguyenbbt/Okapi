@@ -393,5 +393,5 @@ public static void Set_my_counter(int setCount)
 	- If numberOfClicksToPerform > 0, For() will repeat the click by numberOfClicksToPerform times.
 	- Click(false) will click without retries
 	- OnTrue(numberOfClicksToPerform < 0) to make sure when numberOfClicksToPerform = 0, do nothing. This is optional.
-	- FilterByScreenDistance(1). By default the physical distances from the top left of 'My Counter' label to the top left of each arrow will be calculated and the shortest will be considered. In this case the top arrow has shortest physical distance to that label (order 0).  To access to the down arrow, FilterByScreenDistance(1) will set to get the second shortest distance (order 1).
+	- FilterByScreenDistance(1). By default the physical distances from the top left of 'My Counter' label to the top left of each arrow will be calculated and the shortest will be considered. In this case the up arrow has shortest physical distance to that label (order 0).  To access to the down arrow, FilterByScreenDistance(1) will set to get the second shortest distance (order 1).
 	- Math.Abs(numberOfClicksToPerform) to change from nagative number to positive number before passing to For() for repeating.
