@@ -358,3 +358,40 @@ public static void Select_city_names(params string[] cityNames)
     TestReport.Report();
 }
 ````
+
+
+### 2. Example 2: working with a counter
+* Imagine there is a counter on a web page. The counter includes a text box displaying an integer number, which can be negative, zero or positive integer number. There are an up arrow and a down arrow right next to the text box. The up arrow is on top of the down arrow. When users perform a click on the up arrow, the number in the text box increases by 1. Similarly, a click on a down arrow decreases that number by 1.
+
+* The text box is structured by html tag 'input' and has a label 'My Counter' next to it.
+
+* Each of the arrows has html structure as '//p-arrow/div/button/span'
+
+* With Okapi lambda functions you can write the code as below to be reusable and be driven by test data.
+
+````
+[Step]
+public static void Set_my_counter(int setCount)
+{
+    string counterTextBox = "anchor `My Counter` search <input>";
+    string counterControlArrow = "anchor `My Counter` search <p-arrow>div>button>span>";
+    
+    string currentCountString = counterTextBox.Text;
+    int currentCount = string.IsNullOrWhiteSpace(currentCountString) ? 0 : int.Parse(currentCountString);
+    
+    int numberOfClicksToPerform = setCount - currentCount;
+    
+    counterControlArrow.GetTestObject().Run(numberOfClicksToPerform > 0,
+    self => self.For(numberOfClicksToPerform, x => x.Click(false)),
+    self =>self.OnTrue(numberOfClicksToPerform < 0).FilterByScreenDistance(1).For(Math.Abs(numberOfClicksToPerform), x =>                   x.Click(false)));
+		
+    TestReport.Report();
+}
+````
+
+* Explain:
+	- If numberOfClicksToPerform > 0, For() will repeat the click by numberOfClicksToPerform times.
+	- Click(false) will click without retries
+	- OnTrue(numberOfClicksToPerform < 0) to make sure when numberOfClicksToPerform = 0, do nothing. This is optional.
+	- FilterByScreenDistance(1). By default the physical distances from the top left of 'My Counter' label to the top left of each arrow will be calculated and the shortest will be considered. In this case the top arrow has shortest physical distance to that label (order 0).  To access to the down arrow, FilterByScreenDistance(1) will set to get the second shortest distance (order 1).
+	- Math.Abs(numberOfClicksToPerform) to change from nagative number to positive number before passing to For() for repeating.
