@@ -437,7 +437,7 @@ genericTextBox.SetDynamicContents("lastNameId").SendKeys("Doe");
 </div>
 ````
 
-it will understand the same for all these below lines:
+it will do the same task for all these below lines:
 
 ````
 "div[label[text='First Name']]/input".GetTestObject().SendKeys("John");
