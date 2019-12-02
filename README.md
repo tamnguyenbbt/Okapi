@@ -373,7 +373,7 @@ public static void Select_city_names(params string[] cityNames)
 [Step]
 public static void Set_my_counter(int setCount)
 {
-    string counterTextBox = "anchor `My Counter` search <input>";
+    ITestObject counterTextBox = "anchor `My Counter` search <input>".GetTestObject();
     string counterControlArrow = "anchor `My Counter` search <p-arrow>div>button>span>";
     
     string currentCountString = counterTextBox.Text ?? counterTextBox.Value;
