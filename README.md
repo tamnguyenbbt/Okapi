@@ -383,7 +383,7 @@ public static void Set_my_counter(int setCount)
     
     counterControlArrow.GetTestObject().Run(numberOfClicksToPerform > 0,
     self => self.For(numberOfClicksToPerform, x => x.Click(false)),
-    self =>self.OnTrue(numberOfClicksToPerform < 0).FilterByScreenDistance(1).For(Math.Abs(numberOfClicksToPerform), x =>                   x.Click(false)));
+    self =>self.OnTrue(numberOfClicksToPerform < 0).FilterByScreenDistance(1).For(Math.Abs(numberOfClicksToPerform), x =>     x.Click(false)));
 		
     TestReport.Report();
 }
