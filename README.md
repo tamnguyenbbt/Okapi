@@ -374,14 +374,14 @@ public static void Select_city_names(params string[] cityNames)
 public static void Set_my_counter(int setCount)
 {
     ITestObject counterTextBox = "anchor `My Counter` search <input>".GetTestObject();
-    string counterControlArrow = "anchor `My Counter` search <p-arrow>div>button>span>";
+    ITestObject counterControlArrow = "anchor `My Counter` search <p-arrow>div>button>span>".GetTestObject();
     
     string currentCountString = counterTextBox.Text ?? counterTextBox.Value;
     int currentCount = string.IsNullOrWhiteSpace(currentCountString) ? 0 : int.Parse(currentCountString);
     
     int numberOfClicksToPerform = setCount - currentCount;
     
-    counterControlArrow.GetTestObject().Run(numberOfClicksToPerform > 0,
+    counterControlArrow.Run(numberOfClicksToPerform > 0,
     self => self.For(numberOfClicksToPerform, x => x.Click(false)),
     self => self.OnTrue(numberOfClicksToPerform < 0).FilterByScreenDistance(1).For(Math.Abs(numberOfClicksToPerform), x => x.Click(false)));
 		
