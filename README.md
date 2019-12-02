@@ -341,7 +341,7 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 ### 1. Example 1: working with multiple text boxes having similar characteristics
 * Imagine there is a web page which has multiple text boxes with similar html structures and we need to fill up these text boxes with test data. When a piece of data for a text box is null, does nothing for that text box. Each text box has a label next to it.
 
-* We need to write reusable code with test data driven capability so we can use this code to test the page with possitive test cases and nagative test cases, driven by test data.
+* We need to write reusable code with test data driven capability so we can use this block of code, a method, to test the page with both possitive test cases and negative test cases, driven by test data.
 
 * With Okapi lambda functions you can write the code as below:
 
