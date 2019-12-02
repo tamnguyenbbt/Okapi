@@ -420,6 +420,39 @@ genericTextBox.SetDynamicContents("lastNameId").SendKeys("Doe");
 ````
 
 
+## Use locating string
+
+* There are traditional ways to locate a web element by a locating string within Okapi. But the easier way is as the example below
+
+````
+"<button> `Cancel`".GetTestObject().Click();
+````
+
+* Okapi is smart in a way that it predicts what you are trying to tell it. For instance, in html you have 
+
+````
+<div> 
+	<label id = 'ui-label-unique-id'>First Name</label>
+	<input class="ui-textbox-unique" id='firstNameId'
+</div>
+````
+
+it will understand the same for all these below lines:
+
+````
+"div[label[text='First Name']]/input".GetTestObject().SendKeys("John");
+"xpath `div[label[text='First Name']]/input`".GetTestObject().SendKeys("John");
+"id `firstNameId`".GetTestObject().SendKeys("John");
+"`firstNameId`".GetTestObject().SendKeys("John");
+"firstNameId".GetTestObject().SendKeys("John");
+"classname `ui-textbox-unique`".GetTestObject().SendKeys("John");
+"class `ui-textbox-unique`".GetTestObject().SendKeys("John");
+"`ui-textbox-unique`".GetTestObject().SendKeys("John");
+"ui-textbox-unique".GetTestObject().SendKeys("John");
+"anchor `ui-label-unique-id` search <input>".GetTestObject().SendKeys("John");
+````
+
+
 # Advanced Usage
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
