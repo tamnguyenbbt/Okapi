@@ -323,10 +323,39 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 * A line of code to enter a text "John" to First name text box
 	* ````"<input> `first name`".GetTestObject().SendKeys("John");````
 
+## Continue with the browser session opened from the previous test execution
+* Imagine your test case has to test a chain of web pages, say 5 pages. So far you have already automated for the first 4 pages and you are now working on scripting for the last page, page 5. While scripting page 5, you have to run the test from time to time to see if what you have scripted is correct. 
+
+* With Selenium, it is very annoying that to check what happens on page 5 and you have to run the test from beginning which starts to interact with page 1, then moving to page 2, and so on. This is time wasting.
+
+* Okapi allows you to run the test going through from page 1 to 4 then stop your test but not closing the browser. ANd while scripting page 5, you can always run the test to confirm what you have done on page 5 is correct. BUT you run on the previous opened browser which stays at page 4.
+
+````
+[Test]
+public void Already_complete_works()
+{
+     DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+     .....// your code to interact with page 1 to 4 here
+}
+
+[Test]
+public void Temporary_development()
+{
+     DriverPool.Instance.CreateReusableDriverFromLastRun();
+     .....// your code to interact with page 5 here
+}
+````
+
+* How to use:
+- Run Already_complete_works() test; then stop it; not closing the browser opened by it. The browser will land at page 4 at end of the this test.
+- Start to code for page 5 in Temporary_development(). Confirm the script by running it from time to time. It will act on the previous opened browser instead of opening a new browser. You can repeat this cycle as many times as you want.
+- When you are happy with the code in Temporary_development(), copy it and paste it at the end of Already_complete_works(). Then delete the Temporary_development() and rerun the whole Already_complete_works() to double check your complete script.
+
 
 # Advanced Usage
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
+
 * There are multiple ways to do that in Okapi. Below is code demonstrate one way to do that. 
 	* ````ITestObject row = "anchor `{0}` search <tr>".GetTestObject("12345678"); //12345678 is student id````
 	* ````int precedingRowCount = row.PrecedingSibling.ElementCount;```` --> get the number of rows above the row with student id above
