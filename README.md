@@ -338,7 +338,37 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 		
 ## Usage of Okapi lambda functions
 
-### 1. Example 1: working with table
+### 1. Example 1: working with multiple text boxes with similar characteristics
+* Imagine there is a web page which has multiple text boxes with similar html structures and we need to fill up these text boxes with test data. When a piece of data for a text box is null, does nothing for that text box. Each text box has a label next to it.
+
+* We need to write reusable code with test data driven capability so we can use this code to test the page with possitive test cases and nagative test cases, driven by test data.
+
+* With Okapi lambda functions you can write the code as below:
+
+````
+[Step]
+public static void Fill_up_client_profile_information(IList<string> labels, IList<string> testData)
+{
+    string genericTextBox  = "parent <h2> `Create client profile` anchor <label> `{0}` search <input>";
+    
+    genericTextBox
+    .GetTestObject()
+    .For(labels.Count, 
+    (self, index) => self.OnNotNull(testData[index]).SetAnchorDynamicContents(labels[index]).Clear().SendKeys(testData[index]));
+    
+    TestReport.Report();
+}
+````
+
+* For instance, when we want to fill up First Name, Last Name, but not Date of Birth, we can call:
+
+````
+IList<string> labels = new List<string> { "First Name", "Last Name", "Date of Birth" };
+IList<string> testData = new List<string> { "John", "Doe", null };
+FFill_up_client_profile_information(labels, testData);	
+````
+
+### 2. Example 2: working with table
 * Imagine there is city table on a web page of a tourism website, each row starting with a checkbox and then city name. You want to select multiple city names by sticking the checkboxes. If a city name has been already selected, you want to bypass clicking on the associated checkbox because doing that will de-select the city name, which is not what you want to do.
 
 * Each checkbox is structured by a 'li' html tag and each city name is structured by a 'span' html tag. The 'li' tag has attribute 'class'. When a checkbox is selected, this attribute has a new value 'ui-checkbox-selected'. When it is not selected, this value is gone.
@@ -360,7 +390,7 @@ public static void Select_city_names(params string[] cityNames)
 ````
 
 
-### 2. Example 2: working with a counter
+### 3. Example 3: working with a counter
 * Imagine there is a counter on a web page. The counter includes a text box displaying an integer number, which can be negative, zero or positive integer number. There are an up arrow and a down arrow right next to the text box. The up arrow is on top of the down arrow. When users perform a click on the up arrow, the number in the text box increases by 1. Similarly, a click on a down arrow decreases that number by 1.
 
 * The text box is structured by html tag 'input' and has a label 'My Counter' next to it.
