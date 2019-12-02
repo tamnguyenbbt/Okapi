@@ -365,12 +365,29 @@ firstNameTextBox.SendKeys("John");
 lastNameTextBox.SendKeys("Doe");
 ````
 
+Or by id
+
+````
+ITestObject firstNameTextBox = "id `firstNameId`".GetTestObject();
+ITestObject lastNameTextBox = "id `lastNameId`".GetTestObject();
+firstNameTextBox.SendKeys("John");
+lastNameTextBox.SendKeys("Doe");
+````
+
 * However, these 2 xpaths are very similar, so we can do a bit better with Okapi dynamic contents. TestObject will switch the context based on the dynamic content values to locate the expected web element for you.
 
 ````
 ITestObject genericTextBox = "//span[label[text()='{0}']]/input".GetTestObject(); //{0} is a single dynamic content
 genericTextBox.SetDynamicContents("First Name").SendKeys("John");
 genericTextBox.SetDynamicContents("Last Name").SendKeys("Doe");
+````
+
+or by id
+
+````
+ITestObject genericTextBox = "id `{0}`".GetTestObject();
+genericTextBox.SetDynamicContents("firstNameId").SendKeys("John");
+genericTextBox.SetDynamicContents("lastNameId").SendKeys("Doe");
 ````
 
 * With Okapi search by anchors, there can be dynamic contents in parent anchor, in anchor, and/or in search parts. Therefore, Okapi has the following methods for search by anchors:
