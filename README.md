@@ -398,6 +398,10 @@ genericTextBox.SetDynamicContents("Last Name").SendKeys("Doe");
 
 * When there are more than one dynamic contents within, i.e. an xpath or a part of search by anchors locating string, the format starts from 0, `{0}`, `{1}` and so on.
 
+````
+"anchor <h2> `{0} {1}` search <span> `Add Student`".GetTestObject("Create", "Student Profile").Click();
+````
+
 
 # Advanced Usage
 ## Get text of a cell in a table
