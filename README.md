@@ -376,7 +376,7 @@ public static void Set_my_counter(int setCount)
     string counterTextBox = "anchor `My Counter` search <input>";
     string counterControlArrow = "anchor `My Counter` search <p-arrow>div>button>span>";
     
-    string currentCountString = counterTextBox.Text;
+    string currentCountString = counterTextBox.Text ?? counterTextBox.Value;
     int currentCount = string.IsNullOrWhiteSpace(currentCountString) ? 0 : int.Parse(currentCountString);
     
     int numberOfClicksToPerform = setCount - currentCount;
