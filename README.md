@@ -328,7 +328,7 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 
 * With Selenium, it is very annoying that to check what happens on page 5 and you have to run the test from beginning which starts to interact with page 1, then moving to page 2, and so on. This is time wasting.
 
-* Okapi allows you to run the test going through from page 1 to 4 then stop your test but not closing the browser. ANd while scripting page 5, you can always run the test to confirm what you have done on page 5 is correct. BUT you run on the previous opened browser which stays at page 4.
+* Okapi allows you to run the test going through from page 1 to 4 then stop your test but not closing the browser. And while scripting page 5, you can always run the test to confirm what you have done on page 5 is correct. BUT you run on the previous opened browser which stays at page 4.
 
 ````
 [Test]
@@ -347,9 +347,9 @@ public void Temporary_development()
 ````
 
 * How to use:
-- Run Already_complete_works() test; then stop it; not closing the browser opened by it. The browser will land at page 4 at end of the this test.
-- Start to code for page 5 in Temporary_development(). Confirm the script by running it from time to time. It will act on the previous opened browser instead of opening a new browser. You can repeat this cycle as many times as you want.
-- When you are happy with the code in Temporary_development(), copy it and paste it at the end of Already_complete_works(). Then delete the Temporary_development() and rerun the whole Already_complete_works() to double check your complete script.
+	* - Run Already_complete_works() test; then stop it; not closing the browser opened by it. The browser will land at page 4 at end of the this test.
+	* - Start to code for page 5 in Temporary_development(). Confirm the script by running it from time to time. It will act on the previous opened browser instead of opening a new browser. You can repeat this cycle as many times as you want.
+	* - When you are happy with the code in Temporary_development(), copy it and paste it at the end of Already_complete_works(). Then delete the Temporary_development() and rerun the whole Already_complete_works() to double check your complete script.
 
 
 # Advanced Usage
