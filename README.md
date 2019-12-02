@@ -369,11 +369,11 @@ lastNameTextBox.SendKeys("Doe");
 
 ````
 ITestObject genericTextBox = "//span[label[text()='{0}']]/input".GetTestObject(); //{0} is a single dynamic content
-genericTextBox.SetDynamicContent("First Name").SendKeys("John");
-genericTextBox.SetDynamicContent("Last Name").SendKeys("Doe");
+genericTextBox.SetDynamicContents("First Name").SendKeys("John");
+genericTextBox.SetDynamicContents("Last Name").SendKeys("Doe");
 ````
 
-* With Okapi search by anchors, there can be dynamic contents in parent anchor, in anchor, and/or in search parts. Therefore, Okapi has the following methods:
+* With Okapi search by anchors, there can be dynamic contents in parent anchor, in anchor, and/or in search parts. Therefore, Okapi has the following methods for search by anchors:
 	* SetAnchorDynamicContents(params string[] dynamicContents)
 	* SetParentAnchorDynamicContents(params string[] dynamicContents)
 	* SetSearchElementDynamicContents(params string[] dynamicContents)
@@ -386,11 +386,17 @@ genericTextBox.SetDynamicContent("Last Name").SendKeys("Doe");
 
 * When there are dynamic contents for more than one parts (i.e. for both anchor and search, or parent and anchor, etc.), SetDynamicContents() will always set for anchor.
 
-* In the above example, there is only dynamic contents. So you can set dynamic contents within GetTestObject() as well to be short.
+````
+"anchor <h2> `{0}` search <span> `{0}`".GetTestObject().SetDynamicContents("Create Student Profile").SetSearchElementDynamicContents("Add Student").Click();
+````
+
+* In the above example, there is dynamic contents for only one part. So you can set dynamic contents within GetTestObject() as well to be short.
 
 ````
 "anchor <h2> `{0}` search <span> `Add Student`".GetTestObject("Create Student Profile").Click();
 ````
+
+* When there are more than one dynamic contents within, i.e. an xpath or a part of search by anchor locating string, the format starts from 0, `{0}`, `{1}` and so on.
 
 
 # Advanced Usage
