@@ -433,7 +433,7 @@ genericTextBox.SetDynamicContents("lastNameId").SendKeys("Doe");
 ````
 <div> 
 	<label id = 'ui-label-unique-id'>First Name</label>
-	<input class="ui-textbox-unique" id='firstNameId'>
+	<input class="ui-textbox-unique ui-generic" id='firstNameId'>
 </div>
 ````
 
