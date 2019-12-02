@@ -365,7 +365,7 @@ firstNameTextBox.SendKeys("John");
 lastNameTextBox.SendKeys("Doe");
 ````
 
-* However, these 2 xpaths are very similar, so we can do a bit better with Okapi dynamic contents
+* However, these 2 xpaths are very similar, so we can do a bit better with Okapi dynamic contents. TestObject will switch the context based on the dynamic content values to locate the expected web element for you.
 
 ````
 ITestObject genericTextBox = "//span[label[text()='{0}']]/input".GetTestObject(); //{0} is a single dynamic content
@@ -396,7 +396,7 @@ genericTextBox.SetDynamicContents("Last Name").SendKeys("Doe");
 "anchor <h2> `{0}` search <span> `Add Student`".GetTestObject("Create Student Profile").Click();
 ````
 
-* When there are more than one dynamic contents within, i.e. an xpath or a part of search by anchor locating string, the format starts from 0, `{0}`, `{1}` and so on.
+* When there are more than one dynamic contents within, i.e. an xpath or a part of search by anchors locating string, the format starts from 0, `{0}`, `{1}` and so on.
 
 
 # Advanced Usage
