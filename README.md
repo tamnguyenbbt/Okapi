@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.7.1
-* Install-Package Okapi -Version 1.7.1
+* https://www.nuget.org/packages/Okapi/1.7.3
+* Install-Package Okapi -Version 1.7.3
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -262,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.7.1** released on 04/12/2019
+* Version **1.7.3** released on 06/12/2019
 
 ## Author
 ###  **Tam Nguyen**
@@ -451,6 +451,8 @@ it will do the same task for all these below lines:
 "ui-textbox-unique".GetTestObject().SendKeys("John");
 "anchor `ui-label-unique-id` search <input>".GetTestObject().SendKeys("John");
 ````
+
+## To be added ...
 
 
 # Advanced Usage
