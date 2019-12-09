@@ -557,7 +557,42 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 * When you run your tests for the first times, this file is updated with the outcomes calculated by search by anchors. For the future test executions, Okapi will look up this file for cached information. If not found or the found information for an action becomes obsolete due to the web page having changed so making the action failed, it will automatically do search by anchors calculation, delete the existing information from the file and add the new outcome to the file. If you want to have a fresh cache again, you can delete the file.
 
 
+## Working with drivers/browsers
 
+* With Okapi, drivers are managed in the back-ground and named ManagedDriver which implements IManagedDriver interface. Users do not need to refer to a driver for every action like in Selenium, making it easier for users to focus on the business rules of the test scenario, cutting over-heads in code. A ManagedDriver object is one-one mapped to a browser.
+
+* Managed drivers are created, stored and deleted in a pool. The only times users have to deal with a driver is when launching a page and when quiting a driver.
+
+````
+  DriverPool.Instance.ActiveDriver.LaunchPage("http://www.google.com");
+````
+
+or 
+
+````
+  IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage(testData.Url);
+````
+
+````
+	DriverPool.Instance.QuitAllDrivers();
+	DriverPool.Instance.QuitActiveDriver();
+	DriverPool.Instance.Quit(driver);
+	DriverPool.Instance.QuitAllExceptActiveDriver();
+````
+
+* When a test script needs to deal with more than one browsers, you can create new drivers in your test scripts with **CreateDriver(bool setAsActive = true)** method
+
+````
+	IManagedDriver newDriver = DriverPool.Instance.CreateDriver(); //by default the newly created driver will be set as active, pushing the current one into inactive queue
+````
+	
+* To set a driver as active
+
+````
+DriverPool.Instance.ActiveDriver = driver as ManagedDriver;
+````
+
+* After a driver is set active, all the actions will be performed on that driver.
 
 # Advanced Usage
 ## Get text of a cell in a table
