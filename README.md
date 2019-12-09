@@ -486,6 +486,21 @@ Info info = "<p-listboxitem/li/span>".GetTestObject().Info;
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Info.png)
 
 
+## Use FilterByScreenDistance()
+* Okapi's search by anchors core algorithm is sophisticated but the basic for most of the common cases is:
+	* It gets web elements having the shortest Document Object Model (DOM) from the anchor
+	* Then it tries to filter out the ones having the larger loops in DOM 
+	* Then it picks the ones with the shortest physical distance on screen. And these are the ones returned to your tests by Okapi.
+	
+* There are cases you don't want just to get/perform action on the elements with the shortest physical distance on screen. **FilterByScreenDistance(params int[] distanceOrders)** help you to control in this case. Order 0 is for the shortest distance, order 1 is for the second shortest distance, and so on.
+
+* Example:
+````
+"anchor `Month` Search <p-dropdown>div>div>span>".GetTestObject().FilterByScreenDistance(1).Click();
+````
+
+* Check out ITestObject for more methods related to screen distances.
+
 # Advanced Usage
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
