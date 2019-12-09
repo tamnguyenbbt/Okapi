@@ -457,22 +457,30 @@ it will do the same task for all these below lines:
 
 * Similarly, for example, if 2 elements found, they will be indexed as 0 and 1. If you try to set index as 2 or higher, it will be brought down automatically to 1.
 
-* A common usage of SetElementIndex() is when you have a dropdown with multiple items. You can use SetDynamicContents() as discussed above or SetElementIndex().
+* A common usage of SetElementIndex() is when you have a dropdown, a list box or a menu with multiple items. You can use SetDynamicContents() as discussed above or SetElementIndex().
 
 * Example:
- 	* There is a dropdown. Each of its items can be located via the xpath "//p-dropdownitem/li/span[x]" where x = 0, 1, 2,... where 0 gets the first item, 1 gets the second and so on.
+ 	* There is a list box. Each of its items can be located via the xpath "//p-listboxitem/li/span[x]" where x = 0, 1, 2,... where 0 gets the first item, 1 gets the second and so on.
 	* In Okapi you can do the following to click the second item, all producing the same outcome
 	````
-	"//p-dropdownitem/li/span".GetTestObject().SetElementIndex(1).Click(); //using xpath
-	"search <p-dropdownitem/li/span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
-	"search <p-dropdownitem>li>span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
-	"<p-dropdownitem>li>span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
-	"<p-dropdownitem/li/span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
-	"<p-dropdownitem/li/span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
-	"<p-dropdownitem>li>span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
-	"search <p-dropdownitem>li>span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
-	"search <p-dropdownitem/li/span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
+	"//p-listboxitem/li/span".GetTestObject().SetElementIndex(1).Click(); //using xpath
+	"search <p-listboxitem/li/span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
+	"search <p-listboxitem>li>span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
+	"<p-listboxitem>li>span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
+	"<p-listboxitem/li/span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
+	"<p-listboxitem/li/span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
+	"<p-listboxitem>li>span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
+	"search <p-listboxitem>li>span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
+	"search <p-listboxitem/li/span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
 	````
+## Use Info class
+* To check if the details of the web elements pointed to by a TestObject, Info class is helful. It can be used to help you make decision on what element index to be passed to SetElementIndex().	
+
+* Example:
+````
+Info info = "<p-listboxitem/li/span>".GetTestObject().Info;
+````
+
 
 
 
