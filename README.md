@@ -452,7 +452,28 @@ it will do the same task for all these below lines:
 "anchor `ui-label-unique-id` search <input>".GetTestObject().SendKeys("John");
 ````
 
-## To be added ...
+## Use SetElementIndex()
+* In general, if a TestObject based on a locator returns more than one web elements, SetElementIndex() will narrow down to the web element with the set index. Indexes starts from 0. And when not set, index 0 is used by default. When one web element is found, index 0 is always used even if you try to set index more than 0.
+
+* Similarly, for example, if 2 elements found, they will be indexed as 0 and 1. If you try to set index as 2 or higher, it will be brought down automatically to 1.
+
+* A common usage of SetElementIndex() is when you have a dropdown with multiple items. You can use SetDynamicContents() as discussed above or SetElementIndex().
+
+* Example:
+ 	* There is a dropdown. Each of its items can be located via the xpath "//p-dropdownitem/li/span[x]" where x = 0, 1, 2,... where 0 gets the first item, 1 gets the second and so on.
+	* In Okapi you can do the following to click the second item, all producing the same outcome
+	````
+	"//p-dropdownitem/li/span".GetTestObject().SetElementIndex(1).Click(); //using xpath
+	"search <p-dropdownitem/li/span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
+	"search <p-dropdownitem>li>span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
+	"<p-dropdownitem>li>span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
+	"<p-dropdownitem/li/span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
+	"<p-dropdownitem/li/span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
+	"<p-dropdownitem>li>span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
+	"search <p-dropdownitem>li>span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
+	"search <p-dropdownitem/li/span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
+	````
+
 
 
 # Advanced Usage
