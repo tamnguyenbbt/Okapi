@@ -554,7 +554,7 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 
 * To turn on, in app.config add 'cachedObjectRepository ="your file path"'
 
-* When you run your tests for the first times, this file is updated with the outcomes calculated by search by anchors. For the next test executions, Okapi will look up this file for cached information. If not found or failed, it will do search by anchors calculation and update the file. If you want to have a fresh cache again, you can delete the file.
+* When you run your tests for the first times, this file is updated with the outcomes calculated by search by anchors. For the next test executions, Okapi will look up this file for cached information. If not found or the information becomes obsolete due to the web page having changed so making the action failed, it will automatically do search by anchors calculation, delete the existing information from the file and update the file with the new outcome. If you want to have a fresh cache again, you can delete the file.
 
 
 
