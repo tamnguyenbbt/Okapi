@@ -558,6 +558,7 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 
 
 
+
 # Advanced Usage
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
@@ -660,3 +661,30 @@ public static void Set_my_counter(int setCount)
 	- OnTrue(numberOfClicksToPerform < 0) to make sure when numberOfClicksToPerform = 0, do nothing. This is optional.
 	- FilterByScreenDistance(1). By default the physical distances from the top left of 'My Counter' label to the top left of each arrow will be calculated and the shortest will be considered. In this case the up arrow has shortest physical distance to that label (order 0).  To access to the down arrow, FilterByScreenDistance(1) will set to get the second shortest distance (order 1).
 	- Math.Abs(numberOfClicksToPerform) to change from nagative number to positive number before passing to For() for repeating.
+	
+	
+## Check if a checkbox becomes a saved symbol after ticking it
+* There are multiple ways to do this in Okapi. Below is an example showing one way to do it.
+* Imagine there is a checkbox next to a city name label on a web page. When we tick the checkbox, it becomes a saved symbol. We need to check if the checkbox becomes a saved symbol after we click on it. 
+
+````
+ITestObject cityNameLabel = "London".GetTestObject();
+
+ITestObject cityNameCheckBox = cityNameLabel.Parent.PrecedingSibling.Child; //inspect the web page DOM for this; this one pointing to a tooltip and a checkbox.
+
+checkbox.SetElementIndex(1).Click(); //set element index as 1 so pointing to the checkbox instead of the tooltip then click it
+
+//now we don't want to create a new TestObject object with a new locator. We want to use the same checkbox variable.
+KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil(obj
+                => TestExecutor.Any(obj, "saved", (index, element) => { return element.SetElementIndex(index).TryGetText(2); }));
+		
+TestReport.IsTrue(result.Value);
+
+````
+
+* Explain:
+	* 'obj' and 'element' are both the checkbox
+	* 'index' is 1
+	* TestExecutor.Any(...) checks if the element's text becomes 'saved' and returns a boolean value - true/false
+	* After 'checkbox.SetElementIndex(1).Click()', the DOM will be updated and keeps on changing in a short time. So RetryToClearRelationCacheUntil() keeps on clearing the cache for cityNameLabel.Parent.PrecedingSibling.Child relationship until the condition returning by TestExecutor.Any(...) becomes true.
+	* The outcome of RetryToClearRelationCacheUntil() is a key-value pair of checkbox TestObject itself and the boolean value of this TestExecutor.Any(...) check.
