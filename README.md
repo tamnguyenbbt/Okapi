@@ -501,6 +501,45 @@ Info info = "<p-listboxitem/li/span>".GetTestObject().Info;
 
 * Check out ITestObject for more methods related to screen distances.
 
+## Memory Cache
+
+* Okapi TestObject class has a built-in memory caching mechanism to boost performance. It manages the cache automatically in a smart way for most of the case.
+
+* When you use the same variable to store a TestObject object for multiple actions in series then you need to clear the cache manually when you know that DOM has changed since the last action.
+
+* Example: 
+````
+ITestObject saveButton = "Save".GetTestObject().Click();
+....
+// do something so that the web page content is changed
+....
+string disabledAttributeValue = saveButton.ClearCache().GetAttribute("disabled"); //if you don't clear the cache here, saveButton will give you the old information based on the old content of the web page.
+````
+
+* However, if you create a new TestObject instance for every action, nothing is cached
+
+````
+"Save".GetTestObject().Click();
+....
+// do something so that the web page content is changed
+....
+string disabledAttributeValue = "Save".GetTestObject().GetAttribute("disabled");
+````
+
+* Another situation where you need to manually clear cache is as in the below example:
+
+````
+ITestObject studentInfo = "anchor `Student Name` search <span>".GetTestObject();
+ITestObject checkbox = studentInfo.Parent.PrecedingSibling;
+checkbox.Click(); //after this, DOM changes and if want to use checkbox for another action, have to clear cache
+checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advanced usage for this case
+
+````
+	
+
+## File Cache
+
+
 # Advanced Usage
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
