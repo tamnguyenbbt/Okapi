@@ -473,6 +473,8 @@ it will do the same task for all these below lines:
 	"search <p-listboxitem>li>span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
 	"search <p-listboxitem/li/span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
 	````
+	
+	
 ## Use Info class
 * To check if the details of the web elements pointed to by a TestObject, Info class is helful. It can be used to help you make decision on what element index to be passed to SetElementIndex().	
 
@@ -481,7 +483,7 @@ it will do the same task for all these below lines:
 Info info = "<p-listboxitem/li/span>".GetTestObject().Info;
 ````
 
-
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Info.png)
 
 
 # Advanced Usage
