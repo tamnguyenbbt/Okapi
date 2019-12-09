@@ -501,6 +501,7 @@ Info info = "<p-listboxitem/li/span>".GetTestObject().Info;
 
 * Check out ITestObject for more methods related to screen distances.
 
+
 ## Memory Cache
 
 * Okapi TestObject class has a built-in memory caching mechanism to boost performance. It manages the cache automatically in a smart way for most of the case.
@@ -538,6 +539,23 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 	
 
 ## File Cache
+* Okapi's search by anchors requires a lot of calculations and consumes quite a lot of memory and CPU so for some circumstances such as a web page is large, it can be slow. 
+
+* When you see that the action execution is too slow, the best is to improve your locator to help Okapi's search by anchors a bit.
+
+* Example:
+````
+"anchor `Student Name` search <span>" //forces Okapi to work more; imagine there are 1000 span tags in the page, Okapi has to visit them all
+"anchor `Student Name` search <li>div>span>" //Okapi loves this because the locator gives Okapi more information; Okapi has to visit only where there are "//li/div/span" 
+"anchor <label> `Student Name` search <li>div>span>" //Okapi loves this even more
+````
+
+* If your tests rely heavily on search by anchors then, for some particular large web pages, the execution can be slow. File cache can be of help.
+
+* To turn on, in app.config add 'cachedObjectRepository ="your file path"'
+
+* When you run your tests for the first times, this file is updated with the outcomes calculated by search by anchors. For the next test executions, Okapi will look up this file for cached information. If not found or failed, it will do search by anchors calculation and update the file. If you want to have a fresh cache again, you can delete the file.
+
 
 
 # Advanced Usage
