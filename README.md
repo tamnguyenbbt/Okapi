@@ -552,7 +552,7 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 
 * If your tests rely heavily on search by anchors then, for some particular large web pages, the execution can be slow. File cache can be of help.
 
-* To turn on, in app.config add 'cachedObjectRepository ="your file path"'
+* To turn on, in **app.config** add **cachedObjectRepository ="your file path"**
 
 * When you run your tests for the first times, this file is updated with the outcomes calculated by search by anchors. For the future test executions, Okapi will look up this file for cached information. If not found or the found information for an action becomes obsolete due to the web page having changed so making the action failed, it will automatically do search by anchors calculation, delete the existing information from the file and add the new outcome to the file. If you want to have a fresh cache again, you can delete the file.
 
