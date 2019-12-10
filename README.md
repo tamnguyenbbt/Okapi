@@ -594,6 +594,18 @@ DriverPool.Instance.ActiveDriver = driver as ManagedDriver;
 
 * After a driver is set active, all the actions will be performed on that driver.
 
+* With Selenium, everytime a test script is executed, it has to create a new driver. Unlike Selenium, Okapi allows users to reuse an already opened browser from the last run, in the same execution or not in the same execution session.
+
+````
+DriverPool.Instance.CreateReusableDriverFromLastRun();
+````
+
+## Working with windows
+* To be updated
+
+## Working with iframes
+* To be updated
+
 # Advanced Usage
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
