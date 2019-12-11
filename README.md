@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.7.3
-* Install-Package Okapi -Version 1.7.3
+* https://www.nuget.org/packages/Okapi/1.7.4
+* Install-Package Okapi -Version 1.7.4
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -262,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.7.3** released on 06/12/2019
+* Version **1.7.4** released on 11/12/2019
 
 ## Author
 ###  **Tam Nguyen**
@@ -613,11 +613,37 @@ DriverPool.Instance.CreateReusableDriverFromLastRun();
 * There are multiple ways to do that in Okapi. Below is code demonstrate one way to do that. 
 	* ````ITestObject row = "anchor `{0}` search <tr>".GetTestObject("12345678"); //12345678 is student id````
 	* ````int precedingRowCount = row.PrecedingSibling.ElementCount;```` --> get the number of rows above the row with student id above
-	* ````string studentName = "anchor `Student Info` search <table>tr>".GetTestObject().FilterByScreenDistance(precedingRowCount)               .Child.NextSiblingAt(2).ChildAt(2, 0, 2).Text;````
+	* ````string studentName = "anchor `Student Info` search <table>tr>".GetTestObject().FilterByScreenDistance(precedingRowCount)               .Child.NextSiblingAt(2).ChildAt(5).Text;````
 	
 	By default, ````"anchor `Student Info` search <table>tr>".GetTestObject()```` will get the closest row toward the column title 'Student Info' which is the first row in the table. We don't want that to happen. We want to get the row we wanted so we call FilterByScreenDistance(precedingRowCount) which gets row at at distance order 'precedingRowCount' from the column title.
-	Now we are in the row, looking into the DOM a bit and seeing that to go to the student name element we have to call ````Child.NextSiblingAt(2).ChildAt(2, 0, 2)````. 
-		
+	Now we are in the row, looking into the DOM a bit and seeing that to go to the student name element we have to call ````Child.NextSiblingAt(2).ChildAt(5)````. 
+	
+## Working with repeated UI blocks
+* Imagine there is a web page with multiple UI blocks. Each block has a city name and a url link named 'See details' to open up the details about the city.
+
+* We want to check if the city names and the links are correct and also they are arranged properly on the page. With Okapi, it is quite easy to do with very few number of lines of code.
+
+````
+"<h2> `{0}`".GetTestObject().ForEach(new List<string> { "London", "Canberra", "Sydney", "Paris", "New York" },
+                (self, item) =>
+                {
+                    bool cityNameFound = self.SetDynamicContents(item).SingleFound; // check if the city name is found
+                    Point selfLocation = self.Location; //get the city name's location on the web page 
+
+                    ITestObject seeDetailUrl = self.Parent.NextSibling.ChildAt(5); //get 'See details' url element
+                    Point seeDetailUrlLocation = seeDetailUrl.Location;                    
+                    Size seeDetailUrlSize = seeDetailUrl.Size;
+		    
+		    //Assertions
+                    TestReport.IsTrue(cityNameFound);
+                    TestReport.AreEqual("See Details", seeDetailUrl.Text);
+                    TestReport.AreEqual(500, selfLocation.X);
+                    TestReport.AreEqual(500, seeDetailUrlLocation.X);
+                    TestReport.AreEqual(50, seeDetailUrlLocation.Y - selfLocation.Y);
+                    TestReport.AreEqual(100, seeDetailUrlSize.Width);
+                    TestReport.AreEqual(20, seeDetailUrlSize.Height);
+                });
+````
 		
 ## Usage of Okapi lambda functions
 
@@ -727,6 +753,17 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 		
 TestReport.IsTrue(result.Value);
 
+````
+
+* Other ways, which are a bit shorter: 
+````
+KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil(obj
+                => TestExecutor.Any(obj, "lock", element => { return element.TryGetText(2); }));
+````
+
+````
+KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil(obj
+                => { return obj.TryGetText(2) == "lock"; });
 ````
 
 * Explain:
