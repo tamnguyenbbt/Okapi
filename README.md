@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.8.0
-* Install-Package Okapi -Version 1.8.0
+* https://www.nuget.org/packages/Okapi/1.8.1
+* Install-Package Okapi -Version 1.8.1
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -262,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.8.0** released on 16/12/2019
+* Version **1.8.1** released on 17/12/2019
 
 ## Author
 ###  **Tam Nguyen**
@@ -735,6 +735,38 @@ public static void Set_my_counter(int setCount)
 	- FilterByScreenDistance(1). By default the physical distances from the top left of 'My Counter' label to the top left of each arrow will be calculated and the shortest will be considered. In this case the up arrow has shortest physical distance to that label (order 0).  To access to the down arrow, FilterByScreenDistance(1) will set to get the second shortest distance (order 1).
 	- Math.Abs(numberOfClicksToPerform) to change from nagative number to positive number before passing to For() for repeating.
 	
+	
+### 4. Example 4: working with a combo box
+* Imagine there is city combo box where each list item contains a city label and a checkbox. Users are allowed to select multiple cities by ticking on multiple checkboxes. The cities selected will be displayed on the top input area of the combo box horizontally.
+
+* We want to select some cities and check if they are displayed correctly on the input area.
+
+````
+List<string> visitingCities = new List<string> { "Lodon", "Philadelphia", "Paris" };
+
+ITestObject dropdownSelector = "anchor `Visiting Cities` search <multiselect/div/div/span>".GetTestObject();   
+    
+ITestObject checkbox = "parent `Visiting Cities` anchor `{0}` <multiselectitem>li>span> search <multiselectitem>li>div>div>".GetTestObject();
+
+ITestObject displayedCityNames = "anchor `Visiting Cities` search <multiselect/div/div/div/div/div>".GetTestObject();
+    
+dropdownSelector.Click();
+    
+checkbox.ForEach(visitingCities, (self, item) => self.SetAnchorDynamicContents(item).RetryToClickUntilAttributeValueContains("class", "state-active"));    
+// if ticked, 'state-active' will be added to the class attribute value 
+            
+displayedCityNames.FilterByScreenDistance(0, 1, 2).ForEach(visitingCities, (self, item, index) =>
+{
+      string displayedCityName = self.SetElementIndex(index).Text;
+      TestReport.AreEqual(item, displayedCityName);
+});  
+// The selected cities will be displayed as 'London Philadelphia Paris'  
+// order 0 is the distance from the label 'Visiting Cities' to the displayed text 'London'
+// order 1 is the distance from the label 'Visiting Cities' to the displayed text 'Philadelphia'
+// order 2 is the distance from the label 'Visiting Cities' to the displayed text 'Paris'
+````
+
+
 	
 ## Check if a checkbox becomes a saved symbol after ticking it
 * There are multiple ways to do this in Okapi. Below is an example showing one way to do it.
