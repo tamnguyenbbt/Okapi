@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.8.1
-* Install-Package Okapi -Version 1.8.1
+* https://www.nuget.org/packages/Okapi/1.8.2
+* Install-Package Okapi -Version 1.8.2
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -262,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.8.1** released on 17/12/2019
+* Version **1.8.2** released on 18/12/2019
 
 ## Author
 ###  **Tam Nguyen**
@@ -541,7 +541,7 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 ## File Cache
 * Okapi's search by anchors requires a lot of calculations and consumes quite a lot of memory and CPU so for some circumstances such as a web page is large, it can be slow. 
 
-* When you see that the action execution is too slow, the best is to improve your locator to help Okapi's search by anchors a bit.
+* When you see that the search by anchors is too slow, the best is to improve your locator to help Okapi's search by anchors a bit or just use traditional locating methods such as xpath.
 
 * Example:
 ````
@@ -766,6 +766,29 @@ displayedCityNames.FilterByScreenDistance(0, 1, 2).ForEach(visitingCities, (self
 // order 2 is the distance from the label 'Visiting Cities' to the displayed text 'Paris'
 ````
 
+### 5. Example 5: working with paging
+* Imagine there is a web page listing 20 items from top down. At the bottom of the web page, there are page indicator, a next button and a previous button. Clicking on the next button displays the next 20 items.
+
+* We want to click on the next button multiple times until reaching the last items. On each page, perform some actions.
+
+````
+[Step]
+public static void VisitAllPagesAndPerform(Action action)
+{
+    "<a>div> `next-navigate-icon`".GetTestObject().WhileDo(self =>
+    {
+        action();
+        bool found = self.OneFound(5);
+        bool enabled = !"<span>a> `Next Page`".GetTestObject().TryGetAttribute("class").Contains("disabled");
+        return found && enabled;
+     },
+     self >
+     {
+        self.Click();
+        "<div>spinner>progressbar>".GetTestObject().WaitUntilGone();
+     });
+}
+````
 
 	
 ## Check if a checkbox becomes a saved symbol after ticking it
