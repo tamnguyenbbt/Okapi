@@ -600,6 +600,49 @@ DriverPool.Instance.ActiveDriver = driver as ManagedDriver;
 DriverPool.Instance.CreateReusableDriverFromLastRun();
 ````
 
+
+## FileDB
+* Okapi comes with a file database utility called FileDB for users to save and retrieve test data to share between test scripts accross multiple running sessions.
+
+* It allows user to insert, retrieve, update and delete payloads in the form of C# classes, so data is ready to update and use without any transformation.
+
+* Define:
+````
+using Okapi.Utils;
+using Okapi.Utils.DB;
+
+....
+ string dataBasePath = $"{Util.CurrentProjectDirectory}{Util.DirectorySeparatorChar}Database{Util.DirectorySeparatorChar}MyFileDB.db";
+ FileDB fileDB = new FileDB(dataBasePath); 
+````
+
+* Insert
+````
+Student student = new Student();
+long recordId = fileDB.Insert(student, "New Student", "Year 10");
+````
+
+* Retrieval 
+````
+DbObject<Student> studentRecord = fileDB.FindById<Student>(recordId);
+Student payload = studentRecord.Payload;
+payload.Name = "New Name";
+
+studentRecord = fileDB.GetLastInsertedRecordInTheSameExecutionThread<Student>();
+studentRecord = fileDB.GetLastInsertedRecordByStatus<Student>(FileDBSearchMethod.IgnoreCase, "New Student", "year 10);
+````
+
+* Update
+````
+bool success = fileDB.Update(recordId, payload, "Name Changed");
+````
+
+* Delete
+````
+success =fileDB.Delete<Student>(studentRecord.Id);
+````
+
+
 ## Working with windows
 * To be updated
 
