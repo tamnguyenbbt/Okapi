@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.8.2
-* Install-Package Okapi -Version 1.8.2
+* https://www.nuget.org/packages/Okapi/1.8.6
+* Install-Package Okapi -Version 1.8.6
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -44,7 +44,7 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 ## Dependencies
 ### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.1.3)
+* ExtSelenium (>= 1.1.4)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Newtonsoft.Json (>= 12.0.2)
@@ -262,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.8.2** released on 18/12/2019
+* Version **1.8.6** released on 07/01/2020
 
 ## Author
 ###  **Tam Nguyen**
