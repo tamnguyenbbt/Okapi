@@ -649,6 +649,14 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 ## Working with iframes
 * To be updated
 
+## Common TestObject Method References
+* Click -> click on a web element. Check if the web element is ready before clicking. Retry if click does not take effect
+* DoubleClick
+* SendKeys -> input text into a text box or a text area
+* Clear -> clear a text box or a text area
+* ClearAllWithBackspaceKey -> clear a text box or a text area; should be used when Clear does not work for some special web front-end implementations
+* ClearWithBackspaceKey -> clear part of a text box or a text area
+
 # Advanced Usage
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
