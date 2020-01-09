@@ -481,6 +481,7 @@ it will do the same task for all these below lines:
 * Example:
 ````
 Info info = "<p-listboxitem/li/span>".GetTestObject().Info;
+Info info = "<p-listboxitem/li/span>".GetTestObject().QuickInfo; //a less information but less time to calculate
 ````
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Info.png)
@@ -643,11 +644,46 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 ````
 
 
-## Working with windows
+## Work with windows
 * To be updated
 
-## Working with iframes
+## Work with iframes
 * To be updated
+
+## Work with TestExecutor
+* TestExecutor class has methods to help you to perform complex calculations in fewer lines of code
+* Below are some examples
+
+````
+	TestExecutor.Run(HasStudents(), () =>
+        {
+             SelectAllStudent();
+        });
+````
+
+````
+	TestExecutor.Skip(false, () => DriverPool.Instance.QuitActiveDriver()); //change to true to skip the execution of this line
+````
+
+````
+	List<Student> students = studentRecords.Payload.Students;
+	
+	TestExecutor.Loop(students, x =>
+        {
+             TestReport.IsTrue(x.FirstName.GetTestObject().IsDisplayed(5));
+        });
+````
+
+````
+	int studentCount = students.Count;
+	
+	TestExecutor.Loop(students, (i, x) =>
+        {
+             new FileDB(sharedDatabasePath).Insert(x, $"Student {i + 1} of {studentCount}");
+        });
+````
+
+* Please use IDE's intelliSense to find out more methods offered by TestExecutor
 
 ## Common TestObject Method References
 * Click -> click on a web element. Check if the web element is ready before clicking. Retry if click does not take effect
