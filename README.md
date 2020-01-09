@@ -558,7 +558,7 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 * When you run your tests for the first times, this file is updated with the outcomes calculated by search by anchors. For the future test executions, Okapi will look up this file for cached information. If not found or the found information for an action becomes obsolete due to the web page having changed so making the action failed, it will automatically do search by anchors calculation, delete the existing information from the file and add the new outcome to the file. If you want to have a fresh cache again, you can delete the file.
 
 
-## Working with drivers/browsers
+## Work with drivers/browsers
 
 * With Okapi, drivers are managed in the back-ground and named ManagedDriver which implements IManagedDriver interface. Users do not need to refer to a driver for every action like in Selenium, making it easier for users to focus on the business rules of the test scenario, cutting over-heads in code. A ManagedDriver object is one-one mapped to a browser.
 
@@ -651,13 +651,13 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * To be updated
 
 ## Work with TestExecutor
-* TestExecutor class has methods to help you to perform complex calculations in fewer lines of code
+* TestExecutor class has the methods to help you perform complex calculations in fewer lines of code
 * Below are some examples
 
 ````
 	TestExecutor.Run(HasStudents(), () =>
         {
-             SelectAllStudent();
+             SelectAllStudents();
         });
 ````
 
@@ -686,12 +686,30 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * Please use IDE's intelliSense to find out more methods offered by TestExecutor
 
 ## Common TestObject Method References
-* Click -> click on a web element. Check if the web element is ready before clicking. Retry if click does not take effect
+* Click -> clicks on a web element. Checks if the web element is ready before clicking. Retries if the click action does not take effect
 * DoubleClick
-* SendKeys -> input text into a text box or a text area
-* Clear -> clear a text box or a text area
-* ClearAllWithBackspaceKey -> clear a text box or a text area; should be used when Clear does not work for some special web front-end implementations
-* ClearWithBackspaceKey -> clear part of a text box or a text area
+* SendKeys -> inputs text into a text box or a text area
+* Clear -> clears a text box or a text area
+* ClearAllWithBackspaceKey -> clears a text box or a text area; should be used when Clear does not work for some special web front-end implementations
+* ClearWithBackspaceKey -> clears part of a text box or a text area
+* ClickAndHold -> clicks on a web element and holds (left mouse down and hold)
+* ClickHoldAndRelease -> clicks on a web element (left mouse down), holds left mouse down, then releases (left mouse up) after a set amount of time
+* ReleaseMouseClick -> releases mouse click (left mouse up) on the web element represented by TestObject or on the current mouse pointer
+* DragAndDrop -> drags and drops a web element to a specified location or to another specified web element
+* VerticalDragAndDrop -> drags and drops a web element to a specified location vertically
+* HorizontalDragAndDrop -> drags and drops a web element to a specified location horizontally
+* MoveToElement -> sets focus on a web element represented by the TestObject with set element index
+* MoveMousePointer -> moves the mouse pointer to a specified location from the web element represented by TestObject
+* Highlight -> highlights the web element represented by the TestObject
+* ScrollIntoView -> scrolls web page so that the web element represented by TestObject goes into view
+* WaitForAjaxCall -> waits for an ajax call to complete when you know the Url of that Ajax call
+* WaitForAllAjaxCalls -> waits for all ajax calls to complete
+* WaitUntilPageReady -> detects and waits for some common Web UI techniques underneath to finish their works and ajax calls completed 
+* WaitUntilDomToBeStable -> polls to see if the DOM complete loading (i.e. predicts if no more web element is added to DOM)
+* WaitUntilEnabled -> waits until the web element represented by TestObject being unabled. Relies on Selenium so this one does not work for all cases
+* WaitUntilClickable -> waits until the web element represented by TestObject being clickable. Relies on Selenium so this one does not work for all cases
+* WaitUntilVisible -> waits until the web element represented by TestObject being enabled and displayed. Relies on Selenium so this one does not work for all cases
+
 
 # Advanced Usage
 ## Get text of a cell in a table
