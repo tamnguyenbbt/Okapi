@@ -507,13 +507,23 @@ Info info = "<p-listboxitem/li/span>".GetTestObject().QuickInfo; //a less inform
 	
 * There are cases you don't want just to get/perform action on the elements with the shortest physical distance on screen. **FilterByScreenDistance(params int[] distanceOrders)** help you to control in this case. Order 0 is for the shortest distance, order 1 is for the second shortest distance, and so on.
 
-* Example:
+## Control search by anchors' screen distance
+* By default, Okapi returns the web element with the shortest physical distance (screen distance) from the anchor when you perform search by anchors.
+
+* For instance, after applying shortest DOM distance filter, a search returns 10 possible web elements. Okapi then applies shortest screen distance filter on the result and narrows down to 2 web elements which have the same shortest screen distances.
+
+* Users are allowed to ask Okapi not applying shortest screen distance filter by calling method **NoFilterByScreenDistance()**
+
 ````
-"anchor `Month` Search <p-dropdown>div>div>span>".GetTestObject().FilterByScreenDistance(1).Click();
+	ITestObject firstNameTestObject = "anchor <thead>tr>th> `First Name` search <tbody>tr>td>".GetTestObject("First Name");
+	int count = firstNameTestObject.GetTestObject().NoFilterByScreenDistance().TryGetElementCount();
 ````
 
-* Check out ITestObject for more methods related to screen distances.
+This setting has the scope of the test object. In the above example, after calling **NoFilterByScreenDistance()**, there is no screen distance filter applied on firstNameTestObject. If you want to re-apply this shortest screen distance filter, you can call **DefaultFilterByScreenDistance()** on the firstNameTestObject.
 
+* By default, screen distances are measured from TOP LEFT of the anchor element to TOP LEFT of the search elements. Users can change the reference point of the anchor element and/or that of the search elements by calling **FilterByShortestScreenDistance(ReferenceType anchorReferenceType, ReferenceType searchElementReferenceType)**
+
+* **FilterByScreenDistance(params int[] distanceOrders)** has been explained in the previous usage. **FilterByScreenDistance(ReferenceType anchorReferenceType, ReferenceType searchElementReferenceType, params int[] distanceOrders)** can be used to control both the screen distance orders and reference points as well.
 
 ## Memory Cache
 
