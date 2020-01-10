@@ -298,7 +298,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * Anchor - a known web element
 * Search - web element you need to locate
 * Parts - Anchor or Search are made of 2 parts - a tag/css selector; and a text/attribute value. 
-	* tag/css selector format: i.e. ````<div>````, ````<li>div>div>````
+	* tag/css selector format: i.e. ````<div>````, ````<li>div>div>````, or ````<li/div/div>````
 	* text/attribute value format: i.e. `````How are you?`````
 	* One part or two parts can be provided and which part stays first does not matter
 * Sample 
@@ -474,6 +474,18 @@ it will do the same task for all these below lines:
 	"search <p-listboxitem/li/span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
 	````
 	
+## Embedded element index
+* Element index can set via SetElementIndex() or via embedded element index for search by anchor or search by two anchors
+* Embedded element index is the integer number between a opening square bracket and a closing square bracket at the end of search html tag/css selector
+
+Example:
+````
+	"anchor <thead>tr>th> `Name` search <tbody>tr>td[1]>".GetTestObject();
+	"anchor <thead>tr>th> `Name` search <tbody/tr/td[1]>".GetTestObject();
+	"anchor <thead>tr>th> `Name` search <td[1]>".GetTestObject();
+````
+
+Of the found web elements, index 0 gets the first element; index 1 gets the second element, and so on.
 	
 ## Use Info class
 * To check if the details of the web elements pointed to by a TestObject, Info class is helful. It can be used to help you make decision on what element index to be passed to SetElementIndex().	
