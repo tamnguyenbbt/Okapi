@@ -672,7 +672,19 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * To be updated
 
 ## Work with iframes
-* To be updated
+* Okapi.Drivers.ManagedDriver class has methods and properties to deal ith iframes similar to the way Selenium deals with iframes.
+*   	- SwitchToDefaultContent()
+*	- SwitchToParentIFrame()
+*	- SwitchToParentIFrame()
+*   	- SwitchToIFrame(string name) //works only if the frame has a name
+*   	- SwitchToIFrame(int index) //needs to know the hierarchy of frames to figure out relative index
+*       - ActiveFrameName //property to get name, if any, of the active frame
+
+* Properties **InnerIFrames** returns a list of **Frame** objects representing the iframes inside the current html document. Each frame object includes a unique Id (GUID), a frame index (similar to Selenium; users have to switch one by one from top down), attributes within a frame tag, content of a html document which contains this frame, and a list of html documents contained by this frame.
+
+* Okapi's prefered way of managing iframes is to use **Frame** objects. After having the list of **Frame** objects (children, children of children, and so on) via **InnerIFrames** property, users can jump straight to any frame using **JumpToIFrame(Guid id)**.
+
+* When DOM has been changed since the last action, **RefreshInnerIFrames()** returns a list of latest **Frame** objects based on up-to-date DOM.
 
 ## Work with TestExecutor
 * TestExecutor class has the methods to help you perform complex calculations in fewer lines of code
@@ -708,6 +720,13 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 ````
 
 * Please use IDE's intelliSense to find out more methods offered by TestExecutor
+
+## AppConfig class
+* Okapi.Configs.AppConfig.TargetTestEnvironment gets the target environment name set within app.config file
+
+## Util class
+* Okaki.Utils.Util class provides utility properties and methods to be used in test scripts.
+
 
 ## Common TestObject Method References
 * Click -> clicks on a web element. Checks if the web element is ready before clicking. Retries if the click action does not take effect
