@@ -323,6 +323,37 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 4. Example
 	* A line of code to enter a text "John" to First name text box
 		* ````"<input> `first name`".GetTestObject().SendKeys("John");````
+		
+5. Other searches
+	* By xpath 
+		````
+			"xpath `//div/input[text()='First Name']`".GetTestObject(); Or
+			"//div/input[text()='First Name']".GetTestObject();
+		````
+	* By class name
+		````
+			"class `userName`".GetTestObject(); Or
+			"class name `userName`".GetTestObject(); Or
+			"classname `userName`".GetTestObject(); Or
+			"Class `userName`".GetTestObject(); Or
+			"userName".GetTestObject();
+			....
+		````
+	* By link text
+		````
+			"linktext `Student name`".GetTestObject(); Or
+			"link tExt `student name`.GetTestObject(); Or
+			"link `student name`".GetTestObject();
+			....
+			````
+	* By id:
+		````
+			"id `passwordInput`".GetTestObject(); Or
+			"passwordInput".GetTestObject();
+			....
+		````
+			
+	* By other types: partial link text, css selector, etc.: similar syntax
 
 ## Continue with the browser session opened from the previous test execution
 * Imagine your test case has to test a chain of web pages, say 5 pages. So far you have already automated for the first 4 pages and you are now working on scripting for the last page, page 5. While scripting page 5, you have to run the test from time to time to see if what you have scripted is correct. 
@@ -583,6 +614,15 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 * Users can clear this cache for a test object by calling **ClearObjectRepositoryCache()**
 
 * When you work with, say, an html table where you add a new row everytime a test script is run; the added row being based on dynamic test data (i.e. a random date or number); and the locator for this row containing this dynamic data, please be mindful about it. If you cache this test object locator, next executions will get that cached locator which contains the old dynamic data. But you have new test data for every execution. Then the cached xpath does not serve up well. In this situation, you need to force search by anchors engine to delete that cached item and recalculate the locator by calling **ClearObjectRepositoryCache()**
+
+* Example: a table
+	````
+		ITestObject studentRow = "Anchor <thead>tr>th> `Order` search `{0}`".GetTestObject("1").ClearObjectRepositoryCache();
+            	string firstName = studentRow.NextSiblingAt(0).Text;
+            	string lastName = studentRow.NextSiblingAt(1).Text;
+            	string dobString = studentRow.NextSiblingAt(2).Text;
+		DateTime dob = DateTime.ParseExact(dobString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+	````
 
 
 ## Work with drivers/browsers
