@@ -986,7 +986,11 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 	
 	* For instance, in a web page, there is a 'First Name' input box associated with a validation label next to it. When users have not input anything in the input box and clicked Save button, the error message displays otherwise it does not display. The UI developers have decided not to remove the whole XPATH in DOM for that error message when there is no validation error; they have decided just to remove the inner text. So when there is an error, the XPath is **//label[text()='Student Details']/div/span/m-error[text()='First name cannot be empty']"**. And when there is no error the XPath is **//label[text()='Student Details']/div/span/m-error**. 
 	
-	* To search this web element by anchor when there is an error, we use: "anchor <label> `Student Details` search <m-error> `First name cannot be empty`".GetTestObject().
+	* To search this web element by anchor when there is an error, we use: 
+	
+	````
+		"anchor <label> `Student Details` search <m-error> `First name cannot be empty`".GetTestObject();
+	````
 	
 	* Under the unstrict mode, when the search engine finds ONE web element, it associates that web element with **//label[text()='Student Details']/div/span/m-error** to do less calculation. This is enough in most of the cases. And this XPath is saved in File Cache. However, in this example, **//label[text()='Student Details']/div/span/m-error** exists in DOM when there is no validation error. In the next executions, when you try to find the web element associated with the validation error message, **//label[text()='Student Details']/div/span/m-error** is retrieved from File Cache. If you assert to see if the validation error not displayed, the result can be wrong. 
 	
