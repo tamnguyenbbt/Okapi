@@ -618,9 +618,9 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 * Example: a table
 	````
 		ITestObject studentRow = "Anchor <thead>tr>th> `Order` search `{0}`".GetTestObject("1").ClearObjectRepositoryCache();
-            	string firstName = studentRow.NextSiblingAt(0).Text;
-            	string lastName = studentRow.NextSiblingAt(1).Text;
-            	string dobString = studentRow.NextSiblingAt(2).Text;
+            	string firstName = studentRow.NextSiblingAt(0).Value; //input box
+            	string lastName = studentRow.NextSiblingAt(1).Value; //input box
+            	string dobString = studentRow.NextSiblingAt(2).Text; //label
 		DateTime dob = DateTime.ParseExact(dobString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 	````
 
