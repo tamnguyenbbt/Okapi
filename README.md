@@ -291,37 +291,38 @@ Okapi Studio leverages the power of Okapi and has the following base features:
   * Go to Control Panel > System > Advanced system settings > Environment Variables...> System variables > Path
   * Edit and add a new path item pointing to the folder containing chromedriver.exe file 
 * Write a simple unit test using Okapi to test
-  * ````IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");````
+  * ````IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");````  
+* To be a bit more advanched, you might want to set up Selenium grid (hub and nodes) configuration instead. Check out: https://www.guru99.com/introduction-to-selenium-grid.html 
   
 ## Search by anchors syntax
 1. By anchor
-* Anchor - a known web element
-* Search - web element you need to locate
-* Parts - Anchor or Search are made of 2 parts - a tag/css selector; and a text/attribute value. 
-	* tag/css selector format: i.e. ````<div>````, ````<li>div>div>````, or ````<li/div/div>````
-	* text/attribute value format: i.e. `````How are you?`````
-	* One part or two parts can be provided and which part stays first does not matter
-* Sample 
-	* ````"anchor <label> `How are you?` search <button>"````
-	* ````"anchor `How are you?` <label> search <button>"````
+	* Anchor - a known web element
+	* Search - web element you need to locate
+	* Parts - Anchor or Search are made of 2 parts - a tag/css selector; and a text/attribute value. 
+		* tag/css selector format: i.e. ````<div>````, ````<li>div>div>````, or ````<li/div/div>````
+		* text/attribute value format: i.e. `````How are you?````` (in between 2 backticks)
+		* One part or two parts can be provided and which part stays first does not matter
+	* Sample 
+		* ````"anchor <label> `How are you?` search <button>"````
+		* ````"anchor `How are you?` <label> search <button>"````
 2. By 2 anchors
-* Need another information: Parent Anchor or Parent for short
-* Sample
-	* ````"parent `Do you own a car?` anchor <label> `Yes` search <span>"````
+	* Need another information: Parent Anchor or Parent for short
+	* Sample
+		* ````"parent `Do you own a car?` anchor <label> `Yes` search <span>"````
 	
 3. Special case
-* Anchor and Search are one
-* Sample
-	* ````"search <input> `First name`"````
-	* ````"<input> `First name`"````
-	* ````"`First name`"````
-	* ````"First name"````
+	* Anchor and Search are one
+	* Sample
+		* ````"search <input> `First name`"````
+		* ````"<input> `First name`"````
+		* ````"`First name`"````
+		* ````"First name"````
 	
 When smart search is turned on (in app.config; recommend to turn it on all the time), text/attribute values are not case-sensitive. Providing part of the text/attribute values is also OK.
 
 4. Example
-* A line of code to enter a text "John" to First name text box
-	* ````"<input> `first name`".GetTestObject().SendKeys("John");````
+	* A line of code to enter a text "John" to First name text box
+		* ````"<input> `first name`".GetTestObject().SendKeys("John");````
 
 ## Continue with the browser session opened from the previous test execution
 * Imagine your test case has to test a chain of web pages, say 5 pages. So far you have already automated for the first 4 pages and you are now working on scripting for the last page, page 5. While scripting page 5, you have to run the test from time to time to see if what you have scripted is correct. 
