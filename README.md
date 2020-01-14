@@ -975,3 +975,19 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 	* TestExecutor.Any(...) checks if the element's text becomes 'saved' and returns a boolean value - true/false
 	* After 'checkbox.SetElementIndex(1).Click()', the DOM will be updated and keeps on changing in a short time. So RetryToClearRelationCacheUntil() keeps on clearing the cache for cityNameLabel.Parent.PrecedingSibling.Child relationship until the condition returning by TestExecutor.Any(...) becomes true.
 	* The outcome of RetryToClearRelationCacheUntil() is a key-value pair of checkbox TestObject itself and the boolean value of this TestExecutor.Any(...) check.
+
+## Use strict mode
+* ITestObject has property **bool Strict { get; }** for users to check the current running mode and method **ITestObject StrictMode(bool value)** to turn strict mode on/off.
+
+* Search by anchors performance is a bit better under unstrict mode than under strict mode; By default, strict mode is turned off. However, there are user cases where strict mode is needed.
+
+* Let's see the example below to understand strict mode
+	* Most of the time, if a web element on a web page does not exist in DOM, there is no html tag related to it so there is no XPath associated with it. But sometimes, UI developers may just remove the inner text, not the html tags in DOM.
+	
+	* For instance, in a web page, there is a 'First Name' input box associated with a validation label next to it. When users have not input anything in the input box and clicked Save button, the error message displays otherwise it does not display. The UI developers have decided not to remove the whole XPATH in DOM for that error message when there is no validation error; they have decided just to remove the inner text. So when there is an error, the XPath is **//label[text()='Student Details']/div/span/m-error[text()='First name cannot be empty']"**. And when there is no error the XPath is **//label[text()='Student Details']/div/span/m-error**. 
+	
+	* To search this web element by anchor when there is an error, we use: "anchor <label> `Student Details` search <m-error> `First name cannot be empty`".GetTestObject().
+	
+	* Under the unstrict mode, when the search engine finds ONE web element, it associates that web element with **//label[text()='Student Details']/div/span/m-error** to do less calculation. This is enough in most of the cases. And this XPath is saved in File Cache. However, in this example, **//label[text()='Student Details']/div/span/m-error** exists in DOM when there is no validation error. In the next executions, when you try to find the web element associated with the validation error message, **//label[text()='Student Details']/div/span/m-error** is retrieved from File Cache. If you assert to see if the validation error not displayed, the result can be wrong. 
+	
+	* So for this case or similar cases, you may want to set strict mode and Okapi search by anchors engine will return the full XPath even when ONE web element is found. In the above example, **//label[text()='Student Details']/div/span/m-error[text()='First name cannot be empty']"** instead of **//label[text()='Student Details']/div/span/m-error**.
