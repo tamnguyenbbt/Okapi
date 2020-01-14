@@ -581,6 +581,8 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 
 * Users can clear this cache for a test object by calling **ClearObjectRepositoryCache()**
 
+* When you work with, say, an html table where you add a new row everytime a test script is run; the added row being based on dynamic test data (i.e. a random date or number); and the locator for this row containing this dynamic data, please be mindful about it. If you cache this test object locator, next executions will get that cached locator which contains the old dynamic data. But you have new test data for every execution. Then the cached xpath does not serve up well. In this situation, you need to force search by anchors engine to delete that cached item and recalculate the locator by calling **ClearObjectRepositoryCache()**
+
 
 ## Work with drivers/browsers
 
