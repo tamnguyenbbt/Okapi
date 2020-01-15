@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.8.7
-* Install-Package Okapi -Version 1.8.7
+* https://www.nuget.org/packages/Okapi/1.8.9
+* Install-Package Okapi -Version 1.8.9
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -262,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.8.7** released on 08/01/2020
+* Version **1.8.9** released on 15/01/2020
 
 ## Author
 ###  **Tam Nguyen**
@@ -767,8 +767,57 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 ## AppConfig class
 * Okapi.Configs.AppConfig.TargetTestEnvironment gets the target environment name set within app.config file
 
+
 ## Util class
 * Okaki.Utils.Util class provides utility properties and methods to be used in test scripts.
+
+
+## Test data interfaces
+* Okapi offers 2 interfaces under namespace **Okapi.Runners** ready for creating test data in the form of DTOs (Data transfer objects)
+	* ````INameDataSet<T> and IDataSet<T>````
+	
+* When implementing **INameDataSet**, users have to implement the method ````IDictionary<string, T> Get()```` where the string is data item name, and T is data class
+
+* When implementing **IDataSet**, users have to implement the method ````IList<T> Get()````
+
+* To add test data, Okapi extends ````IDictionary<string, T>```` with the method **Append**. This method can be used with Okapi class **Okapi.Runners.NamedDataItem** to add data items
+
+* Example:
+
+````
+	public class AccountDTO
+	{
+		public string Username {get; set;}
+		public string Password {get; set;}
+	}
+	
+	public class AccountDataSet : INamedDataSet<AccountDTO>
+    	{
+		public IDictionary<string, AccountDTO> Get()
+		{
+		    var data = new Dictionary<string, AccountDTO>();
+
+		    data.Append(new NamedDataItem<AccountDTO>
+		    {
+			Name = "Default Account",
+			Data = new AccountDTO
+			{
+			   Username = "test",
+			   Password = "test"
+			}
+		    });
+		    
+		    return data;
+		}
+	}
+	
+	AccountDTO testData = new AccountDataSet().Get()["Default Account"];
+````
+
+* Best test data usage practices
+	* If you write test scripts using Okapi using C# and any IDE such as Visual Studio, the best from of test data is DTO classes.
+	* Some try to use CSV, Excel, Database to store test data. This is overkill and adds uneccessary overheads because you need to convert back and forth from one from to another. These forms are useful only when you have a tool, not an API, such as you write a desktop client application which uses Okapi as the engine.
+	* Always write reusable test steps which are independent from the web page business rules. Business rules are injected by test data (data-driven test scripts)
 
 
 ## Common TestObject Method References
