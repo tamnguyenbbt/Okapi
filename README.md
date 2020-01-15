@@ -1120,3 +1120,27 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 	* Under unstrict mode, when the search engine finds ONE web element, it associates that web element with **//label[text()='Student Details']/div/span/m-error** to do less calculation. This is enough in most of the cases. And this XPath is saved in File Cache. However, in this example, **//label[text()='Student Details']/div/span/m-error** exists in DOM when there is no validation error. In the next executions, when you try to find the web element associated with the validation error message, **//label[text()='Student Details']/div/span/m-error** is retrieved from File Cache. If you assert to see if the validation error not displayed, the result can be wrong. 
 	
 	* So for this case or similar cases, you may want to set strict mode and Okapi search by anchors engine will return the full XPath even when ONE web element is found; in the above example, **//label[text()='Student Details']/div/span/m-error[text()='First name cannot be empty']"** instead of **//label[text()='Student Details']/div/span/m-error**.
+	
+	
+# COMMON PRACTICAL USAGES
+## Check multiple conditions
+* Stop checking on getting the first false
+
+````
+	bool validationOK = false;
+	
+	"anchor <thead>tr>th> `First Name` search <tbody>tr>td> `{0}`"
+	.GetTestObject()
+	.ClearObjectRepositoryCache()
+	.OnTrue(self => self.SetSearchElementDynamicContents("John").OneFound(5))
+	.OnTrue(self => 
+	{
+		string dateOfBirth = self.NextSibling.Text;
+                return dateOfBirth.Equals("01/01/1991"));
+	})
+	.Run(() => validationOK = true);
+	
+	TestReport.IsTrue(validationOK);
+	
+	
+	
