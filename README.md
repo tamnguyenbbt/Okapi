@@ -558,7 +558,7 @@ This setting has the scope of the test object. In the above example, after calli
 * **FilterByScreenDistance(params int[] distanceOrders)** has been explained in the previous usage. **FilterByScreenDistance(ReferenceType anchorReferenceType, ReferenceType searchElementReferenceType, params int[] distanceOrders)** can be used to control both the screen distance orders and reference points as well.
 
 ## Control DOM distance in search by anchors
-* By default, Okapi search by anchors engine returns the web elements having the same SHORTEST DOM distances. Unlike, physical screen distance orders which starts from 0, Okapi considers the shortest DOM distance as order 1, the second shortest DOM distance as order 2 and so on. When a higher order is set, the search outcome will include those returned by the lower orders as well. For instance, if order 2 is set, the search result will include those web elements found by order 1 and by order 2.
+* By default, Okapi search by anchors engine returns the web elements having the same SHORTEST DOM distances. Unlike physical screen distance order which starts from 0, Okapi considers the shortest DOM distance as order 1, the second shortest DOM distance as order 2 and so on. When a higher order is set, the search outcome will include those returned by the lower orders automatically. For instance, if order 3 is set, the search result will include those web elements found by order 1, 2 and 3.
 
 * When more than one web elements are found, the web element under consideration/focus will be based on the set element index (mentioned above)
 
@@ -572,9 +572,9 @@ This setting has the scope of the test object. In the above example, after calli
 	</div>	
 ````
 
-* By default, order 1 is set. ````"anchor `Status` search <span>".GetTestObject()```` gets the first span, the one containing the inner text 'Status' because it has the shorest DOM distance (0) from itself (it is the anchor).
+* By default, order 1 is set. ````"anchor `Status` search <span>".GetTestObject()```` gets the first span, the one containing inner text 'Status' because it has the shorest DOM distance (distance as 0; order 1) from itself (it is the anchor).
 
-* To get both the spans, set order 2. ````"anchor `Status` search <span>".GetTestObject().SetShortestDomDistanceDepth(2)````. By default, element index 0 is set so the first span is returned/set focus. To return the second span (the span containing 'Inactive'), set element index as 1. 
+* To get both the spans, set order 2. ````"anchor `Status` search <span>".GetTestObject().SetShortestDomDistanceDepth(2)````. By default, element index 0 is set so the first span is returned/set focus (top down). To return the second span (the span containing 'Inactive' text), set element index as 1. 
 	````
 		"anchor `Status` search <span>".GetTestObject().SetShortestDomDistanceDepth(2).SetElementIndex(1) Or
 		"anchor `Status` search <span[1]>".GetTestObject().SetShortestDomDistanceDepth(2) //use embedded element index
