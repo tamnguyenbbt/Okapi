@@ -564,7 +564,7 @@ This setting has the scope of the test object. In the above example, after calli
 
 * To set the order, use ITestObject method **SetShortestDomDistanceDepth(int order)**
 
-* Example: look at the below html snippet
+* Example: look at the below simple html snippet
 ````
 	<div>
 		<span>Status</span>
@@ -576,10 +576,18 @@ This setting has the scope of the test object. In the above example, after calli
 
 * To get both the spans, set order 2. ````"anchor `Status` search <span>".GetTestObject().SetShortestDomDistanceDepth(2)````. By default, element index 0 is set so the first span is returned/set focus (top down). To return the second span (the span containing 'Inactive' text), set element index as 1. 
 	````
-		"anchor `Status` search <span>".GetTestObject().SetShortestDomDistanceDepth(2).SetElementIndex(1) Or
-		"anchor `Status` search <span[1]>".GetTestObject().SetShortestDomDistanceDepth(2) //use embedded element index
+		"anchor `Status` search <span>".GetTestObject().SetShortestDomDistanceDepth(2).SetElementIndex(1); Or
+		"anchor `Status` search <span[1]>".GetTestObject().SetShortestDomDistanceDepth(2); //use embedded element index
 	````
 
+* Use Info or QuickInfo to have a detailed looks in the search results
+	````
+		"anchor `Status` search <span[1]>".GetTestObject().SetShortestDomDistanceDepth(2).Info;		
+	````
+	
+* After changing order to be more than 1 for a test object, use **RestoreDefaultShortestDomDistanceDepth()** to set the order back to 1 (default)
+
+* If more than one web elements are found (same shorest DOM distances), by default, the ones with smallest loop are returned, larger loops being filtered out/removed (filter being ON). To turn this filter off/on, use **FilterByShortestRootAnchorDomDistance(bool on)**. To understand how this filter works, imagine multiple triangles (A-R-S) where A is anchor element, R is root element and S is search element. If multiple search web elements are found, there are multiple ARS triangles. They all shares the same A. Smallest html loops have the shorest A to R DOM distance.
 
 ## Memory cache
 
