@@ -571,7 +571,14 @@ This setting has the scope of the test object. In the above example, after calli
 		<span>Inactive</span>
 	</div>	
 ````
-	*  ````"anchor `Status` search <span>".GetTestObject()```` gets the first span, the one containing the inner text Status because it has the shorest DOM distance (0) from itself (it is the anchor)
+
+* By default, order 1 is set. ````"anchor `Status` search <span>".GetTestObject()```` gets the first span, the one containing the inner text 'Status' because it has the shorest DOM distance (0) from itself (it is the anchor).
+
+* To get both the spans, set order 2. ````"anchor `Status` search <span>".GetTestObject().SetShortestDomDistanceDepth(2)````. By default, element index 0 is set so the first span is returned/set focus. To return the second span (the span containing 'Inactive'), set element index as 1. 
+	````
+		"anchor `Status` search <span>".GetTestObject().SetShortestDomDistanceDepth(2).SetElementIndex(1) Or
+		"anchor `Status` search <span[1]>".GetTestObject().SetShortestDomDistanceDepth(2) //use embedded element index
+	````
 
 
 ## Memory cache
