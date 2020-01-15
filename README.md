@@ -580,14 +580,14 @@ This setting has the scope of the test object. In the above example, after calli
 		"anchor `Status` search <span[1]>".GetTestObject().SetShortestDomDistanceDepth(2); //use embedded element index
 	````
 
-* Use Info or QuickInfo to have a detailed looks in the search results
+* Use Info or QuickInfo to have a detailed look into the search results
 	````
 		"anchor `Status` search <span[1]>".GetTestObject().SetShortestDomDistanceDepth(2).Info;		
 	````
 	
-* After changing order to be more than 1 for a test object, use **RestoreDefaultShortestDomDistanceDepth()** to set the order back to 1 (default)
+* After changing order to be more than 1 for a test object, use **RestoreDefaultShortestDomDistanceDepth()** to set the order back to 1 (default) when needed.
 
-* If more than one web elements are found (same shorest DOM distances), by default, the ones with smallest loop are returned, larger loops being filtered out/removed (filter being ON). To turn this filter off/on, use **FilterByShortestRootAnchorDomDistance(bool on)**. To understand how this filter works, imagine multiple triangles (A-R-S) where A is anchor element, R is root element and S is search element. If multiple search web elements are found, there are multiple ARS triangles. They all shares the same A. Smallest html loops have the shorest A to R DOM distance.
+* If more than one web elements are found (same shorest DOM distances), by default, the ones with smallest loop are returned, larger loops being filtered out/removed (filter being ON). To turn this filter off/on, use **FilterByShortestRootAnchorDomDistance(bool on)**. To understand how this filter works, imagine multiple triangles (A-R-S) where A is anchor element, R is root element and S is search element. If multiple search web elements are found initially, there are multiple ARS triangles. They all shares the same A. Smallest html loops have the shorest A to R DOM distance.
 
 ## Memory cache
 
