@@ -284,7 +284,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio2.png)
 
 
-# Basic Usage
+# BASIC USAGE
 ## Setup to use ChromeDriver on Windows 10
 * Download the latest stable chromedriver.exe (32 bit for Windows) version which supports your Chrome browser from https://chromedriver.chromium.org/downloads and save it to a local folder
 * Config Path environment variabe for Selenium to find chromedriver.exe
@@ -539,7 +539,7 @@ Info info = "<p-listboxitem/li/span>".GetTestObject().QuickInfo; //a less inform
 	
 * There are cases you don't want just to get/perform action on the elements with the shortest physical distance on screen. **FilterByScreenDistance(params int[] distanceOrders)** help you to control in this case. Order 0 is for the shortest distance, order 1 is for the second shortest distance, and so on.
 
-## Control search by anchors' screen distance
+## Control screen distance in search by anchors
 * By default, Okapi returns the web element with the shortest physical distance (screen distance) from the anchor when you perform search by anchors.
 
 * For instance, after applying shortest DOM distance filter, a search returns 10 possible web elements. Okapi then applies shortest screen distance filter on the result and narrows down to 2 web elements which have the same shortest screen distances.
@@ -557,7 +557,24 @@ This setting has the scope of the test object. In the above example, after calli
 
 * **FilterByScreenDistance(params int[] distanceOrders)** has been explained in the previous usage. **FilterByScreenDistance(ReferenceType anchorReferenceType, ReferenceType searchElementReferenceType, params int[] distanceOrders)** can be used to control both the screen distance orders and reference points as well.
 
-## Memory Cache
+## Control DOM distance in search by anchors
+* By default, Okapi search by anchors engine returns the web elements having the same SHORTEST DOM distances. Unlike, physical screen distance orders which starts from 0, Okapi considers the shortest DOM distance as order 1, the second shortest DOM distance as order 2 and so on. When a higher order is set, the search outcome will include those returned by the lower orders as well. For instance, if order 2 is set, the search result will include those web elements found by order 1 and by order 2.
+
+* When more than one web elements are found, the web element under consideration/focus will be based on the set element index (mentioned above)
+
+* To set the order, use ITestObject method **SetShortestDomDistanceDepth(int order)**
+
+* Example: look at the below html snippet
+````
+	<div>
+		<span>Status</span>
+		<span>Inactive</span>
+	</div>	
+````
+	*  ````"anchor `Status` search <span>".GetTestObject()```` gets the first span, the one containing the inner text Status because it has the shorest DOM distance (0) from itself (it is the anchor)
+
+
+## Memory cache
 
 * Okapi TestObject class has a built-in memory caching mechanism to boost performance. It manages the cache automatically in a smart way for most of the case.
 
@@ -593,7 +610,7 @@ checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advan
 ````
 	
 
-## File Cache
+## File cache
 * Okapi's search by anchors requires a lot of calculations and consumes quite a lot of memory and CPU so for some circumstances such as a web page is large, it can be slow. 
 
 * When you see that the search by anchors is too slow, the best is to improve your locator to help Okapi's search by anchors a bit or just use traditional locating methods such as xpath.
@@ -847,7 +864,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * WaitUntilVisible -> waits until the web element represented by TestObject being enabled and displayed. Relies on Selenium so this one does not work for all cases
 
 
-# Advanced Usage
+# ADVANCED USAGE
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
 
