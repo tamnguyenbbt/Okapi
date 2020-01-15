@@ -815,9 +815,9 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 ````
 
 * Best test data usage practices
-	* If you write test scripts using Okapi using C# and any IDE such as Visual Studio, the best from of test data is DTO classes.
-	* Some try to use CSV, Excel, Database to store test data. This is overkill and adds uneccessary overheads because you need to convert back and forth from one from to another. These forms are useful only when you have a tool, not an API, such as you write a desktop client application which uses Okapi as the engine.
-	* Always write reusable test steps which are independent from the web page business rules. Business rules are injected by test data (data-driven test scripts)
+	* If you write test scripts using Okapi, C# and any IDE such as Visual Studio, the best form of test data is DTO classes.
+	* Some try to use CSV, Excel, Database to store test data. This is overkill and adds uneccessary overheads because you need to convert back and forth from one DTO classes to one of the above-mentioned forms. These forms are useful only when you have a tool, not an API, such as you write a desktop client application which uses Okapi as the engine.
+	* Always write reusable test steps which are independent from the web page business rules. Business rules should be embedded in test data and be injected by test data into reusable test steps (data-driven test).
 
 
 ## Common TestObject Method References
