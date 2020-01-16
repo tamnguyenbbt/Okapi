@@ -354,6 +354,14 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 		````
 			
 	* By other types: partial link text, css selector, etc.: similar syntax
+	
+	* By any text or any attribute value: 
+		````
+			"`Hello`".GetTestObject();
+			"Hello".GetTestObject();
+			"Confirmation".GetTestObject();
+			....
+		````
 
 ## Continue with the browser session opened from the previous test execution
 * Imagine your test case has to test a chain of web pages, say 5 pages. So far you have already automated for the first 4 pages and you are now working on scripting for the last page, page 5. While scripting page 5, you have to run the test from time to time to see if what you have scripted is correct. 
