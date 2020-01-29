@@ -1,7 +1,7 @@
 # Okapi Get Started
 **Okapi** is an advanced and easy-to-use Selenium-based **Web UI test automation library/framework**. **Okapi** was designed **not to be just another Web UI test automation library or Selenium-wrapper in the market**. It aims at radically changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective at top levels. It was designed and developed to be game changer in Web UI automation testing business. Okapi is powerful and open.
 
-* Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting (in C#). Okapi helps to build reliable and easy-to-maintain test scripts. If timing and stale element issues from Selenium and from other free or commercial tools have long been haunting you (timing issue is number one cause of failure web ui test automation projects), Okapi lifts all those out for you. Okapi has built-in mechanisms and supporting methods which help you to build reliable tests without having timing issues bothering you.
+* Addresses all possible practical test automation difficulties, letting users to focus more on business rules of the web applications under test while scripting (in C#). Okapi helps to build reliable and easy-to-maintain test scripts. If timing and stale element issues from Selenium and from other free or commercial tools have long been haunting you (timing issue is number one cause of failure web ui test automation projects), Okapi lifts all those out for you. Okapi has built-in mechanisms and supporting methods which help you to build reliable tests without having timing issues bothering you. Okapi helps you to build advanced test scripts.
 * Okapi is ready to use, there being little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
 * First to introduce the advanced **search web elements by anchors** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
@@ -25,8 +25,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * Comes with FileDB functionality to save and share test data between tests and steps.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.8.9
-* Install-Package Okapi -Version 1.8.9
+* https://www.nuget.org/packages/Okapi/1.9.3
+* Install-Package Okapi -Version 1.9.3
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -44,7 +44,7 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 ## Dependencies
 ### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.1.4)
+* ExtSelenium (>= 1.1.7)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Newtonsoft.Json (>= 12.0.2)
@@ -262,7 +262,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.8.9** released on 15/01/2020
+* Version **1.9.3** released on 30/01/2020
 
 ## Author
 ###  **Tam Nguyen**
