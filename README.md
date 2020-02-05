@@ -647,14 +647,19 @@ ITestObject studentId = "5235868631646".GetTestObject();
 ITestObject studentName = cabinetProduct.ParentAt(2).NextSiblingAt(1).ChildAt(4); //order starts from 0
 TestReport.IsTrue("Jane Doe", studentName.Value);
 
-//the above 2 lines work fine if the web page under test (so the DOM) is stable before these 2 lines are running. One way to achive that is to use Sleep() but that is quite bad practice in test automation. If the page is not stable yet when these lines are run, the chance to fail with StaleWebElementException is high, making the test script not reliable enough to be trusted.
+//the above 2 lines work fine if the web page under test (so the DOM) is stable before these 2 lines are running.
+//One way to achive that is to use Sleep() but that is quite bad practice in test automation.
+//If the page is not stable yet when these lines are run, the chance to fail with StaleWebElementException is high, making the test //script not reliable enough to be trusted.
 
 //better approach
 ITestObject studentName = cabinetProduct.ParentAt(2).NextSiblingAt(1).ChildAt(4);
-var result = studentName.RetryToClearRelationCacheUntil(self => self.TryGetText(2).Equals("Jane Doe")); //retries to clear memory cache and calculates again until the condition is true or timeout reached. This to make sure to get the result which is correct when the DOM is stable.
+//retries to clear memory cache and calculates again until the condition is true or timeout reached. 
+//This to make sure to get the result which is correct when the DOM is stable.
+var result = studentName.RetryToClearRelationCacheUntil(self => self.TryGetText(2).Equals("Jane Doe"));
 TestReport.IsTrue(result.Value);
 
-//lazy approach, getting all possible children and let Okapi to find which one containing 'Jane Doe'. If any matched, Okapi returns the value.
+//lazy approach, getting all possible children and let Okapi to find which one containing 'Jane Doe'. 
+If any matched, Okapi returns the value.
 ITestObject studentName = cabinetProduct.ParentAt(2).NextSiblingAt(1).Child;  
 var result = studentName.RetryToClearRelationCacheUntil((self, index) => self.SetElementIndex(index).TryGetText(2).Equals("Jane Doe"));
 TestReport.IsTrue(result.Value);
