@@ -293,6 +293,9 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * Write a simple unit test using Okapi to test
   * ````IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");````  
 * To be a bit more advanched, you might want to set up Selenium grid (hub and nodes) configuration instead. Check out: https://www.guru99.com/introduction-to-selenium-grid.html 
+* In app.config, set driverFlavour to "Chrome"
+
+
   
 ## Search by anchors syntax
 1. By anchor
