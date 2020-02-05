@@ -295,7 +295,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * To be a bit more advanched, you might want to set up Selenium grid (hub and nodes) configuration instead. Check out: https://www.guru99.com/introduction-to-selenium-grid.html 
 * In app.config, set driverFlavour to "Chrome"
 
-
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/app_config.jpg)
   
 ## Search by anchors syntax
 1. By anchor
