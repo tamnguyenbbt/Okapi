@@ -296,6 +296,11 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * In app.config, set driverFlavour to "Chrome"
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/app_config.jpg)
+
+## Setup to use Edge driver on Windows 10
+* Download the latest stable Edge driver from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver, change its name to 'MicrosoftWebDriver.exe' and save it to a local folder
+* Config Path environment variabe
+* In app.config, set driverFlavour to "Edge"
   
 ## Search by anchors syntax
 1. By anchor
@@ -393,6 +398,8 @@ public void Temporary_development()
 	*  Run Already_complete_works() test; then stop it; not closing the browser opened by it. The browser will land at page 4 at end of the this test.
 	*  Start to code for page 5 in Temporary_development(). Confirm the script by running it from time to time. It will act on the previous opened browser instead of opening a new browser. You can repeat this cycle as many times as you want.
 	*  When you are happy with the code in Temporary_development(), copy it and paste it at the end of Already_complete_works(). Then delete the Temporary_development() and rerun the whole Already_complete_works() to double check your complete script.
+	
+* ````DriverPool.Instance.GetReusableDriver()```` creates a new driver if no reusable driver found active or gets the lastest active reusable driver, ready for usage.
 
 ## Use Dynamic Contents
 * Okapi introduces Dynamic Contents concept to promote code reusability. The main class in Okapi is TestObject class which implements ITestObject interface. Each TestObject object can represent any of multiple web elements on a web page. It can also represent multiple web elements on a web page.  
@@ -634,6 +641,24 @@ checkbox.Click(); //after this, DOM changes and if want to use checkbox for anot
 checkbox.RetryToClearRelationCacheUntil(...) //there will be an example in Advanced usage for this case
 
 ````
+
+````
+ITestObject studentId = "5235868631646".GetTestObject();
+ITestObject studentName = cabinetProduct.ParentAt(2).NextSiblingAt(1).ChildAt(4); //order starts from 0
+TestReport.IsTrue("Jane Doe", studentName.Value);
+
+//the above 2 lines work fine if the web page under test (so the DOM) is stable before these 2 lines are running. One way to achive that is to use Sleep() but that is quite bad practice in test automation. If the page is not stable yet when these lines are run, the chance to fail with StaleWebElementException is high, making the test script not reliable enough to be trusted.
+
+//better approach
+ITestObject studentName = cabinetProduct.ParentAt(2).NextSiblingAt(1).ChildAt(4);
+var result = studentName.RetryToClearRelationCacheUntil(self => self.TryGetText(2).Equals("Jane Doe")); //retries to clear memory cache and calculates again until the condition is true or timeout reached. This to make sure to get the result which is correct when the DOM is stable.
+TestReport.IsTrue(result.Value);
+
+//lazy approach, getting all possible children and let Okapi to find which one containing 'Jane Doe'. If any matched, Okapi returns the value.
+ITestObject studentName = cabinetProduct.ParentAt(2).NextSiblingAt(1).Child;  
+var result = studentName.RetryToClearRelationCacheUntil((self, index) => self.SetElementIndex(index).TryGetText(2).Equals("Jane Doe"));
+TestReport.IsTrue(result.Value);
+````
 	
 
 ## File cache
@@ -866,7 +891,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 ## Common TestObject Method References
 * Click -> clicks on a web element. Checks if the web element is ready before clicking. Retries if the click action does not take effect
-* DoubleClick
+* DoubleClick -> double click on a web element
 * SendKeys -> inputs text into a text box or a text area
 * Clear -> clears a text box or a text area
 * ClearAllWithBackspaceKey -> clears a text box or a text area; should be used when Clear does not work for some special web front-end implementations
@@ -888,7 +913,8 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * WaitUntilEnabled -> waits until the web element represented by TestObject being unabled. Relies on Selenium so this one does not work for all cases
 * WaitUntilClickable -> waits until the web element represented by TestObject being clickable. Relies on Selenium so this one does not work for all cases
 * WaitUntilVisible -> waits until the web element represented by TestObject being enabled and displayed. Relies on Selenium so this one does not work for all cases
-
+* GetLifespanInMilliseconds -> get life span of a web element, useful for elements which exist a short time, such as a validation error message
+* 
 
 # ADVANCED USAGE
 ## Get text of a cell in a table
