@@ -25,6 +25,7 @@
 Okapi treats traditional searching mwethods such Id and class name as special cases of the advanced search by anchors algorithm where search element is also the anchor element.
 * Supports user-defined actions, to extend/add the web interactive actions where Okapi has not provided yet.
 * Comes with FileDB functionality to save and share test data between tests and steps.
+* If you are a professional .Net/C# developer, you'd love the lambda methods and usages of Okapi. It is a bit advanced for average automation testers using C# but it can help you write less to do more.
 
 ## NuGet
 * https://www.nuget.org/packages/Okapi/1.9.5
