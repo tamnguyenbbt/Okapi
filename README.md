@@ -28,8 +28,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * If you are a professional .Net/C# developer, you'd love the lambda methods/features of Okapi. It is a bit advanced for average automation testers using C# but it can help you write less to do more.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/1.9.5
-* Install-Package Okapi -Version 1.9.5
+* https://www.nuget.org/packages/Okapi/2.0.1
+* Install-Package Okapi -Version 2.0.1
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -47,11 +47,11 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 ## Dependencies
 ### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.1.7)
+* ExtSelenium (>= 1.2.0)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Newtonsoft.Json (>= 12.0.2)
-* Okapi.Common (>= 1.0.8)
+* Okapi.Common (>= 1.0.9)
 * Simplify.Windows.Forms (>= 1.0.0)
 
 ## Set Up Test Project
@@ -265,7 +265,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **1.9.5** released on 05/02/2020
+* Version **2.0.1** released on 26/02/2020
 
 ## Author
 ###  **Tam Nguyen**
