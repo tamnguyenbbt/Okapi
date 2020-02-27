@@ -23,5 +23,6 @@ namespace OkapiSampleTests.ProjectConfig
         public bool HighlightOnSearch => true;
         public double HighlightTimeInSeconds => 0.05;
         public string CachedObjectRepository => "COR.txt";
+        public double DriverTimeoutInSeconds => 5;
     }
 }
