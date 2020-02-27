@@ -934,6 +934,16 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/UnitTestExplorer.png)
 
+
+## View test execution report
+
+* If you have installed the Html test report nuget package mentioned above, Okapi creates test execution reports for you after each execution.
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/SummaryHtmlReport.png)
+
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TestCaseDetailedHtmlReport.png)
+
 # ADVANCED USAGE
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
