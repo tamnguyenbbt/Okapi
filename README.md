@@ -901,7 +901,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 	* Embedding business rules within the code is very bad practice of writing test automation scripts. It makes it hard to debug and troubleshoot, hard to maintain, etc. and the scripts look messy.
 
 
-## Common TestObject Method References
+## Common TestObject method references
 * Click -> clicks on a web element. Checks if the web element is ready before clicking. Retries if the click action does not take effect
 * DoubleClick -> double click on a web element
 * SendKeys -> inputs text into a text box or a text area
@@ -926,7 +926,13 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * WaitUntilClickable -> waits until the web element represented by TestObject being clickable. Relies on Selenium so this one does not work for all cases
 * WaitUntilVisible -> waits until the web element represented by TestObject being enabled and displayed. Relies on Selenium so this one does not work for all cases
 * GetLifespanInMilliseconds -> get life span of a web element, useful for elements which exist a short time, such as a validation error message
-* 
+* (To be added)
+
+## Check Visual Studio unit uest logs for failed tests 
+
+* Okapi console logs on failed tests are comprehensive which support the best for script debugging
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/UnitTestExplorer.png)
 
 # ADVANCED USAGE
 ## Get text of a cell in a table
