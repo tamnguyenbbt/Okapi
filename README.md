@@ -143,7 +143,7 @@ Create a new instance of class **Okapi.Configs.Config**
 
 ### Override Selenium Driver Options (Optional)
 
-* When you want to control the browsers' behaviours rather than using the default behaviours provided by Okapi, 
+When you want to control the browsers' behaviours rather than using the default behaviours provided by Okapi, 
 you can implement **IDriverOptionsFactory** interface. For instance,
 
 ````
@@ -179,15 +179,15 @@ public enum DriverFlavour
 
 ### Customise Logging (Optional)
 
-Okapi comes with the ability to log testing activities and to capture snapshots which are controllable via configuration.
+* Okapi comes with the ability to log testing activities and to capture snapshots which are controllable via configuration.
 You can customise the logging message template format and logging destination by implementing Okapi's interface **IOkapiLogger**.
 
-Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
+* Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
 
-* Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 (obsolete)
-* From 1.2.7, please use https://www.nuget.org/packages/Okapi.Support.Log.Text/1.0.1
-* GitHub: https://github.com/tamnguyenbbt/Okapi.Support.Log.Text
-* Log file path is set via configuration (see Configuration section)
+	* Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 (obsolete)
+	* From 1.2.7, please use https://www.nuget.org/packages/Okapi.Support.Log.Text/1.0.1
+	* GitHub: https://github.com/tamnguyenbbt/Okapi.Support.Log.Text
+	* Log file path is set via configuration (see Configuration section)
 
 ````
     public class Logger : IOkapiLogger
