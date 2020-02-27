@@ -116,7 +116,7 @@ If you decide to use class configs, implement the following interfaces:
 ````
 internal class DriverConfig : IDriverConfig
 {
-    public int TimeoutInSeconds => 2;
+    public double TimeoutInSeconds => 2;
     public DomUtilConfig SearchByAnchorConfig => null;        
 }
 ````
@@ -136,7 +136,6 @@ internal class TestEnvironment : ITestEnvironment
     public bool RemoteDriver => false; //use local driver, not remote
     public bool SmartSearch => true; //from 1.2.3
     public string logPath => "Log.txt"; //from 1.2.4
-    public string reportDirectory => "Report"; //from 1.2.4
     public string reportDirectory => "Report"; //from 1.2.4
     public bool HighlightOnSearch => true; //from 1.3.8 --> helpful in development time and debugging
     public string CachedObjectRepository => "COR.txt";
