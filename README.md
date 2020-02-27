@@ -140,6 +140,30 @@ internal class TestEnvironment : ITestEnvironment
 
 Create a new instance of class **Okapi.Configs.Config**
 
+* Config for a driver
+
+````
+	    Config config = new Config()
+            {
+                DriverFlavour = Okapi.Enums.DriverFlavour.Edge,
+                DriverTimeoutInSeconds = 15
+            };
+
+            IManagedDriver driver = DriverPool.Instance.CreateDriver(config).LaunchPage(data.Url);
+````
+
+* Config for all the drivers
+
+````
+            Config config = new Config()
+            {
+                DriverFlavour = Okapi.Enums.DriverFlavour.Chrome,
+                DriverTimeoutInSeconds = 15
+            };
+
+            IManagedDriver driver = DriverPool.Instance.SetConfig(config).ActiveDriver.LaunchPage(data.Url);
+````
+
 
 ### Override Selenium Driver Options (Optional)
 
@@ -928,7 +952,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * GetLifespanInMilliseconds -> get life span of a web element, useful for elements which exist a short time, such as a validation error message
 * (To be added)
 
-## Check Visual Studio unit uest logs for failed tests 
+## Check Visual Studio unit test logs for failed tests 
 
 * Okapi console logs (in JSON format) on failed tests are comprehensive which support the best for script debugging
 
