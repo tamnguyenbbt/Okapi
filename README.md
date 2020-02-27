@@ -930,7 +930,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 ## Check Visual Studio unit uest logs for failed tests 
 
-* Okapi console logs on failed tests are comprehensive which support the best for script debugging
+* Okapi console logs (in JSON format) on failed tests are comprehensive which support the best for script debugging
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/UnitTestExplorer.png)
 
