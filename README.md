@@ -51,8 +51,11 @@ Okapi treats traditional searching methods such as Id and class name as special 
 * Okapi.Common (>= 1.0.9)
 * Simplify.Windows.Forms (>= 1.0.0)
 
-## Set Up Test Project
-The code in this repo is for a sample test project based on MSUnit and .Net Framework 4.5 and uses Okapi library.
+## Set up a test project
+* The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
+
+* The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community version  (https://visualstudio.microsoft.com/vs/community) then install the following Nuget packages and it is ready for you to write unit tests
+	
 
 ### Configuration (Optional)
 * Okapi supports App.config, class configuration via dependency injection, and class configuration in code. Class configuration in code takes precedence over App.config configuration; and App.config configuration takes precedence over class configuration via dependency injection when more than one methods are used at the same time.
