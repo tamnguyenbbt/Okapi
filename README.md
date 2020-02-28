@@ -293,9 +293,9 @@ You can customise the logging message template format and logging destination by
 ### Customise Test Report (Optional)
 
 * Implement **IReportFormatter** interface.
-* To generate test reports for test cases, you need to decorate your test case methods with Okpai **TestCase** attribute. To generate test reports for test steps, decorate test step methods with Okapi **Step** attribute. 
+* To generate test reports for test cases, you need to decorate your test case methods with Okapi **TestCase** attribute. To generate test reports for test steps, decorate test step methods with Okapi **Step** attribute. 
 
-* Call **TestReport.Verify()** to perform assertions and update report (you can use any assertion library but **TestReport** class has assertion methods with built-in reporting engine for Okapi so it serves two purposes - assert and report)
+* Call **TestReport.Verify()**, **TestReport.IsTrue()**, etc. to perform assertions and update report (you can use any assertion library but **TestReport** class has assertion methods with built-in reporting engine for Okapi so it serves two purposes - assert and report)
 
 * Call **TestReport.Report()** at the end of the test case methods and test step methods to send the report to IReportFormatter
 
