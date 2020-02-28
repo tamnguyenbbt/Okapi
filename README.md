@@ -28,8 +28,8 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 * If you are a professional .Net/C# developer, you'd love the lambda methods/features of Okapi. It is a bit advanced for average automation testers using C# but it can help you write less to do more.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/2.0.1
-* Install-Package Okapi -Version 2.0.1
+* https://www.nuget.org/packages/Okapi/2.0.2
+* Install-Package Okapi -Version 2.0.2
 
 ## Blog
 * https://okapi4automation.wordpress.com
@@ -57,12 +57,14 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 ## Set Up Test Project
 The code in this repo is for a sample test project based on MSUnit and .Net Framework 4.5 and uses Okapi library.
 
-### Test Environment And Selenium Driver Configuration
-Okapi supports both App.config and class configuration. App.config configuration takes precedence when both App.config and class configuration are provided.
+### Configuration
+* Okapi supports App.config, class configuration via dependency injection, and class configuration in code. Class configuration in code takes precedence over App.config configuration; and App.config configuration takes precedence over class configuration via dependency injection when more than one methods are used at the same time.
+
+* If none of the methods mentioned above are used, Okapi will use the built-in default configuration (with Chrome driver as default driver).
 
 #### Using App.config
 
-If you decide to use **App.config**, add an App.config file as below:
+Add an **App.config** file in your test project as below:
 
 ````
 <?xml version="1.0" encoding="utf-8" ?>
@@ -108,20 +110,11 @@ If you decide to use **App.config**, add an App.config file as below:
   </EnvironmentSection>
 </configuration>
 ````
-#### Using Class Configuration
 
-If you decide to use class configs, implement the following interfaces:
+#### Using Class Configuration via Dependency Injection
 
-* Implement **IDriverConfig** (optional)
-````
-internal class DriverConfig : IDriverConfig
-{
-    public double TimeoutInSeconds => 2;
-    public DomUtilConfig SearchByAnchorConfig => null;        
-}
-````
+Implement **ITestEnvironment** interface
 
-* Implement **ITestEnvironment**
 ````
 internal class TestEnvironment : ITestEnvironment
 {
@@ -134,25 +127,48 @@ internal class TestEnvironment : ITestEnvironment
     public bool TakeSnapshotOnError => true;
     public string SnapshotLocation => "Snapshots";
     public bool RemoteDriver => false; //use local driver, not remote
-    public bool SmartSearch => true; //from 1.2.3
-    public string logPath => "Log.txt"; //from 1.2.4
-    public string reportDirectory => "Report"; //from 1.2.4
-    public bool HighlightOnSearch => true; //from 1.3.8 --> helpful in development time and debugging
+    public bool SmartSearch => true;
+    public string logPath => "Log.txt";
+    public string reportDirectory => "Report";
+    public bool HighlightOnSearch => true;
     public string CachedObjectRepository => "COR.txt";
+    public double DriverTimeoutInSeconds => 15;
 }
 ````
 
-You then can pass the objects of these classes into the constructors of the Okapi library's classes, i.e. 
+#### Using Class Configuration within your test code
+
+Create a new instance of class **Okapi.Configs.Config**
+
+* Config for a driver
+
 ````
-DriverPool.Instance.CreateDriver(LocalChromeTestEnvironment.Instance)
+	    Config config = new Config()
+            {
+                DriverFlavour = Okapi.Enums.DriverFlavour.Edge,
+                DriverTimeoutInSeconds = 15
+            };
+
+            IManagedDriver driver = DriverPool.Instance.CreateDriver(config).LaunchPage(data.Url);
 ````
 
-OR you can inject them into Okapi via its Dependency Injection (DI) interface (using Ninject). From version 1.2.3, Okapi automatically picks up the implemented classes without the need to inject vis DI (DI is stilled supported).
+* Config for all the drivers
+
+````
+            Config config = new Config()
+            {
+                DriverFlavour = Okapi.Enums.DriverFlavour.Chrome,
+                DriverTimeoutInSeconds = 15
+            };
+
+            IManagedDriver driver = DriverPool.Instance.SetConfig(config).ActiveDriver.LaunchPage(data.Url);
+````
+
 
 ### Override Selenium Driver Options (Optional)
 
-If you want to control the browsers' behaviours rather than using the default behaviours provided by Okapi, 
-you can implement its **IDriverOptionsFactory** interface. For instance,
+When you want to control the browsers' behaviours rather than using the default behaviours provided by Okapi, 
+you can implement **IDriverOptionsFactory** interface. For instance,
 
 ````
 public DriverOptions CreateDriverOptions(DriverFlavour driverFlavour)
@@ -167,15 +183,13 @@ public DriverOptions CreateDriverOptions(DriverFlavour driverFlavour)
             return new FirefoxOptions();
         default:
              ChromeOptions chromeOptions = new ChromeOptions();
-             //chromeOptions.AddArguments("headless");
+             chromeOptions.AddArguments("headless");
              return chromeOptions;
     }
 }
 ````
 
-then inject it via DI.
-
-At this time, Okapi supports the following browser types:
+Okapi supports the following browser types:
 
 ````
 public enum DriverFlavour
@@ -187,16 +201,17 @@ public enum DriverFlavour
 }
 ````
 
-### Customize Logging (Optional)
-Okapi comes with the ability to log testing activities and to capture snapshots which are controllable via configuration.
-You can customize the logging message template format and logging destination by implementing Okapi's interface **IOkapiLogger**.
-Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
+### Customise Logging (Optional)
 
-* Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 (obsolete)
-* From 1.2.7, please use https://www.nuget.org/packages/Okapi.Support.Log.Text/1.0.1
-* GitHub: https://github.com/tamnguyenbbt/Okapi.Support.Log.Text
+* Okapi comes with the ability to log testing activities and to capture snapshots which are controllable via configuration.
+You can customise the logging message template format and logging destination by implementing Okapi's interface **IOkapiLogger**.
 
-**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ITestEnvironment. Users don't need to perform Ninject dependencies with constructors, please use https://www.nuget.org/packages/Okapi.Support.Log.Text/1.0.1 which provides the default implementation of IOkapiLogger. Also, users don't need to use Ninject at all.
+* Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
+
+	* Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 (obsolete)
+	* From 1.2.7, please use https://www.nuget.org/packages/Okapi.Support.Log.Text/1.0.1
+	* GitHub: https://github.com/tamnguyenbbt/Okapi.Support.Log.Text
+	* Log file path is set via configuration (see Configuration section)
 
 ````
     public class Logger : IOkapiLogger
@@ -226,33 +241,45 @@ Below is a simple implementation using Serilog's File sink. Serilog comes with m
     }
 ````
 
-### Customize Test Report (Optional)
-Implement **IReportFormatter** interface.
-To produce test report, you need to decorate your test case methods with Okpai **TestCase** attribute and test step methods with Okapi **Step** attribute. Also, call **TestReport.Verify()** to perform assertions and update report (you can use any assertion library), and call **TestReport.Report()** at the end of the test methods and test step methods to send the report to the implementation class of IReportFormatter
+* When no implementation is provided or Okapi.Support.Log.Text nuget package is not installed, Okapi does not perform logging.
 
-* GitHub: https://github.com/tamnguyenbbt/Okapi.Support.Report.Text (report to text file) and https://github.com/tamnguyenbbt/Okapi.Support.Report.Html (report to html files)
-* Nuget packages: https://www.nuget.org/packages/Okapi.Support.Report.Text/1.0.1 and https://www.nuget.org/packages/Okapi.Support.Report.Html/1.0.7
+### Customise Test Report (Optional)
 
-**Note**: from Okapi 1.2.4, Okapi configuration allows passing log file path and report directory via app.config or ITestEnvironment. Users don't need to perform Ninject dependencies with constructors.
+* Implement **IReportFormatter** interface.
+* To generate test reports for test cases, you need to decorate your test case methods with Okpai **TestCase** attribute. To generate test reports for test steps,  decorate test step methods with Okapi **Step** attribute. 
 
-### Inject Okapi Interface Implementations
-Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject your settings mentioned above to Okapi
+* Call **TestReport.Verify()** to perform assertions and update report (you can use any assertion library but **TestReport** class has assertion methods with built-in reporting engine for Okapi so it serves two purposes - assert and report)
+
+* Call **TestReport.Report()** at the end of the test case methods and test step methods to send the report to IReportFormatter
+
+* Ready-to-use IReportFormatter implementations: 
+	* https://github.com/tamnguyenbbt/Okapi.Support.Report.Text (report to text file)
+	* https://www.nuget.org/packages/Okapi.Support.Report.Text/1.0.1
+	* https://github.com/tamnguyenbbt/Okapi.Support.Report.Html (report to html files)
+	* https://www.nuget.org/packages/Okapi.Support.Report.Html/1.0.7
+
+* Report directory is set via configuration (see Configuration section)
+
+* When no implementation is provided, or none of the nuget packages listed above has been installed, Okapi does not perform reporting. 
+
+### Inject Okapi Interface Implementations (Optional and Obsolete)
+
+* Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject any implementation of Okapi's public interfaces to Okapi.
+
+* However, from version 1.2.4, the implementation of **IOkapiModuleLoader** is NO LONGER required. Okapi automatically finds and loads the implementations for ITestEnvironment, IDriverOptionsFactory, IOkapiLogger, and  IReportFormatter if any.
 
 ````
 internal class DependencyInjector : IOkapiModuleLoader
 {
     public void LoadAssemblyBindings(IKernel kernel)
     {
-        kernel.Bind<ITestEnvironment>().To<TestEnvironment>().InSingletonScope(); //optional; if not provided, Okapi uses App.config
-        kernel.Bind<IDriverConfig>().To<DriverConfig>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
-        kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope(); //optional; if not provided, Okapi uses its built-in one
-        kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope(); //optional; if not provided, Okapi does not log info
-        kernel.Bind<IReportFormatter>().To<ReportFormatter>().InSingletonScope(); //optional; if not provided, Okapi does not produce test report
+        kernel.Bind<ITestEnvironment>().To<TestEnvironment>().InSingletonScope();
+        kernel.Bind<IDriverOptionsFactory>().To<DriverOptionsFactory>().InSingletonScope();
+        kernel.Bind<IOkapiLogger>().To<Logger>().InSingletonScope();
+        kernel.Bind<IReportFormatter>().To<ReportFormatter>().InSingletonScope();
     }
 }
 ````
-
-**Note**: from 1.2.4, the implementation of **IOkapiModuleLoader** is not required for user-customized classes so the dependencies on Ninject is no longer required. Okapi automatically finds and loads the implementations for ITestEnvironment, IDriverConfig, IDriverOptionsFactory, IOkapiLogger, and  IReportFormatter if any.
 
 ## Sample Tests Using MSTest
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/SimpleTests.cs
@@ -264,7 +291,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **2.0.1** released on 26/02/2020
+* Version **2.0.2** released on 27/02/2020
 
 ## Author
 ###  **Tam Nguyen**
@@ -898,7 +925,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 	* Embedding business rules within the code is very bad practice of writing test automation scripts. It makes it hard to debug and troubleshoot, hard to maintain, etc. and the scripts look messy.
 
 
-## Common TestObject Method References
+## Common TestObject method references
 * Click -> clicks on a web element. Checks if the web element is ready before clicking. Retries if the click action does not take effect
 * DoubleClick -> double click on a web element
 * SendKeys -> inputs text into a text box or a text area
@@ -923,7 +950,33 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * WaitUntilClickable -> waits until the web element represented by TestObject being clickable. Relies on Selenium so this one does not work for all cases
 * WaitUntilVisible -> waits until the web element represented by TestObject being enabled and displayed. Relies on Selenium so this one does not work for all cases
 * GetLifespanInMilliseconds -> get life span of a web element, useful for elements which exist a short time, such as a validation error message
-* 
+* (To be added)
+
+## Check Visual Studio unit test logs for failed tests 
+
+* Okapi console logs (in JSON format) on failed tests are comprehensive which support the best for script debugging
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/UnitTestExplorer.png)
+
+
+## View test execution report
+
+* If you have installed the Html test report nuget package mentioned above, Okapi creates test execution reports for you after each execution.
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/SummaryHtmlReport.png)
+
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TestCaseDetailedHtmlReport.png)
+
+## View activity logs
+
+* If you have installed Okapi.Support.Log.Text nuget package as mentioned above and have set log path within the configuration, Okapi generates activity logs for you.
+
+````
+2020-02-27 09:48:40.115 +11:00 [INF] Click | Index: 0 | Locators: //p-dropdownitem/li/span[text()='7']          ----> TEST: [Id: 21637a99-ed8e-4059-9186-71df03ed3de4 | Name: Test1 | Namespace: Okapi.Sample.Tests.TestCases | File Name: C:\DEV\Okapi.Sample.Tests\TestCases\Sample.cs | Line: 10 | Column: 12]          ----> STEP: [Id: 843ab07c-ea65-4965-8710-4fb220b876d7 | Name: Step1 | Namespace: Okapi.Sample.Tests.TestCases.TestSteps | File Name: C:\DEV\Okapi.Sample.Tests\TestSteps\Login.cs | Line: 57 | Column: 9]
+````
+
+* For failed activities, the log includes more failed details in JSON format
 
 # ADVANCED USAGE
 ## Get text of a cell in a table

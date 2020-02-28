@@ -55,7 +55,6 @@
     <Compile Include="PageObjectModelSample\POMs\SignUpPage.cs" />
     <Compile Include="PageObjectModelSample\Steps\SignUpSteps.cs" />
     <Compile Include="PageObjectModelSample\TestCases\SignUpTestCases.cs" />
-    <Compile Include="ProjectConfig\DriverConfig.cs" />
     <Compile Include="ProjectConfig\TestEnvironment.cs" />
     <Compile Include="TestCases\ReusableDriver.cs" />
     <Compile Include="TestCases\UsingFileDB.cs" />
@@ -102,7 +101,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Okapi">
-      <Version>2.0.1</Version>
+      <Version>2.0.2</Version>
     </PackageReference>
     <PackageReference Include="Okapi.Support.Log.Text">
       <Version>1.0.1</Version>
