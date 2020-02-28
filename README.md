@@ -56,7 +56,7 @@ Okapi treats traditional searching methods such as Id and class name as special 
 ## Set up a test project
 * The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
 
-* The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community version  (https://visualstudio.microsoft.com/vs/community) then install the following Nuget packages and it is ready for you to write unit tests.
+* The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community  (https://visualstudio.microsoft.com/vs/community) then install the following Nuget packages and it is ready for you to write unit tests.
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Nuget.png)
 
