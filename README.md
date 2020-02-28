@@ -54,7 +54,52 @@ Okapi treats traditional searching methods such as Id and class name as special 
 ## Set up a test project
 * The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
 
-* The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community version  (https://visualstudio.microsoft.com/vs/community) then install the following Nuget packages and it is ready for you to write unit tests
+* The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community version  (https://visualstudio.microsoft.com/vs/community) then install the following Nuget packages and it is ready for you to write unit tests.
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Nuget.png)
+
+* Packages:
+	* **Okapi**
+	* **NUnit** is needed to write NUnit test cases
+	* **NUnit3TestAdapter** is needed to run NUnit test cases within Visual Studio
+	* **Okapi.Support.Report.Html** (optional) is needed when you want test reports to be constructed. Okapi sends out test report data when you turn this function on in configuration. Okapi.Support.Report.Html, being a presentation layer, collects those real-time data and builds the html reports. Code for this package is shared at https://github.com/tamnguyenbbt/Okapi.Support.Report.Html. You can base on this code to write your own flavour of Okapi report, locally, as web service, or for CI/CD environments such as Jenkins or TeamCity.
+	* **Okapi.Support.Log.Text** (optional) is needed when you want logs are captured. Okapi sends out real-time logs when you turn this function on in configuration. Okapi.Support.Log.Text, being a presentation layer, collects those real-time data and writes out logs for you. Code for this package is shared at https://github.com/tamnguyenbbt/Okapi.Support.Log.Text. You can base on this code to write your own flavour of Okapi logger.
+	* **Okapi.Support.Report.NUnit** provides **ToOkapiTestContext** method which converts NUnit Test Context to Okapi Test Context
+		* In Okapi, each test needs to be decorated with Okapi TestCase attribute and needs to end with TestReport.Report() call so that the test case activities get reported.
+		* With Okapi.Support.Report.NUnit you can call TestReport.Report at NUnit test tear down level instead
+		
+				
+		````
+		[Test]
+        	[TestCase]
+        	public void Test_with_report()
+        	{
+            		DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            		int elementCount = "<span> `Next`".GetTestObject().ElementCount;
+            		TestReport.IsTrue(elementCount == 1);
+            		TestReport.Report();
+        	}		
+		````
+		
+		Or
+		
+		````
+		[TearDown]
+        	public void TestCleanup()
+        	{
+            		TestReport.Report(TestContext.CurrentContext.ToOkapiTestContext());
+            		DriverPool.Instance.QuitActiveDriver();
+        	}
+
+        	[Test]
+        	[TestCase]
+        	public void Test_with_report()
+        	{
+            		DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            		int elementCount = "<span> `Next`".GetTestObject().ElementCount;
+            		TestReport.IsTrue(elementCount == 1);
+        	}
+		````
 	
 
 ### Configuration (Optional)
