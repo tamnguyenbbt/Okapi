@@ -968,6 +968,16 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TestCaseDetailedHtmlReport.png)
 
+## View activity logs
+
+* If you have installed Okapi.Support.Log.Text nuget package as mentioned above and have set log path within the configuration, Okapi generates activity logs for you.
+
+````
+2020-02-27 09:48:40.115 +11:00 [INF] Click | Index: 0 | Locators: //p-dropdownitem/li/span[text()='7']          ----> TEST: [Id: 21637a99-ed8e-4059-9186-71df03ed3de4 | Name: Test1 | Namespace: Okapi.Sample.Tests.TestCases | File Name: C:\DEV\Okapi.Sample.Tests\TestCases\Sample.cs | Line: 10 | Column: 12]          ----> TEST: [Id: 843ab07c-ea65-4965-8710-4fb220b876d7 | Name: Update_meeting_details | Namespace: CabNet.UI.Tests.Steps.MeetingsSteps | File Name: C:\DEV\Okapi.Sample.Tests\TestSteps\Login.cs | Line: 57 | Column: 9]
+````
+
+* For failed activities, the log includes more failed details in JSON format
+
 # ADVANCED USAGE
 ## Get text of a cell in a table
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
