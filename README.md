@@ -74,7 +74,7 @@ Add an **App.config** file in your test project as below:
   </appSettings>
   <EnvironmentSection>
     <Environments>
-      <add targetTestEnvironment="Test1"
+      <add targetTestEnvironment="Alpha"
 	 active = "true"
 	 driverFlavour = "ChromeDriver"
          remoteDriver = "false"
@@ -90,7 +90,7 @@ Add an **App.config** file in your test project as below:
          highlightOnSearch = "true"
 	 highlightTimeInSeconds = "0.05"
 	 cachedObjectRepository = "COR.txt"/>
-      <add targetTestEnvironment="Test2"
+      <add targetTestEnvironment="Beta"
 	 active = "false"
 	 driverFlavour = "IE"
          remoteDriver = "false"
