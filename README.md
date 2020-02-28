@@ -54,7 +54,7 @@ Okapi treats traditional searching methods such as Id and class name as special 
 ## Set Up Test Project
 The code in this repo is for a sample test project based on MSUnit and .Net Framework 4.5 and uses Okapi library.
 
-### Configuration
+### Configuration (Optional)
 * Okapi supports App.config, class configuration via dependency injection, and class configuration in code. Class configuration in code takes precedence over App.config configuration; and App.config configuration takes precedence over class configuration via dependency injection when more than one methods are used at the same time.
 
 * If none of the methods mentioned above are used, Okapi will use the built-in default configuration (with Chrome driver as default driver).
