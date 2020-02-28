@@ -3,7 +3,7 @@
 
 * Addresses all possible practical test automation difficulties, letting users focus on business rules of the web applications under test while scripting (in C#). Okapi helps build reliable and easy-to-maintain Web UI test scripts. 
 	* If timing and stale web element issues from Selenium and from other free or commercial tools have long been haunting you (timing issue is number one cause of intermittent failure Web UI test automation projects), Okapi lifts all those from your shoulders. Okapi has built-in mechanisms and supporting methods which help you build reliable tests without having timing issues bothering you. Okapi helps you to build advanced test scripts.
-	* Skillful automation testers/developers need to write a lot of lines of code (overhead) to make your Web UI test scripts to be trusted (not false possitive). Okapi lets you write very less code to achieve robust test scripts. What you need is to read through the usage below to understand how Okapi works. As soon as you understand how Okapi works, writing reliable and robust test sripts is very easy with Okapi. Okapi cuts significant development time and effort as well as maintenance time and effort from you and your team.
+	* Skillful automation testers/developers need to write a lot of lines of code (overhead) to make your Web UI test scripts to be trusted (not false positive). Okapi lets you write very less code to achieve robust test scripts. What you need is to read through the usage below to understand how Okapi works. As soon as you understand how Okapi works, writing reliable and robust test scripts is very easy with Okapi. Okapi cuts significant development time and effort as well as maintenance time and effort from you and your team.
 * Okapi is ready to use, there being little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
 * First to introduce the advanced **search web elements by anchors** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
@@ -22,7 +22,7 @@
 * Easy to integrate with any Unit test framework
 * Ideal for setting up and running both locally and in any Continuous Integration environment
 * Smart search on traditional searching methods (id, class name, link text, xpath, etc.). For instance, "userName".GetTestObject().SendKeys("John") acts the same as "Id `userName`".GetTestObject().SendKeys("John").
-Okapi treats traditional searching mwethods such Id and class name as special cases of the advanced search by anchors algorithm where search element is also the anchor element.
+Okapi treats traditional searching methods such as Id and class name as special cases of the advanced search by anchors algorithm where search element is also the anchor element.
 * Supports user-defined actions, to extend/add the web interactive actions where Okapi has not provided yet.
 * Comes with FileDB functionality to save and share test data between tests and steps.
 * If you are a professional .Net/C# developer, you'd love the lambda methods/features of Okapi. It is a bit advanced for average automation testers using C# but it can help you write less to do more.
@@ -30,9 +30,6 @@ Okapi treats traditional searching mwethods such Id and class name as special ca
 ## NuGet
 * https://www.nuget.org/packages/Okapi/2.0.3
 * Install-Package Okapi -Version 2.0.3
-
-## Blog
-* https://okapi4automation.wordpress.com
 
 ## 'What You See Is What You Get' Style Test Development - First Simple Test Script
 
@@ -246,7 +243,7 @@ You can customise the logging message template format and logging destination by
 ### Customise Test Report (Optional)
 
 * Implement **IReportFormatter** interface.
-* To generate test reports for test cases, you need to decorate your test case methods with Okpai **TestCase** attribute. To generate test reports for test steps,  decorate test step methods with Okapi **Step** attribute. 
+* To generate test reports for test cases, you need to decorate your test case methods with Okpai **TestCase** attribute. To generate test reports for test steps, decorate test step methods with Okapi **Step** attribute. 
 
 * Call **TestReport.Verify()** to perform assertions and update report (you can use any assertion library but **TestReport** class has assertion methods with built-in reporting engine for Okapi so it serves two purposes - assert and report)
 
@@ -266,7 +263,7 @@ You can customise the logging message template format and logging destination by
 
 * Okapi comes with **IOkapiModuleLoader** interface for you to implement using Ninject's IKernel so that you can inject any implementation of Okapi's public interfaces to Okapi.
 
-* However, from version 1.2.4, the implementation of **IOkapiModuleLoader** is NO LONGER required. Okapi automatically finds and loads the implementations for ITestEnvironment, IDriverOptionsFactory, IOkapiLogger, and  IReportFormatter if any.
+* However, from version 1.2.4, the implementation of **IOkapiModuleLoader** is NO LONGER required. Okapi automatically finds and loads the implementations for ITestEnvironment, IDriverOptionsFactory, IOkapiLogger, and IReportFormatter if any.
 
 ````
 internal class DependencyInjector : IOkapiModuleLoader
@@ -298,7 +295,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 [![View My profile on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x33.png)](https://www.linkedin.com/in/tam-nguyen-a0792930/)
 
 ## Future Support/Development
-Okapi Studio, desktop application for Okapi is under development and demo version is expected to be released mid 2020.
+Okapi Studio, desktop application for Okapi
 Okapi Studio leverages the power of Okapi and has the following base features:
 * Test artefact creation/edit vis UI. Unlike other tools in the market which have UI view and expert (code) view, Okapi Studio has only one UI view to be simple but it is advanced so users can create sophisticated tests without writing any line of code.
 * Test artefact manager - project, test case, test step, test suite, object repository
