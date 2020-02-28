@@ -6,7 +6,7 @@
 	* Skillful automation testers/developers need to write a lot of lines of code (overhead) to make your Web UI test scripts to be trusted (not false positive). Okapi lets you write very less code to achieve robust test scripts. What you need is to read through the usage below to understand how Okapi works. As soon as you understand how Okapi works, writing reliable and robust test scripts is very easy with Okapi. Okapi cuts significant development time and effort as well as maintenance time and effort from you and your team.
 * Okapi is ready to use, there being little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
-* First to introduce the advanced **search web elements by anchors** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+* First to introduce the advanced **SEARCH WEB ELEMENTS BY ANCHORS** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
 * Advanced **smart search** by anchors (turned on/off in config)
 * Introduces **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
 * Introduces the **Dynamic Contents** concept for better code reusable and easy to use
