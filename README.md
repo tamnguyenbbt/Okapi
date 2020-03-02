@@ -1,25 +1,24 @@
 # Okapi Get Started
 ## Changing to 'What You See Is What You Get' Style Test Development
 
-**Okapi** is an advanced and easy-to-use Selenium-based **Web UI test automation library/framework** for .Net/C# users. **Okapi** has been designed **not to be just another Web UI test automation library or Selenium-wrapper in the market**. It aims at radically changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective at top levels. It has been designed and developed to be game changer in Web UI automation testing business. Okapi is powerful and open.
+**Okapi** is an advanced and easy-to-use **Web UI test automation library/framework** for .Net/C# users. **Okapi** has been designed **not to be just another Web UI test automation library in the market**. It aims at radically changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective at top levels. It has been designed and developed to be game changer in Web UI automation testing business. Okapi is powerful and open.
 
 * Addresses all possible practical test automation difficulties, letting users focus on business rules of the web applications under test while scripting (in C#). Okapi helps build reliable and easy-to-maintain Web UI test scripts. 
-	* If timing and stale web element issues from Selenium and from other free or commercial tools have long been haunting you (timing issue is number one cause of intermittent failure Web UI test automation projects), Okapi lifts all those from your shoulders. Okapi has built-in mechanisms and supporting methods which help you build reliable tests without having timing issues bothering you. Okapi helps you to build advanced test scripts.
+	* If timing and stale web element issues from other free or commercial tools have long been haunting you (timing issue is number one cause of intermittent failure Web UI test automation projects), Okapi lifts all those from your shoulders. Okapi has built-in mechanisms and supporting methods which help you build reliable tests without having timing issues bothering you. Okapi helps you to build advanced test scripts.
 	* Skillful automation testers/developers need to write a lot of lines of code (overhead) to make your Web UI test scripts to be trusted (not false positive). Okapi lets you write very less code to achieve robust test scripts. What you need is to read through the usage below to understand how Okapi works. As soon as you understand how Okapi works, writing reliable and robust test scripts is very easy with Okapi. Okapi cuts significant development time and effort as well as maintenance time and effort from you and your team.
 * Okapi is ready to use, there being little need to build another wrapper around it. 
 * Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
 * First to introduce the advanced **SEARCH WEB ELEMENTS BY ANCHORS** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
-* Advanced **smart search** by anchors (turned on/off in config)
+* Advanced **Smart Search** by anchors (turned on/off in config)
 * Introduces **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
 * Introduces the **Dynamic Contents** concept for better code reusable and easy to use
 * Advanced and unique auto and manual Page Object Model class code generation/recording algorithm
 * Supports data-driven out of the box
-* Manages Selenium drivers automatically
-* Supports user-customized test report and logging, coming with two default report packages - text and html
-* Supports user-customized test project configuration for quick setup of test project
+* Supports user-customised test report and logging, coming with two default report packages - text and html
+* Supports user-customised test project configuration for quick setup of test project
 * Advanced built-in web object interaction library for developing reliable test scripts with less lines of code
-* Reliable API (i.e. all methods detect if the web element under test is found before performing an action on it. Click method also detects if the click action has taken effect otherwise retries up to 3 times, etc.)
-* Supports Selenium ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver and RemoteWebDriver
+* Reliable API
+* Supports ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver, SafariDriver, OperaDriver and Selenium RemoteWebDriver
 * Supports .Net Framework 4.5, 4.6 and 4.7
 * Easy to integrate with any Unit test framework
 * Ideal for setting up and running both locally and in any Continuous Integration environment
@@ -30,8 +29,8 @@ Okapi treats traditional searching methods such as Id and class name as special 
 * If you are a professional .Net/C# developer, you'd love the lambda methods/features of Okapi. It is a bit advanced for average automation testers using C# but it can help you write less to do more.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/2.0.3
-* Install-Package Okapi -Version 2.0.3
+* https://www.nuget.org/packages/Okapi/2.0.5
+* Install-Package Okapi -Version 2.0.5
 
 ## 'What You See Is What You Get' Style Test Development - First Simple Test Script
 
@@ -127,6 +126,8 @@ Add an **App.config** file in your test project as below:
       <add targetTestEnvironment="Alpha"
 	 active = "true"
 	 driverFlavour = "ChromeDriver"
+	 driverDirectory = ""
+	 driverExecutableName = ""
          remoteDriver = "false"
 	 driverTimeoutInSeconds = "10"
 	 quitDriverOnError = "true"
@@ -158,6 +159,8 @@ Add an **App.config** file in your test project as below:
 </configuration>
 ````
 
+* When driverDirectory and driverExecutableName are not set, Okapi looks into the Path environment variable for the path and searches for the default driver name in that path.
+
 #### Using Class Configuration via Dependency Injection
 
 Implement **ITestEnvironment** interface
@@ -179,7 +182,9 @@ internal class TestEnvironment : ITestEnvironment
     public string reportDirectory => "Report";
     public bool HighlightOnSearch => true;
     public string CachedObjectRepository => "COR.txt";
-    public double DriverTimeoutInSeconds => 15;
+    public double DriverTimeoutInSeconds => 30;
+    public string DriverDirectory => "C:\Selenium";
+    public string DriverExecutableName => "chromedriver.exe"
 }
 ````
 
@@ -244,7 +249,9 @@ public enum DriverFlavour
     Chrome,
     Edge,
     Firefox,
-    IE
+    IE,
+    Opera,
+    Safari
 }
 ````
 
@@ -338,7 +345,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **2.0.3** released on 28/02/2020
+* Version **2.0.5** released on 03/03/2020
 
 ## Author
 ###  **Tam Nguyen**
