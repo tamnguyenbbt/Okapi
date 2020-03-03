@@ -24,5 +24,7 @@ namespace OkapiSampleTests.ProjectConfig
         public double HighlightTimeInSeconds => 0.05;
         public string CachedObjectRepository => "COR.txt";
         public double DriverTimeoutInSeconds => 5;
+        public string DriverDirectory => null;
+        public string DriverExecutableName => null;
     }
 }
