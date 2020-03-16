@@ -1037,7 +1037,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 * It is open for users of other tools to pass a html document as text into Okapi and Okapi provides back the xpaths for all the web elements on that html document. There having been some requests from those who have contacted me, I am going to develop a simple Console application, Desktop application, or a simple self-host web service for users of other tools/APIs and those who use Java Selenium to call to get xpaths for all web elements on a html document or xpaths for individual search by anchors.
 
-* Example: Record all xpaths for a document
+* Example: Record xpaths for all web elements in a document
 ````
 IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
 string html = driver.Html;
@@ -1046,15 +1046,34 @@ ManagedXPaths managedXPaths = dom.UnverifiedDocumentManagedXPaths;
 List<string> xpaths = managedXPaths?.Select(x => x.RecomendedUnverifiedLocator)?.ToList();
 ````
 
-* Example: Record some xpaths for a document
+* Example: Record xpaths for some web elements in a document
 ````
 IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
 string html = driver.Html;
 Dom dom = new Dom(html);
 int managedXPathCount = dom.ManagedXPathCount;
-ManagedXPaths managedXPaths = dom.GetUnverifiedManagedXPaths(10, 30); //get 30 xpaths out of managedXPathCount xpaths, from index 10 to index 40)
+ManagedXPaths managedXPaths = dom.GetUnverifiedManagedXPaths(10, 30); //get 30 xpaths out of managedXPathCount xpaths, from index 10 to index 39)
 List<string> xpaths = managedXPaths?.Select(x => x.RecomendedUnverifiedLocator)?.ToList();
 ````
+
+* This method provides the unverified xpaths - those calculated from the provided html document. These xpaths are not tested/confirmed from a real driver/browser.
+
+* Recording from IManagedDriver and you get the verified/confirmed xpaths against the real driver
+
+* Example: Record xpaths for all web elements from current driver
+```
+IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths();
+```
+
+* Example: Record xpaths for some web elements from current driver
+```
+IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths(0, 20); //get 20 xpaths out of managedXPathCount xpaths, from index 0 to index 19)
+```
+
+
+
 
 # ADVANCED USAGE
 ## Get text of a cell in a table
