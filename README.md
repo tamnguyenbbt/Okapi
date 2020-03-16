@@ -1069,6 +1069,7 @@ ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths();
 * Example: Record xpaths for some web elements from current driver
 ```
 IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+int managedXPathCount = driver.GetDocumentManagedXPathCount();
 ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths(0, 20); //get 20 xpaths out of managedXPathCount xpaths, from index 0 to index 19)
 ```
 
