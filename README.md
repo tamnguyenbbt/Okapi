@@ -1033,7 +1033,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * For failed activities, the log includes more failed details in JSON format
 
 ## Record html document xpaths
-* Okapi comes with the capability to record all the xpaths within a html document. There are two ways to do that - via Dom class or via IManagedDriver.
+* Okapi comes with the capability to record all the xpaths within a html document. There are two ways to do that - via **Dom** class or via **IManagedDriver**.
 
 * It is open for users of other tools to pass a html document as text into Okapi and Okapi provides back the xpaths for all the web elements on that html document. There having been some requests from those who have contacted me, I am going to develop a simple Console application, Desktop application, or a simple self-host web service for users of other tools/APIs and those who use Java Selenium to call to get xpaths for all web elements on a html document or xpaths for individual search by anchors.
 
@@ -1043,6 +1043,7 @@ IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www
 string html = driver.Html;
 Dom dom = new Dom(html);
 ManagedXPaths managedXPaths = dom.UnverifiedDocumentManagedXPaths;
+managedXPaths.UpdateDescription("Login");
 List<string> xpaths = managedXPaths?.Select(x => x.RecomendedUnverifiedLocator)?.ToList();
 ````
 
@@ -1058,7 +1059,7 @@ List<string> xpaths = managedXPaths?.Select(x => x.RecomendedUnverifiedLocator)?
 
 * This method provides the unverified xpaths - those calculated from the provided html document. These xpaths are not tested/confirmed from a real driver/browser.
 
-* Recording from IManagedDriver and you get the verified/confirmed xpaths against the real driver
+* Recording from **IManagedDriver** and you get the verified/confirmed xpaths against the real driver
 
 * Example: Record xpaths for all web elements from current driver
 ```
@@ -1088,6 +1089,20 @@ int managedXPathCount = dom.ManagedXPathCount;
 ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths(10, 20, domFilter); 
 ````
 
+## Manage managed xpaths using ManagedXPathCache file cache
+* The outcome of the previous recording process is **ManagedXPaths** class. Okapi has the class **ManagedXPathCache** for users to organise **ManagedXPaths** instances within a file cache
+
+````
+IManagedDriver driver = DriverPool.Instance.GetReusableDriver();
+ManagedXPaths managedXPaths = dom.UnverifiedDocumentManagedXPaths;
+ManagedXPathCache cache = new ManagedXPathCache("C:\\test");
+Guid? id = cache.Save(managedXPaths);
+IList<ManagedXPaths> allManagedXPaths = cache.FindAll();
+ManagedXPaths savedManagedXPaths = cache.FindById(id);
+IList<ManagedXPaths> allLoginManagedXPaths = cache.FindByDescription("Login");
+cache.Delete(id);
+allManagedXPaths = cache.FindAll();
+````
 
 # ADVANCED USAGE
 ## Get text of a cell in a table
