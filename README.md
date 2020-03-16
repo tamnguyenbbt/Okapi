@@ -1035,7 +1035,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 ## Record html document xpaths
 * Okapi comes with the capability to record all the xpaths within a html document. There are two ways to do that - via Dom class or via IManagedDriver.
 
-* It is open for users of other tools to pass a html document as text into Okapi and Okapi provides back the xpaths for all the web element on that html document. There having been some requests from those who have contacted me, I am going to develop a simple Console application, Desktop application, or a simple self-host web service for users of other tools/APIs and those who use Java Selenium to call to get xpaths for all web elements on a html document or xpaths for individual search by anchors.
+* It is open for users of other tools to pass a html document as text into Okapi and Okapi provides back the xpaths for all the web elements on that html document. There having been some requests from those who have contacted me, I am going to develop a simple Console application, Desktop application, or a simple self-host web service for users of other tools/APIs and those who use Java Selenium to call to get xpaths for all web elements on a html document or xpaths for individual search by anchors.
 
 * Example: Record all xpaths for a document
 ````
