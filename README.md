@@ -12,7 +12,7 @@
 * Advanced **Smart Search** by anchors (turned on/off in config)
 * Introduces **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
 * Introduces the **Dynamic Contents** concept for better code reusable and easy to use
-* Advanced and unique auto and manual Page Object Model class code generation/recording algorithm
+* Advanced web page xpath recording mechanism
 * Supports data-driven out of the box
 * Supports user-customised test report and logging, coming with two default report packages - text and html
 * Supports user-customised test project configuration for quick setup of test project
@@ -1031,6 +1031,30 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 ````
 
 * For failed activities, the log includes more failed details in JSON format
+
+## Record html document xpaths
+* Okapi comes with the capability to record all the xpaths within a html document. There are two ways to do that - via Dom class or via IManagedDriver.
+
+* It is open for users of other tools to pass a html document as text into Okapi and Okapi provides back the xpaths for all the web element on that html document. There having been some requests from those who have contacted me, I am going to develop a simple Console application, Desktop application, or a simple self-host web service for users of other tools/APIs and those who use Java Selenium to call to get xpaths for all web elements on a html document or xpaths for individual search by anchors.
+
+* Example: Record all xpaths for a document
+````
+IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+string html = driver.Html;
+Dom dom = new Dom(html);
+ManagedXPaths managedXPaths = dom.UnverifiedDocumentManagedXPaths;
+List<string> xpaths = managedXPaths?.Select(x => x.RecomendedUnverifiedLocator)?.ToList();
+````
+
+* Example: Record some xpaths for a document
+````
+IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+string html = driver.Html;
+Dom dom = new Dom(html);
+int managedXPathCount = dom.ManagedXPathCount;
+ManagedXPaths managedXPaths = dom.GetUnverifiedManagedXPaths(10, 30); //get 30 xpaths out of managedXPathCount xpaths, from index 10 to index 40)
+List<string> xpaths = managedXPaths?.Select(x => x.RecomendedUnverifiedLocator)?.ToList();
+````
 
 # ADVANCED USAGE
 ## Get text of a cell in a table
