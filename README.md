@@ -12,7 +12,7 @@
 * Advanced **Smart Search** by anchors (turned on/off in config)
 * Introduces **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
 * Introduces the **Dynamic Contents** concept for better code reusable and easy to use
-* Advanced and unique auto and manual Page Object Model class code generation/recording algorithm
+* Advanced web page xpath recording mechanism
 * Supports data-driven out of the box
 * Supports user-customised test report and logging, coming with two default report packages - text and html
 * Supports user-customised test project configuration for quick setup of test project
@@ -29,8 +29,8 @@ Okapi treats traditional searching methods such as Id and class name as special 
 * If you are a professional .Net/C# developer, you'd love the lambda methods/features of Okapi. It is a bit advanced for average automation testers using C# but it can help you write less to do more.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/2.0.5
-* Install-Package Okapi -Version 2.0.5
+* https://www.nuget.org/packages/Okapi/2.0.6
+* Install-Package Okapi -Version 2.0.6
 
 ## 'What You See Is What You Get' Style Test Development - First Simple Test Script
 
@@ -45,12 +45,11 @@ Okapi treats traditional searching methods such as Id and class name as special 
 ## Dependencies
 ### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.2.0)
+* ExtSelenium (>= 1.2.1)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Newtonsoft.Json (>= 12.0.2)
 * Okapi.Common (>= 1.0.9)
-* Simplify.Windows.Forms (>= 1.0.0)
 
 ## Set up a test project
 * The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
@@ -345,7 +344,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **2.0.5** released on 03/03/2020
+* Version **2.0.6** released on 16/03/2020
 
 ## Author
 ###  **Tam Nguyen**
@@ -1031,6 +1030,78 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 ````
 
 * For failed activities, the log includes more failed details in JSON format
+
+## Record html document xpaths
+* Okapi comes with the capability to record all the xpaths within a html document. There are two ways to do that - via **Dom** class or via **IManagedDriver**.
+
+* It is open for users of other tools to pass a html document as text into Okapi and Okapi provides back the xpaths for all the web elements on that html document. There having been some requests from those who have contacted me, I am going to develop a simple Console application, Desktop application, or a simple self-host web service for users of other tools/APIs and those who use Java Selenium to call to get xpaths for all web elements on a html document or xpaths for individual search by anchors.
+
+* Example: Record xpaths for all web elements in a document
+````
+IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+string html = driver.Html;
+Dom dom = new Dom(html);
+ManagedXPaths managedXPaths = dom.UnverifiedDocumentManagedXPaths;
+managedXPaths.UpdateDescription("Login");
+List<string> xpaths = managedXPaths?.Select(x => x.RecomendedUnverifiedLocator)?.ToList();
+````
+
+* Example: Record xpaths for some web elements in a document
+````
+IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+string html = driver.Html;
+Dom dom = new Dom(html);
+int managedXPathCount = dom.ManagedXPathCount;
+ManagedXPaths managedXPaths = dom.GetUnverifiedManagedXPaths(10, 30); //get 30 xpaths out of managedXPathCount xpaths, from index 10 to index 39)
+List<string> xpaths = managedXPaths?.Select(x => x.RecomendedUnverifiedLocator)?.ToList();
+````
+
+* This method provides the unverified xpaths - those calculated from the provided html document. These xpaths are not tested/confirmed from a real driver/browser.
+
+* Recording from **IManagedDriver** and you get the verified/confirmed xpaths against the real driver
+
+* Example: Record xpaths for all web elements from current driver
+```
+IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths();
+```
+
+* Example: Record xpaths for some web elements from current driver
+```
+IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.google.com");
+int managedXPathCount = driver.GetDocumentManagedXPathCount();
+ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths(0, 20); //get 20 xpaths out of managedXPathCount xpaths, from index 0 to index 19)
+```
+
+* Instead of recording for all web elements, users are alllowed to narrow down the web elements of choice using **DomFilter** class.
+
+* Example:
+
+````
+IManagedDriver driver = DriverPool.Instance.GetReusableDriver();
+DomFilter domFilter = new DomFilter()
+                .SetAllowedTextKeywordsForAnchor("User Nanme", "Password", "Sign In")
+                .SetAllowedHtmlTagsOrCssSelectorsForNonAnchor("span", "div")
+                .SetAllowedHtmlTagsOrSelectorsForAnchor("label");
+Dom dom = new Dom(html, domFilter);
+int managedXPathCount = dom.ManagedXPathCount;
+ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths(10, 20, domFilter); 
+````
+
+## Manage managed xpaths using ManagedXPathCache file cache
+* The outcome of the previous recording process is **ManagedXPaths** class. Okapi has the class **ManagedXPathCache** for users to organise **ManagedXPaths** instances within a file cache
+
+````
+IManagedDriver driver = DriverPool.Instance.GetReusableDriver();
+ManagedXPaths managedXPaths = dom.UnverifiedDocumentManagedXPaths;
+ManagedXPathCache cache = new ManagedXPathCache("C:\\test");
+Guid? id = cache.Save(managedXPaths);
+IList<ManagedXPaths> allManagedXPaths = cache.FindAll();
+ManagedXPaths savedManagedXPaths = cache.FindById(id);
+IList<ManagedXPaths> allLoginManagedXPaths = cache.FindByDescription("Login");
+cache.Delete(id);
+allManagedXPaths = cache.FindAll();
+````
 
 # ADVANCED USAGE
 ## Get text of a cell in a table
