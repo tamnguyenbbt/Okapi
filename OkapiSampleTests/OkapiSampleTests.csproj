@@ -56,10 +56,10 @@
     <Compile Include="PageObjectModelSample\Steps\SignUpSteps.cs" />
     <Compile Include="PageObjectModelSample\TestCases\SignUpTestCases.cs" />
     <Compile Include="ProjectConfig\TestEnvironment.cs" />
+    <Compile Include="TestCases\DomTests.cs" />
     <Compile Include="TestCases\ReusableDriver.cs" />
     <Compile Include="TestCases\UsingFileDB.cs" />
     <Compile Include="TestCases\FullTextPOM.cs" />
-    <Compile Include="TestCases\MiniDevelopmentSamples.cs" />
     <Compile Include="TestCases\ReportIndividually.cs" />
     <Compile Include="TestCases\ReportWithNUnitContext.cs" />
     <Compile Include="TestCases\ReportWithMSTestContext.cs" />
@@ -101,7 +101,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Okapi">
-      <Version>2.0.5</Version>
+      <Version>2.0.6</Version>
     </PackageReference>
     <PackageReference Include="Okapi.Support.Log.Text">
       <Version>1.0.1</Version>

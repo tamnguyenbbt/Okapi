@@ -11,10 +11,12 @@ namespace OkapiSampleTests.TestCases
     [TestFixture]
     public class HumanWay
     {
+        private IManagedDriver driver = null;
+
         [OneTimeSetUp]
-        public static void ClassInit()
+        public void ClassInit()
         {
-            DriverPool.Instance.ActiveDriver.SetTimeoutInSeconds(2).LaunchPage("https://www.facebook.com/reg");
+            driver = DriverPool.Instance.ActiveDriver.SetTimeoutInSeconds(2).LaunchPage("https://www.facebook.com/reg");
         }
 
         [OneTimeTearDown]
@@ -32,7 +34,7 @@ namespace OkapiSampleTests.TestCases
         [Test]
         [TestCase]
         public void Test1()
-        {            
+        {
             TestObject.New("<input> `First name`").SendKeys("tester");
         }
 
