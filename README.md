@@ -1073,7 +1073,20 @@ int managedXPathCount = driver.GetDocumentManagedXPathCount();
 ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths(0, 20); //get 20 xpaths out of managedXPathCount xpaths, from index 0 to index 19)
 ```
 
+* Instead of recording for all web elements, users are alllowed to narrow down the web elements of choice using **DomFilter** class.
 
+* Example:
+
+````
+IManagedDriver driver = DriverPool.Instance.GetReusableDriver();
+DomFilter domFilter = new DomFilter()
+                .SetAllowedTextKeywordsForAnchor("User Nanme", "Password", "Sign In")
+                .SetAllowedHtmlTagsOrCssSelectorsForNonAnchor("span", "div")
+                .SetAllowedHtmlTagsOrSelectorsForAnchor("label");
+Dom dom = new Dom(html, domFilter);
+int managedXPathCount = dom.ManagedXPathCount;
+ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths(10, 20, domFilter); 
+````
 
 
 # ADVANCED USAGE
