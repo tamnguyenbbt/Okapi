@@ -29,8 +29,8 @@ Okapi treats traditional searching methods such as Id and class name as special 
 * If you are a professional .Net/C# developer, you'd love the lambda methods/features of Okapi. It is a bit advanced for average automation testers using C# but it can help you write less to do more.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/2.0.6
-* Install-Package Okapi -Version 2.0.6
+* https://www.nuget.org/packages/Okapi/2.0.7
+* Install-Package Okapi -Version 2.0.7
 
 ## 'What You See Is What You Get' Style Test Development - First Simple Test Script
 
@@ -45,11 +45,11 @@ Okapi treats traditional searching methods such as Id and class name as special 
 ## Dependencies
 ### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.2.1)
+* ExtSelenium (>= 1.2.2)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
 * Newtonsoft.Json (>= 12.0.2)
-* Okapi.Common (>= 1.0.9)
+* Okapi.Common (>= 1.1.0)
 
 ## Set up a test project
 * The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
@@ -344,7 +344,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **2.0.6** released on 16/03/2020
+* Version **2.0.7** released on 18/03/2020
 
 ## Author
 ###  **Tam Nguyen**
@@ -1102,6 +1102,18 @@ IList<ManagedXPaths> allLoginManagedXPaths = cache.FindByDescription("Login");
 cache.Delete(id);
 allManagedXPaths = cache.FindAll();
 ````
+
+## Get possible xpaths from search by anchors text
+* Users of other web ui test tools than Okapi can use Okapi to convert search-by-anchors text into possible xpaths for using with your tools. You need to pass in two pieces of information - html document text; earch-by-anchors text
+
+Example:
+	````ManagedXPaths managedXPaths = "<button> `Save`".GetTestObject().GetManagedXPaths(html);````
+	
+* Because you pass in the html content, Okapi calculates based on it. You lose a bit of precision offered by Okapi when you use Okapi fully with Okapi's IManagedDriver. The reason is, with Okapi's IManagedDriver, Okapi applies two additional layers of filters. The first is the algorithm of shortest physical distance on the driver/browser; the second is double-checking the calculated xpaths against the driver to narrow down the search results. 
+
+* You also lose a bit of performance because Okapi has cache to speed up test executions
+
+* The developement of a legacy-dotNet-based self-host RESTful API is underway so that your tools can call it in real-time to perform search-by-anchors text to xpaths conversions. This webservice is for Windows but it can be wrapped into docker images for other environments such as Linux. 
 
 # ADVANCED USAGE
 ## Get text of a cell in a table
