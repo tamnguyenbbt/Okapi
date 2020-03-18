@@ -1104,16 +1104,17 @@ allManagedXPaths = cache.FindAll();
 ````
 
 ## Get possible xpaths from search by anchors text
-* Users of other web ui test tools than Okapi can use Okapi to convert search-by-anchors text into possible xpaths for using with your tools. You need to pass in two pieces of information - html document text; earch-by-anchors text
+* Users of other web ui test tools can use Okapi to convert search-by-anchors texts into possible xpaths for using with your tools. You need to pass in two pieces of information - html document text; earch-by-anchors text
 
-Example:
+* Example:
+
 	````ManagedXPaths managedXPaths = "<button> `Save`".GetTestObject().GetManagedXPaths(html);````
 	
-* Because you pass in the html content, Okapi calculates based on it. You lose a bit of precision offered by Okapi when you use Okapi fully with Okapi's IManagedDriver. The reason is, with Okapi's IManagedDriver, Okapi applies two additional layers of filters. The first is the algorithm of shortest physical distance on the driver/browser; the second is double-checking the calculated xpaths against the driver to narrow down the search results. 
+* Because you pass in html content, Okapi calculates based on it. You lose a bit of precision offered by Okapi when you use Okapi fully with Okapi's IManagedDriver. The reason is, with Okapi's IManagedDriver, Okapi applies two additional layers of filters. The first is an algorithm of getting shortest physical distance on driver/browser; the second is double-checking the calculated xpaths against driver to narrow down search results. 
 
-* You also lose a bit of performance because Okapi has cache to speed up test executions
+* You also lose a bit of performance because you cannot use Okapi's cache to speed up test executions here.
 
-* The developement of a legacy-dotNet-based self-host RESTful API is underway so that your tools can call it in real-time to perform search-by-anchors text to xpaths conversions. This webservice is for Windows but it can be wrapped into docker images for other environments such as Linux. 
+* Developement of a legacy-dotNet-based self-host RESTful API is underway so that when done, your tools can call it in real-time to perform search-by-anchors text to xpaths conversions. This webservice is for Windows but it can be wrapped into docker images for other environments such as Linux. 
 
 # ADVANCED USAGE
 ## Get text of a cell in a table
