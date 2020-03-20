@@ -51,7 +51,7 @@ Okapi treats traditional searching methods such as Id and class name as special 
 * Newtonsoft.Json (>= 12.0.3)
 * Okapi.Common (>= 1.1.0)
 
-## Users of other Web UI tools or other platforms want to use Okapi's search-by-anchors 
+## Users of other Web UI tools, other platforms, or other programming languages want to use Okapi's search-by-anchors 
 * See Okapi Web API service tool https://github.com/tamnguyenbbt/Okapi.Web.Api.Console
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSample.png)
