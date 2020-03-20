@@ -56,7 +56,7 @@ Okapi treats traditional searching methods such as Id and class name as special 
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSample.png)
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSampleTest.jpg)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSampleTest.JPG)
 
 ## Set up a test project
 * The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
