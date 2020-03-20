@@ -54,6 +54,10 @@ Okapi treats traditional searching methods such as Id and class name as special 
 ## Users of other Web UI tools or other platforms want to use Okapi's search-by-anchors 
 * See Okapi Web API service tool https://github.com/tamnguyenbbt/Okapi.Web.Api.Console
 
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSample.png)
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSampleTest.jpg)
+
 ## Set up a test project
 * The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
 
