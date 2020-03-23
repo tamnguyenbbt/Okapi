@@ -358,7 +358,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 [![View My profile on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x33.png)](https://www.linkedin.com/in/tam-nguyen-a0792930/)
 
 ## Future Support/Development
-### 1. Okapi with come Machine Learning (ML)
+### 1. Machine Learning (ML) feature for Okapi
 * The objective is that Okapi can understand some basic English instruction flows (rather than users having to code)
 * Example: users can write a test like below and Okapi goes performing it
 
