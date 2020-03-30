@@ -29,8 +29,8 @@ Okapi treats traditional searching methods such as Id and class name as special 
 * If you are a professional .Net/C# developer, you'd love the lambda methods/features of Okapi. It is a bit advanced for average automation testers using C# but it can help you write less to do more.
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/2.0.6
-* Install-Package Okapi -Version 2.0.6
+* https://www.nuget.org/packages/Okapi/2.0.9
+* Install-Package Okapi -Version 2.0.9
 
 ## 'What You See Is What You Get' Style Test Development - First Simple Test Script
 
@@ -45,11 +45,18 @@ Okapi treats traditional searching methods such as Id and class name as special 
 ## Dependencies
 ### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
-* ExtSelenium (>= 1.2.1)
+* ExtSelenium (>= 1.2.2)
 * LiteDB (>= 4.1.4)
 * Ninject (>= 3.3.4)
-* Newtonsoft.Json (>= 12.0.2)
-* Okapi.Common (>= 1.0.9)
+* Newtonsoft.Json (>= 12.0.3)
+* Okapi.Common (>= 1.1.0)
+
+## Users of other Web UI tools, other platforms, or other programming languages want to use Okapi's search-by-anchors 
+* See Okapi Web API service tool https://github.com/tamnguyenbbt/Okapi.Web.Api.Console
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSample.png)
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSampleTest.JPG)
 
 ## Set up a test project
 * The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
@@ -344,14 +351,25 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **2.0.6** released on 16/03/2020
+* Version **2.0.9** released on 19/03/2020
 
 ## Author
 ###  **Tam Nguyen**
 [![View My profile on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x33.png)](https://www.linkedin.com/in/tam-nguyen-a0792930/)
 
 ## Future Support/Development
-Okapi Studio, desktop application for Okapi
+### 1. Machine Learning (ML) feature for Okapi
+* The objective is that Okapi can understand some basic English instruction flows (rather than users having to code)
+* Example: users can write a test like below and Okapi goes performing it
+
+````
+- Enter 'John' into first name box
+- Enter 'Doe' into last name box
+- Click 'submit' button
+- Check 'Sucessful' message displayed
+````
+
+### 2. Okapi Studio, desktop application for Okapi
 Okapi Studio leverages the power of Okapi and has the following base features:
 * Test artefact creation/edit vis UI. Unlike other tools in the market which have UI view and expert (code) view, Okapi Studio has only one UI view to be simple but it is advanced so users can create sophisticated tests without writing any line of code.
 * Test artefact manager - project, test case, test step, test suite, object repository
@@ -1102,6 +1120,19 @@ IList<ManagedXPaths> allLoginManagedXPaths = cache.FindByDescription("Login");
 cache.Delete(id);
 allManagedXPaths = cache.FindAll();
 ````
+
+## Get possible xpaths from search by anchors text
+* Users of other web ui test tools can use Okapi to convert search-by-anchors texts into possible xpaths for using with your tools. You need to pass in two pieces of information - html document text; earch-by-anchors text
+
+* Example:
+
+	````ManagedXPaths managedXPaths = "<button> `Save`".GetTestObject().GetManagedXPaths(html);````
+	
+* Because you pass in html content, Okapi calculates based on it. You lose a bit of precision offered by Okapi when you use Okapi fully with Okapi's IManagedDriver. The reason is, with Okapi's IManagedDriver, Okapi applies two additional layers of filters. The first is an algorithm of getting shortest physical distance on driver/browser; the second is double-checking the calculated xpaths against driver to narrow down search results. 
+
+* You also lose a bit of performance because you cannot use Okapi's cache to speed up test executions here.
+
+* Developement of a legacy-dotNet-based self-host RESTful API is underway so that when done, your tools can call it in real-time to perform search-by-anchors text to xpaths conversions. This webservice is for Windows but it can be wrapped into docker images for other environments such as Linux. 
 
 # ADVANCED USAGE
 ## Get text of a cell in a table
