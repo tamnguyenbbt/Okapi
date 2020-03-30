@@ -363,10 +363,10 @@ internal class DependencyInjector : IOkapiModuleLoader
 * Example: users can write a test like below and Okapi goes performing it
 
 ````
-- Enter 'John' into first name box
-- Enter 'Doe' into last name box
-- Click 'submit' button
-- Check 'Sucessful' message displayed
+- Enter 'John' into `firstName` box
+- Enter 'Doe' into `last name` box
+- Click `submit` button
+- Check `Sucessful` message displayed
 ````
 
 ### 2. Okapi Studio, desktop application for Okapi
