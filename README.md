@@ -1,38 +1,58 @@
 # Okapi Get Started
-## Changing to 'What You See Is What You Get' Style Test Development
 
-**Okapi** is an advanced and easy-to-use **Web UI test automation library/framework** for .Net/C# users. **Okapi** has been designed **not to be just another Web UI test automation library in the market**. It aims at radically changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective at top levels. It has been designed and developed to be game changer in Web UI automation testing business. Okapi is powerful and open.
+## Why Okapi?
 
-* Addresses all possible practical test automation difficulties, letting users focus on business rules of the web applications under test while scripting (in C#). Okapi helps build reliable and easy-to-maintain Web UI test scripts. 
-	* If timing and stale web element issues from other free or commercial tools have long been haunting you (timing issue is number one cause of intermittent failure Web UI test automation projects), Okapi lifts all those from your shoulders. Okapi has built-in mechanisms and supporting methods which help you build reliable tests without having timing issues bothering you. Okapi helps you to build advanced test scripts.
-	* Skillful automation testers/developers need to write a lot of lines of code (overhead) to make your Web UI test scripts to be trusted (not false positive). Okapi lets you write very less code to achieve robust test scripts. What you need is to read through the usage below to understand how Okapi works. As soon as you understand how Okapi works, writing reliable and robust test scripts is very easy with Okapi. Okapi cuts significant development time and effort as well as maintenance time and effort from you and your team.
-* Okapi is ready to use, there being little need to build another wrapper around it. 
-* Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
-* First to introduce the advanced **SEARCH WEB ELEMENTS BY ANCHORS** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+* We, human beings, by nature, are better in using intuition than conscious reasoning when dealing with something simple and repetitive.
+
+* Okapi changes the way you write Web UI test automation towards intuition with **What You See Is What You Get** test script development style.
+
+## What is Okapi?
+
+**Okapi** is an advanced and easy-to-use, open and powerful **Web UI test automation API** for .Net/C# users. **Okapi** has been designed **not to be just another Web UI test automation library in the market**. It aims at radically changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective. It has been designed and developed to be game changer in Web UI automation testing business.
+
+* Okapi addresses all possible practical test automation difficulties such as timing and stale web element issues, letting users focus on business rules of the web applications under test while scripting (in C#). Okapi helps build advanced, reliable and easy-to-maintain Web UI test scripts. Okapi cuts significant development time and effort as well as maintenance time and effort from you and your team by writing very less code to achieve robust test scripts.
+
+* First to introduce the advanced **Search Web Elements By Anchors** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+
 * Advanced **Smart Search** by anchors (turned on/off in config)
-* Introduces **Reusable web driver from another execution session** (for better user-experience while developing test scripts)
-* Introduces the **Dynamic Contents** concept for better code reusable and easy to use
-* Advanced web page xpath recording mechanism
+
+* **Reusable web driver from another execution session** feature for better user-experience while developing test scripts
+
+* Advanced **Web page xpath recording mechanism**
+
+* **Dynamic Contents** concept for better code reusable and easy to use
+
 * Supports data-driven out of the box
+
 * Supports user-customised test report and logging, coming with two default report packages - text and html
+
 * Supports user-customised test project configuration for quick setup of test project
-* Advanced built-in web object interaction library for developing reliable test scripts with less lines of code
-* Reliable API
-* Supports ChromeDriver, FirefoxDriver, InternetExplorerDriver, EdgeDriver, SafariDriver, OperaDriver and Selenium RemoteWebDriver
-* Supports .Net Framework 4.5, 4.6 and 4.7
+
+* Advanced and reliable built-in web element interaction library for developing reliable test scripts with minimal lines of code
+
+* Okapi is ready to use, there being little need to build another wrapper around it.
+
+* Comes under the form of NuGet package and supporting NuGet packages (report, logging, and common)
+
+* Supports **ChromeDriver**, **FirefoxDriver**, **InternetExplorerDriver**, **EdgeDriver**, **SafariDriver**, **OperaDriver** and **Selenium RemoteWebDriver**
+
+* Supports **.Net Framework 4.5, 4.6 and 4.7**
+
 * Easy to integrate with any Unit test framework
+
 * Ideal for setting up and running both locally and in any Continuous Integration environment
-* Smart search on traditional searching methods (id, class name, link text, xpath, etc.). For instance, "userName".GetTestObject().SendKeys("John") acts the same as "Id `userName`".GetTestObject().SendKeys("John").
-Okapi treats traditional searching methods such as Id and class name as special cases of the advanced search by anchors algorithm where search element is also the anchor element.
-* Supports user-defined actions, to extend/add the web interactive actions where Okapi has not provided yet.
-* Comes with FileDB functionality to save and share test data between tests and steps.
-* If you are a professional .Net/C# developer, you'd love the lambda methods/features of Okapi. It is a bit advanced for average automation testers using C# but it can help you write less to do more.
+
+* Supports user-defined actions, to extend/add the web interactive actions where Okapi has not provided yet
+
+* FileDB feature to save and share test data between tests and steps
+
+* Support C# lambda for professional .Net/C# developers to use to build advanced scripts with fewer lines of code
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/2.1.2
-* Install-Package Okapi -Version 2.1.2
+* https://www.nuget.org/packages/Okapi/2.1.3
+* Install-Package Okapi -Version 2.1.3
 
-## 'What You See Is What You Get' Style Test Development - First Simple Test Script
+## **What You See Is What You Get** Style Test Development - First Simple Test Script
 
 **Facebook registration page**
 
@@ -43,6 +63,7 @@ Okapi treats traditional searching methods such as Id and class name as special 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FirstTest.png)
 
 ## Dependencies
+
 ### .NETFramework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
 * ExtSelenium (>= 1.2.6)
@@ -51,14 +72,16 @@ Okapi treats traditional searching methods such as Id and class name as special 
 * Newtonsoft.Json (>= 12.0.3)
 * Okapi.Common (>= 1.1.0)
 
-## Users of other Web UI tools, other platforms, or other programming languages want to use Okapi's search-by-anchors 
-* See Okapi Web API service tool https://github.com/tamnguyenbbt/Okapi.Web.Api.Console
+## Non .Net Support
+
+** Users of other Web UI tools or other programming languages who want to use Okapi's search-by-anchors algorithm can use **Okapi Web API service tool** at https://github.com/tamnguyenbbt/Okapi.Web.Api.Console
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSample.png)
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSampleTest.JPG)
 
-## Set up a test project
+## Set up a Test Project
+
 * The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
 
 * The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community  (https://visualstudio.microsoft.com/vs/community) then install the following Nuget packages and it is ready for you to write unit tests.
@@ -110,6 +133,7 @@ Okapi treats traditional searching methods such as Id and class name as special 
 	
 
 ### Configuration (Optional)
+
 * Okapi supports App.config, class configuration via dependency injection, and class configuration in code. Class configuration in code takes precedence over App.config configuration; and App.config configuration takes precedence over class configuration via dependency injection when more than one methods are used at the same time.
 
 * If none of the methods mentioned above are used, Okapi will use the built-in default configuration (with Chrome driver as default driver).
@@ -194,7 +218,7 @@ internal class TestEnvironment : ITestEnvironment
 }
 ````
 
-#### Using Class Configuration within your test code
+#### Using Class Configuration within Your Test Code
 
 Create a new instance of class **Okapi.Configs.Config**
 
@@ -351,25 +375,15 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **2.1.2** released on 02/04/2020
+* Version **2.1.3** released on 07/04/2020
 
 ## Author
 ###  **Tam Nguyen**
 [![View My profile on LinkedIn](https://static.licdn.com/scds/common/u/img/webpromo/btn_viewmy_160x33.png)](https://www.linkedin.com/in/tam-nguyen-a0792930/)
 
 ## Future Support/Development
-### 1. Machine Learning (ML) feature for Okapi
-* The objective is that Okapi can understand some basic English instruction flows (rather than users having to code)
-* Example: users can write a test like below and Okapi goes performing it
 
-````
-- Enter 'John' into `firstName` box
-- Enter 'Doe' into `last name` box
-- Click `submit` button
-- Check `Sucessful` message displayed
-````
-
-### 2. Okapi Studio, desktop application for Okapi
+### 1. Okapi Studio, desktop application for Okapi
 Okapi Studio leverages the power of Okapi and has the following base features:
 * Test artefact creation/edit vis UI. Unlike other tools in the market which have UI view and expert (code) view, Okapi Studio has only one UI view to be simple but it is advanced so users can create sophisticated tests without writing any line of code.
 * Test artefact manager - project, test case, test step, test suite, object repository
@@ -385,7 +399,9 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 
 
 # BASIC USAGE
-## Setup to use ChromeDriver on Windows 10
+
+## Setup to Use ChromeDriver on Windows 10
+
 * Download the latest stable chromedriver.exe (32 bit for Windows) version which supports your Chrome browser from https://chromedriver.chromium.org/downloads and save it to a local folder
 * Config Path environment variabe for Selenium to find chromedriver.exe
   * Go to Control Panel > System > Advanced system settings > Environment Variables...> System variables > Path
@@ -397,12 +413,12 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/app_config.jpg)
 
-## Setup to use Edge driver on Windows 10
+## Setup to Use EdgeDriver on Windows 10
 * Download the latest stable Edge driver from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver, change its name to 'MicrosoftWebDriver.exe' and save it to a local folder
 * Config Path environment variabe
 * In app.config, set driverFlavour to "Edge"
   
-## Search by anchors syntax
+## Search by Anchors Syntax
 1. By anchor
 	* Anchor - a known web element
 	* Search - web element you need to locate
@@ -470,8 +486,13 @@ When smart search is turned on (in app.config; recommend to turn it on all the t
 			"Confirmation".GetTestObject();
 			....
 		````
+* Note: Okapi treats traditional searching methods such as Id and class name as special cases of the advanced search by anchors algorithm where a search element is also the anchor element. 
 
-## Continue with the browser session opened from the previous test execution
+For instance, 
+````"userName".GetTestObject().SendKeys("John")```` acts the same as ````"Id `userName`".GetTestObject().SendKeys("John")````.
+
+
+## Continue with the Browser Session Opened from the Previous Test Execution
 * Imagine your test case has to test a chain of web pages, say 5 pages. So far you have already automated for the first 4 pages and you are now working on scripting for the last page, page 5. While scripting page 5, you have to run the test from time to time to see if what you have scripted is correct. 
 
 * With Selenium, it is very annoying that to check what happens on page 5 and you have to run the test from beginning which starts to interact with page 1, then moving to page 2, and so on. This is time wasting.
@@ -569,8 +590,7 @@ genericTextBox.SetDynamicContents("lastNameId").SendKeys("Doe");
 "anchor <h2> `{0} {1}` search <span> `Add Student`".GetTestObject("Create", "Student Profile").Click();
 ````
 
-
-## Use locating string
+## Use Locating String
 
 * There are traditional ways to locate a web element by a locating string within Okapi. But the easier way is as the example below
 
@@ -603,6 +623,7 @@ it will do the same task for all these below lines:
 ````
 
 ## Use SetElementIndex()
+
 * In general, if a TestObject based on a locator returns more than one web elements, SetElementIndex() will narrow down to the web element with the set index. Indexes starts from 0. And when not set, index 0 is used by default. When one web element is found, index 0 is always used even if you try to set index more than 0.
 
 * Similarly, for example, if 2 elements found, they will be indexed as 0 and 1. If you try to set index as 2 or higher, it will be brought down automatically to 1.
@@ -624,7 +645,8 @@ it will do the same task for all these below lines:
 	"search <p-listboxitem/li/span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
 	````
 	
-## Embedded element index
+## Embedded Element Index
+
 * Element index can set via SetElementIndex() or via embedded element index for search by anchor or search by two anchors
 * Embedded element index is the integer number between a opening square bracket and a closing square bracket at the end of search html tag/css selector
 
@@ -637,7 +659,8 @@ Example:
 
 Of the found web elements, index 0 gets the first element; index 1 gets the second element, and so on.
 	
-## Use Info class
+## Use Info Class
+
 * To check if the details of the web elements pointed to by a TestObject, Info class is helful. It can be used to help you make decision on what element index to be passed to SetElementIndex().	
 
 * Example:
@@ -650,6 +673,7 @@ Info info = "<p-listboxitem/li/span>".GetTestObject().QuickInfo; //a less inform
 
 
 ## Use FilterByScreenDistance()
+
 * Okapi's search by anchors core algorithm is sophisticated but the basic for most of the common cases is:
 	* It gets web elements having the shortest Document Object Model (DOM) from the anchor
 	* Then it tries to filter out the ones having the larger loops in DOM 
@@ -657,7 +681,8 @@ Info info = "<p-listboxitem/li/span>".GetTestObject().QuickInfo; //a less inform
 	
 * There are cases you don't want just to get/perform action on the elements with the shortest physical distance on screen. **FilterByScreenDistance(params int[] distanceOrders)** help you to control in this case. Order 0 is for the shortest distance, order 1 is for the second shortest distance, and so on.
 
-## Control screen distance in search by anchors
+## Control Screen Distance in Search by Anchors
+
 * By default, Okapi returns the web element with the shortest physical distance (screen distance) from the anchor when you perform search by anchors.
 
 * For instance, after applying shortest DOM distance filter, a search returns 10 possible web elements. Okapi then applies shortest screen distance filter on the result and narrows down to 2 web elements which have the same shortest screen distances.
@@ -675,7 +700,8 @@ This setting has the scope of the test object. In the above example, after calli
 
 * **FilterByScreenDistance(params int[] distanceOrders)** has been explained in the previous usage. **FilterByScreenDistance(ReferenceType anchorReferenceType, ReferenceType searchElementReferenceType, params int[] distanceOrders)** can be used to control both the screen distance orders and reference points as well.
 
-## Control DOM distance in search by anchors
+## Control DOM Distance in Search by Anchors
+
 * By default, Okapi search by anchors engine returns the web elements having the same SHORTEST DOM distances. Unlike physical screen distance order which starts from 0, Okapi considers the shortest DOM distance as order 1, the second shortest DOM distance as order 2 and so on. When a higher order is set, the search outcome will include those returned by the lower orders automatically. For instance, if order 3 is set, the search result will include those web elements found by order 1, 2 and 3.
 
 * When more than one web elements are found, the web element under consideration/focus will be based on the set element index (mentioned above)
@@ -707,7 +733,7 @@ This setting has the scope of the test object. In the above example, after calli
 
 * If more than one web elements are found (same shorest DOM distances), by default, the ones with smallest loop are returned, larger loops being filtered out/removed (filter being ON). To turn this filter off/on, use **FilterByShortestRootAnchorDomDistance(bool on)**. To understand how this filter works, imagine multiple triangles (A-R-S) where A is anchor element, R is root element and S is search element. If multiple search web elements are found initially, there are multiple ARS triangles. They all shares the same A. Smallest html loops have the shorest A to R DOM distance.
 
-## Memory cache
+## Memory Cache
 
 * Okapi TestObject class has a built-in memory caching mechanism to boost performance. It manages the cache automatically in a smart way for most of the case.
 
@@ -768,7 +794,7 @@ TestReport.IsTrue(result.Value);
 ````
 	
 
-## File cache
+## File Cache
 * Okapi's search by anchors requires a lot of calculations and consumes quite a lot of memory and CPU so for some circumstances such as a web page is large, it can be slow. 
 
 * When you see that the search by anchors is too slow, the best is to improve your locator to help Okapi's search by anchors a bit or just use traditional locating methods such as xpath.
@@ -800,7 +826,7 @@ TestReport.IsTrue(result.Value);
 	````
 
 
-## Work with drivers/browsers
+## Work with Drivers/Browsers
 
 * With Okapi, drivers are managed in the back-ground and named ManagedDriver which implements IManagedDriver interface. Users do not need to refer to a driver for every action like in Selenium, making it easier for users to focus on the business rules of the test scenario, cutting over-heads in code. A ManagedDriver object is one-one mapped to a browser.
 
@@ -886,10 +912,12 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 ````
 
 
-## Work with windows
+## Work with Windows
+
 * To be updated
 
 ## Work with iframes
+
 * Okapi.Drivers.ManagedDriver class has methods and properties to deal ith iframes similar to the way Selenium deals with iframes.
 	*   	SwitchToDefaultContent()
 	*	SwitchToParentIFrame()
@@ -905,6 +933,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * When DOM has been changed since the last action, **RefreshInnerIFrames()** returns a list of latest **Frame** objects based on up-to-date DOM.
 
 ## Work with TestExecutor
+
 * TestExecutor class has the methods to help you perform complex calculations in fewer lines of code
 * Below are some examples
 
@@ -939,15 +968,16 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 * Please use IDE's intelliSense to find out more methods offered by TestExecutor
 
-## AppConfig class
+## AppConfig Class
 * Okapi.Configs.AppConfig.TargetTestEnvironment gets the target environment name set within app.config file
 
 
-## Util class
+## Util Class
 * Okaki.Utils.Util class provides utility properties and methods to be used in test scripts.
 
 
-## Test data interfaces
+## Test Data Interfaces
+
 * Okapi offers 2 interfaces under namespace **Okapi.Runners** ready for creating test data in the form of DTOs (Data transfer objects)
 	* ````INameDataSet<T> and IDataSet<T>````
 	
@@ -996,7 +1026,8 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 	* Embedding business rules within the code is very bad practice of writing test automation scripts. It makes it hard to debug and troubleshoot, hard to maintain, etc. and the scripts look messy.
 
 
-## Common TestObject method references
+## Common TestObject Method References
+
 * Click -> clicks on a web element. Checks if the web element is ready before clicking. Retries if the click action does not take effect
 * DoubleClick -> double click on a web element
 * SendKeys -> inputs text into a text box or a text area
@@ -1023,14 +1054,14 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 * GetLifespanInMilliseconds -> get life span of a web element, useful for elements which exist a short time, such as a validation error message
 * (To be added)
 
-## Check Visual Studio unit test logs for failed tests 
+## Visual Studio Unit Test Logs for Failed Tests 
 
 * Okapi console logs (in JSON format) on failed tests are comprehensive which support the best for script debugging
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/UnitTestExplorer.png)
 
 
-## View test execution report
+## View Test Execution Report
 
 * If you have installed the Html test report nuget package mentioned above, Okapi creates test execution reports for you after each execution.
 
@@ -1039,7 +1070,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TestCaseDetailedHtmlReport.png)
 
-## View activity logs
+## View Activity Logs
 
 * If you have installed Okapi.Support.Log.Text nuget package as mentioned above and have set log path within the configuration, Okapi generates activity logs for you.
 
@@ -1049,7 +1080,8 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 * For failed activities, the log includes more failed details in JSON format
 
-## Record html document xpaths
+## Record Html Document XPaths
+
 * Okapi comes with the capability to record all the xpaths within a html document. There are two ways to do that - via **Dom** class or via **IManagedDriver**.
 
 * It is open for users of other tools to pass a html document as text into Okapi and Okapi provides back the xpaths for all the web elements on that html document. There having been some requests from those who have contacted me, I am going to develop a simple Console application, Desktop application, or a simple self-host web service for users of other tools/APIs and those who use Java Selenium to call to get xpaths for all web elements on a html document or xpaths for individual search by anchors.
@@ -1106,7 +1138,8 @@ int managedXPathCount = dom.ManagedXPathCount;
 ManagedXPaths verifiedManagedXPaths = driver.GetDocumentManagedXPaths(10, 20, domFilter); 
 ````
 
-## Manage managed xpaths using ManagedXPathCache file cache
+## ManagedXPathCache File Cache
+
 * The outcome of the previous recording process is **ManagedXPaths** class. Okapi has the class **ManagedXPathCache** for users to organise **ManagedXPaths** instances within a file cache
 
 ````
@@ -1121,7 +1154,8 @@ cache.Delete(id);
 allManagedXPaths = cache.FindAll();
 ````
 
-## Get possible xpaths from search by anchors text
+## Get Possible XPaths from Search by Anchors Locators
+
 * Users of other web ui test tools can use Okapi to convert search-by-anchors texts into possible xpaths for using with your tools. You need to pass in two pieces of information - html document text; earch-by-anchors text
 
 * Example:
@@ -1135,7 +1169,9 @@ allManagedXPaths = cache.FindAll();
 * Developement of a legacy-dotNet-based self-host RESTful API is underway so that when done, your tools can call it in real-time to perform search-by-anchors text to xpaths conversions. This webservice is for Windows but it can be wrapped into docker images for other environments such as Linux. 
 
 # ADVANCED USAGE
-## Get text of a cell in a table
+
+## Get Text of a Cell in a Table
+
 * Imagine there is a table on a web page with multiple columns and multiple rows. Under the column 'Student Info', each cell contains student id and student name. We want to get student name when we know student id.
 
 * There are multiple ways to do that in Okapi. Below is code demonstrate one way to do that. 
@@ -1146,7 +1182,8 @@ allManagedXPaths = cache.FindAll();
 	By default, ````"anchor `Student Info` search <table>tr>".GetTestObject()```` will get the closest row toward the column title 'Student Info' which is the first row in the table. We don't want that to happen. We want to get the row we wanted so we call FilterByScreenDistance(precedingRowCount) which gets row at at distance order 'precedingRowCount' from the column title.
 	Now we are in the row, looking into the DOM a bit and seeing that to go to the student name element we have to call ````Child.NextSiblingAt(2).ChildAt(5)````. 
 	
-## Working with repeated UI blocks
+## Working with Repeated UI Blocks
+
 * Imagine there is a web page with multiple UI blocks. Each block has a city name and a url link named 'See details' to open up the details about the city.
 
 * We want to check if the city names and the links are correct and also they are arranged properly on the page. With Okapi, it is quite easy to do with very few number of lines of code.
@@ -1173,7 +1210,7 @@ allManagedXPaths = cache.FindAll();
                 });
 ````
 		
-## Usage of Okapi lambda functions
+## Usage of Okapi Lambda Functions
 
 ### 1. Example 1: working with multiple text boxes having similar characteristics
 * Imagine there is a web page which has multiple text boxes with similar html structures and we need to fill up these text boxes with test data. When a piece of data for a text box is null, does nothing for that text box. Each text box has a label next to it.
@@ -1205,7 +1242,7 @@ IList<string> testData = new List<string> { "John", "Doe", null };
 FFill_up_client_profile_information(labels, testData);	
 ````
 
-### 2. Example 2: working with table
+### 2. Example 2: Working with Table
 * Imagine there is city table on a web page of a tourism website, each row starting with a checkbox and then city name. You want to select multiple city names by sticking the checkboxes. If a city name has been already selected, you want to bypass clicking on the associated checkbox because doing that will de-select the city name, which is not what you want to do.
 
 * Each checkbox is structured by a 'li' html tag and each city name is structured by a 'span' html tag. The 'li' tag has attribute 'class'. When a checkbox is selected, this attribute has a new value 'ui-checkbox-selected'. When it is not selected, this value is gone.
@@ -1227,7 +1264,7 @@ public static void Select_city_names(params string[] cityNames)
 ````
 
 
-### 3. Example 3: working with a counter
+### 3. Example 3: Working with a Counter
 * Imagine there is a counter on a web page. The counter includes a text box displaying an integer number, which can be negative, zero or positive integer number. There are an up arrow and a down arrow right next to the text box. The up arrow is on top of the down arrow. When users perform a click on the up arrow, the number in the text box increases by 1. Similarly, a click on a down arrow decreases that number by 1.
 
 * The text box is structured by html tag 'input' and has a label 'My Counter' next to it.
@@ -1264,7 +1301,7 @@ public static void Set_my_counter(int setCount)
 	- Math.Abs(numberOfClicksToPerform) to change from nagative number to positive number before passing to For() for repeating.
 	
 	
-### 4. Example 4: working with a combo box
+### 4. Example 4: Working with a ComboBox
 * Imagine there is city combo box where each list item contains a city label and a checkbox. Users are allowed to select multiple cities by ticking on multiple checkboxes. The cities selected will be displayed on the top input area of the combo box horizontally.
 
 * We want to select some cities and check if they are displayed correctly on the input area.
@@ -1294,7 +1331,7 @@ displayedCityNames.FilterByScreenDistance(0, 1, 2).ForEach(visitingCities, (self
 // order 2 is the distance from the label 'Visiting Cities' to the displayed text 'Paris'
 ````
 
-### 5. Example 5: working with paging
+### 5. Example 5: Working with Paging
 * Imagine there is a web page listing 20 items from top down. At the bottom of the web page, there are page indicator, a next button and a previous button. Clicking on the next button displays the next 20 items.
 
 * We want to click on the next button multiple times until reaching the last items. On each page, perform some actions.
@@ -1319,7 +1356,8 @@ public static void VisitAllPagesAndPerform(Action action)
 ````
 
 	
-## Check if a checkbox becomes a saved symbol after ticking it
+## Verify if a Checkbox Becomes a Saved Symbol after Ticking it
+
 * There are multiple ways to do this in Okapi. Below is an example showing one way to do it.
 * Imagine there is a checkbox next to a city name label on a web page. When we tick the checkbox, it becomes a saved symbol. We need to check if the checkbox becomes a saved symbol after we click on it. 
 
@@ -1356,7 +1394,8 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 	* After 'checkbox.SetElementIndex(1).Click()', the DOM will be updated and keeps on changing in a short time. So RetryToClearRelationCacheUntil() keeps on clearing the cache for cityNameLabel.Parent.PrecedingSibling.Child relationship until the condition returning by TestExecutor.Any(...) becomes true.
 	* The outcome of RetryToClearRelationCacheUntil() is a key-value pair of checkbox TestObject itself and the boolean value of this TestExecutor.Any(...) check.
 
-## Use strict mode
+## Use Strict Mode
+
 * ITestObject has property **bool Strict { get; }** for users to check the current running mode and method **ITestObject StrictMode(bool value)** to turn strict mode on/off.
 
 * Search by anchors performance is a bit better under unstrict mode than under strict mode; By default, strict mode is turned off. However, there are user cases where strict mode is needed.
@@ -1378,7 +1417,8 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 	
 	
 # COMMON PRACTICAL USAGES
-## Check multiple conditions
+
+## Check Multiple Conditions
 * Stop checking on getting the first false
 
 ````
