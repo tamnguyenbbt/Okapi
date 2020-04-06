@@ -4,7 +4,7 @@
 
 * We, human beings, by nature, are better in using intuition than conscious reasoning when dealing with something simple and repetitive.
 
-* Okapi changes the way you write Web UI test automation towards intuition with **What You See Is What You Get** test script development style.
+* Okapi changes the way we write Web UI test automation towards intuition with **What You See Is What You Get** test script development style.
 
 ## What is Okapi?
 
