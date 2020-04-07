@@ -1509,8 +1509,8 @@ public void PickTimeFromTimePicker(int? hour, int? minute, string parentAnchorTe
 {
 	TestExecutor.Run(hour != null && hour >= 0 && minute != null && minute >= 0, () =>
 	{
-		PickHourOrMinuteFromTimePicker(hour, "hour-picker", parentAnchorText, string parentAnchorTag);
-		PickHourOrMinuteFromTimePicker(minute, "minute-picker", parentAnchorText, string parentAnchorTag);
+		PickHourOrMinuteFromTimePicker((int)hour, "hour-picker", parentAnchorText, string parentAnchorTag);
+		PickHourOrMinuteFromTimePicker((int)minute, "minute-picker", parentAnchorText, string parentAnchorTag);
 	});
 }
 
