@@ -1349,7 +1349,7 @@ public static void VisitAllPagesAndPerform(Action action)
         bool enabled = !"<span>a> `Next Page`".GetTestObject().TryGetAttribute("class").Contains("disabled");
         return found && enabled;
      },
-     self >
+     self =>
      {
         self.Click();
         "<div>spinner>progressbar>".GetTestObject().WaitUntilGone();
