@@ -76,7 +76,7 @@
 
 ## Non .Net Support
 
-** Users of other Web UI tools or other programming languages who want to use Okapi's search-by-anchors algorithm can use **Okapi Web API service tool** at https://github.com/tamnguyenbbt/Okapi.Web.Api.Console
+* Users of other Web UI tools or other programming languages who want to use Okapi's search-by-anchors algorithm can use **Okapi Web API service tool** at https://github.com/tamnguyenbbt/Okapi.Web.Api.Console
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSample.png)
 
