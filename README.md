@@ -1471,7 +1471,7 @@ string parentAnchorText = null, string parentAnchorTag = null)
 	int newYear = dateTime.Year;
 	
 	int yearDiff = newYear - currentYear;
-	int monthDiff = newMonth - currentMonth + yearDiff*12;
+	int monthDiff = newMonth - currentMonth + yearDiff * 12;
 	
 	// Build search-by-anchors locator for next or previous arrow with search element text as dynamic, which is '{0}'.
 	// This later can be injected with a class attribute value, for the next arrow or the previous arrow
