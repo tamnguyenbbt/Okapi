@@ -1445,7 +1445,7 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 
 * Below is an example of reusable action to select date from a date picker
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/DatePickerType1.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/DatePicker.png)
 
 ````
 [Step]
