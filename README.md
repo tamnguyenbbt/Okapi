@@ -1497,8 +1497,6 @@ string parentAnchorText = null, string parentAnchorTag = null)
 
 **Usage:**
 	* In the below usage example, no parent anchor information is needed; anchor tag is not need; anchor text is the label 'Registration Date:' on top of the date picker.
-	
-	````
+
 	PickDateFromDatePicker(new DateTime(7, 4, 2020), "Registration Date:");
-	````
 
