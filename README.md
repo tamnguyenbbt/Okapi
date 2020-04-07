@@ -1491,7 +1491,10 @@ string parentAnchorText = null, string parentAnchorTag = null)
 	string itemLocator = CommonActions.Instance.BuildSearchByAnchorsLocator(
 	parentAnchorTag, parentAnchorText, anchorTag, anchorText, "td>a", dateTime.Date.ToString());
 	
-	itemLocator.GetTestObject().Click();	
+	itemLocator.GetTestObject().Click();
+	
+	// Report step
+	TestReport.Report();
 }
 ````
 
@@ -1505,6 +1508,7 @@ string parentAnchorText = null, string parentAnchorTag = null)
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TimePicker.png)
 
 ````
+[Step]
 public void PickTimeFromTimePicker(int? hour, int? minute, string parentAnchorText = null, string parentAnchorTag = null)
 {
 	TestExecutor.Run(hour != null && hour >= 0 && minute != null && minute >= 0, () =>
@@ -1512,6 +1516,8 @@ public void PickTimeFromTimePicker(int? hour, int? minute, string parentAnchorTe
 		PickHourOrMinuteFromTimePicker((int)hour, "hour-picker", parentAnchorText, string parentAnchorTag);
 		PickHourOrMinuteFromTimePicker((int)minute, "minute-picker", parentAnchorText, string parentAnchorTag);
 	});
+	
+	TestReport.Report();
 }
 
 private void PickHourOrMinuteFromTimePicker(int hourOrMinute, string classAttribute, string parentAnchorText = null, string parentAnchorTag = null)
