@@ -12,7 +12,7 @@
 
 * Okapi addresses all possible practical test automation difficulties such as timing and stale web element issues, letting users focus on business rules of the web applications under test while scripting (in C#). Okapi helps build advanced, reliable and easy-to-maintain Web UI test scripts. Okapi cuts significant development time and effort as well as maintenance time and effort by allowing writing very less code to achieve robust test scripts.
 
-* First to introduce the advanced **Search Web Elements By Anchors** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.)
+* First to introduce the advanced **Search Web Elements By Anchors** algorithms which are much simpler and intuitive to use and require much less script maintenance than traditional methods (id, name, tag name, class, css, xpath, etc.). Okapi still supports traditional search methods.
 
 * Advanced **Smart Search** by anchors (turned on/off in config)
 
@@ -1441,9 +1441,9 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 ````
 	
 ## Constructing High-Level Actions
-* Okapi has some hingh-level actions via **Okapi.Common.CommonActions** class. You can build your own reusable high-level actions for your organisation's web applications where the same patterns are repeated for multiple web elements and/or in multiple web pages.
+* Okapi has some hingh-level actions via **Okapi.Common.CommonActions** class. You can build your own reusable high-level actions for your organisation's web applications where the same html UI design/structural patterns are repeated for multiple web elements and/or in multiple web pages.
 
-* Below is an example of reusable action to select date from a date picker
+* Below is an example of reusable action to select date from a date picker. You can see search-by-anchors is used instead of xpaths which makes this method to be easy to maintain and robust.
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/DatePicker.png)
 
