@@ -1446,3 +1446,46 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 * Below is an example of reusable action to select date from a date picker
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/DatePicker.png)
+
+````
+[Step]
+public void PickDateFromDatePicker(DateTime dateTime, string anchorText, string anchorTag = null, 
+string parentAnchorText = null, string parentAnchorTag = null)
+{
+	string selectorLocator = CommonActions.Instance.BuildSearchByAnchorsLocator(
+	parentAnchorTag, parentAnchorText, anchorTag, anchorText, "button>span", null);
+	
+	selectorLocator.GetTestObject().Click();
+	
+	string currentMonthText = "datepicker-month".GetTestObject().Text;
+	string currentYearText = "datepicker-year".GetTestObject().Text;
+	DateTime currentDate = 
+	DateTime.ParseExact($"01 {currentMonthText} {currentYearText}", "dd MMM yyyy", CultureInfo.InvariantCulture);
+	int currentMonth = currentDate.Month;
+	int currentYear = currentDate.Year;
+	
+	int newMonth = dateTime.Month;
+	int newYear = dateTime.Year;
+	
+	int yearDiff = newYear - currentYear;
+	int monthDiff = newMonth - currentMonth + yearDiff*12;
+	
+	string arrowLocator = CommonActions.Instance.BuildSearchByAnchorsLocator(
+	parentAnchorTag, parentAnchorText, null, anchorText, "div>a>span", null);
+	
+	arrowLocator.GetTestObject().Run(monthDiff >= 0,
+	self => 
+	self.SetSearchElementDynamicContents("datepicker-next-icon").OnTrue(monthDiff > 0).For(x => x.Click().Sleep(50), monthDiff),
+	self =>
+	self.SetSearchElementDynamicContents("datepicker-previous-icon").For(x => x.Click().Sleep(50), -monthDiff));
+	
+	string itemLocator = CommonActions.Instance.BuildSearchByAnchorsLocator(
+	parentAnchorTag, parentAnchorText, anchorTag, anchorText, "td>a", dateTime.Date.ToString());
+	
+	itemLocator.GetTestObject().Click();	
+}
+````
+
+**Usage:**
+	````PickDateFromDatePicker(new DateTime(7, 4, 2020), "Registration Date:");````
+
