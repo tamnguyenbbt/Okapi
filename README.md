@@ -1443,7 +1443,7 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 ## Constructing High-Level Actions
 * Okapi has some hingh-level actions via **Okapi.Common.CommonActions** class. You can build your own reusable high-level actions for your organisation's web applications where the same html UI design/structural patterns are repeated for multiple web elements and/or in multiple web pages.
 
-* Below is an example of reusable action to select date from a date picker. You can see search-by-anchors is used instead of xpaths which makes this method to be easy to maintain and robust.
+* Below is an example of reusable action to select date from a date picker. You can see search-by-anchors is used instead of xpaths which makes this method easier to maintain and robust.
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/DatePicker.png)
 
