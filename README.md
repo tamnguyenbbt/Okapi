@@ -48,6 +48,8 @@
 
 * Support C# lambda for professional .Net/C# developers to use to build advanced scripts with fewer lines of code
 
+* Drivers are hidden from users to make code simpler to be written
+
 ## NuGet
 * https://www.nuget.org/packages/Okapi/2.1.3
 * Install-Package Okapi -Version 2.1.3
@@ -1436,6 +1438,11 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 	.Run(() => validationOK = true);
 	
 	TestReport.IsTrue(validationOK);
+````
 	
-	
-	
+## Constructing High-Level Actions
+* Okapi has some hingh-level actions via **Okapi.Common.CommonActions** class. You can build your own reusable high-level actions for your organisation's web applications.
+
+* Below is an example of reusable action to select date from a date picker
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/DatePicker.png)
