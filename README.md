@@ -1452,13 +1452,13 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 public void PickDateFromDatePicker(DateTime dateTime, string anchorText, string anchorTag = null, 
 string parentAnchorText = null, string parentAnchorTag = null)
 {
-	//click selector to launch date picker
+	// Click selector to launch date picker
 	string selectorLocator = CommonActions.Instance.BuildSearchByAnchorsLocator(
 	parentAnchorTag, parentAnchorText, anchorTag, anchorText, "button>span", null);
 	
 	selectorLocator.GetTestObject().Click();
 	
-	// get current month and year from the date picker using class attribute values, i.e. 'datepicker-month'
+	// Get current month and year from the date picker using class attribute values, i.e. 'datepicker-month'
 	string currentMonthText = "datepicker-month".GetTestObject().Text;
 	string currentYearText = "datepicker-year".GetTestObject().Text;
 	DateTime currentDate = 
@@ -1466,28 +1466,28 @@ string parentAnchorText = null, string parentAnchorTag = null)
 	int currentMonth = currentDate.Month;
 	int currentYear = currentDate.Year;
 	
-	// get month difference
+	// Get month difference
 	int newMonth = dateTime.Month;
 	int newYear = dateTime.Year;
 	
 	int yearDiff = newYear - currentYear;
 	int monthDiff = newMonth - currentMonth + yearDiff*12;
 	
-	// build search-by-anchors locator for next or previous arrow with search element text as dynamic, 
-	// which is '{0}'. This later can be injected with a class attribute value, for the next arrow or the previous arrow
+	// Build search-by-anchors locator for next or previous arrow with search element text as dynamic, which is '{0}'.
+	// This later can be injected with a class attribute value, for the next arrow or the previous arrow
 	string arrowLocator = CommonActions.Instance.BuildSearchByAnchorsLocator(
 	parentAnchorTag, parentAnchorText, null, anchorText, "div>a>span", "{0}");
 	
-	//if monthDiff > 0, inject 'datepicker-next-icon' - class attribute value for next arrow; 
-	//then loop through monthDiff with the step as 1 and click on the next arrow.
-	//oherwise, if monthDiff <0, do the same for previous arrow. 
+	// If monthDiff > 0, inject 'datepicker-next-icon' - class attribute value for next arrow.
+	// Then loop through monthDiff with the step as 1 and click on the next arrow for each loop.
+	// If monthDiff <0, do the same for previous arrow. 
 	arrowLocator.GetTestObject().Run(monthDiff >= 0,
 	self => 
 	self.SetSearchElementDynamicContents("datepicker-next-icon").OnTrue(monthDiff > 0).For(x => x.Click().Sleep(50), monthDiff),
 	self =>
 	self.SetSearchElementDynamicContents("datepicker-previous-icon").For(x => x.Click().Sleep(50), -monthDiff));
 	
-	//click on the date
+	// Click on the date to select it
 	string itemLocator = CommonActions.Instance.BuildSearchByAnchorsLocator(
 	parentAnchorTag, parentAnchorText, anchorTag, anchorText, "td>a", dateTime.Date.ToString());
 	
