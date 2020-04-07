@@ -66,7 +66,7 @@
 
 ## Dependencies
 
-### .NETFramework 4.5, 4.6 and 4.7
+### .NET Framework 4.5, 4.6 and 4.7
 * DotNetSeleniumExtras.WaitHelpers (>= 3.11.0)
 * ExtSelenium (>= 1.2.6)
 * LiteDB (>= 4.1.4)
