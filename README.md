@@ -494,7 +494,7 @@ For instance,
 ````"userName".GetTestObject().SendKeys("John")```` acts the same as ````"Id `userName`".GetTestObject().SendKeys("John")````.
 
 
-## Continue with the Browser Session Opened from the Previous Test Execution
+## Reuse Browser Session Opened from Previous Test Execution
 * Imagine your test case has to test a chain of web pages, say 5 pages. So far you have already automated for the first 4 pages and you are now working on scripting for the last page, page 5. While scripting page 5, you have to run the test from time to time to see if what you have scripted is correct. 
 
 * With Selenium, it is very annoying that to check what happens on page 5 and you have to run the test from beginning which starts to interact with page 1, then moving to page 2, and so on. This is time wasting.
