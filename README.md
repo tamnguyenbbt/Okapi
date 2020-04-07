@@ -1500,3 +1500,39 @@ string parentAnchorText = null, string parentAnchorTag = null)
 
 	PickDateFromDatePicker(new DateTime(7, 4, 2020), "Registration Date:");
 
+* Below is an example of reusable action to select time from a time picker.
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TimePicker.png)
+
+````
+public void PickTimeFromTimePicker(int? hour, int? minute, string parentAnchorText = null, string parentAnchorTag = null)
+{
+	TestExecutor.Run(hour != null && hour >= 0 && minute != null && minute >= 0, () =>
+	{
+		PickHourOrMinuteFromTimePicker(hour, "hour-picker", parentAnchorText, string parentAnchorTag);
+		PickHourOrMinuteFromTimePicker(minute, "minute-picker", parentAnchorText, string parentAnchorTag);
+	});
+}
+
+private void PickHourOrMinuteFromTimePicker(int hourOrMinute, string classAttribute, string parentAnchorText = null, string parentAnchorTag = null)
+{
+	// Get current hour or minute
+	string currentHourOrMinuteText = CommonActions.Instance.BuildSearchByAnchorsLocator(
+	null, null, null, classAttribute, "div>span[1]", null).GetTestObject().Text;
+	
+	int currentHourOrMinute = int.Parse(currentHourOrMinuteText);
+	
+	// Get hour or minute defference
+	int diff = hourOrMinute - currentHourOrMinute;
+	
+	// Set hour or minute
+	string arrowLocator = CommonActions.Instance.BuildSearchByAnchorsLocator(
+	parentAnchorTag, parentAnchorText, null, classAttribute, "div>a>span", null);
+	
+	ITestObject arrow = arrowLocator.GetTestObject().NoFilterByScreenDistances(); // Get arrow up and down
+	
+	arrow.Run(diff >= 0,
+	self => self.SetElementIndex(0).OnTrue(diff > 0).For(x => x.Click().Sleep(100), diff),
+	self => self.SetElementIndex(1).For(x => x.Click().Sleep(100), -diff));
+}
+````
