@@ -80,7 +80,7 @@
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiWebApiSample.png)
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiWebApiSampleTest.jpg)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiWebApiSampleTest.JPG)
 
 ## Set up a Test Project
 
