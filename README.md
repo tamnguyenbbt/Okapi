@@ -78,9 +78,9 @@
 
 * Users of other Web UI tools or other programming languages who want to use Okapi's search-by-anchors algorithm can use **Okapi Web API service tool** at https://github.com/tamnguyenbbt/Okapi.Web.Api.Console
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSample.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiWebApiSample.png)
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSampleTest.JPG)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiWebApiSampleTest.jpg)
 
 ## Set up a Test Project
 
@@ -88,7 +88,7 @@
 
 * The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community  (https://visualstudio.microsoft.com/vs/community) then install the following NuGet packages and it is ready for you to write unit tests.
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/NuGet.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/NuGet.png)
 
 * Packages:
 	* **Okapi**
@@ -395,9 +395,9 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * Test Data Parameterization
 * Console Runner for CI/CD
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio1.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiStudio1.png)
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio2.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiStudio2.png)
 
 
 # BASIC USAGE
@@ -416,7 +416,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * To be a bit more advanced, you might want to set up Selenium grid (hub and nodes) configuration instead. Check out: https://www.guru99.com/introduction-to-selenium-grid.html 
 * In app.config, set driverFlavour to "Chrome"
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/app_config.jpg)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/AppConfig.jpg)
 
 ## Setup to Use EdgeDriver on Windows 10
 * Download the latest stable Edge driver from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver, change its name to 'MicrosoftWebDriver.exe' and save it to a local folder
@@ -676,7 +676,7 @@ Info info = "<p-listboxitem/li/span>".GetTestObject().Info;
 Info info = "<p-listboxitem/li/span>".GetTestObject().QuickInfo; //a less information but less time to calculate
 ````
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Info.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/Info.png)
 
 
 ## Use FilterByScreenDistance()
@@ -1065,17 +1065,17 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 * Okapi console logs (in JSON format) on failed tests are comprehensive which support the best for script debugging
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/UnitTestExplorer.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/UnitTestExplorer.png)
 
 
 ## View Test Execution Report
 
 * If you have installed the Html test report NuGet package mentioned above, Okapi creates test execution reports for you after each execution.
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/SummaryHtmlReport.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/SummaryHtmlReport.png)
 
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TestCaseDetailedHtmlReport.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/TestCaseDetailedHtmlReport.png)
 
 ## View Activity Logs
 
@@ -1450,7 +1450,7 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 
 * Below is an example of reusable action to select date from a date picker. You can see search-by-anchors is used instead of xpaths which makes this method easier to maintain and robust.
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/DatePicker.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/DatePicker.png)
 
 ````
 [Step]
@@ -1510,7 +1510,7 @@ string parentAnchorText = null, string parentAnchorTag = null)
 
 * Below is an example of reusable action to select time from a time picker.
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TimePicker.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/TimePicker.png)
 
 ````
 [Step]
