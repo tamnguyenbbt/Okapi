@@ -86,9 +86,9 @@
 
 * The code in this repo is for a sample test project based on NUnit and MSUnit and .Net Framework 4.5 and uses Okapi library.
 
-* The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community  (https://visualstudio.microsoft.com/vs/community) then install the following Nuget packages and it is ready for you to write unit tests.
+* The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community  (https://visualstudio.microsoft.com/vs/community) then install the following NuGet packages and it is ready for you to write unit tests.
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Nuget.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/NuGet.png)
 
 * Packages:
 	* **Okapi**
@@ -97,7 +97,7 @@
 	* **Okapi.Support.Report.Html** (optional) is needed when you want test reports to be constructed. Okapi sends out test report data when you turn this function on in configuration. Okapi.Support.Report.Html, being a presentation layer, collects those real-time data and builds the html reports. Code for this package is shared at https://github.com/tamnguyenbbt/Okapi.Support.Report.Html. You can base on this code to write your own flavour of Okapi report, locally, as web service, or for CI/CD environments such as Jenkins or TeamCity.
 	* **Okapi.Support.Log.Text** (optional) is needed when you want logs are captured. Okapi sends out real-time logs when you turn this function on in configuration. Okapi.Support.Log.Text, being a presentation layer, collects those real-time data and writes out logs for you. Code for this package is shared at https://github.com/tamnguyenbbt/Okapi.Support.Log.Text. You can base on this code to write your own flavour of Okapi logger.
 	* **Okapi.Support.Report.NUnit** (optional) provides **ToOkapiTestContext** method which converts NUnit Test Context to Okapi Test Context
-		* In Okapi, each test case needs to be decorated with Okapi TestCase attribute and needs to end with TestReport.Report() call so that the test case activities get reported. Similarly, each test step needs to be decorated with Okapi Step attribute and needs to end with TestReport.Report() call so that the test step activities get reported. The advantage of this approach is that you can selectively choose what to report; and that the report mechanism is independent from any unit test library, third-party packages for NUnit to have better looks, or other specific libraries. Another advantage is if you want reports with very nice look, you can write your own presentation layer. I found the aproach where introducing a new unit test library with better reporting capabilities and forcing users to use it just to have better reports is a bad idea.
+		* In Okapi, each test case needs to be decorated with Okapi TestCase attribute and needs to end with TestReport.Report() call so that the test case activities get reported. Similarly, each test step needs to be decorated with Okapi Step attribute and needs to end with TestReport.Report() call so that the test step activities get reported. The advantage of this approach is that you can selectively choose what to report; and that the report mechanism is independent from any unit test library, third-party packages for NUnit to have better looks, or other specific libraries. Another advantage is if you want reports with very nice look, you can write your own presentation layer. I found the approach where introducing a new unit test library with better reporting capabilities and forcing users to use it just to have better reports is a bad idea.
 		* With Okapi.Support.Report.NUnit you can call TestReport.Report at NUnit test tear down level instead
 		
 				
@@ -294,7 +294,7 @@ You can customise the logging message template format and logging destination by
 
 * Below is a simple implementation using Serilog's File sink. Serilog comes with many sinks. You can implement your own logger or implement your own Serilog sink to suit your logging and reporting needs.
 
-	* Nuget package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 (obsolete)
+	* NuGet package at https://www.nuget.org/packages/Okapi.Support.File/1.0.0 (obsolete)
 	* From 1.2.7, please use https://www.nuget.org/packages/Okapi.Support.Log.Text/1.0.1
 	* GitHub: https://github.com/tamnguyenbbt/Okapi.Support.Log.Text
 	* Log file path is set via configuration (see Configuration section)
@@ -327,7 +327,7 @@ You can customise the logging message template format and logging destination by
     }
 ````
 
-* When no implementation is provided or Okapi.Support.Log.Text nuget package is not installed, Okapi does not perform logging.
+* When no implementation is provided or Okapi.Support.Log.Text NuGet package is not installed, Okapi does not perform logging.
 
 ### Customise Test Report (Optional)
 
@@ -346,7 +346,7 @@ You can customise the logging message template format and logging destination by
 
 * Report directory is set via configuration (see Configuration section)
 
-* When no implementation is provided, or none of the nuget packages listed above has been installed, Okapi does not perform reporting. 
+* When no implementation is provided, or none of the NuGet packages listed above has been installed, Okapi does not perform reporting. 
 
 ### Inject Okapi Interface Implementations (Optional and Obsolete)
 
@@ -405,19 +405,24 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 ## Setup to Use ChromeDriver on Windows 10
 
 * Download the latest stable chromedriver.exe (32 bit for Windows) version which supports your Chrome browser from https://chromedriver.chromium.org/downloads and save it to a local folder
-* Config Path environment variabe for Selenium to find chromedriver.exe
+
+* Config Path environment variable for Selenium to find chromedriver.exe
   * Go to Control Panel > System > Advanced system settings > Environment Variables...> System variables > Path
   * Edit and add a new path item pointing to the folder containing chromedriver.exe file 
+  
 * Write a simple unit test using Okapi to test
   * ````IManagedDriver driver = DriverPool.Instance.ActiveDriver.LaunchPage("https://www.facebook.com/reg");````  
-* To be a bit more advanched, you might want to set up Selenium grid (hub and nodes) configuration instead. Check out: https://www.guru99.com/introduction-to-selenium-grid.html 
+  
+* To be a bit more advanced, you might want to set up Selenium grid (hub and nodes) configuration instead. Check out: https://www.guru99.com/introduction-to-selenium-grid.html 
 * In app.config, set driverFlavour to "Chrome"
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/app_config.jpg)
 
 ## Setup to Use EdgeDriver on Windows 10
 * Download the latest stable Edge driver from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver, change its name to 'MicrosoftWebDriver.exe' and save it to a local folder
-* Config Path environment variabe
+
+* Config Path environment variable
+
 * In app.config, set driverFlavour to "Edge"
   
 ## Search by Anchors Syntax
@@ -522,7 +527,7 @@ public void Temporary_development()
 	*  Start to code for page 5 in Temporary_development(). Confirm the script by running it from time to time. It will act on the previous opened browser instead of opening a new browser. You can repeat this cycle as many times as you want.
 	*  When you are happy with the code in Temporary_development(), copy it and paste it at the end of Already_complete_works(). Then delete the Temporary_development() and rerun the whole Already_complete_works() to double check your complete script.
 	
-* ````DriverPool.Instance.GetReusableDriver()```` creates a new driver if no reusable driver found active or gets the lastest active reusable driver, ready for usage.
+* ````DriverPool.Instance.GetReusableDriver()```` creates a new driver if no reusable driver found active or gets the latest active reusable driver, ready for usage.
 
 ## Use Dynamic Contents
 * Okapi introduces Dynamic Contents concept to promote code reusability. The main class in Okapi is TestObject class which implements ITestObject interface. Each TestObject object can represent any of multiple web elements on a web page. It can also represent multiple web elements on a web page.  
@@ -663,7 +668,7 @@ Of the found web elements, index 0 gets the first element; index 1 gets the seco
 	
 ## Use Info Class
 
-* To check if the details of the web elements pointed to by a TestObject, Info class is helful. It can be used to help you make decision on what element index to be passed to SetElementIndex().	
+* To check if the details of the web elements pointed to by a TestObject, Info class is helpful. It can be used to help you make decision on what element index to be passed to SetElementIndex().	
 
 * Example:
 ````
@@ -718,7 +723,7 @@ This setting has the scope of the test object. In the above example, after calli
 	</div>	
 ````
 
-* By default, order 1 is set. ````"anchor `Status` search <span>".GetTestObject()```` gets the first span, the one containing inner text 'Status' because it has the shorest DOM distance (distance as 0; order 1) from itself (it is the anchor).
+* By default, order 1 is set. ````"anchor `Status` search <span>".GetTestObject()```` gets the first span, the one containing inner text 'Status' because it has the shortest DOM distance (distance as 0; order 1) from itself (it is the anchor).
 
 * To get both the spans, set order 2. ````"anchor `Status` search <span>".GetTestObject().SetShortestDomDistanceDepth(2)````. By default, element index 0 is set so the first span is returned/set focus (top down). To return the second span (the span containing 'Inactive' text), set element index as 1. 
 	````
@@ -733,11 +738,11 @@ This setting has the scope of the test object. In the above example, after calli
 	
 * After changing order to be more than 1 for a test object, use **RestoreDefaultShortestDomDistanceDepth()** to set the order back to 1 (default) when needed.
 
-* If more than one web elements are found (same shorest DOM distances), by default, the ones with smallest loop are returned, larger loops being filtered out/removed (filter being ON). To turn this filter off/on, use **FilterByShortestRootAnchorDomDistance(bool on)**. To understand how this filter works, imagine multiple triangles (A-R-S) where A is anchor element, R is root element and S is search element. If multiple search web elements are found initially, there are multiple ARS triangles. They all shares the same A. Smallest html loops have the shorest A to R DOM distance.
+* If more than one web elements are found (same shortest DOM distances), by default, the ones with smallest loop are returned, larger loops being filtered out/removed (filter being ON). To turn this filter off/on, use **FilterByShortestRootAnchorDomDistance(bool on)**. To understand how this filter works, imagine multiple triangles (A-R-S) where A is anchor element, R is root element and S is search element. If multiple search web elements are found initially, there are multiple ARS triangles. They all shares the same A. Smallest html loops have the shortest A to R DOM distance.
 
 ## Memory Cache
 
-* Okapi TestObject class has a built-in memory caching mechanism to boost performance. It manages the cache automatically in a smart way for most of the case.
+* Okapi TestObject class has a built-in memory caching mechanism to boost performance. It manages the cache automatically in a smart way for most of the cases.
 
 * When you use the same variable to store a TestObject object for multiple actions in series then you need to clear the cache manually when you know that DOM has changed since the last action.
 
@@ -816,7 +821,7 @@ TestReport.IsTrue(result.Value);
 
 * Users can clear this cache for a test object by calling **ClearObjectRepositoryCache()**
 
-* When you work with, say, an html table where you add a new row everytime a test script is run; the added row being based on dynamic test data (i.e. a random date or number); and the locator for this row containing this dynamic data, please be mindful about it. If you cache this test object locator, next executions will get that cached locator which contains the old dynamic data. But you have new test data for every execution. Then the cached xpath does not serve up well. In this situation, you need to force search by anchors engine to delete that cached item and recalculate the locator by calling **ClearObjectRepositoryCache()**
+* When you work with, say, an html table where you add a new row every time a test script is run; the added row being based on dynamic test data (i.e. a random date or number); and the locator for this row containing this dynamic data, please be mindful about it. If you cache this test object locator, next executions will get that cached locator which contains the old dynamic data. But you have new test data for every execution. Then the cached xpath does not serve up well. In this situation, you need to force search by anchors engine to delete that cached item and recalculate the locator by calling **ClearObjectRepositoryCache()**
 
 * Example: a table
 	````
@@ -832,7 +837,7 @@ TestReport.IsTrue(result.Value);
 
 * With Okapi, drivers are managed in the back-ground and named ManagedDriver which implements IManagedDriver interface. Users do not need to refer to a driver for every action like in Selenium, making it easier for users to focus on the business rules of the test scenario, cutting over-heads in code. A ManagedDriver object is one-one mapped to a browser.
 
-* Managed drivers are created, stored and deleted in a pool. The only times users have to deal with a driver is when launching a page and when quiting a driver.
+* Managed drivers are created, stored and deleted in a pool. The only times users have to deal with a driver is when launching a page and when quitting a driver.
 
 ````
   DriverPool.Instance.ActiveDriver.LaunchPage("http://www.google.com");
@@ -865,7 +870,7 @@ DriverPool.Instance.ActiveDriver = driver as ManagedDriver;
 
 * After a driver is set active, all the actions will be performed on that driver.
 
-* With Selenium, everytime a test script is executed, it has to create a new driver. Unlike Selenium, Okapi allows users to reuse an already opened browser from the last run, in the same execution or not in the same execution session.
+* With Selenium, every time a test script is executed, it has to create a new driver. Unlike Selenium, Okapi allows users to reuse an already opened browser from the last run, in the same execution or not in the same execution session.
 
 ````
 DriverPool.Instance.CreateReusableDriverFromLastRun();
@@ -873,7 +878,7 @@ DriverPool.Instance.CreateReusableDriverFromLastRun();
 
 
 ## FileDB
-* Okapi comes with a file database utility called FileDB for users to save and retrieve test data to share between test scripts accross multiple running sessions.
+* Okapi comes with a file database utility called FileDB for users to save and retrieve test data to share between test scripts across multiple running sessions.
 
 * It allows user to insert, retrieve, update and delete payloads in the form of C# classes, so data is ready to update and use without any transformation.
 
@@ -930,7 +935,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 * Properties **InnerIFrames** returns a list of **Frame** objects representing the iframes inside the current html document. Each frame object includes a unique Id (GUID), a frame index (similar to Selenium; users have to switch one by one from top down), attributes within a frame tag, content of a html document which contains this frame, and a list of html documents contained by this frame.
 
-* Okapi's prefered way of managing iframes is to use **Frame** objects. After having the list of **Frame** objects (children, children of children, and so on) via **InnerIFrames** property, users can jump straight to any frame using **JumpToIFrame(Guid id)**.
+* Okapi's preferred method of managing iframes is to use **Frame** objects. After having the list of **Frame** objects (children, children of children, and so on) via **InnerIFrames** property, users can jump straight to any frame using **JumpToIFrame(Guid id)**.
 
 * When DOM has been changed since the last action, **RefreshInnerIFrames()** returns a list of latest **Frame** objects based on up-to-date DOM.
 
@@ -1023,7 +1028,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 * Best test data usage practices
 	* If you write test scripts using Okapi, C# and any IDE such as Visual Studio, the best form of test data is DTO classes.
-	* Some inexperienced automation testers try to use CSV, Excel, database, etc. to store test data when they write test scripts directly from IDEs. This is often considered overkill and often adds uneccessary overheads because they need to convert back and forth from DTO classes to one of the above-mentioned forms. These forms may be useful when you use a tool, not an API, such as you write a desktop client application which uses Okapi as the engine.
+	* Some inexperienced automation testers try to use CSV, Excel, database, etc. to store test data when they write test scripts directly from IDEs. This is often considered overkill and often adds unnecessary overheads because they need to convert back and forth from DTO classes to one of the above-mentioned forms. These forms may be useful when you use a tool, not an API, such as you write a desktop client application which uses Okapi as the engine.
 	* Always write reusable test steps which are independent from the web page business rules. Business rules should be embedded in test data and be injected by test data into reusable test steps (data-driven test). Okapi methods support data-driven test out of the box.
 	* Embedding business rules within the code is very bad practice of writing test automation scripts. It makes it hard to debug and troubleshoot, hard to maintain, etc. and the scripts look messy.
 
@@ -1065,7 +1070,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 ## View Test Execution Report
 
-* If you have installed the Html test report nuget package mentioned above, Okapi creates test execution reports for you after each execution.
+* If you have installed the Html test report NuGet package mentioned above, Okapi creates test execution reports for you after each execution.
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/SummaryHtmlReport.png)
 
@@ -1074,7 +1079,7 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 ## View Activity Logs
 
-* If you have installed Okapi.Support.Log.Text nuget package as mentioned above and have set log path within the configuration, Okapi generates activity logs for you.
+* If you have installed Okapi.Support.Log.Text NuGet package as mentioned above and have set log path within the configuration, Okapi generates activity logs for you.
 
 ````
 2020-02-27 09:48:40.115 +11:00 [INF] Click | Index: 0 | Locators: //p-dropdownitem/li/span[text()='7']          ----> TEST: [Id: 21637a99-ed8e-4059-9186-71df03ed3de4 | Name: Test1 | Namespace: Okapi.Sample.Tests.TestCases | File Name: C:\DEV\Okapi.Sample.Tests\TestCases\Sample.cs | Line: 10 | Column: 12]          ----> STEP: [Id: 843ab07c-ea65-4965-8710-4fb220b876d7 | Name: Step1 | Namespace: Okapi.Sample.Tests.TestCases.TestSteps | File Name: C:\DEV\Okapi.Sample.Tests\TestSteps\Login.cs | Line: 57 | Column: 9]
@@ -1158,7 +1163,7 @@ allManagedXPaths = cache.FindAll();
 
 ## Get Possible XPaths from Search by Anchors Locators
 
-* Users of other web ui test tools can use Okapi to convert search-by-anchors texts into possible xpaths for using with your tools. You need to pass in two pieces of information - html document text; earch-by-anchors text
+* Users of other web ui test tools can use Okapi to convert search-by-anchors texts into possible xpaths for using with your tools. You need to pass in two pieces of information - html document text; search-by-anchors text
 
 * Example:
 
@@ -1217,7 +1222,7 @@ allManagedXPaths = cache.FindAll();
 ### 1. Example 1: working with multiple text boxes having similar characteristics
 * Imagine there is a web page which has multiple text boxes with similar html structures and we need to fill up these text boxes with test data. When a piece of data for a text box is null, does nothing for that text box. Each text box has a label next to it.
 
-* We need to write reusable code with test data driven capability so we can use this block of code, a method, to test the page with both possitive test cases and negative test cases, driven by test data.
+* We need to write reusable code with test data driven capability so we can use this block of code, a method, to test the page with both positive test cases and negative test cases, driven by test data.
 
 * With Okapi lambda functions you can write the code as below:
 
@@ -1300,7 +1305,7 @@ public static void Set_my_counter(int setCount)
 	- Click(false) will click without retries
 	- OnTrue(numberOfClicksToPerform < 0) to make sure when numberOfClicksToPerform = 0, do nothing. This is optional.
 	- FilterByScreenDistance(1). By default the physical distances from the top left of 'My Counter' label to the top left of each arrow will be calculated and the shortest will be considered. In this case the up arrow has shortest physical distance to that label (order 0).  To access to the down arrow, FilterByScreenDistance(1) will set to get the second shortest distance (order 1).
-	- Math.Abs(numberOfClicksToPerform) to change from nagative number to positive number before passing to For() for repeating.
+	- Math.Abs(numberOfClicksToPerform) to change from negative number to positive number before passing to For() for repeating.
 	
 	
 ### 4. Example 4: Working with a ComboBox
@@ -1441,7 +1446,7 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 ````
 	
 ## Constructing High-Level Actions
-* Okapi has some hingh-level actions via **Okapi.Common.CommonActions** class. You can build your own reusable high-level actions for your organisation's web applications where the same html UI design/structural patterns are repeated for multiple web elements and/or in multiple web pages.
+* Okapi has some high-level actions via **Okapi.Common.CommonActions** class. You can build your own reusable high-level actions for your organisation's web applications where the same html UI design/structural patterns are repeated for multiple web elements and/or in multiple web pages.
 
 * Below is an example of reusable action to select date from a date picker. You can see search-by-anchors is used instead of xpaths which makes this method easier to maintain and robust.
 
