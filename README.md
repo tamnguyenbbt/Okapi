@@ -8,7 +8,7 @@
 
 ## What is Okapi?
 
-**Okapi** is an advanced and easy-to-use, open and powerful **Web UI test automation API** for .Net/C# users. **Okapi** has been designed **not to be just another Web UI test automation library in the market**. It aims at radically changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective. It has been designed and developed to be game changer in Web UI automation testing business.
+**Okapi** is an advanced and easy-to-use, open and powerful **Web UI test automation API** for **.Net/C#** users. **Okapi** has been designed **not to be just another Web UI test automation library in the market**. It aims at radically changing the way you write and maintain Web UI test automation scripts to be fun, full of confidence and cost effective. It has been designed and developed to be game changer in Web UI automation testing business.
 
 * Okapi addresses all possible practical test automation difficulties such as timing and stale web element issues, letting users focus on business rules of the web applications under test while scripting (in C#). Okapi helps build advanced, reliable and easy-to-maintain Web UI test scripts. Okapi cuts significant development time and effort as well as maintenance time and effort by allowing writing very less code to achieve robust test scripts.
 
