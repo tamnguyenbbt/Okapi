@@ -90,7 +90,7 @@
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/NuGet.png)
 
-* Packages:
+* **Packages**:
 	* **Okapi**
 	* **NUnit** is needed to write NUnit test cases
 	* **NUnit3TestAdapter** is needed to run NUnit test cases within Visual Studio
@@ -101,37 +101,37 @@
 		* With Okapi.Support.Report.NUnit you can call TestReport.Report at NUnit test tear down level instead
 		
 				
-		````
-		[Test]
-        	[TestCase]
-        	public void Test_with_report()
-        	{
-            		DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            		int elementCount = "<span> `Next`".GetTestObject().ElementCount;
-            		TestReport.IsTrue(elementCount == 1);
-            		TestReport.Report();
-        	}		
-		````
+	````
+	[Test]
+        [TestCase]
+        public void Test_with_report()
+        {
+            	DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            	int elementCount = "<span> `Next`".GetTestObject().ElementCount;
+            	TestReport.IsTrue(elementCount == 1);
+            	TestReport.Report();
+        }		
+	````
 		
-		Or
+	Or
 		
-		````
-		[TearDown]
-        	public void TestCleanup()
-        	{
-            		TestReport.Report(TestContext.CurrentContext.ToOkapiTestContext());
-            		DriverPool.Instance.QuitActiveDriver();
-        	}
+	````
+	[TearDown]
+        public void TestCleanup()
+        {
+            	TestReport.Report(TestContext.CurrentContext.ToOkapiTestContext());
+            	DriverPool.Instance.QuitActiveDriver();
+        }
 
-        	[Test]
-        	[TestCase]
-        	public void Test_with_report()
-        	{
-            		DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            		int elementCount = "<span> `Next`".GetTestObject().ElementCount;
-            		TestReport.IsTrue(elementCount == 1);
-        	}
-		````
+        [Test]
+        [TestCase]
+        public void Test_with_report()
+        {
+            	DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            	int elementCount = "<span> `Next`".GetTestObject().ElementCount;
+            	TestReport.IsTrue(elementCount == 1);
+        }
+	````
 	
 
 ### Configuration (Optional)
