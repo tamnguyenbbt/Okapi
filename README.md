@@ -82,7 +82,7 @@
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistration_DataDrivenStep.png)
 
-* A real test with assertion. If assertion fails, test is stopped and reported as failed with error details. 
+* A real test with assertion. If assertion fails, test is stopped and reported as failed with error details. You can write dozens of the tests like this (happy path, negative, boundary, pairwise, etc.) by just appending different test data sets and use the same test step.
  
  ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistration_TestScript.png)
  
