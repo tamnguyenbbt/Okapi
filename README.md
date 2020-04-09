@@ -627,6 +627,8 @@ it will do the same task for all these below lines:
 "`ui-textbox-unique`".GetTestObject().SendKeys("John");
 "ui-textbox-unique".GetTestObject().SendKeys("John");
 "anchor `ui-label-unique-id` search <input>".GetTestObject().SendKeys("John");
+"anchor `First Name` search <input>".GetTestObject().SendKeys("John");
+"anchor `first name` <label> search <input>".GetTestObject().SendKeys("John");
 ````
 
 ## Use SetElementIndex()
@@ -648,8 +650,8 @@ it will do the same task for all these below lines:
 	"<p-listboxitem/li/span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
 	"<p-listboxitem/li/span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
 	"<p-listboxitem>li>span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
-	"search <p-listboxitem>li>span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
-	"search <p-listboxitem/li/span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
+	"search <p-listboxitem>li>span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
+	"search <p-listboxitem/li/span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
 	````
 	
 ## Embedded Element Index
