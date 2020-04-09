@@ -64,6 +64,32 @@
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FirstTest.png)
 
+## A Real-Life Test Written Using Okapi
+
+* Below is a real-life workable test using the advanced features of Okapi to maintain minimum lines of code. If it is hard for you to understand for now, please skip this session and read the rest of the document to understand more about Okapi.
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistrationPage.png)
+
+* Base on the web page, construct data template classes
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistration_DataTemplates.png)
+
+* Create test data set class based on data templates. The test data set contains the real test scenarios (business rules to be tested)
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistration_DataTemplates.png)
+
+* Data-driven test step. The step does not contain real business rules. Test data contains business rules and drives the flow of the step. By going data-driven, the step does not need to be changed a lot later on. Most of the Okapi's built-in actions such as SendKeys() have built-in data-driven capability. That means when the input test data is null, they do nothing. By pass in different test data sets, different scenarios can be tested using the same step.
+
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistration_DataDrivenStep.png)
+
+* A real test with assertion
+ 
+ ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistration_TestScript.png)
+ 
+ * Outcome
+ 
+  ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistrationPageAssertion.png)
+
 ## Dependencies
 
 ### .NET Framework 4.5, 4.6 and 4.7
