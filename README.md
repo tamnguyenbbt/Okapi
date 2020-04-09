@@ -51,8 +51,8 @@
 * Drivers are hidden from users to make code simpler to be written
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/2.1.3
-* Install-Package Okapi -Version 2.1.3
+* https://www.nuget.org/packages/Okapi/2.1.4
+* Install-Package Okapi -Version 2.1.4
 
 ## **What You See Is What You Get** Style Test Development - First Simple Test Script
 
@@ -377,7 +377,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **2.1.3** released on 07/04/2020
+* Version **2.1.4** released on 09/04/2020
 
 ## Author
 ###  **Tam Nguyen**
