@@ -51,18 +51,18 @@
 * Drivers are hidden from users to make code simpler to be written
 
 ## NuGet
-* https://www.nuget.org/packages/Okapi/2.1.3
-* Install-Package Okapi -Version 2.1.3
+* https://www.nuget.org/packages/Okapi/2.1.4
+* Install-Package Okapi -Version 2.1.4
 
 ## **What You See Is What You Get** Style Test Development - First Simple Test Script
 
 **Facebook registration page**
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FacebookReg.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookReg.png)
 
 **With Okapi, it is quick and easy to write test scripts.**
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/FirstTest.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FirstTest.png)
 
 ## Dependencies
 
@@ -78,9 +78,9 @@
 
 * Users of other Web UI tools or other programming languages who want to use Okapi's search-by-anchors algorithm can use **Okapi Web API service tool** at https://github.com/tamnguyenbbt/Okapi.Web.Api.Console
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSample.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiWebApiSample.png)
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiWebApiSampleTest.JPG)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiWebApiSampleTest.JPG)
 
 ## Set up a Test Project
 
@@ -88,9 +88,9 @@
 
 * The easiest way to experience Okapi is to create a simple unit test project within Visual Studio Community  (https://visualstudio.microsoft.com/vs/community) then install the following NuGet packages and it is ready for you to write unit tests.
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/NuGet.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/NuGet.png)
 
-* Packages:
+* **Packages**:
 	* **Okapi**
 	* **NUnit** is needed to write NUnit test cases
 	* **NUnit3TestAdapter** is needed to run NUnit test cases within Visual Studio
@@ -101,37 +101,37 @@
 		* With Okapi.Support.Report.NUnit you can call TestReport.Report at NUnit test tear down level instead
 		
 				
-		````
-		[Test]
-        	[TestCase]
-        	public void Test_with_report()
-        	{
-            		DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            		int elementCount = "<span> `Next`".GetTestObject().ElementCount;
-            		TestReport.IsTrue(elementCount == 1);
-            		TestReport.Report();
-        	}		
-		````
+	````
+	[Test]
+        [TestCase]
+        public void Test_with_report()
+        {
+            	DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            	int elementCount = "<span> `Next`".GetTestObject().ElementCount;
+            	TestReport.IsTrue(elementCount == 1);
+            	TestReport.Report();
+        }		
+	````
 		
-		Or
+	Or
 		
-		````
-		[TearDown]
-        	public void TestCleanup()
-        	{
-            		TestReport.Report(TestContext.CurrentContext.ToOkapiTestContext());
-            		DriverPool.Instance.QuitActiveDriver();
-        	}
+	````
+	[TearDown]
+        public void TestCleanup()
+        {
+            	TestReport.Report(TestContext.CurrentContext.ToOkapiTestContext());
+            	DriverPool.Instance.QuitActiveDriver();
+        }
 
-        	[Test]
-        	[TestCase]
-        	public void Test_with_report()
-        	{
-            		DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
-            		int elementCount = "<span> `Next`".GetTestObject().ElementCount;
-            		TestReport.IsTrue(elementCount == 1);
-        	}
-		````
+        [Test]
+        [TestCase]
+        public void Test_with_report()
+        {
+            	DriverPool.Instance.ActiveDriver.LaunchPage("https://accounts.google.com/signup");
+            	int elementCount = "<span> `Next`".GetTestObject().ElementCount;
+            	TestReport.IsTrue(elementCount == 1);
+        }
+	````
 	
 
 ### Configuration (Optional)
@@ -377,7 +377,7 @@ internal class DependencyInjector : IOkapiModuleLoader
 * https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiSampleTests/TestCases/ReusableDriver.cs
           
 ## Versions
-* Version **2.1.3** released on 07/04/2020
+* Version **2.1.4** released on 09/04/2020
 
 ## Author
 ###  **Tam Nguyen**
@@ -395,9 +395,9 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * Test Data Parameterization
 * Console Runner for CI/CD
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio1.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiStudio1.png)
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/OkapiStudio2.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/OkapiStudio2.png)
 
 
 # BASIC USAGE
@@ -416,7 +416,7 @@ Okapi Studio leverages the power of Okapi and has the following base features:
 * To be a bit more advanced, you might want to set up Selenium grid (hub and nodes) configuration instead. Check out: https://www.guru99.com/introduction-to-selenium-grid.html 
 * In app.config, set driverFlavour to "Chrome"
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/app_config.jpg)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/AppConfig.jpg)
 
 ## Setup to Use EdgeDriver on Windows 10
 * Download the latest stable Edge driver from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver, change its name to 'MicrosoftWebDriver.exe' and save it to a local folder
@@ -627,6 +627,8 @@ it will do the same task for all these below lines:
 "`ui-textbox-unique`".GetTestObject().SendKeys("John");
 "ui-textbox-unique".GetTestObject().SendKeys("John");
 "anchor `ui-label-unique-id` search <input>".GetTestObject().SendKeys("John");
+"anchor `First Name` search <input>".GetTestObject().SendKeys("John");
+"anchor `first name` <label> search <input>".GetTestObject().SendKeys("John");
 ````
 
 ## Use SetElementIndex()
@@ -648,8 +650,8 @@ it will do the same task for all these below lines:
 	"<p-listboxitem/li/span>".GetTestObject().SetElementIndex(1).Click(); //using anchor
 	"<p-listboxitem/li/span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
 	"<p-listboxitem>li>span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
-	"search <p-listboxitem>li>span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
-	"search <p-listboxitem/li/span[1]>".GetTestObject().SetElementIndex(1).Click(); //using embedded index at the end of the html tag chain
+	"search <p-listboxitem>li>span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
+	"search <p-listboxitem/li/span[1]>".GetTestObject().Click(); //using embedded index at the end of the html tag chain
 	````
 	
 ## Embedded Element Index
@@ -676,7 +678,7 @@ Info info = "<p-listboxitem/li/span>".GetTestObject().Info;
 Info info = "<p-listboxitem/li/span>".GetTestObject().QuickInfo; //a less information but less time to calculate
 ````
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Info.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/Info.png)
 
 
 ## Use FilterByScreenDistance()
@@ -1065,17 +1067,17 @@ success =fileDB.Delete<Student>(studentRecord.Id);
 
 * Okapi console logs (in JSON format) on failed tests are comprehensive which support the best for script debugging
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/UnitTestExplorer.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/UnitTestExplorer.png)
 
 
 ## View Test Execution Report
 
 * If you have installed the Html test report NuGet package mentioned above, Okapi creates test execution reports for you after each execution.
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/SummaryHtmlReport.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/SummaryHtmlReport.png)
 
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TestCaseDetailedHtmlReport.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/TestCaseDetailedHtmlReport.png)
 
 ## View Activity Logs
 
@@ -1450,7 +1452,7 @@ KeyValuePair<ITestObject, bool> result = checkbox.RetryToClearRelationCacheUntil
 
 * Below is an example of reusable action to select date from a date picker. You can see search-by-anchors is used instead of xpaths which makes this method easier to maintain and robust.
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/DatePicker.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/DatePicker.png)
 
 ````
 [Step]
@@ -1510,7 +1512,7 @@ string parentAnchorText = null, string parentAnchorTag = null)
 
 * Below is an example of reusable action to select time from a time picker.
 
-![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/TimePicker.png)
+![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/TimePicker.png)
 
 ````
 [Step]
