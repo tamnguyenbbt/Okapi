@@ -78,7 +78,7 @@
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistration_TestData.png)
 
-* Data-driven test step. The step does not contain real business rules. Test data contains business rules and drives the flow of the step. By going data-driven, the step does not need to be changed a lot later on. Most of the Okapi's built-in actions such as SendKeys() have built-in data-driven capability. That means when the input test data is null, they do nothing. By pass in different test data sets, different scenarios can be tested using the same step.
+* Data-driven test step. The step does not contain real business rules. Test data contains business rules and drives the flow of the step. By going data-driven, the step does not need to be changed a lot later on. Most of the Okapi's built-in actions such as SendKeys() have built-in data-driven capability. That means when the input test data is null, they do nothing. By passing in different test data sets, different scenarios can be tested using the same step.
 
 ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistration_DataDrivenStep.png)
 
