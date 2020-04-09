@@ -87,6 +87,7 @@
  ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistration_TestScript.png)
  
  * Outcome
+ You can see that we have not used a lot of brain power to find xpaths, css selectors, etc. for this test. By looking at the web page itself, we are able to write 90% of the test.
  
   ![alt text](https://github.com/tamnguyenbbt/Okapi/blob/master/Photos/FacebookRegistrationPageAssertion.png)
 
