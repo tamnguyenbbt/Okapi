@@ -1,3 +1,6 @@
+# News
+* I have not managed this one and have not updated it for almost 6 years now so it is time for me to share the code to public in case people can use it a bit.* 
+
 # Okapi Get Started
 
 ## Why Okapi?
